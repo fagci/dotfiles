@@ -1,4 +1,10 @@
-source ../usr/antigen.zsh
+#!/usr/bin/zsh
+
+AG1=/usr/share/zsh/share/antigen.zsh
+AG2=../usr/antigen.zsh
+
+[ -f $AG1 ] && source $AG1
+[ -f $AG2 ] && source $AG2
 
 antigen use oh-my-zsh
 
