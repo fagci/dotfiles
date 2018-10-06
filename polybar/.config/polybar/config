@@ -20,7 +20,7 @@ modules-left = i3 xwindow
 modules-right = fs temp mem vol battery weather keyboard date
 
 font-0 = "xos4 Terminus:pixelsize=9;2"
-font-1 = "FontAwesome:pixelsize=9;2"
+font-1 = "FontAwesome:pixelsize=10;3"
 font-2 = "Inconsolata:pixelsize=14;2"
 font-3 = "Noto Sans:size=14;2"
 
@@ -43,7 +43,6 @@ interval = 60
 type = internal/xwindow
 label = %title:0:30:...%
 
-
 [module/fs]
 type = internal/fs
 interval = 25
@@ -56,7 +55,6 @@ label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/date]
-
 type = internal/date
 date = "%d %b, %a %H:%M"
 
@@ -68,18 +66,7 @@ format-padding = 1
 [module/battery]
 type = internal/battery
 
-; Available tags:
-;   <label-charging> (default)
-;   <bar-capacity>
-;   <ramp-capacity>
-;   <animation-charging>
 format-charging = <animation-charging> <label-charging>
-
-; Available tags:
-;   <label-discharging> (default)
-;   <bar-capacity>
-;   <ramp-capacity>
-;   <animation-discharging>
 format-discharging = <ramp-capacity> <label-discharging>
 
 label-full = 
@@ -115,26 +102,13 @@ animation-discharging-framerate = 500
 [module/vol]
 type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
-; Available tokens:
-;   %percentage% (default)
-;label-volume = %percentage%%
-
 label-volume = " %percentage%%"
-
-; Available tokens:
-;   %percentage% (default)
 label-muted = 
 label-muted-foreground = #66
-
-; Only applies if <ramp-volume> is used
 ramp-volume-0 = 🔈
 ramp-volume-1 = 🔉
 ramp-volume-2 = 🔊
 
-; If defined, it will replace <ramp-volume> when
-; headphones are plugged in to `headphone_control_numid`
-; If undefined, <ramp-volume> will be used for both
-; Only applies if <ramp-volume> is used
 ramp-headphones-0 = 
 ramp-headphones-1 = 
 
