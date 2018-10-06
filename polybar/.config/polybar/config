@@ -123,6 +123,7 @@ format-underline = ${xrdb:color12:#222}
 
 [module/temp]
 type = internal/temperature
+label = " %temperature-c%"
 interval = 5
 
 [module/i3]
