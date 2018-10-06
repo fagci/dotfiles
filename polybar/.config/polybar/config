@@ -13,6 +13,9 @@ locale = ru_RU.UTF-8
 
 height = 20
 
+tray-position = right
+tray-maxsize = 16
+
 modules-left = i3 xwindow
 modules-right = fs temp mem vol battery weather keyboard date
 

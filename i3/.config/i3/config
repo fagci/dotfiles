@@ -1,0 +1,174 @@
+# vim: foldenable
+# GENERAL {{{
+set $mod Mod4
+focus_follows_mouse no
+floating_modifier $mod
+
+#new_window none
+new_window pixel 1
+
+font pango: Terminus, FontAwesome Regular, Ubuntu Mono derivative Powerline, Icons 8
+# }}}
+
+# COLORS {{{
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000
+
+client.background       #ffffff
+# }}}
+
+# WINDOWS {{{
+for_window [class="Pidgin"] floating enable
+for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+# }}}
+
+# WORKSPACES {{{
+set $WS1 1 
+set $WS2 2 
+set $WS3 3 
+set $WS4 4 
+set $WS5 5 
+set $WS6 6 
+set $WS7 7 
+set $WS8 8 
+set $WS9 9 
+set $WS0 10 
+# }}}
+
+# BINDINGS EXECUTE {{{
+bindsym $mod+d exec dmenu_run
+bindsym $mod+l exec ilockit
+
+bindsym $mod+c exec chromium
+bindsym $mod+Shift+l exec luakit
+bindsym $mod+b exec ranger
+bindsym $mod+Shift+b exec rofi -width 45 -modi "fb:rofi-fb" -show fb #rofi filebrowser
+bindsym $mod+Shift+p exec ~/.local/bin/rs.sh
+
+bindsym $mod+a exec rofi -show run
+bindsym $mod+Tab exec rofi -show window
+
+# take screenshot + show
+bindsym Print exec scrot -e 'mv $f ~/Screenshots'
+bindsym $mod+Print exec scrot -s -e 'mv $f ~/Screenshots'
+#bindsym Print exec dscrot
+#bindsym $mod+Print exec wscrot
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+grave exec i3-sensible-terminal
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle && pkill -RTMIN+1 i3blocks
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#
+#}}}
+
+# BINDINGS MAIN {{{
+bindsym $mod+Shift+t border toggle
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+q kill
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
+
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+#bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+# }}}
+
+# BINDINGS MODE {{{
+bindsym $mod+r mode "resize"
+# }}}
+
+# MODES {{{
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# BAR {{{
+bar {
+  #status_command i3status --config /home/fagci/.i3/i3status.conf
+#status_command i3blocks -c /home/fagci/.config/i3/i3blocks.conf
+  status_command -
+  strip_workspace_numbers no
+#tray_output primary
+  colors {
+    separator #586e75
+    background #2d2d2d
+    statusline #c7c7c7
+    focused_workspace  #586e75 #586e75 #ffffff
+    active_workspace #2d2d2d #2d2d2d #ffffff
+    inactive_workspace #455057 #455057 #c7c7c7
+    urgent_workspace #ae4544 #ae4544 #ffffff
+  }
+}
+# }}}
+
+# EXEC {{{
+exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle"
+exec --no-startup-id "xrandr --output LVDS1 --off"
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id "xset r rate 200 25"
+exec --no-startup-id synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
+exec_always --no-startup-id $HOME/.config/i3/polybar.sh
+# }}}
+
+client.focused #586e75 #586e75 #f9f9f9 #268bd2
+client.focused_inactive #455057 #455057 #c7c7c7 #002b36
+client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
+client.urgent #dc322f #dc322f #f9f9f9 #dc322f
+
+
