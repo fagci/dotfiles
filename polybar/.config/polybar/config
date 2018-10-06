@@ -36,6 +36,7 @@ module-margin = 1
 
 [module/weather]
 type = custom/script
+label = " %output%"
 exec = $HOME/.config/polybar/scripts/weather.sh
 interval = 3600
 
