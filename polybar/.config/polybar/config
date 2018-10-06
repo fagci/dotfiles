@@ -37,7 +37,7 @@ module-margin = 1
 [module/weather]
 type = custom/script
 exec = $HOME/.config/polybar/scripts/weather.sh
-interval = 60
+interval = 3600
 
 [module/xwindow]
 type = internal/xwindow
