@@ -32,7 +32,7 @@ line-color = #f00
 
 padding-left = 1
 padding-right = 1
-module-margin = 2
+module-margin = 1
 
 [module/weather]
 type = custom/script
