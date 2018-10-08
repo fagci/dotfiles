@@ -71,7 +71,7 @@ format-disconnected = <label-disconnected>
 
 format-packetloss = <animation-packetloss> <label-connected>
 
-label-connected = [%ifname%% %downspeed:9%]
+label-connected = [%ifname% %downspeed:9%]
 label-connected-foreground = #eefafafa
 
 label-disconnected = not connected
