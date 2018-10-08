@@ -8,6 +8,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/bottom]
+monitor = ${env:MONITOR:}
 bottom = true
 locale = ru_RU.UTF-8
 
