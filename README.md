@@ -8,6 +8,7 @@ Use `stow */` from repo root to make links.
 
 ### Desktop
 
+- pacman-contrib
 - zsh
 - termite
 - i3

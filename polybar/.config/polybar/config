@@ -18,7 +18,7 @@ tray-position = right
 tray-maxsize = 16
 
 modules-left = i3 xwindow
-modules-right = net_l net_w fs temp mem vol battery weather keyboard date
+modules-right = net_l net_w fs temp mem vol battery weather updates keyboard date
 
 font-0 = "xos4 Terminus:pixelsize=9;2"
 font-1 = "FontAwesome:pixelsize=10;3"
@@ -88,6 +88,12 @@ type = custom/script
 label = " %output%"
 exec = $HOME/.config/polybar/scripts/weather.sh
 interval = 3600
+
+[module/updates]
+type = custom/script
+label = "%output%"
+exec = $HOME/.config/polybar/scripts/updates-arch.sh
+interval = 300
 
 [module/xwindow]
 type = internal/xwindow
