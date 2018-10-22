@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!zsh
 
 AG1=/usr/share/zsh/share/antigen.zsh
 AG2=../usr/antigen.zsh
@@ -15,7 +15,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 #antigen bundle nojhan/liquidprompt
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle sudo
+#antigen bundle sudo
 
 antigen bundle compleat
 antigen bundle cp
