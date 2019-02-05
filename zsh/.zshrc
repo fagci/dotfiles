@@ -1,5 +1,7 @@
 #!zsh
 
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 AG1=/usr/share/zsh/share/antigen.zsh
 AG2=../usr/antigen.zsh
 
