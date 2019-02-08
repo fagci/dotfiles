@@ -16,7 +16,7 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 #antigen bundle nojhan/liquidprompt
-antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle zsh-users/zsh-autosuggestions
 #antigen bundle sudo
 
 antigen bundle compleat
