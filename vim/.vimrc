@@ -1,4 +1,5 @@
 set nocompatible
+set encoding=UTF-8
 
 set ttyfast
 set lazyredraw " draw less
@@ -29,6 +30,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'                                          " project file tree
+Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'                                      " enhanced status line
 Plug 'vim-airline/vim-airline-themes'
 Plug 'godlygeek/tabular'
@@ -149,7 +151,7 @@ if executable('ag')
   nnoremap <silent> t :CtrlP<cr>
 
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore=vendor --ignore=node_modules --ignore=bower --ignore images --ignore svg --ignore fonts -g ""'
 endif
 
 " {{{ Mappings
