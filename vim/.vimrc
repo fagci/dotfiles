@@ -1,7 +1,21 @@
 set nocompatible
+
 set ttyfast
 set lazyredraw " draw less
 set cul
+
+set foldmethod=marker
+set number
+set relativenumber
+set hlsearch
+set incsearch
+
+set linebreak " break long lines on breakable chars
+
+set scrolloff=3 " always keep 3 lines around the cursor
+set sidescrolloff=3
+
+set laststatus=2 " always show status line
 
 " {{{ Plugins
 filetype off
@@ -27,14 +41,6 @@ Plug 'editorconfig/editorconfig-vim'                                " consistent
 Plug 'rking/ag.vim'                                                 " search in a project
 Plug 'ervandew/supertab'                                            " tab completion
 Plug 'antonk52/vim-tabber'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 Plug 'tpope/vim-surround' " change surrounding chars
 
@@ -96,14 +102,6 @@ set laststatus=2
 
 " }}}
 
-set foldmethod=marker
-
-set number " show current line number
-set relativenumber
-
-set hlsearch " search made easy
-set incsearch
-
 " {{{ Tab characters
 
 set tabstop=2    " 1 tab == 2 spaces
@@ -114,47 +112,36 @@ set smarttab     " indend/deindent at the beginning of a line
 
 " }}}
 
-set linebreak " break long lines on breakable chars
+" {{{ Spell check
 
-set scrolloff=3 " always keep 3 lines around the cursor
-set sidescrolloff=3
-
-set laststatus=2 " always show status line
-
-" set spell spelllang=ru_ru,en_us
-
-
-
-" ======= Deoplete
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 2
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=red ctermbg=black
+" set spell spelllang=en_us
+" }}}
 
 " ======= Nerdtree
 
-map <C-N> :NERDTreeToggle<CR> 
 let NERDTreeShowHidden=1 " show dot files
 
 " ======= Ctrlp
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim " runtime path for fizzy search
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$|node_modules',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
 let g:ctrlp_root_markers=['package.json']
-
-
-
-let g:deoplete#enable_at_startup = 1
-
 
 " ======= closetag
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx" " file extensions where this plugin is enabled
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.ts,*.tsx' " make the list of non-closing tags self-closing in the specified files
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.ts,*.tsx'
 
 if exists('&belloff') " never ring the bell for any reason
   set belloff=all
 endif
+
+" {{{ Mappings
+map <C-N> :NERDTreeToggle<CR> 
+" }}}
 
