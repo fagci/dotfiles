@@ -126,12 +126,12 @@ let NERDTreeShowHidden=1 " show dot files
 " ======= Ctrlp
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim " runtime path for fizzy search
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$|node_modules',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
 let g:ctrlp_root_markers=['package.json']
-
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|vendor|node_modules',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
+set wildignore+=*\\vendor\\**
 " ======= closetag
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx"
@@ -139,6 +139,10 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.ts,*.tsx'
 
 if exists('&belloff') " never ring the bell for any reason
   set belloff=all
+endif
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 " {{{ Mappings
