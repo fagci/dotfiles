@@ -22,7 +22,7 @@ filetype off
 
 if empty(glob('~/.vim/autoload/plug.vim')) " load vim plug if it is not installed
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -128,10 +128,13 @@ let NERDTreeShowHidden=1 " show dot files
 set runtimepath^=~/.vim/bundle/ctrlp.vim " runtime path for fizzy search
 let g:ctrlp_root_markers=['package.json']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|vendor|node_modules',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-set wildignore+=*\\vendor\\**
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$|vendor|node_modules',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ }
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
 " ======= closetag
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx"
@@ -143,6 +146,10 @@ endif
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
+  nnoremap <silent> t :CtrlP<cr>
+
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
 " {{{ Mappings
