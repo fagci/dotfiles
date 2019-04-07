@@ -29,18 +29,23 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'                                          " project file tree
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'                                      " enhanced status line
 Plug 'vim-airline/vim-airline-themes'
 Plug 'godlygeek/tabular'
 Plug 'blueyed/vim-diminactive'                                      " dims inactive splits
-Plug 'ctrlpvim/ctrlp.vim'                                           " search project by file path/name
 Plug 'easymotion/vim-easymotion'                                    " rapid code nav
 Plug 'jiangmiao/auto-pairs'                                         " auto closes quotes and braces
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'javascript'] } " auto closes XML tags
 Plug 'editorconfig/editorconfig-vim'                                " consistent coding style
-Plug 'rking/ag.vim'                                                 " search in a project
+" Plug 'rking/ag.vim'                                                 " search in a project
 Plug 'ervandew/supertab'                                            " tab completion
 Plug 'antonk52/vim-tabber'
 
@@ -121,22 +126,22 @@ hi SpellBad cterm=underline ctermfg=red ctermbg=black
 " set spell spelllang=en_us
 " }}}
 
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs=1
+
+
 " ======= Nerdtree
 
 let NERDTreeShowHidden=1 " show dot files
 
-" ======= Ctrlp
-
-set runtimepath^=~/.vim/bundle/ctrlp.vim " runtime path for fizzy search
-let g:ctrlp_root_markers=['package.json']
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$|vendor|node_modules',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ }
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
 " ======= closetag
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx"
@@ -146,13 +151,11 @@ if exists('&belloff') " never ring the bell for any reason
   set belloff=all
 endif
 
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  nnoremap <silent> t :CtrlP<cr>
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore=vendor --ignore=node_modules --ignore=bower --ignore images --ignore svg --ignore fonts -g ""'
-endif
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " {{{ Mappings
 map <C-N> :NERDTreeToggle<CR> 

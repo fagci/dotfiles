@@ -24,3 +24,5 @@ if [[ -f $ANTIGEN ]]; then
   antigen apply
 fi
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
