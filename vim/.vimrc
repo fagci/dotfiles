@@ -39,9 +39,9 @@ Plug 'scrooloose/nerdtree'                                          " project fi
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'                                      " enhanced status line
 Plug 'vim-airline/vim-airline-themes'
+Plug 'sk1418/HowMuch'
 Plug 'godlygeek/tabular'
 Plug 'blueyed/vim-diminactive'                                      " dims inactive splits
-Plug 'easymotion/vim-easymotion'                                    " rapid code nav
 Plug 'jiangmiao/auto-pairs'                                         " auto closes quotes and braces
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'javascript'] } " auto closes XML tags
 Plug 'editorconfig/editorconfig-vim'                                " consistent coding style
@@ -159,5 +159,6 @@ nmap ga <Plug>(EasyAlign)
 
 " {{{ Mappings
 map <C-N> :NERDTreeToggle<CR> 
+let mapleader = " "
 " }}}
 
