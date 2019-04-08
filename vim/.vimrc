@@ -29,6 +29,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'christoomey/vim-system-copy'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
