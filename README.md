@@ -1,5 +1,7 @@
 # Dotfiles
 
+![](https://raw.githubusercontent.com/fagcinsk/dotfiles/master/screenshot.png)
+
 Clone this repo to home directory.
 
 Use `stow */` from repo root to make links.
