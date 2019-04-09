@@ -8,11 +8,14 @@ Use `stow */` from repo root to make links.
 
 ### Desktop
 
-- pacman-contrib
-- zsh
-- termite
-- i3
-- polybar
+- dunst/
+- i3/
+- polybar/
+- rofi/
+- termite/
+- termux/
+- vim/
+- zsh/
 
 ### Mobile
 
