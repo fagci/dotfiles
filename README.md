@@ -27,6 +27,5 @@ Use `stow */` from repo root to make links.
 
 Enjoy.
 
-
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_large)
