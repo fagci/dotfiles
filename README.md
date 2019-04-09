@@ -1,4 +1,6 @@
 # Dotfiles
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_shield)
+
 
 ![](https://raw.githubusercontent.com/fagcinsk/dotfiles/master/screenshot.png)
 
@@ -25,4 +27,5 @@ Use `stow */` from repo root to make links.
 
 Enjoy.
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_shield)
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_large)
