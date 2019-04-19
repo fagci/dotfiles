@@ -26,3 +26,12 @@ fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# aliases
+
+if hash pkg 2> /dev/null; then
+  alias pki="pkg install"
+  alias pks="pkg search"
+  alias pku="pkg update"
+  alias pkug="pkg upgrade"
+fi
