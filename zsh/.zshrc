@@ -34,4 +34,6 @@ if hash pkg 2> /dev/null; then
   alias pks="pkg search"
   alias pku="pkg update"
   alias pkug="pkg upgrade"
+  alias pkla="pkg list-all"
+  alias pkli="pkg list-installed"
 fi
