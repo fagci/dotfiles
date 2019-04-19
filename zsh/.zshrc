@@ -1,5 +1,7 @@
 #!zsh
 
+export EDITOR=vim
+
 ANTIGEN=$HOME/.antigen.zsh
 
 [ -f $ANTIGEN ] || curl -L git.io/antigen > $ANTIGEN
@@ -29,7 +31,7 @@ fi
 
 # aliases
 
-if hash pkg 2> /dev/null; then
+if [[ "$OSTYPE" -eq "linux-android" ]] && hash pkg 2> /dev/null; then
   alias pki="pkg install"
   alias pks="pkg search"
   alias pku="pkg update"
