@@ -47,6 +47,17 @@ cht() {
 
 # aliases
 
+if hash exa 2> /dev/null; then
+  unalias ls ll la 
+  alias ls='exa'
+  alias la='exa -a'
+  alias ll='exa -l'
+  alias lll='exa -l | less'
+  alias lla='exa -la'
+  alias llt='exa -T'
+  alias llfu='exa -bghHliS --git'
+fi
+
 if [[ "$OSTYPE" -eq "linux-android" ]] && hash pkg 2> /dev/null; then
   alias pki="pkg install"
   alias pks="pkg search"
