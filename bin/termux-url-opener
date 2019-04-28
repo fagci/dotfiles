@@ -1,0 +1,10 @@
+#! /bin/bash
+clear
+
+if [[ $1 =~ ^.*youtu.*$ ]] || [[ $1 =~ ^.*youtube.*$ ]]; then
+  $SHELL ~/bin/youtube-dl.sh $@
+elif [[ $1 =~ ^.*nourlselected.*$ ]]; then
+  echo "error"
+else
+  echo Unhandled URL type: $1
+fi
