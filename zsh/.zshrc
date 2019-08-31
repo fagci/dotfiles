@@ -3,7 +3,7 @@
 export TERM=xterm-256color
 export EDITOR=vim
 
-ANTIGEN=$HOME/.antigen.zsh
+ANTIGEN=$HOME/antigen.zsh
 
 [ -f $ANTIGEN ] || curl -L git.io/antigen > $ANTIGEN
 
