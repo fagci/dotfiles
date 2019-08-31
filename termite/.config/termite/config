@@ -1,5 +1,11 @@
 [options]
-font = xos4 Terminus 10px
+#font = xos4 Terminus 10px
+font = Monospace 9
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Source Code Pro 10
 
 # Solarized dark color scheme
 
