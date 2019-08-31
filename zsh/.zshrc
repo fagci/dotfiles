@@ -22,7 +22,7 @@ if [[ -f $ANTIGEN ]]; then
   antigen bundle zsh-users/zsh-completions src
   antigen bundle zsh-users/zsh-autosuggestions
 
-  antigen theme dieter
+  antigen theme gallifrey
 
   antigen apply
 fi
