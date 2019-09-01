@@ -20,10 +20,8 @@ tray-maxsize = 16
 modules-left = i3 xwindow
 modules-right = net_l net_w fs temp mem vol battery weather updates keyboard date
 
-font-0 = "xos4 Terminus:pixelsize=9;2"
+font-0 = "Iosevka term:pixelsize=10;3"
 font-1 = "FontAwesome:pixelsize=10;3"
-font-2 = Noto Sans Symbols:size=10:antialias=true;0		# Emoji + support
-font-3 = "Noto Sans:size=14;2"
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -31,7 +29,7 @@ foreground = ${colors.foreground}
 line-size = 4
 line-color = #f00
 
-padding-left = 1
+padding-left = 0
 padding-right = 1
 module-margin = 1
 
@@ -42,14 +40,11 @@ interface = wlp1s0
 ping-interval = 3
 
 format-connected = <label-connected>
-
 format-disconnected = <label-disconnected>
-
 format-packetloss = <animation-packetloss> <label-connected>
 
 label-connected = [%ifname% %essid% %downspeed:9%]
 label-connected-foreground = #eefafafa
-
 label-disconnected = not connected
 label-disconnected-foreground = #66ffffff
 
@@ -66,14 +61,11 @@ interface = enp0s7
 ping-interval = 3
 
 format-connected = <label-connected>
-
 format-disconnected = <label-disconnected>
-
 format-packetloss = <animation-packetloss> <label-connected>
 
 label-connected = [%ifname% %downspeed:9%]
 label-connected-foreground = #eefafafa
-
 label-disconnected = not connected
 label-disconnected-foreground = #66ffffff
 
@@ -106,7 +98,7 @@ interval = 25
 mount-0 = /
 mount-1 = /home
 
-;label-mounted = mountpoint%%{F-}: %free%
+label-mounted = %mountpoint%%{F-}: %free%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
