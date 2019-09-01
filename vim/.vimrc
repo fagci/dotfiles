@@ -101,13 +101,13 @@ Plug 'antonk52/vim-tabber'
 " NOTE: on Arch linux install greenlet from repo, remove pip version
 " Additional dependency: pip3 install --user pynvim
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
 
 " }}}
 
@@ -261,7 +261,6 @@ let g:deoplete#enable_at_startup = 1
 
 map <c-n> :NERDTreeToggle<cr>
 let mapleader = " "
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)

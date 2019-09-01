@@ -1,11 +1,17 @@
 [options]
-#font = xos4 Terminus 10px
-font = Monospace 9
+font = Iosevka Term 10
+
 allow_bold = true
-dynamic_title = true
+audible_bell = false
+visible_bell = false
 urgent_on_bell = true
 clickable_url = true
-font = Source Code Pro 10
+scrollback_lines = 32767
+search_wrap = true
+cursor_blink = off
+#cursor_shape = ibeam
+browser = chromium
+dynamic_title = true
 
 # Solarized dark color scheme
 
@@ -48,5 +54,4 @@ color14 = #8ec07c
 color7 = #a89984
 color15 = #ebdbb2
 
-# vim: ft=dosini cms=#%s
-
+# vim: set ft=dosini :
