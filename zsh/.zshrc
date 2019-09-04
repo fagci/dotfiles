@@ -19,6 +19,8 @@ if [[ -f $ANTIGEN ]]; then
   antigen bundle git
   antigen bundle gnu-utils
 
+  antigen bundle zsh-users/zsh-syntax-highlighting
+
   antigen bundle zsh-users/zsh-completions src
   antigen bundle zsh-users/zsh-autosuggestions
 
