@@ -3,6 +3,11 @@
 export TERM=xterm-256color
 export EDITOR=vim
 
+if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
+  export MPD_HOST=localhost
+  export MPD_PORT=8600
+fi
+
 ANTIGEN=$HOME/antigen.zsh
 
 [ -f $ANTIGEN ] || curl -L git.io/antigen > $ANTIGEN
