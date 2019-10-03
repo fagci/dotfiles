@@ -2,6 +2,7 @@
 
 export TERM=xterm-256color
 export EDITOR=vim
+export PATH=$PATH:~/bin
 
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
   export MPD_HOST=localhost

@@ -3,7 +3,7 @@ rofi.color-window: argb:c6073642, argb:0073642, #a8b8b8
 rofi.color-normal: argb:0073642, #eee8d5, argb:0073642, #2aa198, #fdf6e3
 rofi.color-active: argb:0fdf6e3, #39cdc2, argb:0073642, #2aa198, #fdf6e3
 rofi.color-urgent: argb:83dc322f, #eee8d5, argb:83dc322f, #dc322f, #fdf6e3
-rofi.font: xos4 Terminus 9
+rofi.font: xos4 Iosevka 9
 rofi.separator-style: solid
 rofi.theme: solarized_alternate
 
