@@ -260,6 +260,8 @@ let g:ale_fixers = {
 \}
 let g:ale_fix_on_save = 1
 
+let g:tsuquyomi_completion_detail = 1
+
 " }}}
 
 " {{{ Mappings
@@ -276,6 +278,9 @@ nnoremap <F1> :call investigate#Investigate()<CR>
 
 " }}}
 
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript setlocal completeopt-=menu
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 " vim:fdm=marker:fdl=0
