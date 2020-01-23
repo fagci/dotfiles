@@ -5,20 +5,34 @@ focus_follows_mouse no
 floating_modifier $mod
 
 #new_window none
-new_window pixel 1
+default_border pixel 1
 
 font pango: Terminus, FontAwesome Regular, Ubuntu Mono derivative Powerline, Icons 8
 # }}}
 
 # COLORS {{{
-# class                 border  backgr. text    indicator
-client.focused          #4c7899 #285577 #ffffff #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+# class                 border  bg      text    indicator child_brdr
 client.placeholder      #000000 #0c0c0c #ffffff #000000
 
 client.background       #ffffff
+
+client.focused          $blue $blue $darkgray $purple $green
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
+
+
 # }}}
 
 # WINDOWS {{{
@@ -147,9 +161,5 @@ exec --no-startup-id synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapBut
 exec_always --no-startup-id $HOME/.config/i3/polybar.sh
 # }}}
 
-client.focused #586e75 #586e75 #f9f9f9 #268bd2
-client.focused_inactive #455057 #455057 #c7c7c7 #002b36
-client.unfocused #2d2d2d #2d2d2d #c7c7c7 #002b36
-client.urgent #dc322f #dc322f #f9f9f9 #dc322f
 
 
