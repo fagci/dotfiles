@@ -56,7 +56,7 @@ animation-packetloss-framerate = 500
 
 [module/net_l]
 type = internal/network
-interface = enp0s7
+interface = enp1s6
 
 ping-interval = 3
 

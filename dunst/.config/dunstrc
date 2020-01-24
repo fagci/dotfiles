@@ -7,7 +7,7 @@
   frame_color = "#aaaaaa"
   separator_color = frame
   idle_threshold = 120
-  font = xos4 Terminus 8
+#  font = xos4 Terminus 8
   format = "[%a :: %s]\n%b"
   icon_position = left
 
