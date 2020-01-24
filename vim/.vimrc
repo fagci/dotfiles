@@ -71,12 +71,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes' " themes
-Plug 'wincent/terminus'
+"Plug 'wincent/terminus'
 
 Plug 'christoomey/vim-system-copy'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/limelight.vim'
-Plug 'keith/investigate.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -127,10 +126,10 @@ Plug 'pangloss/vim-javascript',      { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
-Plug 'kchmck/vim-coffee-script', {'for': ['coffee']}
+Plug 'Quramy/tsuquyomi'
 Plug 'chase/vim-ansible-yaml', {'for': ['yaml','yml']}
 Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
-
+Plug 'dense-analysis/ale'
 " }}}
 
 Plug 'Yggdroot/indentLine'
@@ -175,14 +174,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 set laststatus=2
-
-" }}}
-
-" {{{ Spell check
-
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=red ctermbg=black
-" set spell spelllang=en_us
 
 " }}}
 
@@ -255,6 +246,22 @@ let g:html_indent_style1         = "inc"
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint'],
+\   'vue': ['eslint']
+\}
+let g:ale_fixers = {
+\    'javascript': ['eslint'],
+\    'typescript': ['prettier'],
+\    'vue': ['eslint'],
+\    'scss': ['prettier'],
+\    'html': ['prettier']
+\}
+let g:ale_fix_on_save = 1
+
+let g:tsuquyomi_completion_detail = 1
+
 " }}}
 
 " {{{ Mappings
@@ -270,5 +277,10 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <F1> :call investigate#Investigate()<CR>
 
 " }}}
+
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript setlocal completeopt-=menu
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 " vim:fdm=marker:fdl=0

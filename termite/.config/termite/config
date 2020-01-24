@@ -1,5 +1,5 @@
 [options]
-font = Iosevka Term 10
+font = Ubuntu Mono 10
 
 allow_bold = true
 audible_bell = false
