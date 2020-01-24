@@ -68,8 +68,7 @@ bindsym $mod+a exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
 # take screenshot + show
-bindsym Print exec scrot -e 'mv $f ~/Screenshots'
-bindsym $mod+Print exec scrot -s -e 'mv $f ~/Screenshots'
+bindsym Print exec scrot -s -e 'xclip -selection clipboard -t "image/png" < $f'
 #bindsym Print exec dscrot
 #bindsym $mod+Print exec wscrot
 
