@@ -61,10 +61,6 @@ set expandtab
 
 " }}}
 
-" Better ex autocompletion
-set wildmenu
-set wildmode=list:longest,full
-
 " for vertical pane in git diff tool
 set diffopt+=vertical
 
@@ -85,8 +81,6 @@ endif
 " {{{ Plugins here
 call plug#begin('~/.nvim/plugged')
 " General
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/defx.nvim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
 Plug 'junegunn/gv.vim'
@@ -105,12 +99,8 @@ Plug 'blueyed/vim-diminactive'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" status bar
-Plug 'itchyny/lightline.vim'
-
-" allow multisearch in current directory / multi replace as well
-Plug 'wincent/ferret'
-
+Plug 'itchyny/lightline.vim' " status line
+Plug 'wincent/ferret' " multisearch in current directory / multi replace
 Plug 'Shougo/deoplete.nvim'
 Plug 'dense-analysis/ale'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -133,14 +123,6 @@ Plug 'junegunn/limelight.vim', { 'for': 'markdown' } " Hyperfocus-writing
 
 " php doc autocompletion
 "Plug 'tobyS/vmustache' | Plug 'tobyS/pdv', {'for': 'php'}
-
-" Add tmux completion for COC
-Plug 'wellle/tmux-complete.vim'
-
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
-Plug 'Shougo/neco-vim'
-Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " javascript plugins
 Plug 'pangloss/vim-javascript'
@@ -174,11 +156,7 @@ filetype plugin indent on
 
 " {{{ Plugin settings
 
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
-set laststatus=2
+let g:deoplete#enable_at_startup = 1
 
 " Enable JSDoc highlighting
 let g:javascript_plugin_jsdoc = 1
@@ -398,16 +376,6 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<esc>'
 
-" Coc extensions
-let g:coc_global_extensions = [
-    \ 'coc-json', 
-    \ 'coc-css', 
-    \ 'coc-tsserver',
-    \ 'coc-html',
-    \ 'coc-ultisnips',
-    \ 'coc-yaml',
-    \]
-
 " }}}
 
 " }}}
@@ -420,8 +388,6 @@ command! Wq :wq
 command! Ter :ter
 command! Sp :sp
 command! Vs :vs
-
-nnoremap <c-p> :CtrlP<cr>
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gg :Ggrep<space>
