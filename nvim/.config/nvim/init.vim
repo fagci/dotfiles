@@ -80,6 +80,7 @@ endif
 
 " {{{ Plugins here
 call plug#begin('~/.nvim/plugged')
+
 " General
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
@@ -104,6 +105,8 @@ Plug 'wincent/ferret' " multisearch in current directory / multi replace
 Plug 'Shougo/deoplete.nvim'
 Plug 'dense-analysis/ale'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'xolox/vim-misc', {'on': 'Note'}
+Plug 'xolox/vim-notes', {'on': 'Note'}
 
 " Syntax
 
@@ -132,8 +135,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
-
-" For Vue
+" vue
 Plug 'posva/vim-vue'
 
 " -
@@ -160,9 +162,6 @@ let g:deoplete#enable_at_startup = 1
 
 " Enable JSDoc highlighting
 let g:javascript_plugin_jsdoc = 1
-
-" Enable Flow syntax highlighting
-let g:javascript_plugin_flow = 1
 
 " {{{ Ale
 let g:ale_linters = {
@@ -347,6 +346,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 smap <C-d> <Del>
 " }}}
 
+" {{{ Syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump           = 1
@@ -368,13 +368,17 @@ let g:syntastic_haml_checkers       = ['haml-lint'] " gem install haml-lint
 let g:syntastic_css_checkers        = ['csslint'  ] " sudo npm install -g csslint
 let g:syntastic_css_csslint_args    = "--ignore=zero-units"
 
-" multiple cursor
+" }}}
+
+" {{{ multiple cursor
 
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<esc>'
+
+" }}}
 
 " }}}
 
@@ -423,8 +427,11 @@ nnoremap <leader>wh <c-w>s
 nnoremap <leader>wv <c-w>v
 
 " Autocompletion with tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+nnoremap <c-n> :NERDTreeToggle<cr>
+nnoremap <C-n> :FZF<cr>
 
 " }}}
 
