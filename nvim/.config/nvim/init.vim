@@ -81,6 +81,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'Shougo/deoplete.nvim'
 Plug 'dense-analysis/ale'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " formatting / editing
 Plug 'mattn/emmet-vim'
@@ -88,6 +89,9 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'terryma/vim-expand-region' " expand selection by J/K
+Plug 'Lokaltog/vim-easymotion' " highlights motions
 
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -105,9 +109,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'blueyed/vim-diminactive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'itchyny/lightline.vim' " status line
-"Plug 'maximbaz/lightline-ale'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'chip/vim-fat-finger'
+Plug 'Yggdroot/indentLine' " indentation lines
 
 " git
 Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
@@ -134,11 +138,11 @@ Plug 'junegunn/limelight.vim', { 'for': 'markdown' } " Hyperfocus-writing
 "Plug 'tobyS/vmustache' | Plug 'tobyS/pdv', {'for': 'php'}
 
 " javascript plugins
-Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx', 'vue'], 'do': 'npm install'}
-Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'pangloss/vim-javascript'
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx', 'vue'], 'do': 'npm install'}
+"Plug 'HerringtonDarkholme/yats.vim'
 
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
@@ -146,11 +150,13 @@ Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'posva/vim-vue'
 
 " -
-Plug 'hail2u/vim-css3-syntax'
-Plug 'chr4/nginx.vim'
-Plug 'stephpy/vim-yaml'
-Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'ap/vim-css-color'
+"Plug 'hail2u/vim-css3-syntax'
+"Plug 'chr4/nginx.vim'
+"Plug 'stephpy/vim-yaml'
+"Plug 'PotatoesMaster/i3-vim-syntax'
+"Plug 'ap/vim-css-color'
+"Plug 'othree/html5.vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -161,6 +167,8 @@ if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
   PlugInstall
 endif
 " }}}
+
+call plug#load('vim-fat-finger')
 
 filetype plugin indent on
 
@@ -175,14 +183,10 @@ let g:javascript_plugin_jsdoc = 1
 
 " {{{ Ale
 
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '!'
-let g:ale_sign_info = 'ℹ'
-
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_statusline_format = [g:ale_sign_error.'%d', g:ale_sign_warning.'%d', '⬥ ok']
-let g:ale_echo_msg_error_str = g:ale_sign_error
-let g:ale_echo_msg_warning_str = g:ale_sign_warning
+let g:ale_statusline_format = ['⤫ %d', '⚠ %d', 'OK']
+let g:ale_sign_error = '⤫ '
+let g:ale_sign_warning = '⚠ '
+let g:ale_sign_column_always = 1
 
 "let g:ale_linters = {
 "\   'javascript': ['eslint', 'prettier'],
@@ -284,12 +288,6 @@ let g:multi_cursor_quit_key='<esc>'
 
 " {{{ Mapping
 
-" ======= fat fingers
-
-command! Wq :wq
-command! Ter :ter
-command! Sp :sp
-command! Vs :vs
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gg :Ggrep<space>
