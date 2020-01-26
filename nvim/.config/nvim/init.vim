@@ -40,10 +40,6 @@ set laststatus=2 " always show status line
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 if exists('&belloff') " never ring the bell for any reason
   set belloff=all
 endif
@@ -81,7 +77,6 @@ endif
 call plug#begin('~/.nvim/plugged')
 
 " === General
-Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'Shougo/deoplete.nvim'
@@ -174,15 +169,29 @@ let g:deoplete#enable_at_startup = 1
 let g:javascript_plugin_jsdoc = 1
 
 " {{{ Ale
-let g:ale_linters = {
-\   'javascript': ['eslint', 'flow'],
-\   'typescript': ['eslint', 'tsserver'],
-\   'html': []
-\  }
 
-let g:ale_linter_aliases = {
-\  'typescript.tsx': 'typescript',
-\  'typescriptreact': 'typescript'
+let g:ale_sign_error = 'X'
+let g:ale_sign_warning = '!'
+let g:ale_sign_info = 'ℹ'
+let g:ale_sign_style_error = 'X'
+let g:ale_sign_style_warning = '!'
+
+highlight link ALEWarning       Normal
+highlight link ALEWarningSign      Search
+
+let g:ale_sign_column_always = 1
+let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 1
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_statusline_format = [g:ale_sign_error.'%d', g:ale_sign_warning.'%d', '⬥ ok']
+let g:ale_echo_msg_error_str = g:ale_sign_error
+let g:ale_echo_msg_warning_str = g:ale_sign_warning
+
+let g:ale_linters = {
+\   'javascript': ['eslint', 'prettier'],
+\   'typescript': ['eslint', 'tsserver'],
+\   'php': ['php -l'],
+\   'html': []
 \  }
 
 let g:ale_fixers = {
@@ -191,16 +200,10 @@ let g:ale_fixers = {
 \   'typescriptreact': ['eslint'],
 \   }
 
-
-" Use a slightly slimmer error pointer
-let g:ale_sign_error = '✖'
-hi ALEErrorSign guifg=#DF8C8C
-let g:ale_sign_warning = '⚠'
-hi ALEWarningSign guifg=#F2C38F
-
 " }}}
 
 " {{{ FZF
+
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -265,30 +268,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 smap <C-d> <Del>
 " }}}
 
-" {{{ Syntastic
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump           = 1
-let g:syntastic_error_symbol        = '✖'
-let g:syntastic_warning_symbol      = '►'
-
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-let g:syntastic_html_checkers=['tidy']
-let g:syntastic_vim_checkers=['vimlint']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_yaml_checkers=['js-yaml']
-let g:syntastic_scss_checkers=['scss-lint']
-let g:syntastic_css_checkers=['csslint']
-let g:syntastic_handlebars_checkers=['handlebars']
-let g:syntastic_tpl_checkers=['handlebars']
-let g:syntastic_javascript_checkers = ['jshint'   ] " sudo npm install -g jshint
-let g:syntastic_html_checkers       = ['jshint'   ] " sudo npm install -g jshint
-let g:syntastic_haml_checkers       = ['haml-lint'] " gem install haml-lint
-let g:syntastic_css_checkers        = ['csslint'  ] " sudo npm install -g csslint
-let g:syntastic_css_csslint_args    = "--ignore=zero-units"
-
-" }}}
-
 " {{{ multiple cursor
 
 let g:multi_cursor_use_default_mapping=0
@@ -298,6 +277,10 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<esc>'
 
 " }}}
+
+
+
+
 
 " }}}
 
@@ -346,7 +329,7 @@ nnoremap <leader>wh <c-w>s
 nnoremap <leader>wv <c-w>v
 
 nnoremap <c-n> :NERDTreeToggle<cr>
-nnoremap <C-n> :FZF<cr>
+nnoremap <c-p> :Files<CR>
 nmap <leader>d <Plug>(ale_fix)
 
 " }}}
