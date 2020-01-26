@@ -1,14 +1,13 @@
 " ===========================================
 "
-" .vimrc VIM config file
-"
 " Author: fagci <fagci.nsk@gmail.com>
 "
-" ===========================================
-
 " Prerequisites:
+"
 " pip3 install pynvim
 " npm install -g neovim tern
+"
+" ===========================================
 
 " Common setup {{{
 
@@ -81,34 +80,43 @@ endif
 " {{{ Plugins here
 call plug#begin('~/.nvim/plugged')
 
-" General
+" === General
 Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
-Plug 'junegunn/gv.vim'
-Plug 'morhetz/gruvbox'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'mattn/emmet-vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'henrik/vim-indexed-search'
-Plug 'tpope/vim-surround'
-Plug 'blueyed/vim-diminactive'
-Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'itchyny/lightline.vim' " status line
-Plug 'wincent/ferret' " multisearch in current directory / multi replace
 Plug 'Shougo/deoplete.nvim'
 Plug 'dense-analysis/ale'
-Plug 'HerringtonDarkholme/yats.vim'
+
+" formatting / editing
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'editorconfig/editorconfig-vim'
+
+" search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'henrik/vim-indexed-search'
+Plug 'wincent/ferret' " multisearch in current directory / multi replace
+
+" notes
 Plug 'xolox/vim-misc', {'on': 'Note'}
 Plug 'xolox/vim-notes', {'on': 'Note'}
 
-" Syntax
+" usability / style
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
+Plug 'blueyed/vim-diminactive'
+Plug 'itchyny/lightline.vim' " status line
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" git
+Plug 'tpope/vim-fugitive' | Plug 'mhinz/vim-signify'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+
+" === Syntax
 
 " - md
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " Distraction-free
@@ -130,6 +138,7 @@ Plug 'junegunn/limelight.vim', { 'for': 'markdown' } " Hyperfocus-writing
 " javascript plugins
 Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx', 'vue'], 'do': 'npm install'}
+Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'leafgarland/typescript-vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
@@ -146,6 +155,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
 
 call plug#end()
+
 " }}}
 
 " {{{ Automatically install missing plugins on startup
@@ -181,7 +191,6 @@ let g:ale_fixers = {
 \   'typescriptreact': ['eslint'],
 \   }
 
-nmap <leader>d <Plug>(ale_fix)
 
 " Use a slightly slimmer error pointer
 let g:ale_sign_error = '✖'
@@ -189,83 +198,9 @@ hi ALEErrorSign guifg=#DF8C8C
 let g:ale_sign_warning = '⚠'
 hi ALEWarningSign guifg=#F2C38F
 
-" Use ALT-k and ALT-j to navigate errors
-nmap <silent> ˚ <Plug>(ale_previous_wrap)
-nmap <silent> ∆ <Plug>(ale_next_wrap)
 " }}}
 
 " {{{ FZF
-augroup fzf
-  autocmd!
-augroup END
-" Key mapping
-
-" History of file opened
-nnoremap <leader>h :History<cr>
-
-" Buffers opens
-nnoremap <leader>b :Buffers<cr>
-
-" Files recursively from pwd
-nnoremap <leader>f :Files<cr>
-
-" Ex commands
-nnoremap <leader>c :Commands<cr>
-" Ex command history. <C-e> to modify the command
-nnoremap <leader>: :History:<cr>
-
-nnoremap <leader>a :Rgi<space>
-nnoremap <leader>A :exec "Rgi ".expand("<cword>")<cr>
-
-"" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-
-" ripgrep command to search in multiple files
-autocmd fzf VimEnter * command! -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" ripgrep - ignore the files defined in ignore files (.gitignore...)
-autocmd fzf VimEnter * command! -nargs=* Rgi
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" ripgrep - ignore the files defined in ignore files (.gitignore...) and doesn't ignore case
-autocmd fzf VimEnter * command! -nargs=* Rgic
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" ripgrep - ignore the files defined in ignore files (.gitignore...) and doesn't ignore case
-autocmd fzf VimEnter * command! -nargs=* Rgir
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" ripgrep - ignore the files defined in ignore files (.gitignore...) and doesn't ignore case and activate regex search
-autocmd fzf VimEnter * command! -nargs=* Rgr
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --hidden --no-ignore --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -297,25 +232,9 @@ let g:FerretMap=0
 " }}}
 
 " {{{ NERDTree
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    if (expand("%:t") != '')
-      exe ":NERDTreeFind"
-    else
-      exe ":NERDTreeToggle"
-    endif
-  endif
-endfunction
-
-nmap <leader>n :call NERDTreeToggleInCurDir()<CR>
 
 " don't display informations (type ? for help and so on)
 let g:NERDTreeMinimalUI = 1
-" don't replace the native vim file explorer
-let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeShowBookmarks = 0
@@ -432,6 +351,7 @@ nnoremap <leader>wv <c-w>v
 
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap <C-n> :FZF<cr>
+nmap <leader>d <Plug>(ale_fix)
 
 " }}}
 
@@ -450,3 +370,4 @@ colorscheme gruvbox
 set background=dark
 
 " }}}
+
