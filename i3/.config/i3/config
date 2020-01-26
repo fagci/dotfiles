@@ -156,7 +156,6 @@ exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_shift
 exec --no-startup-id "xrandr --output LVDS1 --off"
 exec --no-startup-id "xset r rate 200 25"
 exec --no-startup-id synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
-exec nitrogen --restore
 exec_always --no-startup-id $HOME/.config/i3/polybar.sh
 # }}}
 
