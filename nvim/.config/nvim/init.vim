@@ -345,10 +345,6 @@ nnoremap <leader>wh <c-w>s
 " create vertival window
 nnoremap <leader>wv <c-w>v
 
-" Autocompletion with tab
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap <C-n> :FZF<cr>
 nmap <leader>d <Plug>(ale_fix)

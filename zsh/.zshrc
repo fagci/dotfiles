@@ -53,6 +53,10 @@ cht() {
   IFS=+ curl "https://cht.sh/$where/$*"
 }
 
+fcd() {
+  cd $(find -type d -print 2> /dev/null | fzf)
+}
+
 # aliases
 
 if hash exa 2> /dev/null; then
