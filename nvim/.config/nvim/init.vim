@@ -6,6 +6,10 @@
 "
 " ===========================================
 
+" Prerequisites:
+" pip3 install pynvim
+" npm install -g neovim tern
+
 " Common setup {{{
 
 set nocompatible
@@ -107,6 +111,9 @@ Plug 'itchyny/lightline.vim'
 " allow multisearch in current directory / multi replace as well
 Plug 'wincent/ferret'
 
+Plug 'Shougo/deoplete.nvim'
+Plug 'dense-analysis/ale'
+Plug 'HerringtonDarkholme/yats.vim'
 
 " Syntax
 
@@ -140,6 +147,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx', 'vue'], 'do': 'npm install'}
 
 Plug 'leafgarland/typescript-vim'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
 
 " For Vue
 Plug 'posva/vim-vue'
@@ -169,6 +179,43 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 set laststatus=2
+
+" Enable JSDoc highlighting
+let g:javascript_plugin_jsdoc = 1
+
+" Enable Flow syntax highlighting
+let g:javascript_plugin_flow = 1
+
+" {{{ Ale
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow'],
+\   'typescript': ['eslint', 'tsserver'],
+\   'html': []
+\  }
+
+let g:ale_linter_aliases = {
+\  'typescript.tsx': 'typescript',
+\  'typescriptreact': 'typescript'
+\  }
+
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
+\   }
+
+nmap <leader>d <Plug>(ale_fix)
+
+" Use a slightly slimmer error pointer
+let g:ale_sign_error = '✖'
+hi ALEErrorSign guifg=#DF8C8C
+let g:ale_sign_warning = '⚠'
+hi ALEWarningSign guifg=#F2C38F
+
+" Use ALT-k and ALT-j to navigate errors
+nmap <silent> ˚ <Plug>(ale_previous_wrap)
+nmap <silent> ∆ <Plug>(ale_next_wrap)
+" }}}
 
 " {{{ FZF
 augroup fzf
