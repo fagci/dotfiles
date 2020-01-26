@@ -66,8 +66,8 @@ set diffopt+=vertical
 filetype off
 
 " {{{ Install Plug
-if empty(glob('~/.nvim/autoload/plug.vim')) " load vim plug if it is not installed
-  silent !curl -fLo ~/.nvim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim')) " load vim plug if it is not installed
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -173,32 +173,24 @@ let g:javascript_plugin_jsdoc = 1
 let g:ale_sign_error = 'X'
 let g:ale_sign_warning = '!'
 let g:ale_sign_info = 'ℹ'
-let g:ale_sign_style_error = 'X'
-let g:ale_sign_style_warning = '!'
 
-highlight link ALEWarning       Normal
-highlight link ALEWarningSign      Search
-
-let g:ale_sign_column_always = 1
-let g:ale_completion_enabled = 1
-let g:ale_set_highlights = 1
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_statusline_format = [g:ale_sign_error.'%d', g:ale_sign_warning.'%d', '⬥ ok']
 let g:ale_echo_msg_error_str = g:ale_sign_error
 let g:ale_echo_msg_warning_str = g:ale_sign_warning
 
-let g:ale_linters = {
-\   'javascript': ['eslint', 'prettier'],
-\   'typescript': ['eslint', 'tsserver'],
-\   'php': ['php -l'],
-\   'html': []
-\  }
+"let g:ale_linters = {
+"\   'javascript': ['eslint', 'prettier'],
+"\   'typescript': ['eslint', 'tsserver'],
+"\   'php': ['php -l'],
+"\   'html': []
+"\  }
 
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'typescriptreact': ['eslint'],
-\   }
+"let g:ale_fixers = {
+"\   'javascript': ['eslint'],
+"\   'typescript': ['eslint'],
+"\   'typescriptreact': ['eslint'],
+"\   }
 
 " }}}
 
