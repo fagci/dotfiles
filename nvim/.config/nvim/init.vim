@@ -103,7 +103,10 @@ Plug 'xolox/vim-notes', {'on': 'Note'}
 Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
 Plug 'blueyed/vim-diminactive'
-Plug 'itchyny/lightline.vim' " status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'itchyny/lightline.vim' " status line
+"Plug 'maximbaz/lightline-ale'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " git
@@ -162,6 +165,8 @@ endif
 filetype plugin indent on
 
 " {{{ Plugin settings
+
+let g:airline_powerline_fonts = 1
 
 let g:deoplete#enable_at_startup = 1
 
@@ -269,7 +274,6 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<esc>'
 
 " }}}
-
 
 
 
