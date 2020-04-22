@@ -30,7 +30,10 @@ if [[ -f $ANTIGEN ]]; then
   antigen bundle zsh-users/zsh-completions src
   antigen bundle zsh-users/zsh-autosuggestions
 
-  antigen theme 0i0/0i0.zsh-theme
+  antigen bundle mafredri/zsh-async
+  antigen bundle sindresorhus/pure
+
+  #antigen theme 0i0/0i0.zsh-theme
 
   antigen apply
 fi
@@ -51,6 +54,14 @@ wttr() {
 cht() {
   where="$1"; shift
   IFS=+ curl "https://cht.sh/$where/$*"
+}
+
+geoip() {
+  curl https://ipapi.co/${1}/json/
+}
+
+fcd() {
+  cd $(find -type d -print 2> /dev/null | fzf)
 }
 
 # aliases
