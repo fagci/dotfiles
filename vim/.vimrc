@@ -94,7 +94,9 @@ Plug 'editorconfig/editorconfig-vim'                                " consistent
 " Plug 'rking/ag.vim'                                                 " search in a project
 "Plug 'ervandew/supertab'                                            " tab completion
 Plug 'antonk52/vim-tabber'
-
+Plug 'chr4/nginx.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'posva/vim-vue'
 
 " Deoplete {{{
 " NOTE: on Arch linux install greenlet from repo, remove pip version
