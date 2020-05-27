@@ -15,6 +15,7 @@ set encoding=utf-8
 
 set backspace=2
 set colorcolumn=80
+set clipboard=unnamed
 set foldenable
 set foldmethod=marker
 set foldmarker={{{,}}}
@@ -22,7 +23,6 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set lazyredraw
 set modelines=0 " security
 set noswapfile
 set nobackup
@@ -42,9 +42,12 @@ set updatetime=300
 set noerrorbells visualbell t_vb=
 set wildmenu
 
+" Speedup
 set nocursorline
 set nocursorcolumn
 set norelativenumber
+set ttyfast
+set lazyredraw
 
 set autoindent             " Copy indent from previous line.
 set expandtab              " Replace tabs with spaces in Insert mode.
@@ -142,6 +145,8 @@ let g:airline#extensions#keymap#enabled = 0
 let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
 let g:Powerline_symbols='unicode'
 
+let g:fzf_command_prefix = 'Fzf'
+
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -180,7 +185,7 @@ let g:tagbar_map_togglefold = '<ENTER>'
 
 " {{{ Mappings
 
-command! -bang -nargs=* Rg
+command! -bang -nargs=* RG
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
@@ -206,10 +211,10 @@ nnoremap b# :b#<CR>
 map <S-Tab> <C-W>W
 
 
-nnoremap <silent> <Leader>F :Rg<CR>
-nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>H :History<CR>
-nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>F :RG<CR>
+nnoremap <silent> <Leader>f :FzfFiles<CR>
+nnoremap <silent> <Leader>H :FzfHistory<CR>
+nnoremap <silent> <Leader>b :FzfBuffers<CR>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
