@@ -60,7 +60,7 @@ bindsym $mod+l exec ilockit
 
 bindsym $mod+c exec chromium
 bindsym $mod+Shift+l exec luakit
-bindsym $mod+b exec ranger
+bindsym $mod+b exec thunar
 bindsym $mod+Shift+b exec rofi -width 45 -modi "fb:rofi-fb" -show fb #rofi filebrowser
 bindsym $mod+Shift+p exec ~/.local/bin/rs.sh
 
