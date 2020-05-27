@@ -72,8 +72,8 @@ bindsym Print exec scrot -s -e 'xclip -selection clipboard -t "image/png" < $f'
 #bindsym Print exec dscrot
 #bindsym $mod+Print exec wscrot
 
-bindsym $mod+Return exec termite
-bindsym $mod+grave exec termite
+bindsym $mod+Return exec kitty
+bindsym $mod+grave exec kitty
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle && pkill -RTMIN+1 i3blocks
