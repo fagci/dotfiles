@@ -1,288 +1,170 @@
-" ===========================================
+" ===========================
+" VIMRC
+" ===========================
 "
-" .vimrc VIM config file
+" @author fagci
 "
-" Author: fagci <fagci.nsk@gmail.com>
-"
-" ===========================================
+" ===========================
 
-" Common setup {{{
+set encoding=utf-8
 
-set nocompatible
-set modelines=1
-set encoding=UTF-8
+" Install plugin manager
 
-set ttyfast
-set lazyredraw " draw less
-set cul
-
-set noswapfile
-set nobackup
-set nowb
-
-set foldmethod=marker
-set number
-set relativenumber
-set hlsearch
-set incsearch
-
-set linebreak " break long lines on breakable chars
-
-set scrolloff=3 " always keep 3 lines around the cursor
-set sidescrolloff=3
-
-set laststatus=2 " always show status line
-
-" Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-if exists('&belloff') " never ring the bell for any reason
-  set belloff=all
-endif
-
-" {{{ Indentation
-
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-
-" }}}
-
-" }}}
-
-" {{{ Plugins
-filetype off
-
-if empty(glob('~/.vim/autoload/plug.vim')) " load vim plug if it is not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+" Plugins {{{
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
-Plug 'flazz/vim-colorschemes' " themes
-"Plug 'wincent/terminus'
+" Base
 
-Plug 'christoomey/vim-system-copy'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }             " project file tree
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'                                      " enhanced status line
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'sk1418/HowMuch'
-Plug 'godlygeek/tabular'
-Plug 'blueyed/vim-diminactive'                                      " dims inactive splits
-Plug 'jiangmiao/auto-pairs'                                         " auto closes quotes and braces
-Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'javascript'] } " auto closes XML tags
-Plug 'editorconfig/editorconfig-vim'                                " consistent coding style
-" Plug 'rking/ag.vim'                                                 " search in a project
-"Plug 'ervandew/supertab'                                            " tab completion
-Plug 'antonk52/vim-tabber'
-Plug 'chr4/nginx.vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'posva/vim-vue'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'wincent/ferret' " :Ack -> :Acks /A/B/
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'wellle/targets.vim' " more entities (ex.: di,)
+Plug 'tpope/vim-commentary'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'qpkorr/vim-bufkill' " :BD
 
-" Deoplete {{{
-" NOTE: on Arch linux install greenlet from repo, remove pip version
-" Additional dependency: pip3 install --user pynvim
+Plug 'osyo-manga/vim-over' " show regex as u type it
 
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-
-" }}}
-
-Plug 'tpope/vim-surround' " change surrounding chars
-
-if has('python')
-  Plug 'Valloric/MatchTagAlways'
-endif
-
-" Syntax {{{
-
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] } " quick html
-Plug 'othree/html5.vim', {'for': ['html']} "HTML5 omnicomplete and syntax
-Plug 'groenewege/vim-less', {'for': 'less'}
-Plug 'hail2u/vim-css3-syntax', { 'for': ['html','css'] }
-Plug 'pangloss/vim-javascript',      { 'for': 'javascript' }
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
-Plug 'chase/vim-ansible-yaml', {'for': ['yaml','yml']}
-Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
-Plug 'dense-analysis/ale'
-" }}}
-
-Plug 'Yggdroot/indentLine'
-
-" Git {{{
-
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" }}}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+
+Plug 'morhetz/gruvbox'
+
+" Syntax & lang
+
+Plug 'w0rp/ale' " check syntax
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css', 'php'] } " C-y ,
+Plug 'gko/vim-coloresque' " css color
+Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
+Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php']}
 
 call plug#end()
-filetype plugin indent on
 
 " }}}
 
-" {{{ Command aliases
+" Plugin settings
 
-" ======= fat fingers
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 
-command! Wq :wq
-command! Ter :ter
-command! Sp :sp
-command! Vs :vs
-
-" }}}
-
-" {{{ Styling
-
-syntax enable
-set background=dark
-if has('termguicolors')
-  set termguicolors
-endif
-
-let base16colorspace=256 " Access colors present in 256 colorspace
-set t_Co=256
-
-color gruvbox
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
+
+let g:UltiSnipsExpandTrigger='<Nop>'
+let g:UltiSnipsJumpForwardTrigger = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
+
+" Base settings
+
+syntax on
+filetype plugin indent on
+
+set lazyredraw
+set updatetime=300
+set number
+set relativenumber
+set cursorline
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+set visualbell
 set laststatus=2
+set scrolloff=4
+set colorcolumn=80,120
+set foldenable
+set tabstop=4
+set shiftwidth=4
+set shiftround
+set smarttab
+set expandtab
+set smartindent
+set wildmenu
 
-" }}}
+set nobackup
+set noswapfile
+set undofile
+set undodir=/tmp/.vim_undo
+set undolevels=1000
+set undoreload=10000
 
-" Plugin settings {{{
+set modelines=0 " security
+set backspace=indent,eol,start
 
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump           = 1
-let g:syntastic_error_symbol        = '✖'
-let g:syntastic_warning_symbol      = '►'
+let mapleader=","
 
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-let g:syntastic_html_checkers=['tidy']
-let g:syntastic_vim_checkers=['vimlint']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_yaml_checkers=['js-yaml']
-let g:syntastic_scss_checkers=['scss-lint']
-let g:syntastic_css_checkers=['csslint']
-let g:syntastic_handlebars_checkers=['handlebars']
-let g:syntastic_tpl_checkers=['handlebars']
-let g:syntastic_javascript_checkers = ['jshint'   ] " sudo npm install -g jshint
-let g:syntastic_html_checkers       = ['jshint'   ] " sudo npm install -g jshint
-let g:syntastic_haml_checkers       = ['haml-lint'] " gem install haml-lint
-let g:syntastic_css_checkers        = ['csslint'  ] " sudo npm install -g csslint
-let g:syntastic_css_csslint_args    = "--ignore=zero-units"
+" Theme
 
-" multiple cursor
+set t_Co=256
+color gruvbox
+set bg=dark
 
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-m>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<esc>'
+" Mappings
 
-" ======= Nerdtree
+nnoremap <silent> <Leader>, :noh<CR>
+map <tab> :NERDTreeToggle<CR>
+noremap <Leader>/ :Commentary<CR>
+nmap <leader><tab> :FZF<cr>
+map <leader>l :set list!<CR> " Toggle tabs and EOL
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+map <F3> :DBUIToggle<CR>
 
-let NERDTreeShowHidden=1 " show dot files
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let g:NERDTreeWinSize = 30
-" git indicator in tree
-let g:NERDTreeShowIgnoredStatus = 1
-let g:NERDTreeIndicatorMapCustom = {
-      \ "Modified"  : "✹",
-      \ "Staged"    : "✚",
-      \ "Untracked" : "✭",
-      \ "Renamed"   : "➜",
-      \ "Unmerged"  : "═",
-      \ "Deleted"   : "✖",
-      \ "Dirty"     : "✗",
-      \ "Clean"     : "✔︎",
-      \ 'Ignored'   : '☒',
-      \ "Unknown"   : "?"
-      \ }
+map <leader>" ysiw"<cr>
+map <leader>' ysiw'<cr>
 
-" ======= closetag
+vmap < <gv
+vmap > >gv
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js,*.ts,*.tsx"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.ts,*.tsx'
+" Navigate buffers
+nnoremap bn :bn<CR>
+nnoremap bp :bp<CR>
+nnoremap b# :b#<CR>
+map <S-Tab> <C-W>W
 
-" emmet
-let g:user_emmet_expandabbr_key='<Tab>'
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-let g:used_javascript_libs = 'jquery,lodash,vue,angularjs'
-let javascript_enable_domhtmlcss = 1
-let g:html_indent_inctags        = "html,body,head,tbody"
-let g:html_indent_script1        = "inc"
-let g:html_indent_style1         = "inc"
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
+" Autocmds
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'tslint'],
-\   'vue': ['eslint']
-\}
-let g:ale_fixers = {
-\    'javascript': ['eslint'],
-\    'typescript': ['prettier'],
-\    'vue': ['eslint'],
-\    'scss': ['prettier'],
-\    'html': ['prettier']
-\}
-let g:ale_fix_on_save = 1
+autocmd FileType c,cpp,java,php,html,js,css,h,m,rb,erb,es6,py autocmd BufWritePre <buffer> %s/\s\+$//e
 
-let g:tsuquyomi_completion_detail = 1
 
-" }}}
+" vim:foldmethod=marker:foldlevel=0
 
-" {{{ Mappings
-
-map <c-n> :NERDTreeToggle<cr>
-let mapleader = " "
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-nnoremap <F1> :call investigate#Investigate()<CR>
-
-" }}}
-
-set ballooneval
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-autocmd FileType typescript setlocal completeopt-=menu
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-
-" vim:fdm=marker:fdl=0
