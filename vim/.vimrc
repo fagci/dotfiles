@@ -47,7 +47,7 @@ set nocursorline
 set nocursorcolumn
 set norelativenumber
 set ttyfast
-set lazyredraw
+" set lazyredraw
 
 set autoindent             " Copy indent from previous line.
 set expandtab              " Replace tabs with spaces in Insert mode.
@@ -68,6 +68,10 @@ set shortmess+=c
 
 set t_Co=256
 set bg=dark
+
+let &t_EI.="\e[1 q" "EI = normal mode cursor
+let &t_SI.="\e[5 q" "SI = insert mode cursor
+let &t_SR.="\e[3 q" "SR = replace mode cursor
 
 " }}}
 
@@ -107,6 +111,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/limelight.vim'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
@@ -151,6 +157,8 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+
+let g:limelight_conceal_ctermfg = 'gray'
 
 let g:coc_global_extensions = 'coc-json coc-css coc-phpls coc-html coc-yaml coc-emmet coc-sql coc-ultisnips coc-tag coc-git'
 let g:coc_user_config = {
@@ -220,12 +228,31 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 nnoremap <Leader>o :TagbarToggle<CR>
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Autocmds
 
