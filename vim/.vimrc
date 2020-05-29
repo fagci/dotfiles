@@ -105,42 +105,40 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Base
+" Editing
 
-Plug 'scrooloose/nerdtree'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-Plug 'mbbill/undotree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'jremmen/vim-ripgrep'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/limelight.vim'
 
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
+" Search & replace
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" UI
+
+Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
-Plug 'tpope/vim-dadbod'
-
-"Plug 'morhetz/gruvbox'
+Plug 'mbbill/undotree'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'sainnhe/gruvbox-material'
 
-" Syntax & lang
+" Linters, autocompletions
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Syntax & lang
 
+Plug 'editorconfig/editorconfig-vim'
+
+Plug 'tpope/vim-dadbod'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'gko/vim-coloresque', { 'for': ['css','scss'] } " css color
@@ -154,6 +152,8 @@ call plug#end()
 color gruvbox-material
 
 " {{{ Plugin settings
+
+let g:rg_derive_root='true'
 
 let g:lightline = {'colorscheme' : 'gruvbox_material'}
 
@@ -172,8 +172,6 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 let g:fzf_command_prefix = 'Fzf'
-
-let g:limelight_conceal_ctermfg = 'gray'
 
 let g:coc_global_extensions = 'coc-json coc-css coc-phpls coc-html coc-yaml coc-emmet coc-sql coc-ultisnips coc-tag coc-git'
 let g:coc_user_config = {
@@ -218,7 +216,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 map <tab> :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
-nmap <leader><tab> :FZF<cr>
 map <leader>l :set list!<CR>
 
 nmap < <<
@@ -233,10 +230,12 @@ nnoremap b# :b#<CR>
 map <S-Tab> <C-W>W
 nnoremap <C-x> :bp\|bd #<CR>
 
+nmap <leader><tab> :FZF<cr>
 nnoremap <silent> <Leader>F :RG<CR>
 nnoremap <silent> <Leader>f :FzfFiles<CR>
 nnoremap <silent> <Leader>H :FzfHistory<CR>
 nnoremap <silent> <Leader>b :FzfBuffers<CR>
+nnoremap <Leader>s :FzfBLines<cr>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -277,7 +276,8 @@ autocmd FileType css,markdown,python,php setlocal shiftwidth=4 softtabstop=4 tab
 " custom
 
 if executable('rg')
-  set grepprg=set grepprg=rg\ --no-heading\ --vimgrep
+  "set grepprg=rg\ --no-heading\ --vimgrep
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
 " vim:fdm=marker:fdl=0
