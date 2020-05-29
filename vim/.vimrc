@@ -73,6 +73,9 @@ let &t_EI.="\e[1 q" "EI = normal mode cursor
 let &t_SI.="\e[5 q" "SI = insert mode cursor
 let &t_SR.="\e[3 q" "SR = replace mode cursor
 
+silent !stty -ixon
+autocmd VimLeave * silent !stty ixon
+
 " }}}
 
 " {{{ Prepare workspace
@@ -100,6 +103,7 @@ call plug#begin('~/.vim/plugged')
 " Base
 
 Plug 'scrooloose/nerdtree'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'mbbill/undotree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
