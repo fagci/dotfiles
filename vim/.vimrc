@@ -19,7 +19,7 @@ set backspace=2
 set colorcolumn=80
 set clipboard=unnamed
 set foldenable
-set foldmethod=marker
+"set foldmethod=marker
 set foldmarker={{{,}}}
 set hlsearch
 set ignorecase
@@ -58,6 +58,9 @@ set shiftwidth=2           " Spaces for each (auto)indent.
 set smarttab               " Insert and delete sw blanks in the front of a line.
 set softtabstop=2          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=2              " Spaces that a <Tab> in file counts for.
+
+set splitbelow
+set splitright
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
@@ -167,9 +170,12 @@ let g:lightline = {
        \   'gitbranch': 'fugitive#head'
        \ },
        \ }
-let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.tabline = {'left': [['buffers']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#enable_devicons = 1
 
 let g:fzf_command_prefix = 'Fzf'
 
@@ -204,6 +210,28 @@ let g:tagbar_map_togglefold = '<ENTER>'
 
 " }}}
 
+" Functions {{{
+
+" coc
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+fun! <SID>BufMakeScratch()
+  setl buftype=nofile
+  setl bufhidden=hide
+  setl noswapfile
+  setl nobuflisted
+endfun
+command! -bar BufScratch tabnew|call <SID>BufMakeScratch()
+command! -bar BufScratchTab tabnew|call <SID>BufMakeScratch()
+command! -bar BufScratchVSplit vnew|call <SID>BufMakeScratch()
+command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
+
+
+" }}}
+
 " {{{ Mappings
 
 command! -bang -nargs=* RG
@@ -227,8 +255,19 @@ vmap > >gv
 nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap b# :b#<CR>
-map <S-Tab> <C-W>W
-nnoremap <C-x> :bp\|bd #<CR>
+
+nnoremap <leader>1 :b1<CR>
+nnoremap <leader>2 :b2<CR>
+nnoremap <leader>3 :b3<CR>
+nnoremap <leader>4 :b4<CR>
+nnoremap <leader>5 :b5<CR>
+nnoremap <leader>6 :b6<CR>
+nnoremap <leader>7 :b7<CR>
+nnoremap <leader>8 :b8<CR>
+nnoremap <leader>9 :b9<CR>
+
+nnoremap <leader>q :bp<bar>bd#<cr>
+nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
 nmap <leader><tab> :FZF<cr>
 nnoremap <silent> <Leader>F :RG<CR>
@@ -242,12 +281,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
-" Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
@@ -259,26 +295,32 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Autocmds
+
+nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
+
+" }}}
+
+" Autocmds {{{
 
 " File type specific indenting
 autocmd FileType c,make setlocal noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
 autocmd FileType css,markdown,python,php setlocal shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType vim setlocal foldmethod=marker
 
-" custom
+" }}}
+
+" Custom {{{
 
 if executable('rg')
   "set grepprg=rg\ --no-heading\ --vimgrep
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
-" vim:fdm=marker:fdl=0
+
+nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
+
+" }}}
 
