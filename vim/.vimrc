@@ -7,6 +7,8 @@
 
 " {{{ Base settings
 
+set nocompatible
+
 syntax on
 filetype plugin indent on
 
@@ -48,7 +50,7 @@ set nocursorline
 set nocursorcolumn
 set norelativenumber
 set ttyfast
-" set lazyredraw
+set lazyredraw
 
 set autoindent             " Copy indent from previous line.
 set expandtab              " Replace tabs with spaces in Insert mode.
@@ -69,6 +71,8 @@ set shortmess+=c
 
 set t_Co=256
 set bg=dark
+
+set showtabline=2
 
 let &t_EI.="\e[1 q" "EI = normal mode cursor
 let &t_SI.="\e[5 q" "SI = insert mode cursor
@@ -107,7 +111,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'mbbill/undotree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -126,9 +131,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
 
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 
 " Syntax & lang
 
@@ -146,22 +151,27 @@ call plug#end()
 
 " }}}
 
-color gruvbox
+color gruvbox-material
 
 " {{{ Plugin settings
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#keymap#enabled = 0
-let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
-let g:Powerline_symbols='unicode'
+let g:lightline = {'colorscheme' : 'gruvbox_material'}
+
+let g:lightline = {
+       \ 'active': {
+       \   'left': [ [ 'mode', 'paste' ],
+       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+       \ },
+       \ 'colorscheme': 'gruvbox_material',
+       \ 'component_function': {
+       \   'gitbranch': 'fugitive#head'
+       \ },
+       \ }
+let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 let g:fzf_command_prefix = 'Fzf'
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
 
 let g:limelight_conceal_ctermfg = 'gray'
 
@@ -210,7 +220,6 @@ nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
 nmap <leader><tab> :FZF<cr>
 map <leader>l :set list!<CR>
-map <F3> :DBUIToggle<CR>
 
 nmap < <<
 nmap > >>
