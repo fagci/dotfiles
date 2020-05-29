@@ -34,6 +34,7 @@ set showmatch
 set smartcase
 set smartindent
 set smarttab
+set signcolumn=yes
 set undodir=~/.vim/undodir
 set undofile
 set undolevels=1000
@@ -221,7 +222,7 @@ nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap b# :b#<CR>
 map <S-Tab> <C-W>W
-
+nnoremap <C-x> :bp\|bd #<CR>
 
 nnoremap <silent> <Leader>F :RG<CR>
 nnoremap <silent> <Leader>f :FzfFiles<CR>
