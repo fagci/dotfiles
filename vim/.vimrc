@@ -127,6 +127,7 @@ Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'easymotion/vim-easymotion'
 
 " UI
 
@@ -155,6 +156,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'tpope/vim-dadbod'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'tpope/vim-liquid'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
@@ -178,6 +180,9 @@ let g:fzf_command_prefix = 'Fzf'
 
 let g:lightline = {
       \ 'colorscheme': 'srcery',
+            \ 'component': {
+            \   'readonly': '%{&readonly?"":""}',
+            \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'cocstatus': 'coc#status',
@@ -309,7 +314,8 @@ command! -bang -nargs=* RG
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 map <tab> :NERDTreeToggle<CR>
-nnoremap <silent> <Leader>, :noh<CR>
+"nnoremap <silent> <Leader>, :noh<CR>
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 noremap <Leader>/ :Commentary<CR>
 map <leader>l :set list!<CR>
 
