@@ -218,7 +218,6 @@ let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#enable_devicons = 1
 
 let g:coc_global_extensions = [
-      \   'coc-marketplace',
       \   'coc-highlight',
       \   'coc-pairs',
       \   'coc-snippets',
