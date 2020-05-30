@@ -76,6 +76,7 @@ set t_Co=256
 set bg=dark
 
 set showtabline=2
+set guioptions-=e
 
 let &t_EI.="\e[1 q" "EI = normal mode cursor
 let &t_SI.="\e[5 q" "SI = insert mode cursor
@@ -148,36 +149,38 @@ Plug 'gko/vim-coloresque', { 'for': ['css','scss'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php']}
 
+" Utils
+
+Plug 'tpope/vim-fugitive'
+Plug 'skywind3000/asyncrun.vim'
+
 call plug#end()
 
 " }}}
 
-color gruvbox-material
-
 " {{{ Plugin settings
 
-let g:rg_derive_root='true'
+let g:rg_derive_root = 1
+let g:fzf_command_prefix = 'Fzf'
 
 let g:lightline = {'colorscheme' : 'gruvbox_material'}
 
 let g:lightline = {
-       \ 'active': {
-       \   'left': [ [ 'mode', 'paste' ],
-       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-       \ },
-       \ 'colorscheme': 'gruvbox_material',
-       \ 'component_function': {
-       \   'gitbranch': 'fugitive#head'
-       \ },
-       \ }
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'colorscheme': 'gruvbox_material',
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 let g:lightline.tabline = {'left': [['buffers']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#enable_devicons = 1
-
-let g:fzf_command_prefix = 'Fzf'
 
 let g:coc_global_extensions = 'coc-json coc-css coc-phpls coc-html coc-yaml coc-emmet coc-sql coc-ultisnips coc-tag coc-git'
 let g:coc_user_config = {
@@ -235,9 +238,9 @@ command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
 " {{{ Mappings
 
 command! -bang -nargs=* RG
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+      \   fzf#vim#with_preview(), <bang>0)
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -256,15 +259,16 @@ nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap b# :b#<CR>
 
-nnoremap <leader>1 :b1<CR>
-nnoremap <leader>2 :b2<CR>
-nnoremap <leader>3 :b3<CR>
-nnoremap <leader>4 :b4<CR>
-nnoremap <leader>5 :b5<CR>
-nnoremap <leader>6 :b6<CR>
-nnoremap <leader>7 :b7<CR>
-nnoremap <leader>8 :b8<CR>
-nnoremap <leader>9 :b9<CR>
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
@@ -301,6 +305,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
 
+nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
+
 " }}}
 
 " Autocmds {{{
@@ -319,8 +325,7 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
-
-nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
+color gruvbox-material
 
 " }}}
 
