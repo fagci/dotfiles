@@ -1,5 +1,4 @@
 " ===========================
-"
 " .vimrc
 " Author: fagci
 "
@@ -15,7 +14,7 @@ filetype plugin indent on
 let mapleader=","
 set encoding=utf-8
 
-set backspace=2
+set backspace=indent,eol,start
 set colorcolumn=80
 set clipboard=unnamed
 set foldenable
@@ -76,6 +75,7 @@ set t_Co=256
 set bg=dark
 
 set showtabline=2
+set noshowmode
 
 let &t_EI.="\e[1 q" "EI = normal mode cursor
 let &t_SI.="\e[5 q" "SI = insert mode cursor
@@ -132,6 +132,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'sainnhe/gruvbox-material'
+Plug 'Yggdroot/indentLine'
 
 " Linters, autocompletions
 
@@ -196,6 +197,17 @@ let g:coc_user_config = {
       \ 'hintSign': '•',
       \ }
       \ }
+
+let php_html_in_heredoc=0
+let php_html_in_nowdoc=0
+let php_sql_heredoc=0
+let php_sql_nowdoc=0
+
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=25
+let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+
+let g:indentLine_char_list = ['⎸']
 
 " Tagbar {{{
 let g:tagbar_width = 30
