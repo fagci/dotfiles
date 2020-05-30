@@ -1,9 +1,13 @@
-" ===========================
+" ===================================================================
 "
-" .vimrc
+" File: .vimrc
 " Author: fagci
 "
-" ===========================
+" Description: 
+"   Yet another vimrc file by web developer.
+"   Single file because of easy editing. Trying to keep things simple.
+"
+" ===================================================================
 
 " {{{ Base settings
 
@@ -142,17 +146,21 @@ Plug 'Yggdroot/indentLine'
 " Linters, autocompletions
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Syntax & lang
 
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'tpope/vim-dadbod'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'sheerun/vim-polyglot'
 
-Plug 'gko/vim-coloresque', { 'for': ['css','scss'] } " css color
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php']}
+Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': 'php'} " TESTING
 
 " Utils
 
@@ -169,23 +177,63 @@ let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
 
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
       \ 'colorscheme': 'srcery',
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ }
-let g:lightline.tabline = {'left': [['buffers']]}
+let g:lightline.active = {
+      \   'left': [
+      \     ['mode', 'paste'],
+      \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ],
+      \     ['gitinfo']
+      \   ],
+      \   'right': [
+      \     ['lineinfo', 'filetype'],
+      \     ['percent'],
+      \     ['fileformat', 'fileencoding'],
+      \   ],
+      \ }
+let g:lightline.inactive = {
+      \   'left': [
+      \     ['paste'],
+      \     ['readonly', 'filename', 'modified'],
+      \   ],
+      \   'right': [
+      \     ['lineinfo', 'filetype'],
+      \     ['percent'],
+      \   ],
+      \ }
+let g:lightline.tabline = {'left': [['buffers']], 'right':[]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+let g:lightline.tabline_separator = g:lightline.separator
+let g:lightline.tabline_subseparator = g:lightline.subseparator
 
 let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#enable_devicons = 1
 
-let g:coc_global_extensions = 'coc-json coc-css coc-phpls coc-html coc-yaml coc-emmet coc-sql coc-ultisnips coc-tag coc-git'
+let g:coc_global_extensions = [
+      \   'coc-marketplace',
+      \   'coc-highlight',
+      \   'coc-pairs',
+      \   'coc-snippets',
+      \   'coc-css',
+      \   'coc-eslint',
+      \   'coc-html',
+      \   'coc-emmet',
+      \   'coc-sql',
+      \   'coc-json',
+      \   'coc-phpls',
+      \   'coc-git',
+      \   'coc-tslint-plugin',
+      \   'coc-tsserver',
+      \   'coc-yaml',
+      \ ]
 let g:coc_user_config = {
       \ 'suggest': {
       \ 'enablePreview': v:true,
@@ -319,6 +367,17 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
+" Vim-plug
+
+nnoremap <silent> <leader>pi :PlugInstall<CR>
+nnoremap <silent> <leader>pu :PlugUpdate<CR>
+nnoremap <silent> <leader>pr :PlugClean<CR>
+nnoremap <silent> <leader>pc :PlugClean<CR>
+nnoremap <silent> <leader>pg :PlugUpgrade<CR>
+nnoremap <silent> <leader>ps :PlugStatus<CR>
+nnoremap <silent> <leader>pd :PlugDiff<CR>
+nnoremap <silent> <leader>ph :PlugSnapshot
+
 
 nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
 
@@ -329,6 +388,7 @@ nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
 " Autocmds {{{
 
 " File type specific indenting
+
 autocmd FileType c,make setlocal noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
 autocmd FileType css,markdown,python,php setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType vim setlocal foldmethod=marker
@@ -338,7 +398,6 @@ autocmd FileType vim setlocal foldmethod=marker
 " Custom {{{
 
 if executable('rg')
-  "set grepprg=rg\ --no-heading\ --vimgrep
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 

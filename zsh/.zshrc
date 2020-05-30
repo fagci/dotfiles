@@ -9,6 +9,8 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
   export MPD_PORT=8600
 fi
 
+ANTIGEN_MUTEX=false
+
 ANTIGEN=$HOME/antigen.zsh
 
 [ -f $ANTIGEN ] || curl -L git.io/antigen > $ANTIGEN
