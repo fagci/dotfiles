@@ -33,8 +33,6 @@ if [[ -f $ANTIGEN ]]; then
   antigen bundle mafredri/zsh-async
   antigen bundle sindresorhus/pure
 
-  #antigen theme 0i0/0i0.zsh-theme
-
   antigen apply
 fi
 
@@ -85,3 +83,4 @@ if [[ "$OSTYPE" -eq "linux-android" ]] && hash pkg 2> /dev/null; then
   alias pkla="pkg list-all"
   alias pkli="pkg list-installed"
 fi
+

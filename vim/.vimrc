@@ -73,7 +73,9 @@ set shortmess+=at
 set shortmess+=c
 
 set t_Co=256
-set bg=dark
+set background=dark
+set termguicolors
+set t_ut="" " fixes weird background over line
 
 set showtabline=2
 set guioptions-=e
@@ -133,7 +135,8 @@ Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'sainnhe/gruvbox-material'
+" Plug 'sainnhe/gruvbox-material'
+Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/indentLine'
 
 " Linters, autocompletions
@@ -165,14 +168,12 @@ call plug#end()
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
 
-let g:lightline = {'colorscheme' : 'gruvbox_material'}
-
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
-      \ 'colorscheme': 'gruvbox_material',
+      \ 'colorscheme': 'srcery',
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head'
       \ },
@@ -212,6 +213,9 @@ let g:NERDTreeWinSize=25
 let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 
 let g:indentLine_char_list = ['⎸']
+
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_material_background = 'hard'
 
 " Tagbar {{{
 let g:tagbar_width = 30
@@ -338,7 +342,8 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
-color gruvbox-material
+" color gruvbox-material
+color srcery
 
 " }}}
 
