@@ -21,7 +21,7 @@ set encoding=utf-8
 
 set backspace=indent,eol,start
 set colorcolumn=80
-set clipboard=unnamed
+set clipboard+=unnamedplus
 set foldenable
 "set foldmethod=marker
 set foldmarker={{{,}}}
@@ -79,8 +79,7 @@ set shortmess+=c
 set t_Co=256
 set background=dark
 set termguicolors
-set t_ut="" " fixes weird background over line
-
+set t_ut="" " fixes weird bg over line
 set showtabline=2
 set guioptions-=e
 set noshowmode
@@ -118,7 +117,7 @@ call plug#begin('~/.vim/plugged')
 
 " Editing
 
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -147,7 +146,7 @@ Plug 'Yggdroot/indentLine'
 " Linters, autocompletions
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips' " py3 error
 Plug 'honza/vim-snippets'
 
 " Syntax & lang
@@ -158,6 +157,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-liquid'
 Plug 'sheerun/vim-polyglot'
+Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
@@ -222,8 +222,9 @@ let g:lightline.tabline_subseparator = g:lightline.subseparator
 let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#enable_devicons = 1
 
+let g:coc_git_status = 0
+
 let g:coc_global_extensions = [
-      \   'coc-highlight',
       \   'coc-pairs',
       \   'coc-snippets',
       \   'coc-css',
@@ -233,7 +234,6 @@ let g:coc_global_extensions = [
       \   'coc-sql',
       \   'coc-json',
       \   'coc-phpls',
-      \   'coc-git',
       \   'coc-tslint-plugin',
       \   'coc-tsserver',
       \   'coc-yaml',
@@ -261,7 +261,11 @@ let php_sql_heredoc=0
 let php_sql_nowdoc=0
 
 let NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize=25
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden = 1
+"let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:NERDTreeWinSize = 25
 let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 
 let g:indentLine_char_list = ['⎸']
@@ -301,6 +305,8 @@ command! -bar BufScratchTab tabnew|call <SID>BufMakeScratch()
 command! -bar BufScratchVSplit vnew|call <SID>BufMakeScratch()
 command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
 
+command! -bar CBCopy !xclip -f -sel clip
+command! -bar CBPaste r!xclip -o -sel clip
 
 " }}}
 
@@ -314,8 +320,7 @@ command! -bang -nargs=* RG
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 map <tab> :NERDTreeToggle<CR>
-"nnoremap <silent> <Leader>, :noh<CR>
-nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
 map <leader>l :set list!<CR>
 
@@ -387,6 +392,10 @@ nnoremap <silent> <leader>ph :PlugSnapshot
 nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
 
 nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
+nnoremap <leader>D :%DB<cr>
+
+vmap "+y :!xclip -f -sel clip
+map "+p :r!xclip -o -sel clip
 
 " }}}
 
@@ -397,6 +406,16 @@ nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
 autocmd FileType c,make setlocal noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
 autocmd FileType css,markdown,python,php setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType vim setlocal foldmethod=marker
+
+augroup nerdtree
+  autocmd!
+  autocmd FileType nerdtree syntax clear NERDTreeFlags
+  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+  autocmd FileType nerdtree setlocal signcolumn=no
+  autocmd FileType nerdtree setlocal conceallevel=3
+  autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
 
 " }}}
 
