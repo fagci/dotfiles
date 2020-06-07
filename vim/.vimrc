@@ -140,7 +140,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 " Plug 'sainnhe/gruvbox-material'
-Plug 'srcery-colors/srcery-vim'
+" Plug 'srcery-colors/srcery-vim'
+" Plug 'arzg/vim-colors-xcode'
+Plug 'flazz/vim-colorschemes'
+
 Plug 'Yggdroot/indentLine'
 
 " Linters, autocompletions
@@ -161,8 +164,8 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
-Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php']}
-Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': 'php'} " TESTING
+Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php', 'phtml']}
+Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'phtml']} " TESTING
 
 " Utils
 
@@ -179,7 +182,7 @@ let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
 
 let g:lightline = {
-      \ 'colorscheme': 'srcery',
+      \ 'colorscheme': 'gruvbox',
             \ 'component': {
             \   'readonly': '%{&readonly?"":""}',
             \ },
@@ -425,8 +428,8 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
-" color gruvbox-material
-color srcery
+color gruvbox
+
 
 " }}}
 
