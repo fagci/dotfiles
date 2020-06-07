@@ -303,6 +303,7 @@ fun! <SID>BufMakeScratch()
   setl noswapfile
   setl nobuflisted
 endfun
+
 command! -bar BufScratch tabnew|call <SID>BufMakeScratch()
 command! -bar BufScratchTab tabnew|call <SID>BufMakeScratch()
 command! -bar BufScratchVSplit vnew|call <SID>BufMakeScratch()
@@ -310,6 +311,25 @@ command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
 
 command! -bar CBCopy !xclip -f -sel clip
 command! -bar CBPaste r!xclip -o -sel clip
+
+
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+  \ }))
+
 
 " }}}
 
