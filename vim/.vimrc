@@ -76,10 +76,10 @@ set shortmess+=at
 " Don't show completion messages. coc.nvim recommends this.
 set shortmess+=c
 
-set t_Co=256
+"set t_Co=256
 set background=dark
 set termguicolors
-set t_ut="" " fixes weird bg over line
+"set t_ut="" " fixes weird bg over line
 set showtabline=2
 set guioptions-=e
 set noshowmode
