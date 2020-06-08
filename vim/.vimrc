@@ -84,6 +84,8 @@ set showtabline=2
 set guioptions-=e
 set noshowmode
 
+set completeopt=noinsert,menuone,noselect
+
 let &t_EI.="\e[1 q" "EI = normal mode cursor
 let &t_SI.="\e[5 q" "SI = insert mode cursor
 let &t_SR.="\e[3 q" "SR = replace mode cursor
@@ -117,7 +119,6 @@ call plug#begin('~/.vim/plugged')
 
 " Editing
 
-"Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -126,7 +127,6 @@ Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'easymotion/vim-easymotion'
 
 " UI
 
@@ -134,33 +134,32 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mbbill/undotree'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
+"Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+"Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-" Plug 'sainnhe/gruvbox-material'
-" Plug 'srcery-colors/srcery-vim'
-" Plug 'arzg/vim-colors-xcode'
-Plug 'flazz/vim-colorschemes'
 
 Plug 'Yggdroot/indentLine'
+
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " Linters, autocompletions
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'SirVer/ultisnips' " py3 error
 Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
 
 " Syntax & lang
 
 Plug 'editorconfig/editorconfig-vim'
 
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-dadbod'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-liquid'
-Plug 'sheerun/vim-polyglot'
-Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
@@ -180,6 +179,20 @@ call plug#end()
 
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
+let g:fzf_colors = {
+      \ 'fg':      ['fg', 'GruvboxFg1'],
+      \ 'bg':      ['fg', 'GruvboxBg0'],
+      \ 'hl':      ['fg', 'GruvboxYellow'],
+      \ 'fg+':     ['fg', 'GruvboxFg1'],
+      \ 'bg+':     ['fg', 'GruvboxBg1'],
+      \ 'hl+':     ['fg', 'GruvboxYellow'],
+      \ 'info':    ['fg', 'GruvboxBlue'],
+      \ 'prompt':  ['fg', 'GruvboxFg4'],
+      \ 'pointer': ['fg', 'GruvboxBlue'],
+      \ 'marker':  ['fg', 'GruvboxOrange'],
+      \ 'spinner': ['fg', 'GruvboxYellow'],
+      \ 'header':  ['fg', 'GruvboxBg3']
+      \ }
 
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -263,6 +276,9 @@ let php_html_in_nowdoc=0
 let php_sql_heredoc=0
 let php_sql_nowdoc=0
 
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
@@ -275,6 +291,8 @@ let g:indentLine_char_list = ['⎸']
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_background = 'hard'
+let g:gruvbox_bold=1
+let g:gruvbox_italic=1
 
 " Tagbar {{{
 let g:tagbar_width = 30
