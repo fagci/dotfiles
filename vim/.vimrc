@@ -78,7 +78,7 @@ set shortmess+=c
 
 set t_Co=256
 set background=dark
-set termguicolors
+"set termguicolors
 "set t_ut="" " fixes weird bg over line
 set showtabline=2
 set guioptions-=e

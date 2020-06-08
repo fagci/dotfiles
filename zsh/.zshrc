@@ -1,6 +1,6 @@
 #!zsh
 
-export TERM=xterm-256color
+#export TERM=xterm-256color
 export EDITOR=vim
 export PATH=$PATH:~/bin
 
