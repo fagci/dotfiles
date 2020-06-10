@@ -20,8 +20,8 @@ selection:
 colors:
   # Default colors
   primary:
-    # hard contrast: background = '#1d2021'
-    background: '#282828'
+    background: '#1d2021' # high contrast
+    #background: '#282828'
     # soft contrast: background = '#32302f'
   foreground: '#ebdbb2'
 
@@ -49,7 +49,4 @@ colors:
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
-
-# env:
-#   TERM: xterm-256color
 
