@@ -76,7 +76,7 @@ set shortmess+=at
 " Don't show completion messages. coc.nvim recommends this.
 set shortmess+=c
 
-set t_Co=256
+"set t_Co=256
 set background=dark
 "set termguicolors
 "set t_ut="" " fixes weird bg over line
@@ -163,7 +163,7 @@ Plug 'tpope/vim-liquid'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
-Plug 'adoy/vim-php-refactoring-toolbox', {'for': ['php', 'phtml']}
+Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'phtml']} " TESTING
 
 " Utils
@@ -282,15 +282,13 @@ let g:closetag_filetypes = 'html,xhtml,phtml'
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
-"let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 
 let g:indentLine_char_list = ['⎸']
 
 let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_material_background = 'hard'
+let g:gruvbox_improved_warnings=1
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
 
@@ -348,6 +346,12 @@ command! BD call fzf#run(fzf#wrap({
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
   \ }))
 
+function! CompileSASS()
+  let current_file = shellescape(expand('%:p'))
+  let filename = shellescape(expand('%:r'))
+  let command = 'silent !sass ' . current_file . ' ' . filename . '.css'
+  execute command
+endfunction
 
 " }}}
 
@@ -458,6 +462,9 @@ augroup nerdtree
   autocmd FileType nerdtree setlocal concealcursor=nvic
 augroup END
 
+" Compile SASS/SCSS on save
+"autocmd BufWritePost,FileWritePost *.scss call CompileSASS()
+
 " }}}
 
 " Custom {{{
@@ -466,8 +473,7 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
-color gruvbox
-
-
 " }}}
+
+colorscheme gruvbox
 
