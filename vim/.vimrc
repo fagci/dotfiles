@@ -45,7 +45,7 @@ set undodir=~/.vim/undodir
 set undofile
 set undolevels=1000
 set undoreload=10000
-set updatetime=300
+set updatetime=150
 set noerrorbells visualbell t_vb=
 set wildmenu
 
@@ -140,9 +140,12 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 
+Plug 'kshenoy/vim-signature'
+
 Plug 'Yggdroot/indentLine'
 
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
 
 " Linters, autocompletions
@@ -169,7 +172,10 @@ Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'ph
 " Utils
 
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
 call plug#end()
 
@@ -195,10 +201,10 @@ let g:fzf_colors = {
       \ }
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-            \ 'component': {
-            \   'readonly': '%{&readonly?"":""}',
-            \ },
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'cocstatus': 'coc#status',
@@ -264,10 +270,10 @@ let g:coc_user_config = {
       \ },
       \ 'diagnostic': {
       \ 'displayByAle': v:false,
-      \ 'errorSign': '•',
-      \ 'warningSign': '•',
-      \ 'infoSign': '•',
-      \ 'hintSign': '•',
+      \   'errorSign'  : '',
+      \   'warningSign': '',
+      \   'infoSign'   : '',
+      \   'hintSign'   : ''
       \ }
       \ }
 
@@ -288,9 +294,11 @@ let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 let g:indentLine_char_list = ['⎸']
 
 let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_improved_warnings=1
+"let g:gruvbox_improved_warnings=1
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
+let g:gruvbox_sign_column='bg0'
+let g:gruvbox_hls_cursor = 'red'
 
 " Tagbar {{{
 let g:tagbar_width = 30
