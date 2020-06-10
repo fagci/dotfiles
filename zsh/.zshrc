@@ -1,6 +1,5 @@
 #!zsh
 
-#export TERM=xterm-256color
 export EDITOR=vim
 export PATH=$PATH:~/bin
 
@@ -9,33 +8,29 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
   export MPD_PORT=8600
 fi
 
-ANTIGEN_MUTEX=false
+[ -d $HOME/.zgen ] || git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 
-ANTIGEN=$HOME/antigen.zsh
+source "${HOME}/.zgen/zgen.zsh"
 
-[ -f $ANTIGEN ] || curl -L git.io/antigen > $ANTIGEN
+if ! zgen saved; then
+  zgen load mafredri/zsh-async
 
-if [[ -f $ANTIGEN ]]; then
-  source $ANTIGEN
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/bgnotify
+  zgen oh-my-zsh plugins/command-not-found
 
-  antigen use oh-my-zsh
+  zgen load zsh-users/zsh-history-substring-search
+  zgen load junegunn/fzf
+  zgen load sindresorhus/pure
 
-  antigen bundle history
-  antigen bundle common-aliases
-  antigen bundle command-not-found
+  zgen load zsh-users/zsh-autosuggestions
+  zgen load zsh-users/zsh-completions
+  zgen load mattmc3/zsh-safe-rm
 
-  antigen bundle git
-  antigen bundle gnu-utils
+  zgen load zdharma/fast-syntax-highlighting
 
-  antigen bundle zsh-users/zsh-syntax-highlighting
-
-  antigen bundle zsh-users/zsh-completions src
-  antigen bundle zsh-users/zsh-autosuggestions
-
-  antigen bundle mafredri/zsh-async
-  antigen bundle sindresorhus/pure
-
-  antigen apply
+  zgen save
 fi
 
 
