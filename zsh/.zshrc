@@ -8,7 +8,7 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
   export MPD_PORT=8600
 fi
 
-[ -d $HOME/.zgen ] || git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+[ -d $HOME/.zgen ] || git clone --depth 1 https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -60,6 +60,10 @@ fcd() {
 }
 
 # aliases
+
+if hash mosh 2> /dev/null; then
+  alias mosh='mosh --no-init'
+fi
 
 if hash exa 2> /dev/null; then
   unalias ls ll la 
