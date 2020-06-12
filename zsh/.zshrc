@@ -26,7 +26,6 @@ if ! zgen saved; then
 
   zgen load zsh-users/zsh-autosuggestions
   zgen load zsh-users/zsh-completions
-  zgen load mattmc3/zsh-safe-rm
 
   zgen load zdharma/fast-syntax-highlighting
 
