@@ -23,7 +23,7 @@ set backspace=indent,eol,start
 set colorcolumn=80
 set clipboard+=unnamedplus
 set foldenable
-"set foldmethod=marker
+set foldmethod=syntax
 set foldmarker={{{,}}}
 set hlsearch
 set ignorecase
@@ -201,7 +201,7 @@ let g:fzf_colors = {
       \ }
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'gruvbox',
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
@@ -219,13 +219,12 @@ let g:lightline.active = {
       \   ],
       \   'right': [
       \     ['lineinfo', 'filetype'],
-      \     ['percent'],
-      \     ['fileformat', 'fileencoding'],
+      \     ['fileencoding'],
       \   ],
       \ }
 let g:lightline.inactive = {
       \   'left': [
-      \     ['paste'],
+      \     ['mode', 'paste'],
       \     ['readonly', 'filename', 'modified'],
       \   ],
       \   'right': [
@@ -243,6 +242,8 @@ let g:lightline.tabline_subseparator = g:lightline.subseparator
 
 let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#filename_modifier = ':t'
+let g:lightline_gruvbox_style = 'hard_left'
 
 let g:coc_git_status = 0
 
@@ -259,22 +260,36 @@ let g:coc_global_extensions = [
       \   'coc-tslint-plugin',
       \   'coc-tsserver',
       \   'coc-yaml',
+      \   'coc-vimlsp',
       \ ]
+
 let g:coc_user_config = {
+      \ 'coc.preferences.jumpCommand': 'split',
       \ 'suggest': {
-      \ 'enablePreview': v:true,
-      \ 'noselect': v:false,
-      \ 'timeout': 500,
-      \ 'preferCompleteThanJumpPlaceholder': v:true,
-      \ 'minTriggerInputLength': 2,
+      \   'enablePreview': v:false,
+      \   'maxCompleteItemCount': 48,
+      \   'minTriggerInputLength': 2,
+      \   'noselect': v:false,
+      \   'preferCompleteThanJumpPlaceholder': v:true,
+      \   "snippetIndicator": " ►",
+      \   'timeout': 500,
+      \   "triggerAfterInsertEnter": v:true,
       \ },
       \ 'diagnostic': {
       \ 'displayByAle': v:false,
-      \   'errorSign'  : '',
-      \   'warningSign': '',
-      \   'infoSign'   : '',
+      \   'errorSign'  : '✗',
+      \   'warningSign': '⚠',
+      \   'infoSign'   : '🛈',
       \   'hintSign'   : ''
-      \ }
+      \ },
+      \ "coc.preferences.formatOnSaveFiletypes": [
+      \ "php",
+      \ "css",
+      \ "markdown",
+      \ "javascript",
+      \ "typescript",
+      \ ],
+      \ "suggest.floatEnable": v:false
       \ }
 
 let php_html_in_heredoc=0
@@ -290,6 +305,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+
 
 let g:indentLine_char_list = ['⎸']
 
@@ -333,8 +349,8 @@ command! -bar BufScratchTab tabnew|call <SID>BufMakeScratch()
 command! -bar BufScratchVSplit vnew|call <SID>BufMakeScratch()
 command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
 
-command! -bar CBCopy !xclip -f -sel clip
-command! -bar CBPaste r!xclip -o -sel clip
+command! -bar CBCopy !xclip -f -selection clipboard
+command! -bar CBPaste r!xclip -o -selection clipboard
 
 
 function! s:list_buffers()
@@ -349,10 +365,18 @@ function! s:delete_buffers(lines)
 endfunction
 
 command! BD call fzf#run(fzf#wrap({
-  \ 'source': s:list_buffers(),
-  \ 'sink*': { lines -> s:delete_buffers(lines) },
-  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-  \ }))
+      \ 'source': s:list_buffers(),
+      \ 'sink*': { lines -> s:delete_buffers(lines) },
+      \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+      \ }))
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 function! CompileSASS()
   let current_file = shellescape(expand('%:p'))
@@ -401,11 +425,11 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
-nmap <leader><tab> :FZF<cr>
-nnoremap <silent> <Leader>F :RG<CR>
-nnoremap <silent> <Leader>f :FzfFiles<CR>
-nnoremap <silent> <Leader>H :FzfHistory<CR>
-nnoremap <silent> <Leader>b :FzfBuffers<CR>
+nnoremap <leader><tab> :FzfGFiles --cached --others --exclude-standard<cr>
+nnoremap <Leader>F :RG<CR>
+nnoremap <Leader>f :FzfFiles<CR>
+nnoremap <Leader>H :FzfHistory<CR>
+nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>s :FzfBLines<cr>
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -418,6 +442,8 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nnoremap <Leader>o :TagbarToggle<CR>
 
@@ -447,8 +473,7 @@ nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
 nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
 nnoremap <leader>D :%DB<cr>
 
-vmap "+y :!xclip -f -sel clip
-map "+p :r!xclip -o -sel clip
+vnoremap <leader>y :'<,'>!xclip -f -selection clipboard<cr>
 
 " }}}
 
@@ -470,6 +495,8 @@ augroup nerdtree
   autocmd FileType nerdtree setlocal concealcursor=nvic
 augroup END
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Compile SASS/SCSS on save
 "autocmd BufWritePost,FileWritePost *.scss call CompileSASS()
 
@@ -484,4 +511,21 @@ endif
 " }}}
 
 colorscheme gruvbox
+
+" Highlights {{{
+
+highlight link CocErrorSign GruvboxRed
+highlight link CocWarningSign GruvboxYello
+highlight link CocInfoSign GruvboxBlue
+highlight link CocHintSign GruvboxGreen
+highlight CocUnderline cterm=underline gui=underline
+highlight CocHighlightText term=bold,reverse cterm=bold ctermfg=0 ctermbg=121 gui=bold guifg=bg guibg=LightGreen
+" use highlight! to overwrite any default
+highlight! link CocErrorHighlight CocUnderline
+highlight! link CocWarningHighlight CocUnderline
+highlight! link CocInfoHighlight CocUnderline
+highlight! link CocHintHighlight CocUnderline
+highlight! link CocFloating Pmenu
+
+" }}}
 
