@@ -1,8 +1,23 @@
 [user]
 	email = fagci.nsk@gmail.com
-  name = Mikhail Yudin
-  username = fagcinsk
+	name = Mikhail Yudin
+	username = fagcinsk
 
 [github]
-  user = fagcinsk
+	user = fagcinsk
+
+[core]
+  editor = vim
+
+[pull]
+	rebase = true
+
+[branch "master"]
+	rebase = true
+
+[push]
+	default = current
+
+[branch]
+  autosetuprebase = always
 
