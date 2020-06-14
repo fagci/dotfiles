@@ -86,9 +86,17 @@ set noshowmode
 
 set completeopt=noinsert,menuone,noselect
 
-let &t_EI.="\e[1 q" "EI = normal mode cursor
-let &t_SI.="\e[5 q" "SI = insert mode cursor
-let &t_SR.="\e[3 q" "SR = replace mode cursor
+" Cursor shape
+
+if exists('$TMUX')
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\" " normal
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\" " insert
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\e[3 q\<Esc>\\" " replace
+else
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[2 q"
+    let &t_SR = "\e[3 q"
+endif
 
 silent !stty -ixon
 autocmd VimLeave * silent !stty ixon
