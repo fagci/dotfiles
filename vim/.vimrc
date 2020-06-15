@@ -18,73 +18,63 @@ filetype plugin indent on
 
 let mapleader=","
 set encoding=utf-8
+set modelines=0 " security
 
+" Editing
 set backspace=indent,eol,start
 set colorcolumn=80
-set clipboard+=unnamedplus
-set foldenable
-set foldmethod=syntax
-set foldmarker={{{,}}}
-set hlsearch
-set ignorecase
-set incsearch
-set laststatus=2
-set modelines=0 " security
-set noswapfile
-set nobackup
-set nowritebackup
-set nowrap
+set signcolumn=yes
 set number
-set scrolloff=4
+set nowrap
 set showmatch
-set smartcase
+set scrolloff=5
+set clipboard+=unnamedplus
+
+" Indentation
 set smartindent
 set smarttab
-set signcolumn=yes
+set autoindent             " Copy indent from previous line.
+set expandtab              " Replace tabs with spaces in Insert mode.
+set shiftwidth=4           " Spaces for each (auto)indent.
+set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
+set tabstop=4              " Spaces that a <Tab> in file counts for.
+
+" UI
+set laststatus=2
+set cmdheight=2
+set foldlevelstart=99
+set splitbelow splitright
+set noerrorbells visualbell t_vb=
+set wildmenu
+set showtabline=2
+set guioptions-=e
+set noshowmode
+set shortmess=Iatc
+set background=dark
+"set t_ut="" " fixes weird bg over line
+
+" History
+set noswapfile nobackup nowritebackup
 set undodir=~/.vim/undodir
 set undofile
 set undolevels=1000
 set undoreload=10000
-set updatetime=150
-set noerrorbells visualbell t_vb=
-set wildmenu
+
+" Search
+set ignorecase incsearch hlsearch smartcase
 
 " Speedup
-set nocursorline
-set nocursorcolumn
-set norelativenumber
+set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
+set updatetime=300
+set synmaxcol=128
+set regexpengine=1
+set hidden " this speeds up buffer switch x25 I think
 
-set autoindent             " Copy indent from previous line.
-set expandtab              " Replace tabs with spaces in Insert mode.
-set shiftwidth=2           " Spaces for each (auto)indent.
-set smarttab               " Insert and delete sw blanks in the front of a line.
-set softtabstop=2          " Spaces for tabs when inserting <Tab> or <BS>.
-set tabstop=2              " Spaces that a <Tab> in file counts for.
-
-set splitbelow
-set splitright
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
-
-" Don't show Vim's welcome message.
-set shortmess=I
-" Make the save message shorter. Helps avoid the 'Hit ENTER to continue' message.
-set shortmess+=at
-" Don't show completion messages. coc.nvim recommends this.
-set shortmess+=c
-
-"set t_Co=256
-set background=dark
-"set termguicolors
-"set t_ut="" " fixes weird bg over line
-set showtabline=2
-set guioptions-=e
-set noshowmode
-
-set completeopt=noinsert,menuone,noselect
 
 " Cursor shape
 
@@ -98,8 +88,6 @@ else
     let &t_SR = "\e[3 q"
 endif
 
-silent !stty -ixon
-autocmd VimLeave * silent !stty ixon
 
 " }}}
 
@@ -128,8 +116,8 @@ call plug#begin('~/.vim/plugged')
 " Editing
 
 Plug 'tpope/vim-commentary'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
 
 " Search & replace
 
@@ -138,12 +126,10 @@ Plug 'junegunn/fzf.vim'
 
 " UI
 
+Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'mbbill/undotree'
-"Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-"Plug 'lvht/tagbar-markdown', { 'for': 'markdown' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
@@ -159,7 +145,6 @@ Plug 'shinchu/lightline-gruvbox.vim'
 " Linters, autocompletions
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'SirVer/ultisnips' " py3 error
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
@@ -174,13 +159,13 @@ Plug 'tpope/vim-liquid'
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
-Plug 'adoy/vim-php-refactoring-toolbox'
-Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'phtml']} " TESTING
+" Plug 'adoy/vim-php-refactoring-toolbox'
+" Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'phtml']} " TESTING
 
 " Utils
 
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+Plug 'junegunn/gv.vim' " :GV
 Plug 'skywind3000/asyncrun.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
@@ -210,20 +195,15 @@ let g:fzf_colors = {
 
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
       \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'fugitive': 'fugitive#head'
       \ },
       \ }
 let g:lightline.active = {
       \   'left': [
-      \     ['mode', 'paste'],
-      \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ],
-      \     ['gitinfo']
+      \     [ 'mode', 'paste' ],
+      \     ['fugitive', 'cocstatus'], ['readonly', 'filename', 'modified']
       \   ],
       \   'right': [
       \     ['lineinfo', 'filetype'],
@@ -318,22 +298,10 @@ let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 let g:indentLine_char_list = ['⎸']
 
 let g:gruvbox_contrast_dark='hard'
-"let g:gruvbox_improved_warnings=1
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
 let g:gruvbox_sign_column='bg0'
 let g:gruvbox_hls_cursor = 'red'
-
-" Tagbar {{{
-let g:tagbar_width = 30
-let g:tagbar_silent = 1
-let g:tagbar_compact = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
-let g:tagbar_iconchars = ['▸', '▾']
-let g:tagbar_sort = 0 " Don't sort alphabetically.
-let g:tagbar_map_togglefold = '<ENTER>'
-" }}}
 
 " }}}
 
@@ -359,24 +327,6 @@ command! -bar BufScratchSplit new|call <SID>BufMakeScratch()
 
 command! -bar CBCopy !xclip -f -selection clipboard
 command! -bar CBPaste r!xclip -o -selection clipboard
-
-
-function! s:list_buffers()
-  redir => list
-  silent ls
-  redir END
-  return split(list, "\n")
-endfunction
-
-function! s:delete_buffers(lines)
-  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
-endfunction
-
-command! BD call fzf#run(fzf#wrap({
-      \ 'source': s:list_buffers(),
-      \ 'sink*': { lines -> s:delete_buffers(lines) },
-      \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-      \ }))
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -487,21 +437,8 @@ vnoremap <leader>y :'<,'>!xclip -f -selection clipboard<cr>
 
 " Autocmds {{{
 
-" File type specific indenting
-
-autocmd FileType c,make setlocal noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-autocmd FileType css,markdown,python,php setlocal shiftwidth=4 softtabstop=4 tabstop=4
-autocmd FileType vim setlocal foldmethod=marker
-
-augroup nerdtree
-  autocmd!
-  autocmd FileType nerdtree syntax clear NERDTreeFlags
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
-  autocmd FileType nerdtree setlocal signcolumn=no
-  autocmd FileType nerdtree setlocal conceallevel=3
-  autocmd FileType nerdtree setlocal concealcursor=nvic
-augroup END
+silent !stty -ixon
+autocmd VimLeave * silent !stty ixon
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
