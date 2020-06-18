@@ -17,6 +17,7 @@ syntax on
 filetype plugin indent on
 
 let mapleader=","
+let maplocalleader=","
 set encoding=utf-8
 set modelines=0 " security
 
@@ -29,6 +30,7 @@ set nowrap
 set showmatch
 set scrolloff=5
 set clipboard+=unnamedplus
+set pastetoggle=<F2>
 
 " Indentation
 set smartindent
@@ -69,8 +71,11 @@ set ttyfast
 set lazyredraw
 set updatetime=300
 set synmaxcol=128
+syntax sync minlines=256
 set regexpengine=1
 set hidden " this speeds up buffer switch x25 I think
+let g:matchparen_timeout = 20
+let g:matchparen_insert_timeout = 20
 
 
 set fillchars+=vert:│
@@ -113,6 +118,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tweekmonster/startuptime.vim'
+
 " Editing
 
 Plug 'tpope/vim-commentary'
@@ -127,7 +134,7 @@ Plug 'junegunn/fzf.vim'
 " UI
 
 Plug 'mbbill/undotree'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -139,8 +146,9 @@ Plug 'kshenoy/vim-signature'
 Plug 'Yggdroot/indentLine'
 
 "Plug 'morhetz/gruvbox'
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'lifepillar/vim-gruvbox8'
 
 " Linters, autocompletions
 
@@ -157,18 +165,14 @@ Plug 'tpope/vim-dadbod'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-liquid'
 
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'stylus', 'less'] } " css color
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
-" Plug 'adoy/vim-php-refactoring-toolbox'
-" Plug 'captbaritone/better-indent-support-for-php-with-html', {'for': ['php', 'phtml']} " TESTING
 
 " Utils
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim' " :GV
-Plug 'skywind3000/asyncrun.vim'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+Plug 'jceb/vim-orgmode'
 
 call plug#end()
 
@@ -197,7 +201,7 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'fugitive': 'fugitive#head'
+      \   'fugitive': 'FugitiveHead'
       \ },
       \ }
 let g:lightline.active = {
@@ -292,7 +296,14 @@ let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 25
+let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+let g:DevIconsEnableFoldersOpenClose = 1
+" disable netrw
+let g:loaded_netrw       = 1 
+let g:loaded_netrwPlugin = 1
 
 
 let g:indentLine_char_list = ['⎸']
@@ -302,6 +313,8 @@ let g:gruvbox_bold=1
 let g:gruvbox_italic=1
 let g:gruvbox_sign_column='bg0'
 let g:gruvbox_hls_cursor = 'red'
+
+let g:gruvbox_filetype_hi_groups = 1
 
 " }}}
 
@@ -334,13 +347,6 @@ function! s:show_documentation()
   else
     call CocAction('doHover')
   endif
-endfunction
-
-function! CompileSASS()
-  let current_file = shellescape(expand('%:p'))
-  let filename = shellescape(expand('%:r'))
-  let command = 'silent !sass ' . current_file . ' ' . filename . '.css'
-  execute command
 endfunction
 
 " }}}
@@ -442,8 +448,9 @@ autocmd VimLeave * silent !stty ixon
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Compile SASS/SCSS on save
-"autocmd BufWritePost,FileWritePost *.scss call CompileSASS()
+" Syntax
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " }}}
 
@@ -455,22 +462,5 @@ endif
 
 " }}}
 
-colorscheme gruvbox
-
-" Highlights {{{
-
-highlight link CocErrorSign GruvboxRed
-highlight link CocWarningSign GruvboxYello
-highlight link CocInfoSign GruvboxBlue
-highlight link CocHintSign GruvboxGreen
-highlight CocUnderline cterm=underline gui=underline
-highlight CocHighlightText term=bold,reverse cterm=bold ctermfg=0 ctermbg=121 gui=bold guifg=bg guibg=LightGreen
-" use highlight! to overwrite any default
-highlight! link CocErrorHighlight CocUnderline
-highlight! link CocWarningHighlight CocUnderline
-highlight! link CocInfoHighlight CocUnderline
-highlight! link CocHintHighlight CocUnderline
-highlight! link CocFloating Pmenu
-
-" }}}
+colorscheme gruvbox8_hard
 
