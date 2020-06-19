@@ -70,7 +70,7 @@ set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
 set updatetime=300
-set synmaxcol=128
+set synmaxcol=256 " UTF = x2
 syntax sync minlines=256
 set regexpengine=1
 set hidden " this speeds up buffer switch x25 I think
@@ -166,6 +166,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-liquid'
 
 Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
+Plug 'adoy/vim-php-refactoring-toolbox'
 
 " Utils
 
