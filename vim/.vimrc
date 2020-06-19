@@ -24,7 +24,6 @@ set modelines=0 " security
 " Editing
 set backspace=indent,eol,start
 set colorcolumn=80
-set signcolumn=yes
 set number
 set nowrap
 set showmatch
@@ -33,17 +32,14 @@ set clipboard+=unnamedplus
 set pastetoggle=<F2>
 
 " Indentation
-set smartindent
-set smarttab
-set autoindent             " Copy indent from previous line.
-set expandtab              " Replace tabs with spaces in Insert mode.
+set smartindent autoindent expandtab smarttab
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 
 " UI
+set signcolumn=yes
 set laststatus=2
-set cmdheight=2
 set foldlevelstart=99
 set splitbelow splitright
 set noerrorbells visualbell t_vb=
@@ -183,20 +179,6 @@ call plug#end()
 
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
-let g:fzf_colors = {
-      \ 'fg':      ['fg', 'GruvboxFg1'],
-      \ 'bg':      ['fg', 'GruvboxBg0'],
-      \ 'hl':      ['fg', 'GruvboxYellow'],
-      \ 'fg+':     ['fg', 'GruvboxFg1'],
-      \ 'bg+':     ['fg', 'GruvboxBg1'],
-      \ 'hl+':     ['fg', 'GruvboxYellow'],
-      \ 'info':    ['fg', 'GruvboxBlue'],
-      \ 'prompt':  ['fg', 'GruvboxFg4'],
-      \ 'pointer': ['fg', 'GruvboxBlue'],
-      \ 'marker':  ['fg', 'GruvboxOrange'],
-      \ 'spinner': ['fg', 'GruvboxYellow'],
-      \ 'header':  ['fg', 'GruvboxBg3']
-      \ }
 
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -409,8 +391,6 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-nnoremap <Leader>o :TagbarToggle<CR>
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
