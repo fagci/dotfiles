@@ -236,6 +236,7 @@ let g:coc_global_extensions = [
       \   'coc-tsserver',
       \   'coc-yaml',
       \   'coc-vimlsp',
+      \   'coc-sh',
       \ ]
 
 let g:coc_user_config = {
