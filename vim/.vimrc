@@ -30,6 +30,7 @@ set showmatch
 set scrolloff=5
 set clipboard+=unnamedplus
 set pastetoggle=<F2>
+set conceallevel=0
 
 " Indentation
 set smartindent autoindent expandtab smarttab
@@ -121,6 +122,7 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'godlygeek/tabular'
 
 " Search & replace
 
@@ -291,6 +293,7 @@ let g:loaded_netrwPlugin = 1
 
 
 let g:indentLine_char_list = ['⎸']
+let g:indentLine_setConceal = 0
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
@@ -433,6 +436,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Syntax
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType markdown setlocal sw=2 ts=2 
 
 " }}}
 

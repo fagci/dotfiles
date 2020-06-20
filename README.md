@@ -1,25 +1,27 @@
 # Dotfiles
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_shield)
 
 ![](https://raw.githubusercontent.com/fagcinsk/dotfiles/master/screenshot.png)
 
-Clone this repo to home directory.
+## Install
 
-Use `stow */` from repo root to make links.
+1. Clone this repo to home directory, ex.: `git clone https://github.com/fagcinsk/dotfiles ~/.dotfiles`
+1. Go into cloned repo root directory `cd ~/.dotfiles`
+1. Use `stow */` from repo root to make config symlinks.
 
-## Used packages:
+## Used packages
 
 ### Desktop
 
-- dunst/
-- i3/
-- polybar/
-- rofi/
-- termite/
-- termux/
-- vim/
-- zsh/
+- dunst
+- i3
+- polybar
+- rofi
+- termite
+- termux
+- vim
+- zsh
 
 ### Mobile
 
@@ -28,4 +30,6 @@ Use `stow */` from repo root to make links.
 Enjoy.
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_large)
+
