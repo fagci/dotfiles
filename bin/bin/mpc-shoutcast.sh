@@ -16,18 +16,23 @@ BASE_URL='http://api.shoutcast.com'
 
 SCRIPT_NAME=$(basename $0)
 
-if [[ ! -f "${CONFIG_FILE}" ]]; then
-    echo "SHOUTCAST_API_KEY=YOUR_DEV_API_TOKEN\n" > "${CONFIG_FILE}"
+load_config() {
+    if [[ ! -f "${CONFIG_FILE}" ]]; then
+        echo "SHOUTCAST_API_KEY=YOUR_DEV_API_TOKEN\n" > "${CONFIG_FILE}"
+        edit_config
+    fi
+
+    source "${CONFIG_FILE}"
+    
+    if [[ $SHOUTCAST_API_KEY == "" ]]; then
+        rm "${CONFIG_FILE}" 
+        exec $(basename $0)
+    fi
+}
+
+edit_config() {
     $EDITOR "${CONFIG_FILE}"
-fi
-
-. "${CONFIG_FILE}"
-
-if [[ $SHOUTCAST_API_KEY == "" ]]; then
-    rm "${CONFIG_FILE}" 
-    exec $(basename $0)
-fi
-
+}
 
 make_query() {
     local method=$1
@@ -54,7 +59,7 @@ search() {
     local query=$1
 
     local hash=$(echo -n "${query}" | md5sum | awk '{print $1}')
-    
+
     local tmpfile="${TMPDIR:-/tmp}/${SCRIPT_NAME}.$hash.json"
 
     # caching query for 10m
@@ -76,7 +81,7 @@ search() {
         jq -r ".response.data.stationlist.station[0:20] \
         | to_entries[] \
         | (.key|tostring) + \":\t[\"+(.value.br|tostring)+\"]\t\" + .value.name"
-    
+
     echo ''
     read -p 'Tunein to: ' num
 
@@ -90,14 +95,50 @@ search() {
     tunein $base $station_id
 }
 
-clear
-query=$1
+ask_for_search() {
+    query=$1
 
-# echo "Your shoutcast api key is: '$SHOUTCAST_API_KEY'"
+    clear
 
-if [[ $query == "" ]]; then
-    read -p 'Search: ' query
-fi
+    [[ $query == "" ]] && read -p 'Search: ' query
 
-search "${query}"
+    search "${query}"
+}
+
+
+show_help() {
+    cat <<-END
+Shoutcast mpc radio player
+
+Usage: ${SCRIPT_NAME} [args] [search_query]
+
+Args:
+
+    -c, --config    edit config file
+    -h, --help      show help
+END
+}
+
+
+load_config
+
+[ $# -eq 0 ] && ask_for_search
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --config*|-c*)
+            if [[ "$1" != *=* ]]; then shift; fi
+            FILE="${1#*=}"
+            edit_config
+            ;;
+        --help|-h)
+            show_help
+            exit 0
+            ;;
+        *)
+            ask_for_search $1
+            ;;
+    esac
+    shift
+done
 
