@@ -345,8 +345,8 @@ command! -bang -nargs=* RG
       \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
       \   fzf#vim#with_preview(), <bang>0)
 
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>ev :e ~/.vimrc<CR>
+nmap <silent> <leader>sv :so ~/.vimrc<CR>
 map <tab> :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
