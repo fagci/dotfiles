@@ -6,8 +6,14 @@
 
 ## Install
 
-1. Clone this repo to home directory, ex.: `git clone https://github.com/fagcinsk/dotfiles ~/.dotfiles`
-1. Go into cloned repo root directory `cd ~/.dotfiles`
+1. Clone this repo to home directory
+    ```sh
+    git clone https://github.com/fagcinsk/dotfiles ~/.dotfiles
+    ```
+1. Go into cloned repo root directory
+    ```sh
+    cd ~/.dotfiles
+    ```
 1. Use `stow */` from repo root to make config symlinks.
 
 ## Used packages
