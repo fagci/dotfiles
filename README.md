@@ -20,12 +20,18 @@
 
 ### Desktop
 
+- alacritty
 - dunst
+- git
 - i3
+- irssi
+- kitty
+- nvim
+- picom
 - polybar
 - rofi
 - termite
-- termux
+- tmux
 - vim
 - zsh
 
