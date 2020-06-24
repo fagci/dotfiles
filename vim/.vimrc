@@ -7,6 +7,10 @@
 "   Yet another vimrc file by web developer.
 "   Single file because of easy editing. Trying to keep things simple.
 "
+" for spell checking the following command:
+" > for x in en.utf-8.spl en.utf-8.sug ru.utf-8.spl ru.utf-8.sug ; do wget http://ftp.vim.org/vim/runtime/spell/$x; done
+" should be executed in ~/.vim/spell
+" TODO: adopt for autoinstall
 " ===================================================================
 
 " {{{ Base settings
@@ -239,6 +243,8 @@ let g:coc_global_extensions = [
       \   'coc-yaml',
       \   'coc-vimlsp',
       \   'coc-sh',
+      \   'coc-spell-checker',
+      \   'coc-vetur'
       \ ]
 
 let g:coc_user_config = {
