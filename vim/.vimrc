@@ -3,7 +3,7 @@
 " File: .vimrc
 " Author: fagci
 "
-" Description: 
+" Description:
 "   Yet another vimrc file by web developer.
 "   Single file because of easy editing. Trying to keep things simple.
 "
@@ -49,11 +49,13 @@ set foldlevelstart=99
 set splitbelow splitright
 set noerrorbells visualbell t_vb=
 set wildmenu
-set showtabline=2
+" set showtabline=2
 set guioptions-=e
-set noshowmode
+set showmode
 set shortmess=Iatc
 set background=dark
+set listchars=tab:→\ ,trail:·
+set list
 "set t_ut="" " fixes weird bg over line
 
 " History
@@ -74,7 +76,8 @@ set updatetime=300
 " set synmaxcol=256 " UTF = x2
 syntax sync minlines=256
 set regexpengine=1
-set hidden " this speeds up buffer switch x25 I think
+set hidden confirm " this speeds up buffer switch x25 I think
+set switchbuf=useopen
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
 
@@ -140,14 +143,11 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 
 Plug 'kshenoy/vim-signature'
 
 Plug 'Yggdroot/indentLine'
 
-"Plug 'morhetz/gruvbox'
 " Plug 'gruvbox-community/gruvbox'
 Plug 'lifepillar/vim-gruvbox8'
 
@@ -184,46 +184,6 @@ call plug#end()
 
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
-
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'fugitive': 'FugitiveHead'
-      \ },
-      \ }
-let g:lightline.active = {
-      \   'left': [
-      \     [ 'mode', 'paste' ],
-      \     ['fugitive', 'cocstatus'], ['readonly', 'filename', 'modified']
-      \   ],
-      \   'right': [
-      \     ['lineinfo', 'filetype'],
-      \     ['fileencoding'],
-      \   ],
-      \ }
-let g:lightline.inactive = {
-      \   'left': [
-      \     ['mode', 'paste'],
-      \     ['readonly', 'filename', 'modified'],
-      \   ],
-      \   'right': [
-      \     ['lineinfo', 'filetype'],
-      \     ['percent'],
-      \   ],
-      \ }
-let g:lightline.tabline = {'left': [['buffers']], 'right':[]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-let g:lightline.tabline_separator = g:lightline.separator
-let g:lightline.tabline_subseparator = g:lightline.subseparator
-
-let g:lightline#bufferline#show_number = 2
-let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#filename_modifier = ':t'
-let g:lightline_gruvbox_style = 'hard_left'
 
 let g:coc_git_status = 0
 
@@ -367,17 +327,6 @@ nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap b# :b#<CR>
 
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
-
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
@@ -452,6 +401,16 @@ if executable('rg')
 endif
 
 " }}}
+
+" ########## Status line experiment ########## 
+
+set stl=[%n]\ 
+set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}\ \|\ %)
+set stl+=%(%{FugitiveHead()}\ \|\ %)
+set stl+=%(%{coc#status()}\ \|\ %)
+set stl+=%=%{&fenc}\ %l/%L\ %y
+
+" ########## / Status line experiment ########## 
 
 colorscheme gruvbox8_hard
 
