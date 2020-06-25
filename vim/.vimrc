@@ -37,7 +37,7 @@ set pastetoggle=<F2>
 set conceallevel=0
 
 " Indentation
-set smartindent autoindent expandtab smarttab
+set smartindent smarttab expandtab
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
@@ -71,7 +71,7 @@ set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
 set updatetime=300
-set synmaxcol=256 " UTF = x2
+" set synmaxcol=256 " UTF = x2
 syntax sync minlines=256
 set regexpengine=1
 set hidden " this speeds up buffer switch x25 I think
@@ -149,7 +149,6 @@ Plug 'Yggdroot/indentLine'
 
 "Plug 'morhetz/gruvbox'
 " Plug 'gruvbox-community/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'lifepillar/vim-gruvbox8'
 
 " Linters, autocompletions
@@ -187,7 +186,7 @@ let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'seoul256',
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
       \   'fugitive': 'FugitiveHead'
