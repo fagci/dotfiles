@@ -148,7 +148,6 @@ Plug 'kshenoy/vim-signature'
 
 Plug 'Yggdroot/indentLine'
 
-" Plug 'gruvbox-community/gruvbox'
 Plug 'lifepillar/vim-gruvbox8'
 
 " Linters, autocompletions
@@ -166,7 +165,6 @@ Plug 'tpope/vim-dadbod'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-liquid'
 
-Plug 'alvan/vim-closetag', { 'for': ['html', 'php', 'phtml', 'xml']}
 Plug 'adoy/vim-php-refactoring-toolbox'
 
 " Utils
@@ -188,22 +186,23 @@ let g:fzf_command_prefix = 'Fzf'
 let g:coc_git_status = 0
 
 let g:coc_global_extensions = [
-      \   'coc-pairs',
-      \   'coc-snippets',
+      \   'coc-calc',
       \   'coc-css',
+      \   'coc-diagnostic',
+      \   'coc-emmet',
       \   'coc-eslint',
       \   'coc-html',
-      \   'coc-emmet',
-      \   'coc-sql',
       \   'coc-json',
+      \   'coc-pairs',
       \   'coc-phpls',
+      \   'coc-sh',
+      \   'coc-snippets',
+      \   'coc-sql',
       \   'coc-tslint-plugin',
       \   'coc-tsserver',
-      \   'coc-yaml',
+      \   'coc-vetur',
       \   'coc-vimlsp',
-      \   'coc-sh',
-      \   'coc-spell-checker',
-      \   'coc-vetur'
+      \   'coc-yaml',
       \ ]
 
 let g:coc_user_config = {
@@ -225,6 +224,11 @@ let g:coc_user_config = {
       \   'infoSign'   : 'i',
       \   'hintSign'   : '?'
       \ },
+      \ "diagnostic-languageserver.filetypes": {
+      \    "vim": "vint",
+      \    "sh": "shellcheck",
+      \    "php": ["phpstan", "psalm"],
+      \  },
       \ "coc.preferences.formatOnSaveFiletypes": [
       \ "php",
       \ "css",
@@ -240,9 +244,6 @@ let php_html_in_nowdoc=0
 let php_sql_heredoc=0
 let php_sql_nowdoc=0
 
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-let g:closetag_filetypes = 'html,xhtml,phtml'
-
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
@@ -256,17 +257,12 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
-
 let g:indentLine_char_list = ['⎸']
 let g:indentLine_setConceal = 0
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
-let g:gruvbox_sign_column='bg0'
-let g:gruvbox_hls_cursor = 'red'
-
-let g:gruvbox_filetype_hi_groups = 1
 
 " }}}
 
@@ -300,6 +296,16 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+function! ToggleConcealLevel()
+    if &conceallevel == 0
+        setlocal conceallevel=2
+    else
+        setlocal conceallevel=0
+    endif
+endfunction
+
+nnoremap <silent> <leader>C :call ToggleConcealLevel()<CR>
 
 " }}}
 
@@ -413,4 +419,5 @@ set stl+=%=%{&fenc}\ %l/%L\ %y
 " ########## / Status line experiment ########## 
 
 colorscheme gruvbox8_hard
+highlight clear SignColumn
 

@@ -16,7 +16,7 @@ readonly CACHE_TIME=600
 readonly BASE_URL='http://api.shoutcast.com'
 
 readonly CONFIG_FILE="${HOME}/.config/shoutcast.config"
-readonly SCRIPT_NAME=$(basename $0)
+readonly SCRIPT_NAME=$(basename "$0")
 readonly ARGS="$@"
 
 is_config_file_absent() {
@@ -42,8 +42,8 @@ check_config_and_load() {
     load_config
 
     if [[ -z $SHOUTCAST_API_KEY ]]; then
-        rm "${CONFIG_FILE}" 
-        exec $(basename $0)
+        rm "${CONFIG_FILE}"
+        exec "$(basename "$0")"
     fi
 }
 
@@ -77,27 +77,31 @@ get_hash() {
 }
 
 get_cache_file_name() {
-    local hash=$(get_hash $1)
+    local hash
+    hash=$(get_hash "$1")
     echo "${TMPDIR:-/tmp}/${SCRIPT_NAME}.$hash.json"
 }
 
 cache_get() {
-    local tmpfile=$(get_cache_file_name $1)
+    local tmpfile
+    tmpfile=$(get_cache_file_name "$1")
     if [[ -f "${tmpfile}" ]]; then
-        lifetime=$(expr $(date +%s) - $(date -r "${tmpfile}" +%s))
+        lifetime=$(( $(date +%s) - $(date -r "${tmpfile}" +%s)))
         [ $lifetime -gt $CACHE_TIME ] && rm "${tmpfile}"
     fi
     [[ -f "${tmpfile}" ]] && cat "${tmpfile}"
 }
 
 cache_set() {
-    local tmpfile=$(get_cache_file_name $1)
+    local tmpfile
+    tmpfile=$(get_cache_file_name "$1")
     echo "$2" > "${tmpfile}"
 }
 
 make_search_query() {
     local query="$1"
-    local result=$(cache_get $query)
+    local result
+    result=$(cache_get "$query")
 
     if [[ -z "$result" ]]; then
         result=$(make_query 'station/advancedsearch' "search=${query}")
@@ -111,16 +115,24 @@ search() {
     local query="$1"
     local items_path='to_entries[]|(.key|tostring)+"\t"+(.value.br|tostring)+"\t"+.value.name'
 
+    local json
+    local stationlist_json
+    local stations_json
+    local stations_list
+
+    local base
+    local station_id
+    local station_name
 
     clear
 
     echo 'Searching...'
 
-    local json=$(make_search_query "$query")
+    json=$(make_search_query "$query")
 
-    local stationlist_json=$(jq -cM '.response.data.stationlist' <<< "$json")
-    local stations_json=$(jq -cM '.station | if type == "object" then [.] else . end' <<< "$stationlist_json")
-    local stations_list=$(jq -crM "$items_path" <<< "$stations_json")
+    stationlist_json=$(jq -cM '.response.data.stationlist' <<< "$json")
+    stations_json=$(jq -cM '.station | if type == "object" then [.] else . end' <<< "$stationlist_json")
+    stations_list=$(jq -crM "$items_path" <<< "$stations_json")
 
 
     clear
@@ -130,15 +142,15 @@ search() {
     echo "${stations_list/&amp;/&}"
 
     echo ''
-    read -p 'Tunein to: ' num
+    read -r -p 'Tunein to: ' num
 
-    local base=$(jq -r '.tunein["base-m3u"]' <<< "$stationlist_json")
-    local station_id=$(jq -r ".[${num}].id" <<< "$stations_json")
-    local station_name=$(jq -r ".[${num}].name" <<< "$stations_json")
+    base=$(jq -r '.tunein["base-m3u"]' <<< "$stationlist_json")
+    station_id=$(jq -r ".[${num}].id" <<< "$stations_json")
+    station_name=$(jq -r ".[${num}].name" <<< "$stations_json")
 
     echo "Tuning to '${station_name}'..."
 
-    tunein $base $station_id
+    tunein "$base" "$station_id"
 }
 
 ask_for_search() {
@@ -147,7 +159,7 @@ ask_for_search() {
     clear
 
     [[ -z $query ]] \
-        && read -p 'Search: ' query
+        && read -r -p 'Search: ' query
 
     search "$query"
 }
@@ -182,7 +194,7 @@ cmdline() {
 
 main() {
     check_config_and_load
-    cmdline $ARGS
+    cmdline "$ARGS"
 }
 
 main
