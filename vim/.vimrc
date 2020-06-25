@@ -220,10 +220,10 @@ let g:coc_user_config = {
       \ },
       \ 'diagnostic': {
       \ 'displayByAle': v:false,
-      \   'errorSign'  : '✗',
-      \   'warningSign': '⚠',
-      \   'infoSign'   : '🛈',
-      \   'hintSign'   : ''
+      \   'errorSign'  : 'X',
+      \   'warningSign': '!',
+      \   'infoSign'   : 'i',
+      \   'hintSign'   : '?'
       \ },
       \ "coc.preferences.formatOnSaveFiletypes": [
       \ "php",
@@ -253,7 +253,7 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
 " disable netrw
-let g:loaded_netrw       = 1 
+let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
 
