@@ -411,13 +411,45 @@ endif
 " ########## Status line experiment ########## 
 
 set stl=[%n]\ 
-set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}\ \|\ %)
-set stl+=%(%{FugitiveHead()}\ \|\ %)
-set stl+=%(%{coc#status()}\ \|\ %)
+set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}%)
+set stl+=%(\ \|\ %{FugitiveHead()}%)
+set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l/%L\ %y
 
 " ########## / Status line experiment ########## 
 
 colorscheme gruvbox8_hard
 highlight clear SignColumn
+
+
+autocmd Syntax * syn keyword lispFunc lambda conceal cchar=λ
+autocmd Syntax * syn keyword Operator def conceal cchar=ƒ
+autocmd Syntax * syn match Operator "=\@<!==\@!" conceal cchar=←
+autocmd Syntax * syn match Operator "!=" conceal cchar=≠
+
+autocmd Syntax * syn match Operator ":\n" conceal cchar=→
+
+autocmd Syntax * syn keyword Operator return conceal cchar=◀
+autocmd Syntax * syn keyword Operator for conceal cchar=∀
+autocmd Syntax * syn keyword Operator range conceal cchar=ι
+
+autocmd Syntax * syn keyword Operator if conceal cchar=»
+autocmd Syntax * syn keyword Operator elif conceal cchar=›
+autocmd Syntax * syn keyword Operator else conceal cchar=◇
+
+autocmd Syntax * syn keyword Operator None conceal cchar=ø
+
+
+autocmd Syntax * syn match Keyword "\<x\>" conceal cchar=𝒳
+autocmd Syntax * syn match Keyword "\<y\>" conceal cchar=𝒴
+autocmd Syntax * syn match Keyword "\<z\>" conceal cchar=𝒵
+
+autocmd Syntax * syn keyword Operator self conceal cchar=♀
+autocmd Syntax * syn keyword Operator this conceal cchar=♀
+
+autocmd Syntax * syn keyword Statement True conceal cchar=Ṫ
+autocmd Syntax * syn keyword Statement False conceal cchar=Ḟ
+
+autocmd Syntax * syn keyword Statement len conceal cchar=#
+autocmd Syntax * syn keyword Statement print conceal cchar=ρ
 
