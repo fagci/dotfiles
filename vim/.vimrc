@@ -85,6 +85,8 @@ set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 
 set fillchars+=vert:│
@@ -144,7 +146,7 @@ Plug 'junegunn/fzf.vim'
 " UI
 
 Plug 'mbbill/undotree'
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -165,9 +167,10 @@ Plug 'mattn/emmet-vim'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-dadbod'
-Plug 'hail2u/vim-css3-syntax'
+Plug 'stephpy/vim-yaml', { 'for': [ 'yaml' ] }
+Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'tpope/vim-liquid'
 
 Plug 'adoy/vim-php-refactoring-toolbox'
@@ -178,7 +181,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim' " :GV
 Plug 'xolox/vim-misc'
 Plug 'jceb/vim-orgmode'
-Plug 'chrisbra/unicode.vim'
 
 call plug#end()
 
@@ -401,6 +403,14 @@ augroup FileTypes
     autocmd!
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType markdown setlocal sw=2 ts=2 
+
+    autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
+    autocmd FileType scss setlocal iskeyword+=- " for css3 box-shadow etc
+augroup END
+
+augroup ScrollToLastSeenLocationOnFileOpen
+    autocmd!
+    autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &filetype !~# 'commit' | exe "normal! g`\"" | endif
 augroup END
 
 " }}}
