@@ -15,7 +15,7 @@ locale = ru_RU.UTF-8
 height = 20
 
 tray-position = right
-tray-maxsize = 16
+tray-maxsize = 18
 
 modules-left = i3 xwindow
 modules-right = net_l net_w fs_root fs_home temp mem vol battery keyboard weather date
@@ -178,9 +178,11 @@ type = internal/i3
 pin-workspaces = true
 
 label-unfocused-background = ${colors.background-alt}
-label-unfocused-padding-right = 1
 label-focused-background = #888888
 label-focused-foreground = #222222
+
+label-unfocused-padding-right = 1
 label-focused-padding-right = 1
+label-urgent-padding-right = 1
 
 ; vim:ft=dosini
