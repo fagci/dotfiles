@@ -60,6 +60,12 @@ fcd() {
 
 # aliases
 
+if hash nvim 2> /dev/null; then
+    if [[ $(nvim --version | head -1 | grep -o '[0-9]\.[0-9]') -gt 0.3 ]]; then
+        alias vim='nvim'
+    fi
+fi
+
 if hash mosh 2> /dev/null; then
   alias mosh='mosh --no-init'
 fi
