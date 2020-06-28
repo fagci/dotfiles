@@ -78,7 +78,7 @@ animation-packetloss-framerate = 500
 
 [module/weather]
 type = custom/script
-label = " %output%"
+label = "%output%"
 exec = $HOME/.config/polybar/scripts/weather.sh
 interval = 3600
 
@@ -98,7 +98,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = / %free%
+label-mounted = /%free%
 label-unmounted = %mountpoint% not mounted
 
 [module/fs_home]
@@ -107,12 +107,12 @@ interval = 25
 
 mount-0 = /home
 
-label-mounted = ~ %free%
+label-mounted = ~%free%
 label-unmounted = %mountpoint% not mounted
 
 [module/date]
 type = internal/date
-date = "%d %b, %a %H:%M"
+date = "%a, %d.%m %H:%M"
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -166,7 +166,7 @@ label-muted-foreground = #66
 type = internal/memory
 interval = 2
 format-prefix = " "
-label = "%percentage_used%%/%percentage_swap_used%%"
+label = "%percentage_used%%"
 
 [module/temp]
 type = internal/temperature
