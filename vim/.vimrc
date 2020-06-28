@@ -49,13 +49,19 @@ set foldlevelstart=99
 set splitbelow splitright
 set noerrorbells visualbell t_vb=
 set wildmenu
-" set showtabline=2
 set guioptions-=e
 set showmode
 set shortmess=Iatc
 set background=dark
 set list listchars=tab:⎸\ ,trail:·
-"set t_ut="" " fixes weird bg over line
+"set t_ut= " fixes weird bg over line
+
+" statusline
+set stl=[%n]\ 
+set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}%)
+set stl+=%(\ \|\ %{FugitiveHead()}%)
+set stl+=%(\ \|\ %{coc#status()}%)
+set stl+=%=%{&fenc}\ %l/%L\ %y
 
 " History
 set noswapfile nobackup nowritebackup
@@ -104,15 +110,15 @@ endif
 " Create undodir if not exists
 
 if !isdirectory($HOME."/.vim/undodir")
-  call mkdir($HOME."/.vim/undodir", "p", 0700)
+    call mkdir($HOME."/.vim/undodir", "p", 0700)
 endif
 
 " Install plugin manager
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 " }}}
@@ -186,58 +192,58 @@ let g:fzf_command_prefix = 'Fzf'
 let g:coc_git_status = 0
 
 let g:coc_global_extensions = [
-      \   'coc-calc',
-      \   'coc-css',
-      \   'coc-diagnostic',
-      \   'coc-emmet',
-      \   'coc-eslint',
-      \   'coc-html',
-      \   'coc-json',
-      \   'coc-pairs',
-      \   'coc-phpls',
-      \   'coc-sh',
-      \   'coc-snippets',
-      \   'coc-sql',
-      \   'coc-tslint-plugin',
-      \   'coc-tsserver',
-      \   'coc-vetur',
-      \   'coc-vimlsp',
-      \   'coc-yaml',
-      \ ]
+            \   'coc-calc',
+            \   'coc-css',
+            \   'coc-diagnostic',
+            \   'coc-emmet',
+            \   'coc-eslint',
+            \   'coc-html',
+            \   'coc-json',
+            \   'coc-pairs',
+            \   'coc-phpls',
+            \   'coc-sh',
+            \   'coc-snippets',
+            \   'coc-sql',
+            \   'coc-tslint-plugin',
+            \   'coc-tsserver',
+            \   'coc-vetur',
+            \   'coc-vimlsp',
+            \   'coc-yaml',
+            \ ]
 
 let g:coc_user_config = {
-      \ 'coc.preferences.jumpCommand': 'split',
-      \ 'suggest': {
-      \   'enablePreview': v:false,
-      \   'maxCompleteItemCount': 48,
-      \   'minTriggerInputLength': 2,
-      \   'noselect': v:false,
-      \   'preferCompleteThanJumpPlaceholder': v:true,
-      \   "snippetIndicator": " ►",
-      \   'timeout': 500,
-      \   "triggerAfterInsertEnter": v:true,
-      \ },
-      \ 'diagnostic': {
-      \ 'displayByAle': v:false,
-      \   'errorSign'  : 'X',
-      \   'warningSign': '!',
-      \   'infoSign'   : 'i',
-      \   'hintSign'   : '?'
-      \ },
-      \ "diagnostic-languageserver.filetypes": {
-      \    "vim": "vint",
-      \    "sh": "shellcheck",
-      \    "php": ["phpstan", "psalm"],
-      \  },
-      \ "coc.preferences.formatOnSaveFiletypes": [
-      \ "php",
-      \ "css",
-      \ "markdown",
-      \ "javascript",
-      \ "typescript",
-      \ ],
-      \ "suggest.floatEnable": v:false
-      \ }
+            \ 'coc.preferences.jumpCommand': 'split',
+            \ 'suggest': {
+            \   'enablePreview': v:false,
+            \   'maxCompleteItemCount': 48,
+            \   'minTriggerInputLength': 2,
+            \   'noselect': v:false,
+            \   'preferCompleteThanJumpPlaceholder': v:true,
+            \   "snippetIndicator": " ►",
+            \   'timeout': 500,
+            \   "triggerAfterInsertEnter": v:true,
+            \ },
+            \ 'diagnostic': {
+            \ 'displayByAle': v:false,
+            \   'errorSign'  : 'X',
+            \   'warningSign': '!',
+            \   'infoSign'   : 'i',
+            \   'hintSign'   : '?'
+            \ },
+            \ "diagnostic-languageserver.filetypes": {
+            \    "vim": "vint",
+            \    "sh": "shellcheck",
+            \    "php": ["phpstan", "psalm"],
+            \  },
+            \ "coc.preferences.formatOnSaveFiletypes": [
+            \ "php",
+            \ "css",
+            \ "markdown",
+            \ "javascript",
+            \ "typescript",
+            \ ],
+            \ "suggest.floatEnable": v:false
+            \ }
 
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
@@ -253,9 +259,6 @@ let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
-" disable netrw
-" let g:loaded_netrw       = 1
-" let g:loaded_netrwPlugin = 1
 
 let g:indentLine_char = '⎸'
 
@@ -269,15 +272,15 @@ let g:gruvbox_italic=1
 
 " coc
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-fun! <SID>BufMakeScratch()
-  setl buftype=nofile
-  setl bufhidden=hide
-  setl noswapfile
-  setl nobuflisted
+function! <SID>BufMakeScratch()
+    setl buftype=nofile
+    setl bufhidden=hide
+    setl noswapfile
+    setl nobuflisted
 endfun
 
 command! -bar BufScratch tabnew|call <SID>BufMakeScratch()
@@ -289,11 +292,11 @@ command! -bar CBCopy !xclip -f -selection clipboard
 command! -bar CBPaste r!xclip -o -selection clipboard
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 function! ToggleConcealLevel()
@@ -311,9 +314,9 @@ nnoremap <silent> <leader>C :call ToggleConcealLevel()<CR>
 " {{{ Mappings
 
 command! -bang -nargs=* RG
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-      \   fzf#vim#with_preview(), <bang>0)
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview(), <bang>0)
 
 nmap <silent> <leader>ev :e ~/.vimrc<CR>
 nmap <silent> <leader>sv :so ~/.vimrc<CR>
@@ -356,9 +359,9 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use <c-space> to trigger completion.
@@ -394,30 +397,24 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Syntax
 
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType markdown setlocal sw=2 ts=2 
+augroup FileTypes
+    autocmd!
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType markdown setlocal sw=2 ts=2 
+augroup END
 
 " }}}
 
 " Custom {{{
 
 if executable('rg')
-  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 endif
 
 " }}}
-
-" ########## Status line experiment ########## 
-
-set stl=[%n]\ 
-set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}%)
-set stl+=%(\ \|\ %{FugitiveHead()}%)
-set stl+=%(\ \|\ %{coc#status()}%)
-set stl+=%=%{&fenc}\ %l/%L\ %y
-
-" ########## / Status line experiment ########## 
 
 colorscheme gruvbox8_hard
 hi clear SignColumn
 
 hi SpecialKey ctermfg=239
+
