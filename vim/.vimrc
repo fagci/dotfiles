@@ -24,6 +24,7 @@ let mapleader=","
 let maplocalleader=","
 set encoding=utf-8
 set modelines=0 " security
+set spelllang=ru,en
 
 " Editing
 set backspace=indent,eol,start
@@ -37,6 +38,7 @@ set pastetoggle=<F2>
 set conceallevel=0
 
 " Indentation
+set copyindent
 set smartindent smarttab expandtab
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
@@ -115,11 +117,24 @@ if !isdirectory($HOME."/.vim/undodir")
     call mkdir($HOME."/.vim/undodir", "p", 0700)
 endif
 
+if !isdirectory($HOME."/.vim/spell")
+    call mkdir($HOME."/.vim/spell", "p", 0700)
+endif
+
+if empty(glob("~/.vim/spell/ru.utf-8.spl"))
+    echomsg 'Installing spell dictionaries...'
+    !cd "${HOME}/.vim/spell" 
+                \ && for x in en.utf-8.spl en.utf-8.sug ru.utf-8.spl ru.utf-8.sug ; do
+                \ echo "$x" ;
+                \ wget -qO "${HOME}/.vim/spell/$x" http://ftp.vim.org/vim/runtime/spell/$x ;
+                \ done
+endif
+
 " Install plugin manager
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -159,7 +174,7 @@ Plug 'lifepillar/vim-gruvbox8'
 
 " Linters, autocompletions
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
@@ -327,6 +342,16 @@ nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
 map <leader>l :set list!<CR>
 
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+nnoremap <silent> + :exe "resize " . (winheight(0) * 8/7)<CR>
+nnoremap <silent> _ :exe "resize " . (winheight(0) * 7/8)<CR>
+nnoremap <silent> = :exe "vertical resize " . (winwidth(0) * 8/7)<CR>
+nnoremap <silent> - :exe "vertical resize " . (winwidth(0) * 7/8)<CR>
+
+nnoremap <Leader>s :set spell!<cr>
+
 nmap < <<
 nmap > >>
 vmap < <gv
@@ -345,7 +370,6 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>H :FzfHistory<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
-nnoremap <Leader>s :FzfBLines<cr>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -386,7 +410,7 @@ nnoremap <silent> <leader>n :ScratchToggle<cr> " Scratch buffer
 nnoremap <leader>sql :BufScratchSplit<bar>set filetype=mysql<cr>
 nnoremap <leader>D :%DB<cr>
 
-vnoremap <leader>y :'<,'>!xclip -f -selection clipboard<cr>
+vnoremap <leader>y :'<,'>!xclip -selection clipboard<cr>
 
 " }}}
 
