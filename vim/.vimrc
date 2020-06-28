@@ -54,8 +54,7 @@ set guioptions-=e
 set showmode
 set shortmess=Iatc
 set background=dark
-set listchars=tab:→\ ,trail:·
-set list
+set list listchars=tab:⎸\ ,trail:·
 "set t_ut="" " fixes weird bg over line
 
 " History
@@ -173,6 +172,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim' " :GV
 Plug 'xolox/vim-misc'
 Plug 'jceb/vim-orgmode'
+Plug 'chrisbra/unicode.vim'
 
 call plug#end()
 
@@ -254,11 +254,10 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
 " disable netrw
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrw       = 1
+" let g:loaded_netrwPlugin = 1
 
-let g:indentLine_char_list = ['⎸']
-let g:indentLine_setConceal = 0
+let g:indentLine_char = '⎸'
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
@@ -419,37 +418,6 @@ set stl+=%=%{&fenc}\ %l/%L\ %y
 " ########## / Status line experiment ########## 
 
 colorscheme gruvbox8_hard
-highlight clear SignColumn
+hi clear SignColumn
 
-
-autocmd Syntax * syn keyword lispFunc lambda conceal cchar=λ
-autocmd Syntax * syn keyword Operator def conceal cchar=ƒ
-autocmd Syntax * syn match Operator "=\@<!==\@!" conceal cchar=←
-autocmd Syntax * syn match Operator "!=" conceal cchar=≠
-
-autocmd Syntax * syn match Operator ":\n" conceal cchar=→
-
-autocmd Syntax * syn keyword Operator return conceal cchar=◀
-autocmd Syntax * syn keyword Operator for conceal cchar=∀
-autocmd Syntax * syn keyword Operator range conceal cchar=ι
-
-autocmd Syntax * syn keyword Operator if conceal cchar=»
-autocmd Syntax * syn keyword Operator elif conceal cchar=›
-autocmd Syntax * syn keyword Operator else conceal cchar=◇
-
-autocmd Syntax * syn keyword Operator None conceal cchar=ø
-
-
-autocmd Syntax * syn match Keyword "\<x\>" conceal cchar=𝒳
-autocmd Syntax * syn match Keyword "\<y\>" conceal cchar=𝒴
-autocmd Syntax * syn match Keyword "\<z\>" conceal cchar=𝒵
-
-autocmd Syntax * syn keyword Operator self conceal cchar=♀
-autocmd Syntax * syn keyword Operator this conceal cchar=♀
-
-autocmd Syntax * syn keyword Statement True conceal cchar=Ṫ
-autocmd Syntax * syn keyword Statement False conceal cchar=Ḟ
-
-autocmd Syntax * syn keyword Statement len conceal cchar=#
-autocmd Syntax * syn keyword Statement print conceal cchar=ρ
-
+hi SpecialKey ctermfg=239
