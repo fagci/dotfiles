@@ -15,7 +15,7 @@ locale = ru_RU.UTF-8
 height = 20
 
 tray-position = right
-tray-maxsize = 18
+tray-maxsize = 20
 
 modules-left = i3 xwindow
 modules-right = net_l net_w fs_root fs_home temp mem vol battery keyboard weather date
@@ -26,10 +26,8 @@ font-1 = "FontAwesome:pixelsize=10;3"
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 4
 line-color = #f00
 
-padding-left = 0
 padding-right = 1
 module-margin = 1
 
@@ -40,7 +38,6 @@ interface = wlp1s0
 ping-interval = 3
 
 format-connected = <label-connected>
-format-connected-prefix = " "
 format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 
@@ -112,7 +109,14 @@ label-unmounted = %mountpoint% not mounted
 
 [module/date]
 type = internal/date
-date = "%a, %d.%m %H:%M"
+
+label = %date%%time%
+
+date =
+time = %H:%M
+
+date-alt = "%a, %d %b "
+time-alt = %H:%M
 
 [module/keyboard]
 type = internal/xkeyboard
