@@ -34,14 +34,19 @@ set pastetoggle=<F2>
 set conceallevel=0
 
 " Indentation
-set copyindent
+" set copyindent
+set autoindent
 set smartindent smarttab expandtab
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 
 " UI
-set signcolumn=yes
+if has("patch-8.1.1564")
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
 set laststatus=2
 set foldlevelstart=99
 set splitbelow splitright
@@ -53,10 +58,13 @@ set shortmess=Iatc
 set background=dark
 set list listchars=tab:⎸\ ,trail:·
 "set t_ut= " fixes weird bg over line
+if exists('+termguicolors')
+	set termguicolors
+endif
 
 " statusline
 set stl=[%n]\ 
-set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%t%{(&mod?'*':'')}%)
+set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
 set stl+=%(\ \|\ %{FugitiveHead()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l/%L\ %y
@@ -89,6 +97,7 @@ let g:loaded_netrwPlugin = 1
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
+set suffixesadd=.ts,.js,.tsx,.jsx,.json   "gf extensions
 
 " Cursor shape
 
@@ -183,6 +192,9 @@ Plug 'stephpy/vim-yaml', { 'for': [ 'yaml' ] }
 Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'tpope/vim-liquid'
+Plug 'posva/vim-vue', { 'for': 'vue' }
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 
 Plug 'adoy/vim-php-refactoring-toolbox'
 
@@ -214,6 +226,7 @@ let g:coc_global_extensions = [
             \   'coc-json',
             \   'coc-pairs',
             \   'coc-phpls',
+            \   'coc-prettier',
             \   'coc-sh',
             \   'coc-snippets',
             \   'coc-sql',
@@ -262,6 +275,8 @@ let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
 let php_sql_heredoc=0
 let php_sql_nowdoc=0
+
+let g:vue_pre_processors = []
 
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
@@ -338,13 +353,13 @@ nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
 map <leader>l :set list!<CR>
 
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+" nmap <S-Enter> O<Esc>
+" nmap <CR> o<Esc>
 
-nnoremap <silent> + :exe "resize " . (winheight(0) * 8/7)<CR>
-nnoremap <silent> _ :exe "resize " . (winheight(0) * 7/8)<CR>
-nnoremap <silent> = :exe "vertical resize " . (winwidth(0) * 8/7)<CR>
-nnoremap <silent> - :exe "vertical resize " . (winwidth(0) * 7/8)<CR>
+" nnoremap <silent> + :exe "resize " . (winheight(0) * 8/7)<CR>
+" nnoremap <silent> _ :exe "resize " . (winheight(0) * 7/8)<CR>
+" nnoremap <silent> = :exe "vertical resize " . (winwidth(0) * 8/7)<CR>
+" nnoremap <silent> - :exe "vertical resize " . (winwidth(0) * 7/8)<CR>
 
 nnoremap <Leader>s :set spell!<cr>
 
@@ -377,6 +392,7 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -421,8 +437,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup FileTypes
     autocmd!
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType markdown setlocal sw=2 ts=2 
+    autocmd FileType html,css,scss,javascript,typescript,json,vue,yaml setlocal ts=2 sw=2 sts=2
 
     autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType scss setlocal iskeyword+=- " for css3 box-shadow etc
