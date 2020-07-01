@@ -91,9 +91,21 @@ set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
 
+" Disable unused built-in plugins.
+let g:loaded_gzip = v:true
+let g:loaded_rrhelper = v:true
+let g:loaded_tarPlugin = v:true
+let g:loaded_zipPlugin = v:true
+let g:loaded_netrwPlugin = v:true
+let g:loaded_netrwFileHandlers = v:true
+let g:loaded_netrwSettings = v:true
+let g:loaded_2html_plugin = v:true
+let g:loaded_vimballPlugin = v:true
+let g:loaded_getscriptPlugin = v:true
+let g:loaded_logipat = v:true
+let g:loaded_tutor_mode_plugin = v:true
+let g:loaded_matchit = v:true
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
@@ -170,6 +182,7 @@ Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'kshenoy/vim-signature'
 
@@ -279,7 +292,7 @@ let g:vue_pre_processors = []
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
