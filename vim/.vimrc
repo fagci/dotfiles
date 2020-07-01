@@ -35,8 +35,10 @@ set conceallevel=0
 
 " Indentation
 " set copyindent
-set autoindent
-set smartindent smarttab expandtab
+" set autoindent
+" set smartindent
+set expandtab smarttab
+set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
@@ -55,11 +57,10 @@ set wildmenu
 set guioptions-=e
 set showmode
 set shortmess=Iatc
-set background=dark
-set list listchars=tab:⎸\ ,trail:·
-"set t_ut= " fixes weird bg over line
+set background=dark 
+set listchars=tab:▸\ ,trail:•
 if exists('+termguicolors')
-	set termguicolors
+    set termguicolors
 endif
 
 " statusline
@@ -84,7 +85,6 @@ set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
 set updatetime=300
-" set synmaxcol=256 " UTF = x2
 syntax sync minlines=256
 set regexpengine=1
 set hidden confirm " this speeds up buffer switch x25 I think
@@ -173,7 +173,7 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'kshenoy/vim-signature'
 
-Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'lifepillar/vim-gruvbox8'
 
@@ -204,6 +204,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim' " :GV
 Plug 'xolox/vim-misc'
 Plug 'jceb/vim-orgmode'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -217,7 +218,6 @@ let g:fzf_command_prefix = 'Fzf'
 let g:coc_git_status = 0
 
 let g:coc_global_extensions = [
-            \   'coc-calc',
             \   'coc-css',
             \   'coc-diagnostic',
             \   'coc-emmet',
@@ -233,7 +233,6 @@ let g:coc_global_extensions = [
             \   'coc-tslint-plugin',
             \   'coc-tsserver',
             \   'coc-vetur',
-            \   'coc-vimlsp',
             \   'coc-yaml',
             \ ]
 
@@ -278,6 +277,10 @@ let php_sql_nowdoc=0
 
 let g:vue_pre_processors = []
 
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+
 let NERDTreeMinimalUI = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
@@ -288,7 +291,7 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
 
-let g:indentLine_char = '⎸'
+" let g:indentLine_char = '⎸'
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
@@ -352,14 +355,6 @@ map <tab> :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>, :noh<CR>
 noremap <Leader>/ :Commentary<CR>
 map <leader>l :set list!<CR>
-
-" nmap <S-Enter> O<Esc>
-" nmap <CR> o<Esc>
-
-" nnoremap <silent> + :exe "resize " . (winheight(0) * 8/7)<CR>
-" nnoremap <silent> _ :exe "resize " . (winheight(0) * 7/8)<CR>
-" nnoremap <silent> = :exe "vertical resize " . (winwidth(0) * 8/7)<CR>
-" nnoremap <silent> - :exe "vertical resize " . (winwidth(0) * 7/8)<CR>
 
 nnoremap <Leader>s :set spell!<cr>
 
