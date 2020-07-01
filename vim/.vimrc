@@ -454,7 +454,10 @@ augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen
     autocmd!
-    autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &filetype !~# 'commit' | exe "normal! g`\"" | endif
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
 augroup END
 
 " }}}
