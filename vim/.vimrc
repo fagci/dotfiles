@@ -16,8 +16,8 @@ set nocompatible
 syntax on
 filetype plugin indent on
 
-let mapleader=","
-let maplocalleader=","
+let mapleader=','
+let maplocalleader=','
 set encoding=utf-8
 set modelines=0 " security
 set spelllang=ru,en
@@ -85,27 +85,9 @@ set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
 set updatetime=300
-syntax sync minlines=256
 set regexpengine=1
 set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
-let g:matchparen_timeout = 20
-let g:matchparen_insert_timeout = 20
-
-" Disable unused built-in plugins.
-let g:loaded_gzip = v:true
-let g:loaded_rrhelper = v:true
-let g:loaded_tarPlugin = v:true
-let g:loaded_zipPlugin = v:true
-let g:loaded_netrwPlugin = v:true
-let g:loaded_netrwFileHandlers = v:true
-let g:loaded_netrwSettings = v:true
-let g:loaded_2html_plugin = v:true
-let g:loaded_vimballPlugin = v:true
-let g:loaded_getscriptPlugin = v:true
-let g:loaded_logipat = v:true
-let g:loaded_tutor_mode_plugin = v:true
-let g:loaded_matchit = v:true
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
@@ -130,13 +112,17 @@ endif
 
 " Create undodir if not exists
 
-if !isdirectory($HOME."/.vim/undodir")
-    call mkdir($HOME."/.vim/undodir", "p", 0700)
+if !isdirectory($HOME.'/.vim/undodir')
+    call mkdir($HOME.'/.vim/undodir', 'p', 0700)
 endif
 
-if !isdirectory($HOME."/.vim/spell")
-    call mkdir($HOME."/.vim/spell", "p", 0700)
+" Create spells directory
+
+if !isdirectory($HOME.'/.vim/spell')
+    call mkdir($HOME.'/.vim/spell', 'p', 0700)
 endif
+
+" Download spell dictionaries
 
 if empty(glob("~/.vim/spell/ru.utf-8.spl"))
     echomsg 'Installing spell dictionaries...'
@@ -177,7 +163,7 @@ Plug 'junegunn/fzf.vim'
 
 " UI
 
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -206,6 +192,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'tpope/vim-liquid'
 Plug 'posva/vim-vue', { 'for': 'vue' }
+Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 
@@ -257,54 +244,55 @@ let g:coc_user_config = {
             \   'minTriggerInputLength': 2,
             \   'noselect': v:false,
             \   'preferCompleteThanJumpPlaceholder': v:true,
-            \   "snippetIndicator": " ►",
+            \   'snippetIndicator': ' ►',
             \   'timeout': 500,
-            \   "triggerAfterInsertEnter": v:true,
+            \   'triggerAfterInsertEnter': v:true,
             \ },
             \ 'diagnostic': {
-            \ 'displayByAle': v:false,
             \   'errorSign'  : 'X',
             \   'warningSign': '!',
             \   'infoSign'   : 'i',
             \   'hintSign'   : '?'
             \ },
-            \ "diagnostic-languageserver.filetypes": {
-            \    "vim": "vint",
-            \    "sh": "shellcheck",
-            \    "php": ["phpstan", "psalm"],
+            \ 'diagnostic-languageserver.filetypes': {
+            \   'vim': 'vint',
+            \   'sh': 'shellcheck',
+            \   'php': ['phpstan', 'psalm'],
             \  },
-            \ "coc.preferences.formatOnSaveFiletypes": [
-            \ "php",
-            \ "css",
-            \ "markdown",
-            \ "javascript",
-            \ "typescript",
+            \ 'coc.preferences.formatOnSaveFiletypes': [
+            \   'php',
+            \   'css',
+            \   'markdown',
+            \   'javascript',
+            \   'typescript',
             \ ],
-            \ "suggest.floatEnable": v:false
+            \ 'suggest.floatEnable': v:false
             \ }
 
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
 let php_sql_heredoc=0
 let php_sql_nowdoc=0
+let php_htmlInStrings=1
+let php_sql_query=1
 
 let g:vue_pre_processors = []
 
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
-let NERDTreeMinimalUI = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 25
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
-
-" let g:indentLine_char = '⎸'
+let g:NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
@@ -474,4 +462,7 @@ colorscheme gruvbox8_hard
 hi clear SignColumn
 
 hi SpecialKey ctermfg=239
+
+hi IndentGuidesOdd  guibg=#222425   ctermbg=236
+hi IndentGuidesEven guibg=#292C2E   ctermbg=235
 
