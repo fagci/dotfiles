@@ -1,9 +1,12 @@
+rofi.hide-scrollbar: true
 rofi.color-enabled: true
-rofi.color-window: argb:c6073642, argb:0073642, #a8b8b8
-rofi.color-normal: argb:0073642, #eee8d5, argb:0073642, #2aa198, #fdf6e3
-rofi.color-active: argb:0fdf6e3, #39cdc2, argb:0073642, #2aa198, #fdf6e3
-rofi.color-urgent: argb:83dc322f, #eee8d5, argb:83dc322f, #dc322f, #fdf6e3
-rofi.font: xos4 Iosevka 9
+rofi.font: xos4 Hack 9
 rofi.separator-style: solid
-rofi.theme: solarized_alternate
 
+! Property Name     BG       Border   Separator
+rofi.color-window:  argb:88666666, #3c3836, #282828
+
+! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+rofi.color-normal:  argb:003c3836, #d5c4a1, argb:003c3836, #3c3836, #fbf1c7
+rofi.color-active:  argb:003c3836, #83a598, #3c3836, #3c3836, #83a598
+rofi.color-urgent:  argb:003c3836, #fb4934, #3c3836, #3c3836, #fb4934

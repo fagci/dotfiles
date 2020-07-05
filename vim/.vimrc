@@ -19,12 +19,12 @@ filetype plugin indent on
 let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
-set modelines=0 " security
+" set modelines=0 " security
 set spelllang=ru,en
 
 " Editing
 set backspace=indent,eol,start
-set colorcolumn=80
+" set colorcolumn=80
 set number
 set nowrap
 set showmatch
@@ -59,7 +59,9 @@ set showmode
 set shortmess=Iatc
 " set background=dark 
 set listchars=tab:▸\ ,trail:•
-if exists('+termguicolors')
+if has('termguicolors')
+    set t_8f=\[[38;2;%lu;%lu;%lum
+    set t_8b=\[[48;2;%lu;%lu;%lum
     set termguicolors
 endif
 
@@ -461,11 +463,13 @@ endif
 " }}}
 
 colorscheme gruvbox8_hard
-hi clear SignColumn
-hi Normal guibg=NONE ctermbg=NONE
+match Error /\%>80c/
 
-hi SpecialKey ctermfg=239
-" hi LineNr ctermfg=236 guifg=#444444 
-hi IndentGuidesOdd  guibg=#222425   ctermbg=236
-hi IndentGuidesEven guibg=#292C2E   ctermbg=235
+hi clear SignColumn
+
+hi   Normal             ctermbg=NONE  guibg=NONE 
+hi   SpecialKey         ctermfg=239   guifg=#666666
+hi   LineNr             ctermfg=239   guifg=#666666
+hi   IndentGuidesOdd    ctermbg=236   guibg=#282828
+hi   IndentGuidesEven   ctermbg=235   guibg=#323232
 

@@ -1,6 +1,6 @@
 [colors]
-background = #222
-background-alt = #444
+background = #88222222
+background-alt = #99444444
 foreground = #dfdfdf
 foreground-alt = #fff
 primary = #ffb52a
@@ -42,7 +42,6 @@ format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 
 label-connected = %downspeed:7%
-label-connected-foreground = #eefafafa
 label-disconnected = not connected
 label-disconnected-foreground = #66ffffff
 
@@ -63,7 +62,6 @@ format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 
 label-connected = %downspeed:7%
-label-connected-foreground = #eefafafa
 label-disconnected = not connected
 label-disconnected-foreground = #66ffffff
 
