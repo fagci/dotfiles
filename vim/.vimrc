@@ -472,6 +472,7 @@ endif
 
 colorscheme gruvbox8_hard
 hi clear SignColumn
+hi Normal guibg=NONE ctermbg=NONE
 
 hi SpecialKey ctermfg=239
 
