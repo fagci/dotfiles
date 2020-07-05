@@ -57,7 +57,7 @@ set wildmenu
 set guioptions-=e
 set showmode
 set shortmess=Iatc
-set background=dark 
+" set background=dark 
 set listchars=tab:▸\ ,trail:•
 if exists('+termguicolors')
     set termguicolors
@@ -178,7 +178,7 @@ Plug 'lifepillar/vim-gruvbox8'
 
 " Linters, autocompletions
 
-Plug 'neoclide/coc.nvim', {'branch': 'master'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
@@ -293,6 +293,8 @@ let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+
+" colorschemes
 
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_bold=1
@@ -460,9 +462,10 @@ endif
 
 colorscheme gruvbox8_hard
 hi clear SignColumn
+hi Normal guibg=NONE ctermbg=NONE
 
 hi SpecialKey ctermfg=239
-
+" hi LineNr ctermfg=236 guifg=#444444 
 hi IndentGuidesOdd  guibg=#222425   ctermbg=236
 hi IndentGuidesEven guibg=#292C2E   ctermbg=235
 
