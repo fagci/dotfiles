@@ -24,7 +24,7 @@ set spelllang=ru,en
 
 " Editing
 set backspace=indent,eol,start
-" set colorcolumn=80
+set colorcolumn=80
 set number
 set nowrap
 set showmatch
@@ -155,7 +155,7 @@ Plug 'tweekmonster/startuptime.vim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 
 " Search & replace
@@ -463,7 +463,6 @@ endif
 " }}}
 
 colorscheme gruvbox8_hard
-match Error /\%>80c/
 
 hi clear SignColumn
 
