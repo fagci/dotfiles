@@ -174,7 +174,7 @@ exec_always --no-startup-id killall -q unclutter
 exec_always --no-startup-id killall -q polybar
 exec_always --no-startup-id killall -q picom
 
-exec_always --no-startup-id sleep 2; picom -b 
+exec_always --no-startup-id sleep 2; picom -b --experimental-backends 
 exec_always --no-startup-id $HOME/.config/i3/polybar.sh
 exec_always --no-startup-id unclutter --timeout 1
 exec_always --no-startup-id dunst
