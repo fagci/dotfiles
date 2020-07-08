@@ -33,7 +33,6 @@ set scrolloff=5
 set clipboard+=unnamedplus
 set pastetoggle=<F2>
 set conceallevel=0
-set inccommand=nosplit " live substitution
 
 " Indentation
 " set copyindent
@@ -206,6 +205,8 @@ Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim' " :GV
 Plug 'vimwiki/vimwiki'
 
+Plug 'markonm/traces.vim'
+
 call plug#end()
 
 " }}}
@@ -266,9 +267,9 @@ let g:coc_user_config = {
             \   'javascript',
             \   'typescript',
             \ ],
-            \ 'suggest.floatEnable': v:false
+            \ 'suggest.floatEnable': v:false,
+            \ 'coc.preferences.diagnostic.refreshOnInsertMode': v:true,
             \ }
-
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
 let php_sql_heredoc=0
