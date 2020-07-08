@@ -32,6 +32,7 @@ if ! zgen saved; then
   zgen save
 fi
 
+bindkey -v
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

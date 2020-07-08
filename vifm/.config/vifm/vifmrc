@@ -1,0 +1,26 @@
+" vim:set noet sts=-1 sw=4 ts=4 tw=80 ft=vim:
+
+set sortnumbers
+set ignorecase
+set smartcase
+set incsearch
+
+command! df df -h %m 2> /dev/null
+command! diff vim -d %f %F
+command! zip zip -r %f.zip %f
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir %a | cd %a
+command! reload :write | restart
+command! sxiv sxiv -f -r -t %d
+
+set classify='  :dir:/,  :exe:,  :reg:,  :link:'
+set classify+='  ::../::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
+set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
+set classify+='  ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
+set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
+
+" set previewprg='~/.confiig/vifm/preview.sh %c '
+" filetype * ~/.config/vifm/open.sh %c
