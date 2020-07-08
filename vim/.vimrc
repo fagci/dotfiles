@@ -20,6 +20,7 @@ let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
 " set modelines=0 " security
+set modeline
 set spelllang=ru,en
 
 " Editing
@@ -155,7 +156,6 @@ Plug 'tweekmonster/startuptime.vim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
 
 " Search & replace
@@ -168,9 +168,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'kshenoy/vim-signature'
 
@@ -203,9 +202,7 @@ Plug 'adoy/vim-php-refactoring-toolbox'
 " Utils
 
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim' " :GV
-Plug 'xolox/vim-misc'
-Plug 'jceb/vim-orgmode'
+" Plug 'junegunn/gv.vim' " :GV
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
