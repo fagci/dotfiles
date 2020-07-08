@@ -33,6 +33,7 @@ set scrolloff=5
 set clipboard+=unnamedplus
 set pastetoggle=<F2>
 set conceallevel=0
+set inccommand=nosplit " live substitution
 
 " Indentation
 " set copyindent
