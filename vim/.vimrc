@@ -25,7 +25,7 @@ set spelllang=ru,en
 
 " Editing
 set backspace=indent,eol,start
-set colorcolumn=80
+" set colorcolumn=80
 set number
 set nowrap
 set showmatch
@@ -59,7 +59,7 @@ set guioptions-=e
 set showmode
 set shortmess=Iatc
 " set background=dark 
-set listchars=tab:▸\ ,trail:•
+set listchars=tab:▸\ ,space:.,trail:•
 if has('termguicolors')
     set t_8f=\[[38;2;%lu;%lu;%lum
     set t_8b=\[[48;2;%lu;%lu;%lum
@@ -279,7 +279,7 @@ let php_sql_query=1
 
 let g:vue_pre_processors = []
 
-let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2

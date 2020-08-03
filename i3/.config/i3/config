@@ -4,13 +4,11 @@ set $mod Mod4
 focus_follows_mouse no
 floating_modifier $mod
 
-for_window [class="^.*"] border pixel 1
-gaps inner 5 
-gaps outer 2
+for_window [class="^.*"] border pixel 0
+gaps inner 10 
+gaps outer 5
 smart_gaps on
 smart_borders on
-
-default_border pixel 1
 
 font pango: Terminus, FontAwesome Regular, Ubuntu Mono derivative Powerline, Icons 8
 # }}}
