@@ -61,8 +61,6 @@ set shortmess=Iatc
 " set background=dark 
 set listchars=tab:▸\ ,space:.,trail:•
 if has('termguicolors')
-    set t_8f=\[[38;2;%lu;%lu;%lum
-    set t_8b=\[[48;2;%lu;%lu;%lum
     set termguicolors
 endif
 
