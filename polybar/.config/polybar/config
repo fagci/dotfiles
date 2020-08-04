@@ -17,7 +17,7 @@ height = 20
 tray-position = right
 tray-maxsize = 20
 
-modules-left = i3 xwindow
+modules-left = i3 bspwm xwindow
 modules-right = net_l net_w fs_root fs_home temp mem vol battery keyboard weather date
 
 font-0 = "Iosevka term:pixelsize=10;3"
@@ -186,5 +186,31 @@ label-focused-foreground = #222222
 label-unfocused-padding-right = 1
 label-focused-padding-right = 1
 label-urgent-padding-right = 1
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+enable-scroll = false
+
+label-urgent = !
+
+label-occupied-background = ${colors.background-alt}
+label-focused-background = #888888
+label-focused-foreground = #222222
+label-urgent-background = #bd2c40
+
+label-focused-padding-right = 1
+label-occupied-padding-right = 1
+label-empty-padding-right = 1
+label-urgent-padding-right = 2
+
+label-locked = locked
+label-locked-padding = 1
+label-sticky = sticky
+label-sticky-padding = 1
+label-private = private
+label-private-padding = 1
+; label-focused-padding-right = 1
+; label-urgent-padding-right = 1
 
 ; vim:ft=dosini

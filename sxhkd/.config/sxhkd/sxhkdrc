@@ -1,0 +1,82 @@
+# sxhkdrc
+# vim: set ft=config
+
+super + shift + r
+    pkill -USR1 -x sxhkd && notify-send "sxhkd config" "Reloaded key bindings"
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# set the window state
+super + {t,shift + space,space,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} ^{1-9,10}
+
+# send and follow to given desktop	
+super + ctrl + shift + {1-9}
+    id=$(bspc query -N -n); bspc node -d ^{1-9}; bspc node -f ${id}
+
+# Expand/contract a window by moving one of its side outward/inward
+super + r : {Left,Down,Up,Right}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+
+# move a floating window
+# super + {Left,Down,Up,Right}
+# 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# switch between gap presets
+super + shift + {y,u,i,o}
+    bspc config window_gap {0,5,10,20}
+
+# dynamic gaps
+super + shift + bracket{left,right}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+
+
+# Apps
+
+super + {Return,grave}
+    alacritty
+
+super + l
+    ilockit
+
+super + c
+    chromium
+
+super + b
+    thunar
+
+super + shift + p
+    ~/.local/bin/rs.sh
+
+super + a
+    rofi -show run
+
+super+Tab
+    rofi -show window
+
+Print
+    scrot -sq 90 -e 'xclip -selection clipboard -t "image/png" < $f'
+
+XF86Audio{Mute,LowerVolume,RaiseVolume}
+    amixer set Master {toggle,5%-,5%+}
+
