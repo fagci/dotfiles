@@ -31,6 +31,8 @@ bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
+# TODO: make focus revert from dismissed app (flameshot)
+
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Chromium desktop='^1'
 bspc rule -a TelegramDesktop desktop='^9'
@@ -38,6 +40,7 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a pulseaudio state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a Alacritty:bc state=floating
 
 # other programs startup
 
@@ -56,4 +59,5 @@ picom -b --experimental-backends
 $HOME/.config/i3/polybar.sh &
 unclutter &
 dunst &
+telegram-desktop &
 

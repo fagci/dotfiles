@@ -4,9 +4,9 @@ rofi.font: xos4 Hack 9
 rofi.separator-style: solid
 
 ! Property Name     BG       Border   Separator
-rofi.color-window:  argb:aa666666, #3c3836, #282828
+rofi.color-window:  argb:ea666666, #3c3836, #282828
 
 ! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
-rofi.color-normal:  argb:003c3836, #eaeaea, argb:003c3836, #3c3836, #fbf1c7
-rofi.color-active:  argb:003c3836, #eaeaea, #3c3836, #3c3836, #83a598
-rofi.color-urgent:  argb:003c3836, #fb4934, #3c3836, #3c3836, #fb4934
+rofi.color-normal:  argb:00000000, #ffffff, argb:00000000, #3c3836, #fbf1c7
+rofi.color-active:  argb:00000000, #ffffff, #3c3836, #3c3836, #83a598
+rofi.color-urgent:  argb:00000000, #fb4934, #3c3836, #3c3836, #fb4934

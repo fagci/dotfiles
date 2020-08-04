@@ -60,7 +60,7 @@ super + l
     ilockit
 
 super + c
-    chromium
+    notify-send "running chromium..." && chromium
 
 super + b
     thunar
@@ -71,11 +71,21 @@ super + shift + p
 super + a
     rofi -show run
 
-super+Tab
+super + Tab
     rofi -show window
 
+# calc
+super + shift + equal
+	bspc rule -a Alacritty:bc state=floating \
+	&& alacritty --class bc,Alacritty --dimensions 25 20 \
+	-e bash -c 'echo Calc && bc -q'
+
 Print
-    scrot -sq 90 -e 'xclip -selection clipboard -t "image/png" < $f'
+    flameshot gui
+    # scrot -sq 90 -e 'xclip -selection clipboard -t "image/png" < $f'
+
+super + Print
+	flameshot full -c
 
 XF86Audio{Mute,LowerVolume,RaiseVolume}
     amixer set Master {toggle,5%-,5%+}
