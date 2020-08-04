@@ -197,6 +197,8 @@ label-focused-background = #888888
 label-focused-foreground = #222222
 label-urgent-background = #bd2c40
 
+label-empty =
+
 label-focused-padding-right = 1
 label-occupied-padding-right = 1
 label-empty-padding-right = 1
