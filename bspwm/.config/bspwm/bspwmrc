@@ -1,9 +1,7 @@
 #!/bin/sh
 
 # start hotkeys daemon
-mkfifo /run/user/$UID/sxhkd.fifo
-pgrep -x sxhkd > /dev/null || sxhkd -s /run/user/$UID/sxhkd.fifo &
-pgrep -x sxhkd-statusd > /dev/null || sxhkd-statusd /run/user/$UID/sxhkd.fifo &
+pgrep -x sxhkd > /dev/null || sxhkd &
 
 #clenup rules if reloaded
 bspc rule -r "*"
