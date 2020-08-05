@@ -1,7 +1,38 @@
 #!zsh
 
+# zmodload zsh/zprof
+
 export EDITOR=vim
 export PATH=$PATH:~/bin
+
+export ZGEN_PREZTO_LOAD_DEFAULT=0
+
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+DISABLE_AUTO_UPDATE="true"
+COMPLETION_WAITING_DOTS="true"
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Show history
+case $HIST_STAMPS in
+  "mm/dd/yyyy") alias history='fc -fl 1' ;;
+  "dd.mm.yyyy") alias history='fc -El 1' ;;
+  "yyyy-mm-dd") alias history='fc -il 1' ;;
+  *) alias history='fc -l 1' ;;
+esac
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
 
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
   export MPD_HOST=localhost
@@ -13,20 +44,12 @@ fi
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
-  zgen load mafredri/zsh-async
+  zgen prezto
+  zgen prezto history-substring-search
 
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/git
-  zgen oh-my-zsh plugins/bgnotify
-  zgen oh-my-zsh plugins/command-not-found
+  zgen load "mafredri/zsh-async" # Used by pure theme 
 
-  zgen load zsh-users/zsh-history-substring-search
-  zgen load junegunn/fzf
-  zgen load sindresorhus/pure
-
-  zgen load zsh-users/zsh-autosuggestions
-  zgen load zsh-users/zsh-completions
-
+  zgen load "Riatre/pure"
   zgen load zdharma/fast-syntax-highlighting
 
   zgen save
@@ -61,6 +84,12 @@ fcd() {
 
 # aliases
 
+alias gc="git commit -a"
+alias ga="git add"
+alias gcam="git commit -am"
+alias gp="git push"
+alias gl="git pull"
+
 if hash nvim 2> /dev/null; then
     if [[ $(nvim --version | head -1 | grep -o '[0-9]\.[0-9]') -gt 0.3 ]]; then
         alias vim='nvim'
@@ -72,7 +101,7 @@ if hash mosh 2> /dev/null; then
 fi
 
 if hash exa 2> /dev/null; then
-  unalias ls ll la 
+  # unalias ls ll la 
   alias ls='exa'
   alias la='exa -a'
   alias ll='exa -l'
@@ -91,3 +120,4 @@ if [[ "$OSTYPE" -eq "linux-android" ]] && hash pkg 2> /dev/null; then
   alias pkli="pkg list-installed"
 fi
 
+# zprof
