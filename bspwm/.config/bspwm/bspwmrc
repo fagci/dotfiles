@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # start hotkeys daemon
-pgrep -x sxhkd > /dev/null || sxhkd &
+mkfifo /run/user/$UID/sxhkd.fifo
+pgrep -x sxhkd > /dev/null || sxhkd -s /run/user/$UID/sxhkd.fifo &
+pgrep -x sxhkd-statusd > /dev/null || sxhkd-statusd /run/user/$UID/sxhkd.fifo &
 
 #clenup rules if reloaded
 bspc rule -r "*"
@@ -19,10 +21,8 @@ if ! echo "$mainmonitor" | grep LVDS >/dev/null 2>&1; then
 fi
 
 # Start workspaces on the main monitor.
-bspc monitor "$mainmonitor" -d 1 2 3 4 5 6 7 8 9
-bspc desktop -f 1
-
-# bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor "$mainmonitor" -d 1 2 3 4
+# bspc desktop -f 1
 
 bspc config border_width         1
 bspc config window_gap           5
@@ -36,7 +36,7 @@ bspc config single_monocle       true
 
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Chromium desktop='^1'
-bspc rule -a TelegramDesktop desktop='^9'
+bspc rule -a TelegramDesktop desktop='^4'
 bspc rule -a mplayer2 state=floating
 bspc rule -a pulseaudio state=floating
 bspc rule -a Kupfer.py focus=on
@@ -45,8 +45,6 @@ bspc rule -a Alacritty:bc state=floating
 
 # other programs startup
 
-killall -q dunst
-killall -q unclutter
 killall -q polybar
 killall -q picom
 
@@ -58,7 +56,8 @@ synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
 
 picom -b --experimental-backends 
 $HOME/.config/i3/polybar.sh &
-unclutter &
-dunst &
-telegram-desktop &
+pgrep -x unclutter > /dev/null || unclutter &
+pgrep -x dunst > /dev/null || dunst &
+
+pgrep -x telegram-desktop > /dev/null || telegram-desktop &
 

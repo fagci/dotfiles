@@ -24,6 +24,18 @@ super + {t,shift + space,space,f}
 super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
+# Add a new desktop on the current monitor with name set by rofi
+super + plus
+    bspc monitor -a "$(rofi -dmenu -p Workspace -i -no-fixed-num-lines -width 12%)"
+
+# Remove the current desktop
+super + minus
+    bspc desktop -r
+
+# Switch to next/previous desktop on current monitor
+super + bracket{left,right}
+    bspc desktop -f {prev,next}.local
+
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} ^{1-9,10}
