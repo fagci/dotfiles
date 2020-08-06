@@ -46,6 +46,7 @@ source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved; then
   zgen prezto
   zgen prezto history-substring-search
+  zgen prezto autosuggestions
 
   zgen load "mafredri/zsh-async" # Used by pure theme 
 
