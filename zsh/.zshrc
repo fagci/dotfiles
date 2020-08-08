@@ -16,6 +16,8 @@ export KEYTIMEOUT=1
 
 bindkey -v
 
+setopt append_history inc_append_history
+
 if [[ ! -d ~/.zinit ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 fi
