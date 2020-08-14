@@ -35,6 +35,7 @@ bspc config single_monocle       true
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Chromium desktop='^1'
 bspc rule -a TelegramDesktop desktop='^4'
+bspc rule -a Kotatogram desktop='^4'
 bspc rule -a mplayer2 state=floating
 bspc rule -a pulseaudio state=floating
 bspc rule -a Kupfer.py focus=on
@@ -44,18 +45,17 @@ bspc rule -a Alacritty:bc state=floating
 # other programs startup
 
 killall -q polybar
-killall -q picom
 
 xset r rate 320 25
-nitrogen --restore
+pgrep -x nitrogen || nitrogen --restore
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
 xrandr --output LVDS1 --off
 synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
 
-picom -b --experimental-backends 
+pgrep -x picom > /dev/null || picom -b --experimental-backends 
 $HOME/.config/i3/polybar.sh &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
 
-pgrep -x telegram-desktop > /dev/null || telegram-desktop &
+pgrep -x kotatogram-desktop > /dev/null || kotatogram-desktop &
 

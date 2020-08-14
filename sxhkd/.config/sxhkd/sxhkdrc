@@ -87,7 +87,7 @@ super + Tab
     rofi -show window
 
 # calc
-super + shift + equal
+super + alt + equal
 	bspc rule -a Alacritty:bc state=floating \
 	&& alacritty --class bc,Alacritty --dimensions 25 20 \
 	-e bash -c 'echo Calc && bc -q'
