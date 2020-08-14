@@ -64,3 +64,4 @@ zle -N zle-keymap-select
 
 # zprof
 ### End of Zinit's installer chunk
+### End of Zinit's installer chunk

@@ -1,24 +1,38 @@
-background_opacity: 0.65
+background_opacity: 0.7
+
+env:
+  # In some cases, if you're using X11 the scale factor
+  # when rendering the terminal will change between screens
+  # so to prevent that, we need to force the scale factor to 1
+  WINIT_UNIX_BACKEND: x11
+  WINIT_X11_SCALE_FACTOR: "1.0"
 
 window:
-  dynamic_title: true
   padding:
     x: 4
     y: 4
 
 scrolling:
-  history: 100000
+  history: 10000
   multiplier: 3
 
 font:
-  size: 8
-  normal:
-    family: Hack
-  bold:
-    family: Hack
-  italic:
-    family: Hack
+  size: 9.0
   use_thin_strokes: true
+  normal:
+    family: JetBrains Mono NL
+  bold:
+    family: JetBrains Mono NL
+  italic:
+    family: JetBrains Mono NL
+  italic_bold:
+    family: JetBrains Mono NL
+  # normal:
+  #   family: Hack
+  # bold:
+  #   family: Hack
+  # italic:
+  #   family: Hack
 
 selection:
   save_to_clipboard: true
