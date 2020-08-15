@@ -68,6 +68,6 @@ colors:
     cyan:    '#8ec07c'
     white:   '#ebdbb2'
 
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+# mouse_bindings:
+#   - { mouse: Middle, action: PasteSelection }
 

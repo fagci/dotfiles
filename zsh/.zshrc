@@ -33,6 +33,11 @@ fi
 
 # bindkey -v
 setopt append_history inc_append_history
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
+
+
 
 if [[ ! -d ~/.zinit ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
