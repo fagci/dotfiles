@@ -1,38 +1,9 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
+
 # beam as the cursor by default
 echo -ne '\e[5 q'
-
-export EDITOR=vim
-export PATH=$PATH:~/bin
-
-# Load version control information
-autoload -Uz vcs_info
-precmd() { vcs_info }
-
-# Format the vcs_info_msg_0_ variable
-zstyle ':vcs_info:git:*' formats ' %b '
-
-setopt PROMPT_SUBST
-PROMPT='%(?..%F{red}%?)%f%B%F{240}%1~%f%b${vcs_info_msg_0_}%(!.#.>) '
-
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-
-DISABLE_AUTO_UPDATE="true"
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-# Speed up prompt redraw, useful when using vi-mode 
-# export KEYTIMEOUT=1
-
-# bindkey -v
-
-setopt append_history inc_append_history
-
 
 # Callback for vim mode change
 function zle-keymap-select () {
@@ -46,6 +17,38 @@ function zle-keymap-select () {
 }
 # Bind the callback
 zle -N zle-keymap-select
+
+export EDITOR=vim
+export PATH=$PATH:~/bin
+# Speed up prompt redraw, useful when using vi-mode 
+export KEYTIMEOUT=1
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+DISABLE_AUTO_UPDATE="true"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats ' %b '
+
+setopt PROMPT_SUBST
+
+if [[ -n $SSH_CONNECTION ]]; then
+    PROMPT='%(?..%F{red}%?)%n@%m %f%B%F{240}%1~%f%b${vcs_info_msg_0_}%(!.#.>) '
+else
+    PROMPT='%(?..%F{red}%?)%f%B%F{240}%1~%f%b${vcs_info_msg_0_}%(!.#.>) '
+fi
+
+# bindkey -v
+setopt append_history inc_append_history
 
 if [[ ! -d ~/.zinit ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
@@ -67,8 +70,6 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=8600
 fi
-
-
 
 # zprof
 ### End of Zinit's installer chunk
