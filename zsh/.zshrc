@@ -1,9 +1,21 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
+# beam as the cursor by default
+echo -ne '\e[5 q'
 
 export EDITOR=vim
 export PATH=$PATH:~/bin
+
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats ' %b '
+
+setopt PROMPT_SUBST
+PROMPT='%(?..%F{red}%?)%f%B%F{240}%1~%f%b${vcs_info_msg_0_}%(!.#.>) '
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -15,11 +27,25 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 # Speed up prompt redraw, useful when using vi-mode 
-export KEYTIMEOUT=1
+# export KEYTIMEOUT=1
 
-bindkey -v
+# bindkey -v
 
 setopt append_history inc_append_history
+
+
+# Callback for vim mode change
+function zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        # Set block cursor
+        echo -ne '\e[1 q'
+    else
+        # Set beam cursor
+        echo -ne '\e[5 q'
+    fi
+}
+# Bind the callback
+zle -N zle-keymap-select
 
 if [[ ! -d ~/.zinit ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
@@ -34,9 +60,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
 zinit light zdharma/fast-syntax-highlighting
 
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
-
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
@@ -45,23 +68,7 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_PORT=8600
 fi
 
-# beam as the cursor by default
-echo -ne '\e[5 q'
 
-# Callback for vim mode change
-function zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-        # Set block cursor
-        echo -ne '\e[1 q'
-    else
-        # Set beam cursor
-        echo -ne '\e[5 q'
-    fi
-}
-
-# Bind the callback
-zle -N zle-keymap-select
 
 # zprof
-### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
