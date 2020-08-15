@@ -2,22 +2,6 @@
 
 # zmodload zsh/zprof
 
-# beam as the cursor by default
-echo -ne '\e[5 q'
-
-# Callback for vim mode change
-function zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-        # Set block cursor
-        echo -ne '\e[1 q'
-    else
-        # Set beam cursor
-        echo -ne '\e[5 q'
-    fi
-}
-# Bind the callback
-zle -N zle-keymap-select
-
 export EDITOR=vim
 export PATH=$PATH:~/bin
 # Speed up prompt redraw, useful when using vi-mode 
