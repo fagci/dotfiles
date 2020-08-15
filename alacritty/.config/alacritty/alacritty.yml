@@ -13,7 +13,7 @@ window:
     y: 4
 
 scrolling:
-  history: 10000
+  history: 3000
   multiplier: 3
 
 font:
