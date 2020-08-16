@@ -464,6 +464,7 @@ colorscheme gruvbox8_hard
 hi clear SignColumn
 
 hi   Normal             ctermbg=NONE  guibg=NONE 
+hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
 hi   SpecialKey         ctermfg=239   guifg=#666666
 hi   LineNr             ctermfg=239   guifg=#666666
 hi   IndentGuidesOdd    ctermbg=236   guibg=#282828
