@@ -1,5 +1,5 @@
 [colors]
-background = #222222
+background = #000000
 background-alt = #444444
 foreground = #dfdfdf
 foreground-alt = #fff
@@ -10,7 +10,7 @@ alert = #bd2c40
 [bar/bottom]
 monitor = ${env:MONITOR:}
 bottom = true
-locale = ru_RU.UTF-8
+; locale = ru_RU.UTF-8
 wm-restack = bspwm
 
 height = 20

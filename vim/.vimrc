@@ -60,6 +60,7 @@ set showmode
 set shortmess=Iatc
 " set background=dark 
 set listchars=tab:▸\ ,space:.,trail:•
+" WARNING: works only with neovim somewhy 
 if has('termguicolors')
     set termguicolors
 endif

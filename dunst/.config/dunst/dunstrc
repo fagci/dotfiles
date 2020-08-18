@@ -1,14 +1,15 @@
+# :vim ft=dosini :
 [global]
   geometry = "300x5-0"
   separator_height = 1
-  padding = 4
+  padding = 8
   horizontal_padding = 8
   frame_width = 1
   frame_color = "#aaaaaa"
   separator_color = frame
   idle_threshold = 120
-#  font = xos4 Terminus 8
-  format = "[%a :: %s]\n%b"
+  font = Droid Sans 9
+  format = "<b>%s %p</b>\n%b"
   icon_position = left
 
 [urgency_low]
