@@ -219,7 +219,6 @@ let g:coc_git_status = 0
 
 let g:coc_global_extensions = [
             \   'coc-css',
-            \   'coc-diagnostic',
             \   'coc-emmet',
             \   'coc-eslint',
             \   'coc-html',
@@ -266,6 +265,7 @@ let g:coc_user_config = {
             \   'javascript',
             \   'typescript',
             \ ],
+            \ 'prettier.disableSuccessMessage': v:true,
             \ 'suggest.floatEnable': v:false,
             \ 'coc.preferences.diagnostic.refreshOnInsertMode': v:true,
             \ }
