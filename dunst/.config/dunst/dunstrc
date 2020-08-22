@@ -1,29 +1,36 @@
 # :vim ft=dosini :
 [global]
-  geometry = "300x5-0"
-  separator_height = 1
-  padding = 8
-  horizontal_padding = 8
-  frame_width = 1
-  frame_color = "#aaaaaa"
-  separator_color = frame
-  idle_threshold = 120
-  font = Droid Sans 9
-  format = "<b>%s %p</b>\n%b"
-  icon_position = left
+geometry = "300x5-0"
+separator_height = 1
+padding = 8
+horizontal_padding = 8
+frame_width = 1
+frame_color = "#aaaaaa"
+separator_color = frame
+idle_threshold = 120
+font = Droid Sans 9
+format = "<b>%s %p</b>\n%b"
+icon_position = left
+history_length = 20
+
+[shortcuts]
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
 
 [urgency_low]
-  background = "#222222"
-  foreground = "#888888"
-  timeout = 120
+background = "#222222"
+foreground = "#888888"
+timeout = 120
 
 [urgency_normal]
-  background = "#285577"
-  foreground = "#ffffff"
-  timeout = 120
+background = "#285577"
+foreground = "#ffffff"
+timeout = 120
 
 [urgency_critical]
-  background = "#900000"
-  foreground = "#ffffff"
-  frame_color = "#ff0000"
-  timeout = 0
+background = "#900000"
+foreground = "#ffffff"
+frame_color = "#ff0000"
+timeout = 0
