@@ -23,6 +23,8 @@ set encoding=utf-8
 set modeline
 set spelllang=ru,en
 
+let g:ale_disable_lsp = 1
+
 " Editing
 set backspace=indent,eol,start
 " set colorcolumn=80
@@ -37,7 +39,7 @@ set conceallevel=0
 " Indentation
 " set copyindent
 " set autoindent
-" set smartindent
+set smartindent
 set expandtab smarttab
 set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
@@ -56,9 +58,14 @@ set splitbelow splitright
 set noerrorbells visualbell t_vb=
 set wildmenu
 set guioptions-=e
+
+" Following three lines remove the auto copy function from VIM
+set guioptions-=a
+set guioptions-=A
+set guioptions-=aA
+
 set showmode
-set shortmess=Iatc
-" set background=dark 
+set shortmess+=c
 set listchars=tab:▸\ ,space:.,trail:•
 " WARNING: works only with neovim somewhy 
 if has('termguicolors')
@@ -66,11 +73,11 @@ if has('termguicolors')
 endif
 
 " statusline
-set stl=[%n]\ 
+set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%{WebDevIconsGetFileTypeSymbol()}\ %r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
 set stl+=%(\ \|\ %{FugitiveHead()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
-set stl+=%=%{&fenc}\ %l/%L\ %y
+set stl+=%=%{&fenc}\ %l:%c/%L\ %y
 
 " History
 set noswapfile nobackup nowritebackup
@@ -181,6 +188,7 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
+Plug 'dense-analysis/ale'
 
 " Syntax & lang
 
@@ -232,18 +240,18 @@ let g:coc_global_extensions = [
             \   'coc-tslint-plugin',
             \   'coc-tsserver',
             \   'coc-vetur',
+            \   'coc-vimlsp',
             \   'coc-yaml',
             \ ]
 
 let g:coc_user_config = {
-            \ 'coc.preferences.jumpCommand': 'split',
+            \ "codeLens.enable": v:true,
             \ 'suggest': {
             \   'enablePreview': v:false,
             \   'maxCompleteItemCount': 48,
             \   'minTriggerInputLength': 2,
             \   'noselect': v:false,
             \   'preferCompleteThanJumpPlaceholder': v:true,
-            \   'snippetIndicator': ' ►',
             \   'timeout': 500,
             \   'triggerAfterInsertEnter': v:true,
             \ },
@@ -251,7 +259,8 @@ let g:coc_user_config = {
             \   'errorSign'  : 'X',
             \   'warningSign': '!',
             \   'infoSign'   : 'i',
-            \   'hintSign'   : '?'
+            \   'hintSign'   : '?',
+            \   'displayByAle': v:true
             \ },
             \ 'diagnostic-languageserver.filetypes': {
             \   'vim': 'vint',
@@ -260,8 +269,6 @@ let g:coc_user_config = {
             \  },
             \ 'coc.preferences.formatOnSaveFiletypes': [
             \   'php',
-            \   'css',
-            \   'markdown',
             \   'javascript',
             \   'typescript',
             \ ],
@@ -277,6 +284,9 @@ let php_htmlInStrings=1
 let php_sql_query=1
 
 let g:vue_pre_processors = []
+
+let g:ale_sign_error = 'X'
+let g:ale_sign_warning = '!'
 
 " let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -403,6 +413,13 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nmap <leader>; :CocCommand prettier.formatFile<cr>
+
+" organize imports
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
 " Vim-plug
 
 nnoremap <silent> <leader>pi :PlugInstall<CR>
@@ -450,6 +467,11 @@ augroup ScrollToLastSeenLocationOnFileOpen
       \ | endif
 augroup END
 
+augroup MarkdownAutocompletionOff
+    autocmd!
+    autocmd FileType markdown let b:coc_suggest_disable = 1
+augroup END
+
 " }}}
 
 " Custom {{{
@@ -462,7 +484,12 @@ endif
 
 colorscheme gruvbox8_hard
 
-hi clear SignColumn
+hi clear SignColumn LineNr
+hi clear ALEErrorSign
+hi clear ALEWarningSign
+
+hi ALEWarningSign ctermfg=3 guifg=#ffff00
+hi ALEWarningSign ctermfg=1 guifg=#ff0000
 
 hi   Normal             ctermbg=NONE  guibg=NONE 
 hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
