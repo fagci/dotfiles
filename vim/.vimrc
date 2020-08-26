@@ -205,6 +205,7 @@ Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 " Plug 'beberlei/vim-php-refactor', {'for': 'php'}
@@ -492,6 +493,15 @@ augroup MarkdownAutocompletionOff
     autocmd FileType markdown let b:coc_suggest_disable = 1
 augroup END
 
+function DetectGoHtmlTmpl()
+    if expand('%:e') == "html" && search("{{") != 0
+        set filetype=gohtmltmpl 
+    endif
+endfunction
+
+augroup filetypedetect
+    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+augroup END
 " }}}
 
 " Custom {{{
