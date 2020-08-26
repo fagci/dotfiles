@@ -20,7 +20,7 @@ let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
 set langmenu=en_US.utf-8
-language C " language for menus
+language message en_US.UTF-8
 " set modelines=0 " security
 set modeline
 set spelllang=en,ru
