@@ -19,11 +19,11 @@ filetype plugin indent on
 let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
+set langmenu=en_US.utf-8
+language C " language for menus
 " set modelines=0 " security
 set modeline
-set spelllang=ru,en
-
-let g:ale_disable_lsp = 1
+set spelllang=en,ru
 
 " Editing
 set backspace=indent,eol,start
@@ -66,6 +66,7 @@ set guioptions-=aA
 
 set showmode
 set shortmess+=c
+set shortmess+=I
 set listchars=tab:▸\ ,space:.,trail:•
 " WARNING: works only with neovim somewhy 
 if has('termguicolors')
@@ -163,6 +164,8 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
+Plug 'wellle/targets.vim' " paired text objects
+Plug 'michaeljsmith/vim-indent-object' " indentation text objects (vii - inside indent)
 
 " Search & replace
 
@@ -188,7 +191,6 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'dense-analysis/ale'
 
 " Syntax & lang
 
@@ -204,7 +206,8 @@ Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 
-Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
+" Plug 'beberlei/vim-php-refactor', {'for': 'php'}
 
 " Utils
 
@@ -242,12 +245,14 @@ let g:coc_global_extensions = [
             \   'coc-vetur',
             \   'coc-vimlsp',
             \   'coc-yaml',
+            \   'coc-diagnostic'
             \ ]
 
 let g:coc_user_config = {
             \ "codeLens.enable": v:true,
             \ 'suggest': {
             \   'enablePreview': v:false,
+            \   'floatEnable': v:false,
             \   'maxCompleteItemCount': 48,
             \   'minTriggerInputLength': 2,
             \   'noselect': v:false,
@@ -260,22 +265,31 @@ let g:coc_user_config = {
             \   'warningSign': '!',
             \   'infoSign'   : 'i',
             \   'hintSign'   : '?',
-            \   'displayByAle': v:true
             \ },
             \ 'diagnostic-languageserver.filetypes': {
             \   'vim': 'vint',
             \   'sh': 'shellcheck',
-            \   'php': ['phpstan', 'psalm'],
+            \   'php': ['php', 'phpmd', 'tidy'],
+            \   'html': ['tidy'],
+            \   'javascript': ['eslint'],
+            \   'typescript': ['tslint']
             \  },
             \ 'coc.preferences.formatOnSaveFiletypes': [
             \   'php',
+            \   'phtml',
+            \   'html',
             \   'javascript',
             \   'typescript',
             \ ],
             \ 'prettier.disableSuccessMessage': v:true,
-            \ 'suggest.floatEnable': v:false,
-            \ 'coc.preferences.diagnostic.refreshOnInsertMode': v:true,
+            \ 'css.lint':  {
+            \   'duplicateProperties': 'warning',
+            \   'float': 'warning',
+            \ },
             \ }
+
+let g:coc_filetype_map = {'php': 'html'}
+
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
 let php_sql_heredoc=0
@@ -285,8 +299,6 @@ let php_sql_query=1
 
 let g:vue_pre_processors = []
 
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '!'
 
 " let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -404,11 +416,19 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" inoremap <silent><expr> <TAB>
+"             \ pumvisible() ? "\<C-n>" :
+"             \ <SID>check_back_space() ? "\<TAB>" :
+"             \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -485,11 +505,6 @@ endif
 colorscheme gruvbox8_hard
 
 hi clear SignColumn LineNr
-hi clear ALEErrorSign
-hi clear ALEWarningSign
-
-hi ALEWarningSign ctermfg=3 guifg=#ffff00
-hi ALEWarningSign ctermfg=1 guifg=#ff0000
 
 hi   Normal             ctermbg=NONE  guibg=NONE 
 hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
