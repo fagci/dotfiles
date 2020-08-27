@@ -289,8 +289,6 @@ let g:coc_user_config = {
             \ },
             \ }
 
-" let g:coc_filetype_map = {'php': 'html'}
-
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
 let php_sql_heredoc=0
