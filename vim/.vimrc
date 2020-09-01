@@ -21,6 +21,7 @@ let maplocalleader=','
 set encoding=utf-8
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 " set modelines=0 " security
 set modeline
 set spelllang=en,ru
@@ -484,6 +485,7 @@ augroup FileTypes
 
     autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType scss setlocal iskeyword+=- " for css3 box-shadow etc
+    autocmd FileType php setl commentstring=//%s 
 augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen
