@@ -113,7 +113,7 @@ make_search_query() {
 
 search() {
     local query="$1"
-    local items_path='to_entries[]|(.key|tostring)+"\t"+(.value.br|tostring)+"\t"+.value.name'
+    local items_path='to_entries[]|(.key|tostring)+"\t"+(.value.br|tostring)+"\t"+(.value.name|tostring)'
 
     local json
     local stationlist_json
