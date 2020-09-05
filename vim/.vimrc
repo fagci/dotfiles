@@ -227,6 +227,12 @@ call plug#end()
 
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 let g:coc_git_status = 0
 
@@ -379,8 +385,9 @@ nnoremap <silent> <leader>C :call ToggleConcealLevel()<CR>
 
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-            \   fzf#vim#with_preview(), <bang>0)
+            \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%'), <bang>0)
+
 
 nmap <silent> <leader>ev :e ~/.vimrc<CR>
 nmap <silent> <leader>sv :so ~/.vimrc<CR>
