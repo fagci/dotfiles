@@ -93,10 +93,11 @@ set ignorecase incsearch hlsearch smartcase
 set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
-set updatetime=300
+set updatetime=150
 set regexpengine=1
 set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
+set timeoutlen=1000 ttimeoutlen=0  " remove delay on mode change
 
 set fillchars+=vert:│
 set diffopt+=foldcolumn:0
@@ -225,9 +226,7 @@ call plug#end()
 
 let g:rg_derive_root = 1
 let g:fzf_command_prefix = 'Fzf'
-let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_action = {
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit' }
@@ -377,16 +376,18 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 nnoremap <silent> <leader>C :call ToggleConcealLevel()<CR>
 
+" Toggle colorcolumn with ,|
+nnoremap <silent> <leader><bar> :execute "set colorcolumn="
+                  \ . (&colorcolumn == "" ? "80" : "")<CR>
+
 " }}}
 
 " {{{ Mappings
 
-
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case -- '.shellescape(<q-args>), 1,
-            \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%'), <bang>0)
-
+            \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 nmap <silent> <leader>ev :e ~/.vimrc<CR>
 nmap <silent> <leader>sv :so ~/.vimrc<CR>
@@ -406,6 +407,26 @@ vmap > >gv
 nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap b# :b#<CR>
+
+" Navigate windows
+nnoremap <C-LEFT> <C-w>h
+nnoremap <C-DOWN> <C-w>j
+nnoremap <C-UP> <C-w>k
+nnoremap <C-RIGHT> <C-w>l
+
+" Move lines
+nnoremap <A-DOWN> :m .+1<CR>==
+nnoremap <A-UP> :m .-2<CR>==
+inoremap <A-DOWN> <Esc>:m .+1<CR>==gi
+inoremap <A-UP> <Esc>:m .-2<CR>==gi
+vnoremap <A-DOWN> :m '>+1<CR>gv=gv
+vnoremap <A-UP> :m '<-2<CR>gv=gv
+
+" Resize windows
+noremap <silent> <C-S-Left> :vertical resize -1<CR>
+noremap <silent> <C-S-Right> :vertical resize +1<CR>
+noremap <silent> <C-S-Up> :resize +1<CR>
+noremap <silent> <C-S-Down> :resize -1<CR>
 
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
@@ -499,9 +520,6 @@ augroup FileTypes
     autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType scss setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType php setl commentstring=//%s 
-
-    " insert newline with indent when open brace
-    autocmd FileType css inoremap { {<CR><CR>}<C-o>k<C-o>S
 augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen
