@@ -245,7 +245,6 @@ let g:coc_global_extensions = [
             \   'coc-prettier',
             \   'coc-sh',
             \   'coc-snippets',
-            \   'coc-db',
             \   'coc-sql',
             \   'coc-tslint-plugin',
             \   'coc-tsserver',
