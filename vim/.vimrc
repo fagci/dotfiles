@@ -383,6 +383,7 @@ nnoremap <silent> <leader>C :call ToggleConcealLevel()<CR>
 
 " {{{ Mappings
 
+
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case -- '.shellescape(<q-args>), 1,
@@ -493,6 +494,9 @@ augroup FileTypes
     autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType scss setlocal iskeyword+=- " for css3 box-shadow etc
     autocmd FileType php setl commentstring=//%s 
+
+    " insert newline with indent when open brace
+    autocmd FileType css inoremap { {<CR><CR>}<C-o>k<C-o>S
 augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen

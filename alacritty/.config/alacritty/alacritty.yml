@@ -18,8 +18,32 @@ scrolling:
   multiplier: 3
 
 font:
-  size: 9.0
+  size: 9
   use_thin_strokes: true
+
+  # normal:
+  #   family: Roboto Mono
+  #   style: Regular
+  # bold:
+  #   family: Roboto Mono
+  #   style: Bold
+  # italic:
+  #   family: Roboto Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: Roboto Mono
+  #   style: Bold Italic
+
+  # normal:
+  #   family: Monoid Nerd Font Mono
+  #   style: Retina
+  # bold:
+  #   family: Monoid Nerd Font Mono
+  #   style: Bold
+  # italic:
+  #   family: Monoid Nerd Font Mono
+  #   style: Italic
+
   normal:
     family: JetBrains Mono NL
   bold:
@@ -28,6 +52,7 @@ font:
     family: JetBrains Mono NL
   italic_bold:
     family: JetBrains Mono NL
+
   # normal:
   #   family: Hack
   # bold:
