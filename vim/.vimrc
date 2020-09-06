@@ -21,14 +21,12 @@ let maplocalleader=','
 set encoding=utf-8
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-" set modelines=0 " security
+
 set modeline
 set spelllang=en,ru
 
 " Editing
 set backspace=indent,eol,start
-" set colorcolumn=80
 set number
 set nowrap
 set showmatch
@@ -148,7 +146,7 @@ endif
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -166,7 +164,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'wellle/targets.vim' " paired text objects
-Plug 'michaeljsmith/vim-indent-object' " indentation text objects (vii - inside indent)
+" Plug 'michaeljsmith/vim-indent-object' " indentation text objects (vii - inside indent)
 
 " Search & replace
 
@@ -178,7 +176,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'kshenoy/vim-signature'
@@ -216,8 +213,9 @@ Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim' " :GV
 Plug 'vimwiki/vimwiki'
+Plug 'vifm/vifm.vim'
 
-Plug 'markonm/traces.vim'
+Plug 'markonm/traces.vim' " range, pattern, substitute preview
 
 call plug#end()
 
@@ -231,8 +229,8 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_action = {
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
 
 let g:coc_git_status = 0
 
@@ -315,7 +313,7 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 35
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -370,10 +368,10 @@ function! ToggleConcealLevel()
 endfunction
 
 function! CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+    let hits = []
+    %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+    let reg = empty(a:reg) ? '+' : a:reg
+    execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
@@ -418,6 +416,12 @@ nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>H :FzfHistory<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 
+" Vifm
+map <leader>vv :Vifm<CR>
+map <leader>vs :VsplitVifm<CR>
+map <leader>sp :SplitVifm<CR>
+map <leader>dv :DiffVifm<CR>
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -439,10 +443,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? coc#_select_confirm() :
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 
 let g:coc_snippet_next = '<tab>'
 
@@ -489,6 +493,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup FileTypes
     autocmd!
     autocmd FileType markdown setlocal sw=2 ts=2 
+    autocmd FileType markdown let b:coc_suggest_disable = 1
     autocmd FileType html,css,scss,javascript,typescript,json,vue,yaml setlocal ts=2 sw=2 sts=2
 
     autocmd FileType css setlocal iskeyword+=- " for css3 box-shadow etc
@@ -502,14 +507,9 @@ augroup END
 augroup ScrollToLastSeenLocationOnFileOpen
     autocmd!
     autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-      \ |   exe "normal! g`\""
-      \ | endif
-augroup END
-
-augroup MarkdownAutocompletionOff
-    autocmd!
-    autocmd FileType markdown let b:coc_suggest_disable = 1
+                \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+                \ |   exe "normal! g`\""
+                \ | endif
 augroup END
 
 function DetectGoHtmlTmpl()
