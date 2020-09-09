@@ -19,7 +19,7 @@ if ! echo "$mainmonitor" | grep LVDS >/dev/null 2>&1; then
 fi
 
 # Start workspaces on the main monitor.
-bspc monitor "$mainmonitor" -d 1 2 3 4
+bspc monitor "$mainmonitor" -d 1 2 3 4 5
 # bspc desktop -f 1
 
 bspc config border_width         1
@@ -34,8 +34,8 @@ bspc config single_monocle       true
 
 bspc rule -a Gimp state=floating follow=on
 # bspc rule -a Chromium desktop='^1'
-bspc rule -a TelegramDesktop desktop='^4'
-bspc rule -a Kotatogram desktop='^4'
+bspc rule -a TelegramDesktop desktop='^5'
+bspc rule -a Kotatogram desktop='^5'
 bspc rule -a mplayer2 state=floating
 bspc rule -a pulseaudio state=floating
 bspc rule -a Kupfer.py focus=on

@@ -1,2 +1,2 @@
-nvim/.config/nvim/*
-!nvim/.config/nvim/init.vim
+nvim/.config/nvim/pack
+nvim/.config/nvim/autoload
