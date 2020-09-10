@@ -1,10 +1,64 @@
 {
-    "suggest.floatEnable": false,
-    "suggest.minTriggerInputLength": 2,
-    "suggest.timeout": 2000,
-    "diagnostic.errorSign"  : "X",
-    "diagnostic.warningSign": "!",
-    "diagnostic.infoSign"   : "i",
-    "diagnostic.hintSign"   : "?",
-    "coc.source.emoji.filetypes": ["gitcommit", "vim","vimwiki","html","text"]
+  "codeLens.enable": true,
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.messageLevel": "more",
+
+  "suggest.timeout": 2000,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.localityBonus": true,
+  "suggest.enablePreview": false,
+  "suggest.snippetIndicator": " ★",
+  "suggest.enablePreselect": false,
+  "suggest.fixInsertedWord": true,
+  "suggest.autoTrigger": "trigger",
+  "suggest.detailField": "preview",
+  "suggest.floatEnable": true,
+  "suggest.echodocSupport": true,
+  "suggest.minTriggerInputLength": 2,
+
+  "diagnostic.errorSign": "X",
+  "diagnostic.warningSign": "!",
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "?",
+
+  "diagnostic.messageTarget": "float",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": " >> ",
+  "diagnostic.enableMessage": "always",
+  "diagnostic.messageDelay": 1000,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+
+  "signature.enable": true,
+  "signature.target": "float",
+  "signature.triggerSignatureWait": 300,
+
+  "intelephense.telemetry.enabled": false,
+  "intelephense.phpdoc.returnVoid": true,
+
+  "coc.preferences.formatOnSaveFiletypes": [
+    "php",
+    "phtml",
+    "html",
+    "javascript",
+    "typescript",
+    "json",
+    "yaml"
+  ],
+
+  "diagnostic-languageserver.filetypes": {
+    "css": "stylelint",
+    "yaml": "ansible-lint",
+    "asterisk": "asterisklint",
+    "vim": "vint",
+    "sh": "shellcheck",
+    "php": ["php", "phpmd", "tidy"],
+    "html": ["tidy"],
+    "javascript": ["eslint"]
+  },
+
+  "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
+  "coc.source.emoji.filetypes": ["gitcommit", "vim", "vimwiki", "html", "text"],
+  "prettier.disableSuccessMessage": true
 }
