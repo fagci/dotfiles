@@ -6,5 +6,5 @@
     "diagnostic.warningSign": "!",
     "diagnostic.infoSign"   : "i",
     "diagnostic.hintSign"   : "?",
-    "coc.source.emoji.filetypes": ["gitcommit", "vim","vimwiki","html","txt"]
+    "coc.source.emoji.filetypes": ["gitcommit", "vim","vimwiki","html","text"]
 }
