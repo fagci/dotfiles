@@ -1,35 +1,49 @@
-if empty(glob('~/.config/nvim/autoload/plugpac.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plugpac.vim --create-dirs https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
-  silent !git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
-  autocmd VimEnter * PackInstall
+" ==================== 
+" Author: fagci
+" ====================
+
+" Vim-Plug paths
+let s:plug_autoload_path = "~/.config/nvim/autoload/plug.vim"
+let s:plug_download_url  = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+" If Plug isn't installed, install it
+if !filereadable(expand(s:plug_autoload_path))
+    silent exec "!curl -fLo " . fnameescape(s:plug_autoload_path) . " --create-dirs " . s:plug_download_url
+    silent exec "so " . fnameescape(s:plug_autoload_path)
 endif
 
-call plugpac#begin()
-Pack 'airblade/vim-gitgutter'
-Pack 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Pack 'tpope/vim-commentary'
-Pack 'tpope/vim-fugitive'
-Pack 'tpope/vim-surround'
-Pack 'Shougo/neosnippet.vim'
-Pack 'Shougo/neosnippet-snippets'
-Pack 'junegunn/fzf'
-Pack 'junegunn/fzf.vim'
-Pack 'ryanoasis/vim-devicons'
-Pack 'kshenoy/vim-signature'
-Pack 'editorconfig/editorconfig-vim'
-Pack 'vimwiki/vimwiki'
-Pack 'markonm/traces.vim' " range, pattern, substitute preview
-Pack 'prabirshrestha/async.vim'
-Pack 'prabirshrestha/asyncomplete.vim'
-Pack 'prabirshrestha/asyncomplete-lsp.vim'
-Pack 'prabirshrestha/vim-lsp'
-Pack 'mattn/vim-lsp-settings'
-Pack 'prabirshrestha/asyncomplete-emmet.vim'
-Pack 'prabirshrestha/asyncomplete-emoji.vim'
-Pack 'prabirshrestha/asyncomplete-file.vim'
-Pack 'prabirshrestha/asyncomplete-neosnippet.vim'
-Pack 'prabirshrestha/asyncomplete-omni.vim'
-call plugpac#end()
+call plug#begin("~/.config/nvim/plugged")
+
+" Project navigation
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'tpope/vim-fugitive'
+
+" Editing
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'markonm/traces.vim' " range, pattern, substitute preview
+Plug 'editorconfig/editorconfig-vim'
+Plug 'SirVer/ultisnips'
+Plug 'godlygeek/tabular'
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Language-specific
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-dadbod'
+
+" LSP, completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Utils
+Plug 'vimwiki/vimwiki'
+Plug 'kshenoy/vim-signature'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+call plug#end()
 
 filetype plugin indent on
 syntax on
@@ -42,7 +56,7 @@ set langmenu=en_US.utf-8
 language message en_US.UTF-8
 
 set backspace=start,eol,indent
-set noswapfile
+set noswapfile nobackup nowritebackup
 
 set number
 set signcolumn=yes
@@ -51,18 +65,20 @@ set showmatch
 set scrolloff=5
 set clipboard+=unnamedplus
 set noerrorbells visualbell t_vb=
+set shortmess+=c
+
+" Search
+set ignorecase incsearch hlsearch smartcase
 
 set smartindent
 set expandtab smarttab
+set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 
 set splitbelow splitright
 set listchars=tab:▸\ ,space:.,trail:•
-
-set wildmenu
-set wildmode=longest:full,full
 
 set termguicolors
 
@@ -77,7 +93,7 @@ set undofile
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
 set stl+=%(\ \|\ %{FugitiveHead()}%)
-" set stl+=%(\ \|\ %{coc#status()}%)
+set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l:%c/%L\ %y
 
 " speedup
@@ -147,78 +163,22 @@ nnoremap <silent> <leader><bar> :execute "set colorcolumn="
 map <tab> :NERDTreeToggle<CR>
 noremap <Leader>/ :Commentary<CR>
 
-nnoremap <silent> <leader>pi :PackInstall<CR>
-nnoremap <silent> <leader>pu :PackUpdate<CR>
-nnoremap <silent> <leader>pc :PackClean<CR>
-nnoremap <silent> <leader>ps :PackStatus<CR>
+" Vim-plug
+
+nnoremap <silent> <leader>pi :PlugInstall<CR>
+nnoremap <silent> <leader>pu :PlugUpdate<CR>
+nnoremap <silent> <leader>pr :PlugClean<CR>
+nnoremap <silent> <leader>pc :PlugClean<CR>
+nnoremap <silent> <leader>pg :PlugUpgrade<CR>
+nnoremap <silent> <leader>ps :PlugStatus<CR>
+nnoremap <silent> <leader>pd :PlugDiff<CR>
+nnoremap <silent> <leader>ph :PlugSnapshot
 
 nnoremap <leader><tab> :GFiles --cached --others --exclude-standard<cr>
 nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>H :History<CR>
 nnoremap <Leader>b :Buffers<CR>
-
-" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" let g:asyncomplete_auto_popup = 0
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-
-augroup Completion
-    au!
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emmet#get_source_options({
-        \ 'name': 'emmet',
-        \ 'whitelist': ['html'],
-        \ 'completor': function('asyncomplete#sources#emmet#completor'),
-        \ }))
-
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
-        \ 'name': 'emoji',
-        \ 'whitelist': ['*'],
-        \ 'priority': 1,
-        \ 'completor': function('asyncomplete#sources#emoji#completor'),
-        \ }))
-
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-        \ 'name': 'file',
-        \ 'whitelist': ['*'],
-        \ 'priority': 10,
-        \ 'completor': function('asyncomplete#sources#file#completor')
-        \ }))
-    " buggy
-    " au User asyncomplete_setup call  asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-    "     \ 'name': 'omni',
-    "     \ 'whitelist': ['*'],
-    "     \ 'blacklist': ['c', 'cpp', 'html'],
-    "     \ 'completor': function('asyncomplete#sources#omni#completor'),
-    "     \ 'config': {
-    "     \   'show_source_kind': 1
-    "     \ }
-    "     \ }))
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-        \ 'name': 'neosnippet',
-        \ 'whitelist': ['*'],
-        \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
-        \ }))
-augroup END
-
 
 " Autocommands
 
@@ -254,45 +214,102 @@ endif
 
 
 
+" COC
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" lsp init
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    
-    " refer to doc to add more commands
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-let g:asyncomplete_popup_delay = 500
-let g:asyncomplete_auto_popup = 1
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-let g:lsp_highlight_references_enabled = 1
+nmap <silent> <leader>[ <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>] <Plug>(coc-diagnostic-next)
 
-let g:lsp_signs_error = {'text': 'X'}
-let g:lsp_signs_warning = {'text': '!'}
-let g:lsp_signs_hint = {'text': '?'}
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+" Used on most machines
+let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic']
+
+" Also using
+"   coc-css
+"   coc-emmet
+"   coc-eslint
+"   coc-html
+"   coc-json
+"   coc-pairs
+"   coc-phpls
+"   coc-prettier
+"   coc-sh
+"   coc-snippets
+"   coc-sql
+"   coc-tslint-plugin
+"   coc-tsserver
+"   coc-vetur
+"   coc-vimlsp
+"   coc-yaml
+"   coc-diagnostic
+
+let g:rg_derive_root = 1
+
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
+
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
 
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
-highlight link LspErrorText GruvboxRedSign " requires gruvbox
-highlight clear LspWarningLine
+hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
+hi   SpecialKey         ctermfg=239   guifg=#666666
+hi   LineNr             ctermfg=239   guifg=#666666
+hi   IndentGuidesOdd    ctermbg=236   guibg=#282828
+hi   IndentGuidesEven   ctermbg=235   guibg=#323232

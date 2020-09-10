@@ -1,0 +1,10 @@
+{
+    "suggest.floatEnable": false,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.timeout": 2000,
+    "diagnostic.errorSign"  : "X",
+    "diagnostic.warningSign": "!",
+    "diagnostic.infoSign"   : "i",
+    "diagnostic.hintSign"   : "?",
+    "coc.source.emoji.filetypes": ["gitcommit", "vim","vimwiki","html","txt"]
+}
