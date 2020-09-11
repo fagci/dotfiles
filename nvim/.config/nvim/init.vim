@@ -33,6 +33,15 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-dadbod'
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 
+" Syntax hl
+Plug 'nelsyeung/twig.vim', {'for': 'twig'}
+Plug 'posva/vim-vue', {'for': 'vue'}
+Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'SirVer/ultisnips'
@@ -221,6 +230,10 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+" Jump between snippet placeholders
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -273,8 +286,10 @@ let php_sql_nowdoc=0
 let php_htmlInStrings=1
 let php_sql_query=1
 
+let g:vue_pre_processors = []
+
 " Used on most machines
-let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic']
+let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic', 'coc-git']
 
 " Also using
 "   coc-css coc-emmet coc-eslint coc-html coc-json coc-pairs coc-phpls coc-prettier coc-sh 

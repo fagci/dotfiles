@@ -3,17 +3,17 @@
   "coc.preferences.formatOnType": true,
 
   "suggest.acceptSuggestionOnCommitCharacter": true,
-  "suggest.autoTrigger": "trigger",
-  "suggest.detailField": "preview",
+  "suggest.autoTrigger": "always",
+  "suggest.detailField": "abbr",
   "suggest.echodocSupport": true,
-  "suggest.enablePreselect": false,
+  "suggest.enablePreselect": true,
   "suggest.enablePreview": false,
   "suggest.fixInsertedWord": true,
-  "suggest.floatEnable": true,
+  "suggest.floatEnable": false,
   "suggest.localityBonus": true,
   "suggest.minTriggerInputLength": 2,
   "suggest.noselect": false,
-  "suggest.snippetIndicator": " ★",
+  "suggest.snippetIndicator": " >",
   "suggest.timeout": 2000,
   "suggest.triggerAfterInsertEnter": true,
 
@@ -39,7 +39,8 @@
     "javascript",
     "typescript",
     "json",
-    "yaml"
+    "yaml",
+    "vue"
   ],
 
   "diagnostic-languageserver.filetypes": {

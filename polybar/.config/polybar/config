@@ -159,7 +159,8 @@ animation-discharging-4 = 
 animation-discharging-framerate = 500
 
 [module/vol]
-type = internal/pulseaudio
+type = internal/alsa
+mapped = true
 format-volume = <label-volume>
 label-volume = " %percentage%%"
 label-muted = 
