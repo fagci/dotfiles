@@ -1,21 +1,21 @@
 {
   "codeLens.enable": true,
   "coc.preferences.formatOnType": true,
-  "coc.preferences.messageLevel": "more",
 
-  "suggest.timeout": 2000,
-  "suggest.triggerAfterInsertEnter": true,
   "suggest.acceptSuggestionOnCommitCharacter": true,
-  "suggest.localityBonus": true,
-  "suggest.enablePreview": false,
-  "suggest.snippetIndicator": " ★",
-  "suggest.enablePreselect": false,
-  "suggest.fixInsertedWord": true,
   "suggest.autoTrigger": "trigger",
   "suggest.detailField": "preview",
-  "suggest.floatEnable": true,
   "suggest.echodocSupport": true,
+  "suggest.enablePreselect": false,
+  "suggest.enablePreview": false,
+  "suggest.fixInsertedWord": true,
+  "suggest.floatEnable": true,
+  "suggest.localityBonus": true,
   "suggest.minTriggerInputLength": 2,
+  "suggest.noselect": false,
+  "suggest.snippetIndicator": " ★",
+  "suggest.timeout": 2000,
+  "suggest.triggerAfterInsertEnter": true,
 
   "diagnostic.errorSign": "X",
   "diagnostic.warningSign": "!",
@@ -30,12 +30,7 @@
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
 
-  "signature.enable": true,
-  "signature.target": "float",
-  "signature.triggerSignatureWait": 300,
-
   "intelephense.telemetry.enabled": false,
-  "intelephense.phpdoc.returnVoid": true,
 
   "coc.preferences.formatOnSaveFiletypes": [
     "php",

@@ -25,16 +25,18 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'markonm/traces.vim' " range, pattern, substitute preview
 Plug 'editorconfig/editorconfig-vim'
-Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Language-specific
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-dadbod'
+Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Utils
 Plug 'vimwiki/vimwiki'
@@ -261,8 +263,15 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
+
+let php_html_in_heredoc=0
+let php_html_in_nowdoc=0
+let php_sql_heredoc=0
+let php_sql_nowdoc=0
+let php_htmlInStrings=1
+let php_sql_query=1
 
 " Used on most machines
 let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic']
