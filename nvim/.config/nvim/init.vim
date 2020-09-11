@@ -48,28 +48,34 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
+" Base
 let loaded_matchit=1
 let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
-
-set backspace=start,eol,indent
 set noswapfile nobackup nowritebackup
+if !isdirectory("/tmp/.vim-undo-dir")
+    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+endif
+set undodir=/tmp/.vim-undo-dir
+set undofile
 
+" UI
 set number
 set signcolumn=yes
-set nowrap
-set showmatch
 set scrolloff=5
-set clipboard+=unnamedplus
 set noerrorbells visualbell t_vb=
 set shortmess+=c
+set splitbelow splitright
+set termguicolors
+set listchars=tab:▸\ ,space:.,trail:•
 
-" Search
-set ignorecase incsearch hlsearch smartcase
-
+" Editing
+set nowrap
+set clipboard+=unnamedplus
+set backspace=start,eol,indent
 set smartindent
 set expandtab smarttab
 set formatoptions=tcqrn1
@@ -77,17 +83,8 @@ set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 
-set splitbelow splitright
-set listchars=tab:▸\ ,space:.,trail:•
-
-set termguicolors
-
-" Use persistent history.
-if !isdirectory("/tmp/.vim-undo-dir")
-    call mkdir("/tmp/.vim-undo-dir", "", 0700)
-endif
-set undodir=/tmp/.vim-undo-dir
-set undofile
+" Search
+set ignorecase incsearch hlsearch smartcase
 
 " statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
@@ -271,23 +268,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic']
 
 " Also using
-"   coc-css
-"   coc-emmet
-"   coc-eslint
-"   coc-html
-"   coc-json
-"   coc-pairs
-"   coc-phpls
-"   coc-prettier
-"   coc-sh
-"   coc-snippets
-"   coc-sql
-"   coc-tslint-plugin
-"   coc-tsserver
-"   coc-vetur
-"   coc-vimlsp
-"   coc-yaml
-"   coc-diagnostic
+"   coc-css coc-emmet coc-eslint coc-html coc-json coc-pairs coc-phpls coc-prettier coc-sh 
+"   coc-snippets coc-sql coc-tslint-plugin coc-tsserver coc-vetur coc-vimlsp coc-yaml coc-diagnostic 
 
 let g:rg_derive_root = 1
 
@@ -305,7 +287,6 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
-
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
 hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
@@ -313,3 +294,10 @@ hi   SpecialKey         ctermfg=239   guifg=#666666
 hi   LineNr             ctermfg=239   guifg=#666666
 hi   IndentGuidesOdd    ctermbg=236   guibg=#282828
 hi   IndentGuidesEven   ctermbg=235   guibg=#323232
+
+hi! DiffAdd ctermbg=none ctermfg=green gui=none guibg=none guifg=green
+hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred
+hi! DiffChangeDelete ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
+hi! DiffChange ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
+hi! CocWarningSign guifg=#ffff00
+
