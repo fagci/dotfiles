@@ -72,6 +72,7 @@ if !isdirectory("/tmp/.vim-undo-dir")
 endif
 set undodir=/tmp/.vim-undo-dir
 set undofile
+set modeline
 
 " UI
 set number

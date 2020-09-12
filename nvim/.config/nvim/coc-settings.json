@@ -40,7 +40,8 @@
     "typescript",
     "json",
     "yaml",
-    "vue"
+    "vue",
+    "gohtmltmpl"
   ],
 
   "diagnostic-languageserver.filetypes": {
@@ -51,6 +52,7 @@
     "sh": "shellcheck",
     "php": ["php", "phpmd", "tidy"],
     "html": ["tidy"],
+    "gohtmltmpl": ["tidy"],
     "javascript": ["eslint"]
   },
 
