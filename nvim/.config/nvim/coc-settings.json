@@ -30,6 +30,15 @@
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
 
+  "emmet.includeLanguages": {
+    "html": "html",
+    "php": "html",
+    "gohtmltmpl": "html",
+    "markdown": "html",
+    "vue-html": "html",
+    "css": "css"
+  },
+
   "intelephense.telemetry.enabled": false,
 
   "coc.preferences.formatOnSaveFiletypes": [
@@ -57,6 +66,7 @@
   },
 
   "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
+  "git.enableGlobalStatus": false,
   "coc.source.emoji.filetypes": ["gitcommit", "vim", "vimwiki", "html", "text"],
   "prettier.disableSuccessMessage": true
 }
