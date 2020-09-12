@@ -57,6 +57,7 @@ pgrep -x picom > /dev/null || picom -b --experimental-backends
 "$HOME/.config/i3/polybar.sh" &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
+pgrep -x redshift > /dev/null || redshift &
 
 # pgrep -x kotatogram-desktop > /dev/null || kotatogram-desktop &
 

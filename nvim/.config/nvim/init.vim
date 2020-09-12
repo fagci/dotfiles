@@ -2,11 +2,14 @@
 " Author: fagci
 " ====================
 
-" Vim-Plug paths
+
+" ======================================== 
+" Plugins
+" ======================================== 
+
+" Vim-Plug install if not
 let s:plug_autoload_path = "~/.config/nvim/autoload/plug.vim"
 let s:plug_download_url  = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-
-" If Plug isn't installed, install it
 if !filereadable(expand(s:plug_autoload_path))
     silent exec "!curl -fLo " . fnameescape(s:plug_autoload_path) . " --create-dirs " . s:plug_download_url
     silent exec "so " . fnameescape(s:plug_autoload_path)
@@ -44,14 +47,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Utils
 Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'airblade/vim-gitgutter'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
@@ -59,20 +60,26 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
+" ======================================== 
+" Options
+" ======================================== 
+
 " Base
+set modeline
 let loaded_matchit=1
 let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
+
+" Backup, history, undo
 set noswapfile nobackup nowritebackup
-if !isdirectory("/tmp/.vim-undo-dir")
-    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+set undodir=~/.vimundo
+if (!isdirectory(expand(&undodir)))
+    call mkdir(expand(&undodir), 'p')
 endif
-set undodir=/tmp/.vim-undo-dir
 set undofile
-set modeline
 
 " UI
 set number
@@ -98,14 +105,14 @@ set tabstop=4              " Spaces that a <Tab> in file counts for.
 " Search
 set ignorecase incsearch hlsearch smartcase
 
-" statusline
+" Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
 set stl+=%(\ \|\ %{FugitiveHead()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l:%c/%L\ %y
 
-" speedup
+" Speedup
 set nocursorline nocursorcolumn norelativenumber
 set ttyfast
 set lazyredraw
@@ -115,14 +122,43 @@ set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 set timeoutlen=1000 ttimeoutlen=0  " remove delay on mode change
 
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+endif
+
+
+" ======================================== 
 " Functions
+" ======================================== 
 
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function DetectGoHtmlTmpl()
+    if expand('%:e') == "html" && search("{{") != 0
+        set filetype=gohtmltmpl 
+    endif
+endfunction
+
+
+" ======================================== 
 " Mappings
+" ======================================== 
 
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
@@ -189,40 +225,6 @@ nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>H :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
-" Autocommands
-
-silent !stty -ixon
-
-augroup Ixon
-    autocmd! VimLeave * silent !stty ixon
-augroup END
-
-augroup ScrollToLastSeenLocationOnFileOpen
-    autocmd! BufReadPost *
-                \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-                \ |   exe "normal! g`\""
-                \ | endif
-augroup END
-
-function DetectGoHtmlTmpl()
-    if expand('%:e') == "html" && search("{{") != 0
-        set filetype=gohtmltmpl 
-    endif
-endfunction
-
-augroup filetypedetect
-    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-augroup END
-
-
-if executable('rg')
-    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
-endif
-
-
-
-
-
 " COC
 
 inoremap <silent><expr> <TAB>
@@ -234,11 +236,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Jump between snippet placeholders
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -265,20 +262,46 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>.  <Plug>(coc-fix-current)
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+
+" ======================================== 
+" Autocommands
+" ======================================== 
+
+silent !stty -ixon
+
+augroup Ixon
+    autocmd! VimLeave * silent !stty ixon
+augroup END
+
+augroup ScrollToLastSeenLocationOnFileOpen
+    autocmd! BufReadPost *
+                \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+                \ |   exe "normal! g`\""
+                \ | endif
+augroup END
+
+augroup filetypedetect
+    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+augroup END
 
 " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup HLSymbolOnCursorHold
+    autocmd!
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup END
 
+
+" ======================================== 
+" Variables
+" ======================================== 
 
 let php_html_in_heredoc=0
 let php_html_in_nowdoc=0
@@ -290,11 +313,11 @@ let php_sql_query=1
 let g:vue_pre_processors = []
 
 " Used on most machines
-let g:coc_global_extensions = ['coc-pairs', 'coc-sh', 'coc-snippets', 'coc-vimlsp', 'coc-diagnostic', 'coc-git']
+let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets', 'coc-vimlsp']
 
 " Also using
-"   coc-css coc-emmet coc-eslint coc-html coc-json coc-pairs coc-phpls coc-prettier coc-sh 
-"   coc-snippets coc-sql coc-tslint-plugin coc-tsserver coc-vetur coc-vimlsp coc-yaml coc-diagnostic 
+"   coc-css coc-stylelint coc-emmet coc-eslint coc-html coc-json coc-phpls coc-prettier 
+"   coc-sql coc-tslint-plugin coc-tsserver coc-vetur coc-yaml 
 
 let g:rg_derive_root = 1
 
@@ -312,8 +335,14 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
+
+" ======================================== 
+" Colors
+" ======================================== 
+
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
+
 hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
 hi   SpecialKey         ctermfg=239   guifg=#666666
 hi   LineNr             ctermfg=239   guifg=#666666
