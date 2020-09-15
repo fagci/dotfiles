@@ -44,6 +44,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'StanAngeloff/php.vim', {'for': 'php'}
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -313,12 +314,6 @@ augroup END
 " Variables
 " ======================================== 
 
-let php_html_in_heredoc=0
-let php_html_in_nowdoc=0
-let php_sql_heredoc=0
-let php_sql_nowdoc=0
-let php_htmlInStrings=1
-let php_sql_query=1
 
 let g:vue_pre_processors = []
 
