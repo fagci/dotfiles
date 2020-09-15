@@ -44,7 +44,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'StanAngeloff/php.vim', {'for': 'php'}
+" Plug 'StanAngeloff/php.vim', {'for': 'php'}
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -228,12 +228,7 @@ nnoremap <Leader>b :Buffers<CR>
 
 " COC
 
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -314,6 +309,10 @@ augroup END
 " Variables
 " ======================================== 
 
+let g:php_sql_heredoc = 1
+let g:php_sql_nowdoc = 1
+let g:php_html_in_heredoc = 1
+let g:php_html_in_nowdoc = 1
 
 let g:vue_pre_processors = []
 
