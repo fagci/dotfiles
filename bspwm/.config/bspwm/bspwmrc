@@ -46,8 +46,8 @@ bspc rule -a Alacritty:bc state=floating
 
 killall -q polybar
 
-xset r rate 320 25
-kbdrate -r 9 -d 500
+xset r rate 300 25
+kbdrate -r 9 -d 300
 pgrep -x nitrogen || nitrogen --restore
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
 xrandr --output LVDS1 --off

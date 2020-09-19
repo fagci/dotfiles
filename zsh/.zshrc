@@ -27,7 +27,7 @@ zstyle ':vcs_info:git:*' formats ' %b '
 setopt PROMPT_SUBST
 
 if [[ -n $SSH_CONNECTION ]]; then
-    PROMPT='%(?..%?)%u@%h:%c${vcs_info_msg_0_}%(!.#.>) '
+    PROMPT='%(?..%?)%n@%m:%c${vcs_info_msg_0_}%(!.#.>) '
 else
     PROMPT='%(?..%?)%c${vcs_info_msg_0_}%(!.#.>) '
 fi
