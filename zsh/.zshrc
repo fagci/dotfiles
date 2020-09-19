@@ -9,9 +9,14 @@ export KEYTIMEOUT=1
 set -o emacs #prevent vim mode, coz of home key brings to it
 
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
 export HISTTIMEFORMAT="[%F %T] "
 
 DISABLE_AUTO_UPDATE="true"
