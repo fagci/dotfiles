@@ -6,6 +6,7 @@ export EDITOR=vim
 export PATH=$PATH:~/bin
 # Speed up prompt redraw, useful when using vi-mode 
 export KEYTIMEOUT=1
+set -o emacs #prevent vim mode, coz of home key brings to it
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000

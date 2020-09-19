@@ -17,16 +17,18 @@ endif
 
 call plug#begin("~/.config/nvim/plugged")
 
+Plug 'tweekmonster/startuptime.vim'
+
 " Project navigation
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
 " Editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'markonm/traces.vim' " range, pattern, substitute preview
+" Plug 'markonm/traces.vim'" TODO: replace that, slow? range, pattern, substitute preview
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -52,7 +54,7 @@ Plug 'honza/vim-snippets'
 
 " Utils
 Plug 'vimwiki/vimwiki'
-Plug 'kshenoy/vim-signature'
+" Plug 'kshenoy/vim-signature'
 Plug 'ryanoasis/vim-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -109,7 +111,7 @@ set ignorecase incsearch hlsearch smartcase
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-set stl+=%(\ \|\ %{FugitiveHead()}%)
+" set stl+=%(\ \|\ %{FugitiveHead()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l:%c/%L\ %y
 
@@ -122,6 +124,10 @@ set regexpengine=1
 set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 set timeoutlen=1000 ttimeoutlen=0  " remove delay on mode change
+set regexpengine=0
+set noshowmatch
+let g:loaded_matchparen=1
+
 
 if executable('rg')
     set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
