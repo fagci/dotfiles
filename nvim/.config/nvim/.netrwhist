@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/fagci/Projects/vim-test'
+let g:netrw_dirhist_7='/home/fagci/Projects'
+let g:netrw_dirhist_6='/home/fagci'
+let g:netrw_dirhist_5='/home/fagci/.config'
+let g:netrw_dirhist_4='/home/fagci/.config/nvim'
+let g:netrw_dirhist_3='/home/fagci/.config/nvim/ftplugin'
+let g:netrw_dirhist_2='/home/fagci/.config/nvim'
+let g:netrw_dirhist_1='/home/fagci/Projects/vim-test'

@@ -2,6 +2,7 @@
 " Author: fagci
 " ====================
 
+let loaded_matchit=1
 
 " ======================================== 
 " Plugins
@@ -22,7 +23,6 @@ Plug 'tweekmonster/startuptime.vim'
 " Project navigation
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 " Plug 'tpope/vim-fugitive'
 
 " Editing
@@ -32,6 +32,7 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/goyo.vim'                 " Distraction free writing
 
 " Language-specific
 Plug 'mattn/emmet-vim'
@@ -46,7 +47,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'StanAngeloff/php.vim', {'for': 'php'}
+Plug 'StanAngeloff/php.vim', {'for': 'php'}
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -58,6 +59,9 @@ Plug 'vimwiki/vimwiki'
 Plug 'ryanoasis/vim-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andymass/vim-matchup'
+Plug 'vifm/vifm.vim'
+
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -70,7 +74,6 @@ syntax on
 
 " Base
 set modeline
-let loaded_matchit=1
 let mapleader=','
 let maplocalleader=','
 set encoding=utf-8
@@ -132,6 +135,7 @@ let g:loaded_matchparen=1
 
 if executable('rg')
     set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-ignore --smart-case --glob "!.git/*"'
 endif
 
 
@@ -141,8 +145,14 @@ endif
 
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case -- '.shellescape(<q-args>), 1,
+            \   'rg --column --line-number --no-heading --color=always --fixed-strings --no-ignore --smart-case --glob "!.git/*" -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+command! -bang -nargs=* GRG
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --glob "!.git/*" -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -213,8 +223,14 @@ nnoremap <leader>Q :bp!<bar>bd!#<cr>
 nnoremap <silent> <leader><bar> :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
 
-map <tab> :NERDTreeToggle<CR>
 noremap <Leader>/ :Commentary<CR>
+
+" Vifm
+map <Leader>vv :Vifm<CR> 
+map <Leader>vs :VsplitVifm<CR> 
+
+" Goyo
+nnoremap <silent> <leader>gy :Goyo<CR>
 
 " Vim-plug
 
@@ -227,10 +243,11 @@ nnoremap <silent> <leader>ps :PlugStatus<CR>
 nnoremap <silent> <leader>pd :PlugDiff<CR>
 nnoremap <silent> <leader>ph :PlugSnapshot
 
-nnoremap <leader><tab> :GFiles --cached --others --exclude-standard<cr>
+nnoremap <tab> :GFiles --cached --others --exclude-standard<cr>
+nnoremap <Leader><tab> :Files<CR>
+nnoremap <Leader>f :GRG<CR>
 nnoremap <Leader>F :RG<CR>
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>H :History<CR>
+nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
 " COC
@@ -311,6 +328,9 @@ augroup HLSymbolOnCursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup END
 
+augroup FZF
+    au! FileType fzf set noshowmode noruler nonu nornu
+augroup END
 
 " ======================================== 
 " Variables
@@ -332,19 +352,11 @@ let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic
 
 let g:rg_derive_root = 1
 
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:NERDTreeIgnore=['.vscode', '.idea', '\~$', '^\.git$']
 
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
+let g:indent_guides_exclude_filetypes = ['help', 'fzf']
 
 
 " ======================================== 
@@ -353,12 +365,16 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'fzf']
 
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
+" color base16-default-dark
+" color base16-bright
 
-hi   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
-hi   SpecialKey         ctermfg=239   guifg=#666666
-hi   LineNr             ctermfg=239   guifg=#666666
-hi   IndentGuidesOdd    ctermbg=236   guibg=#282828
-hi   IndentGuidesEven   ctermbg=235   guibg=#323232
+hi! Normal guibg=NONE ctermbg=NONE
+hi! LineNr guibg=NONE ctermbg=NONE ctermfg=239 guifg=#666666
+hi! SignColumn guibg=NONE ctermbg=NONE
+hi!   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
+hi!   SpecialKey         ctermfg=239   guifg=#666666
+hi!   IndentGuidesOdd    ctermbg=236   guibg=#282828
+hi!   IndentGuidesEven   ctermbg=235   guibg=#323232
 
 hi! DiffAdd ctermbg=none ctermfg=green gui=none guibg=none guifg=green
 hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred

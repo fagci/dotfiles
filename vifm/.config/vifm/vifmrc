@@ -4,6 +4,7 @@ set sortnumbers
 set ignorecase
 set smartcase
 set incsearch
+set dotfiles
 
 colorscheme gruvbox
 
@@ -41,7 +42,7 @@ nnoremap yd :!echo %d | xclip %i<cr>
 " Yank current file path into the clipboard
 nnoremap yf :!echo %c:p | xclip %i<cr>
 
-
+nnoremap T :tree!<cr>
 
 " Pdf
 filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
