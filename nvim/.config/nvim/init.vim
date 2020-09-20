@@ -116,7 +116,7 @@ set ignorecase incsearch hlsearch smartcase
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-" set stl+=%(\ \|\ %{FugitiveHead()}%)
+set stl+=%(\ \|\ %{GitBranch()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
 set stl+=%=%{&fenc}\ %l:%c/%L\ %y
 
@@ -168,7 +168,11 @@ function! s:show_documentation()
   endif
 endfunction
 
-function DetectGoHtmlTmpl()
+function! GitBranch()
+  return system("git branch --show-current 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! DetectGoHtmlTmpl()
     if expand('%:e') == "html" && search("{{") != 0
         set filetype=gohtmltmpl 
     endif
