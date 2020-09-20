@@ -1,8 +1,11 @@
 " ==================== 
 " Author: fagci
+" Description: My neovim config for frontend web development
 " ====================
 
 let loaded_matchit=1
+let g:loaded_netrw=1
+let g:loaded_netrwPlguin=1
 
 " ======================================== 
 " Plugins
@@ -23,12 +26,10 @@ Plug 'tweekmonster/startuptime.vim'
 " Project navigation
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-" Plug 'tpope/vim-fugitive'
 
 " Editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-" Plug 'markonm/traces.vim'" TODO: replace that, slow? range, pattern, substitute preview
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -60,7 +61,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
-
+Plug 'yuratomo/w3m.vim'
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
@@ -173,6 +174,10 @@ function DetectGoHtmlTmpl()
     endif
 endfunction
 
+function! OnlineDoc()
+  let s:wordUnderCursor = expand("<cword>")
+  execute 'W3m' &ft s:wordUnderCursor
+endfunction
 
 " ======================================== 
 " Mappings
@@ -181,6 +186,9 @@ endfunction
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>, :noh<CR>
+
+" Online doc search.
+map <silent> <M-d> :call OnlineDoc()<CR>
 
 map <leader>l :set list!<CR>
 
@@ -352,6 +360,7 @@ let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic
 
 let g:rg_derive_root = 1
 
+let g:vifm_replace_netrw=1
 
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
