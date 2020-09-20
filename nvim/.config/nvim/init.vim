@@ -89,7 +89,7 @@ endif
 set undofile
 
 " UI
-set number
+set nonumber
 set signcolumn=yes
 set scrolloff=5
 set noerrorbells visualbell t_vb=
@@ -381,4 +381,5 @@ hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred
 hi! DiffChangeDelete ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
 hi! DiffChange ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
 hi! CocWarningSign guifg=#ffff00
+
 
