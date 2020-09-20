@@ -94,6 +94,7 @@ set nonumber
 set signcolumn=yes
 set scrolloff=5
 set noerrorbells visualbell t_vb=
+set shortmess=I
 set shortmess+=c
 set splitbelow splitright
 set termguicolors
@@ -116,9 +117,9 @@ set ignorecase incsearch hlsearch smartcase
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-set stl+=%(\ \|\ %{GitBranch()}%)
+" set stl+=%(\ \|\ %{GitBranch()}%)
 set stl+=%(\ \|\ %{coc#status()}%)
-set stl+=%=%{&fenc}\ %l:%c/%L\ %y
+set stl+=%=%l:%c/%L\ %y
 
 " Speedup
 set nocursorline nocursorcolumn norelativenumber
