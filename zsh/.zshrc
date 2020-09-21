@@ -39,8 +39,6 @@ else
     PROMPT='%(?..%? )%{%F{245}%}%c%{%f%}%{%F{5}%}${vcs_info_msg_0_}%{%f%}%(!.#.>) '
 fi
 
-# bindkey -v
-setopt append_history inc_append_history
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
