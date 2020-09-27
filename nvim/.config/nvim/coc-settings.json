@@ -84,7 +84,7 @@
     "asterisk": "asterisklint",
     "vim": "vint",
     "sh": "shellcheck",
-    "php": ["phpstan", "phpcs", "phpmd", "tidy"],
+    "php": ["tidy"],
     "html": ["tidy"],
     "gohtmltmpl": ["tidy"],
     "javascript": ["eslint"],

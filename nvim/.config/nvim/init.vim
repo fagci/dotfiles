@@ -59,7 +59,7 @@ Plug 'vimwiki/vimwiki'
 " Plug 'kshenoy/vim-signature'
 Plug 'ryanoasis/vim-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'andymass/vim-matchup'
+" Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
 Plug 'yuratomo/w3m.vim'
 Plug 'chriskempson/base16-vim'
