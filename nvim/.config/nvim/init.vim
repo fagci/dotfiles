@@ -56,14 +56,13 @@ Plug 'honza/vim-snippets'
 
 " Utils
 Plug 'vimwiki/vimwiki'
-" Plug 'kshenoy/vim-signature'
 Plug 'ryanoasis/vim-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
 Plug 'yuratomo/w3m.vim'
 Plug 'chriskempson/base16-vim'
-" Plug 'jaxbot/browserlink.vim'
+Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -258,7 +257,7 @@ nnoremap <silent> <leader>ps :PlugStatus<CR>
 nnoremap <silent> <leader>pd :PlugDiff<CR>
 nnoremap <silent> <leader>ph :PlugSnapshot
 
-nnoremap <tab> :GFiles --others --exclude-standard<cr>
+nnoremap <tab> :GFiles --cache<cr>
 nnoremap <Leader><tab> :Files<CR>
 nnoremap <Leader>f :GRG<CR>
 nnoremap <Leader>F :RG<CR>
@@ -355,7 +354,7 @@ let g:php_html_in_nowdoc = 1
 let g:vue_pre_processors = []
 
 " Used on most machines
-let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets', 'coc-vimlsp']
+let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets']
 
 " Also using
 "   coc-css coc-stylelint coc-emmet coc-eslint coc-html coc-json coc-phpls coc-prettier 
@@ -378,7 +377,16 @@ let g:indent_guides_exclude_filetypes = ['help', 'fzf']
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
 " color base16-default-dark
-" color base16-bright
+
+
+" let g:sonokai_style = 'shusia'
+" let g:sonokai_enable_italic = 1
+" " let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_transparent_background = 1
+" let g:sonokai_current_word = 'grey background'
+" let g:sonokai_better_performance = 1
+
+" color sonokai
 
 hi! Normal guibg=NONE ctermbg=NONE
 hi! LineNr guibg=NONE ctermbg=NONE ctermfg=239 guifg=#666666
@@ -388,10 +396,10 @@ hi!   SpecialKey         ctermfg=239   guifg=#666666
 hi!   IndentGuidesOdd    ctermbg=236   guibg=#282828
 hi!   IndentGuidesEven   ctermbg=235   guibg=#323232
 
-hi! DiffAdd ctermbg=none ctermfg=green gui=none guibg=none guifg=green
+hi! DiffAdd cterm=none ctermbg=none ctermfg=green gui=none guibg=none guifg=green
 hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred
 hi! DiffChangeDelete ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
 hi! DiffChange ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
-hi! CocWarningSign guifg=#ffff00
+hi! CocWarningSign ctermfg=yellow guifg=#ffff00
 
 

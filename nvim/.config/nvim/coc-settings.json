@@ -1,7 +1,4 @@
 {
-  "codeLens.enable": true,
-  "coc.preferences.formatOnType": true,
-
   "suggest.acceptSuggestionOnCommitCharacter": true,
   "suggest.autoTrigger": "always",
   "suggest.detailField": "abbr",
@@ -16,18 +13,18 @@
   "suggest.snippetIndicator": " >",
   "suggest.timeout": 2000,
   "suggest.triggerAfterInsertEnter": true,
-
   "diagnostic.hintSign": "?",
   "diagnostic.errorSign": "x",
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "•",
-
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": " >> ",
   "diagnostic.messageDelay": 1000,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-
+  "eslint.autoFix": false,
+  "eslint.autoFixOnSave": false,
+  "eslint.enable": true,
   "emmet.includeLanguages": {
     "html": "html",
     "php": "html",
@@ -36,7 +33,11 @@
     "vue-html": "html",
     "css": "css"
   },
-  "coc.preferences.rootPatterns": ["composer.json", "package.json", ".git"],
+  "coc.preferences.rootPatterns": [
+    "composer.json",
+    "package.json",
+    ".git"
+  ],
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -64,9 +65,7 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   },
-
   "intelephense.telemetry.enabled": false,
-
   "coc.preferences.formatOnSaveFiletypes": [
     "php",
     "phtml",
@@ -78,22 +77,38 @@
     "vue",
     "gohtmltmpl"
   ],
-
   "diagnostic-languageserver.filetypes": {
     "css": "stylelint",
     "yaml": "ansible-lint",
     "asterisk": "asterisklint",
     "vim": "vint",
     "sh": "shellcheck",
-    "php": ["tidy"],
-    "html": ["tidy"],
-    "gohtmltmpl": ["tidy"],
-    "javascript": ["eslint"],
-    "typescript": ["tslint"]
+    "php": [
+      "tidy"
+    ],
+    "html": [
+      "tidy"
+    ],
+    "gohtmltmpl": [
+      "tidy"
+    ],
+    "javascript": [
+      "eslint"
+    ],
+    "typescript": [
+      "tslint"
+    ]
   },
-
-  "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
+  "git.semanticCommit.filetypes": [
+    "gitcommit",
+    "markdown"
+  ],
   "git.enableGlobalStatus": false,
-  "coc.source.emoji.filetypes": ["gitcommit", "vim", "vimwiki", "html", "text"],
-  "prettier.disableSuccessMessage": true
+  "coc.source.emoji.filetypes": [
+    "gitcommit",
+    "vim",
+    "vimwiki",
+    "html",
+    "text"
+  ]
 }
