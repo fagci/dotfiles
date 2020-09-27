@@ -391,15 +391,17 @@ color gruvbox8_hard
 hi! Normal guibg=NONE ctermbg=NONE
 hi! LineNr guibg=NONE ctermbg=NONE ctermfg=239 guifg=#666666
 hi! SignColumn guibg=NONE ctermbg=NONE
-hi!   StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
-hi!   SpecialKey         ctermfg=239   guifg=#666666
-hi!   IndentGuidesOdd    ctermbg=236   guibg=#282828
-hi!   IndentGuidesEven   ctermbg=235   guibg=#323232
+hi! StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
+hi! SpecialKey         ctermfg=239   guifg=#666666
+hi! IndentGuidesOdd    ctermbg=236   guibg=#282828
+hi! IndentGuidesEven   ctermbg=235   guibg=#323232
 
 hi! DiffAdd cterm=none ctermbg=none ctermfg=green gui=none guibg=none guifg=green
 hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred
 hi! DiffChangeDelete ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
 hi! DiffChange ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
+
 hi! CocWarningSign ctermfg=yellow guifg=#ffff00
+hi! CocInfoSign ctermfg=blue guifg=#0088aa
 
 
