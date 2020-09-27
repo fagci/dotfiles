@@ -63,6 +63,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'vifm/vifm.vim'
 Plug 'yuratomo/w3m.vim'
 Plug 'chriskempson/base16-vim'
+" Plug 'jaxbot/browserlink.vim'
 
 call plug#end()
 
@@ -90,12 +91,13 @@ endif
 set undofile
 
 " UI
-set nonumber
+set number
 set signcolumn=yes
 set scrolloff=5
 set noerrorbells visualbell t_vb=
 set shortmess=I
 set shortmess+=c
+set shortmess+=F
 set splitbelow splitright
 set termguicolors
 set listchars=tab:▸\ ,space:.,trail:•
@@ -256,7 +258,7 @@ nnoremap <silent> <leader>ps :PlugStatus<CR>
 nnoremap <silent> <leader>pd :PlugDiff<CR>
 nnoremap <silent> <leader>ph :PlugSnapshot
 
-nnoremap <tab> :GFiles --cached --others --exclude-standard<cr>
+nnoremap <tab> :GFiles --others --exclude-standard<cr>
 nnoremap <Leader><tab> :Files<CR>
 nnoremap <Leader>f :GRG<CR>
 nnoremap <Leader>F :RG<CR>
