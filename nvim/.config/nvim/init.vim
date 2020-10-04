@@ -134,8 +134,8 @@ set noshowmatch
 
 
 if executable('rg')
-    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-ignore --smart-case --glob "!.git/*"'
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore --smart-case --glob "!.git/*"'
 endif
 
 
