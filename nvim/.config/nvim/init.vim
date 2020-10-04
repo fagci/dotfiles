@@ -3,7 +3,8 @@
 " Description: My neovim config for frontend web development
 " ====================
 
-let loaded_matchit=1
+let g:loaded_matchit=1
+let g:loaded_matchparen=1
 let g:loaded_netrw=1
 let g:loaded_netrwPlguin=1
 
@@ -74,10 +75,8 @@ syntax on
 " ======================================== 
 
 " Base
-set modeline
 let mapleader=','
 let maplocalleader=','
-set encoding=utf-8
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
 
@@ -93,7 +92,7 @@ set undofile
 set number
 set signcolumn=yes
 set scrolloff=5
-set noerrorbells visualbell t_vb=
+set sidescrolloff=5
 set shortmess=I
 set shortmess+=c
 set shortmess+=F
@@ -104,7 +103,6 @@ set listchars=tab:▸\ ,space:.,trail:•
 " Editing
 set nowrap
 set clipboard+=unnamedplus
-set backspace=start,eol,indent
 set smartindent
 set expandtab smarttab
 set formatoptions=tcqrn1
@@ -114,6 +112,7 @@ set tabstop=4              " Spaces that a <Tab> in file counts for.
 
 " Search
 set ignorecase incsearch hlsearch smartcase
+set inccommand=nosplit " live substitution
 
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
@@ -124,7 +123,6 @@ set stl+=%=%l:%c/%L\ %y
 
 " Speedup
 set nocursorline nocursorcolumn norelativenumber
-set ttyfast
 set lazyredraw
 set updatetime=150
 set regexpengine=1
@@ -133,7 +131,6 @@ set switchbuf=useopen
 set timeoutlen=1000 ttimeoutlen=0  " remove delay on mode change
 set regexpengine=0
 set noshowmatch
-let g:loaded_matchparen=1
 
 
 if executable('rg')
