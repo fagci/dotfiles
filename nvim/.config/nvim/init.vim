@@ -22,7 +22,7 @@ endif
 
 call plug#begin("~/.config/nvim/plugged")
 
-Plug 'tweekmonster/startuptime.vim'
+" Plug 'tweekmonster/startuptime.vim'
 
 " Project navigation
 Plug 'junegunn/fzf'
@@ -34,7 +34,6 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/goyo.vim'                 " Distraction free writing
 
 " Language-specific
 Plug 'mattn/emmet-vim'
@@ -48,22 +47,17 @@ Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'gohtmltmpl' }
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 
 " LSP, completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Utils
 Plug 'vimwiki/vimwiki'
-Plug 'ryanoasis/vim-devicons'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
-Plug 'yuratomo/w3m.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -177,11 +171,6 @@ function! DetectGoHtmlTmpl()
     endif
 endfunction
 
-function! OnlineDoc()
-  let s:wordUnderCursor = expand("<cword>")
-  execute 'W3m' &ft s:wordUnderCursor
-endfunction
-
 " ======================================== 
 " Mappings
 " ======================================== 
@@ -189,9 +178,6 @@ endfunction
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>, :noh<CR>
-
-" Online doc search.
-map <silent> <M-d> :call OnlineDoc()<CR>
 
 map <leader>l :set list!<CR>
 
@@ -239,9 +225,6 @@ noremap <Leader>/ :Commentary<CR>
 " Vifm
 map <Leader>vv :Vifm<CR> 
 map <Leader>vs :VsplitVifm<CR> 
-
-" Goyo
-nnoremap <silent> <leader>gy :Goyo<CR>
 
 " Vim-plug
 
@@ -373,17 +356,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'fzf']
 
 let gruvbox_transp_bg=v:true
 color gruvbox8_hard
-" color base16-default-dark
-
-
-" let g:sonokai_style = 'shusia'
-" let g:sonokai_enable_italic = 1
-" " let g:sonokai_disable_italic_comment = 1
-" let g:sonokai_transparent_background = 1
-" let g:sonokai_current_word = 'grey background'
-" let g:sonokai_better_performance = 1
-
-" color sonokai
 
 hi! Normal guibg=NONE ctermbg=NONE
 hi! LineNr guibg=NONE ctermbg=NONE ctermfg=239 guifg=#666666
