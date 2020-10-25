@@ -26,18 +26,22 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 # Load version control information
 autoload -Uz vcs_info
-precmd() { vcs_info }
+setopt PROMPT_SUBST
+autoload colors
+colors
+
+precmd() { 
+    vcs_info 
+
+    if [ -z "${SSH_CONNECTION}" ]; then
+        PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}$ "
+    else
+        PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}%{${fg[green]}%}[%n@%m]$%{${reset_color}%} "
+    fi
+}
 
 # Format the vcs_info_msg_0_ variable
 zstyle ':vcs_info:git:*' formats ' %b '
-
-setopt PROMPT_SUBST
-
-if [[ -n $SSH_CONNECTION ]]; then
-    PROMPT='%(?..%? )%n@%m:%{%F{245}%}%c%{%f%}%{%F{5}%}${vcs_info_msg_0_}%{%f%}%(!.#.>) '
-else
-    PROMPT='%(?..%? )%{%F{245}%}%c%{%f%}%{%F{5}%}${vcs_info_msg_0_}%{%f%}%(!.#.>) '
-fi
 
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line

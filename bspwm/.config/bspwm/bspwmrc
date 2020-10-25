@@ -46,7 +46,7 @@ bspc rule -a Alacritty:bc state=floating
 
 killall -q polybar
 
-xset r rate 300 25
+# xset r rate 300 25
 kbdrate -r 9 -d 300
 xmodmap -e 'keycode 135 = backslash bar backslash slash' # bb backslash =(
 pgrep -x nitrogen || nitrogen --restore
@@ -58,7 +58,7 @@ pgrep -x picom > /dev/null || picom -b --experimental-backends
 "$HOME/.config/i3/polybar.sh" &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
-pgrep -x redshift > /dev/null || redshift &
+# pgrep -x redshift > /dev/null || redshift &
 
 # pgrep -x kotatogram-desktop > /dev/null || kotatogram-desktop &
 
