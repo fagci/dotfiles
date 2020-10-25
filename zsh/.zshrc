@@ -61,6 +61,8 @@ zinit light zdharma/fast-syntax-highlighting
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
+
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=8600

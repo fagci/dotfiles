@@ -49,6 +49,7 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'gohtmltmpl' }
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
+Plug 'vim-python/python-syntax', {'for': 'python'}
 
 " LSP, completion
 Plug 'honza/vim-snippets'
@@ -325,6 +326,8 @@ augroup END
 " ======================================== 
 " Variables
 " ======================================== 
+
+let python_highlight_all=1
 
 let g:php_sql_heredoc = 1
 let g:php_sql_nowdoc = 1

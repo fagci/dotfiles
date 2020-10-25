@@ -50,9 +50,8 @@ super + r : {Left,Down,Up,Right}
     bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
     bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
-# move a floating window
-# super + {Left,Down,Up,Right}
-# 	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + alt + {Left,Right}
+	bspc desktop -d {prev,next}
 
 # switch between gap presets
 super + shift + {y,u,i,o}
