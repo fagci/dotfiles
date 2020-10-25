@@ -38,6 +38,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Language-specific
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-dadbod'
+Plug 'vim-scripts/dbext.vim'
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 
 " Syntax hl

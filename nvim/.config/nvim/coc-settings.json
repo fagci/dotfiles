@@ -67,6 +67,20 @@
     "variable": " "
   },
   "intelephense.telemetry.enabled": false,
+  "intelephense.files.exclude": [
+    "**/.git/**",
+    "**/.svn/**",
+    "**/.hg/**",
+    "**/CVS/**",
+    "**/.DS_Store/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**/{Test,test,Tests,tests}/**",
+    "**/storage/**",
+    "**/database/migrations/**",
+    "**/.history/**",
+    "**/vendor/**/vendor/**"
+  ],
   "coc.preferences.formatOnSaveFiletypes": [
     "php",
     "phtml",
