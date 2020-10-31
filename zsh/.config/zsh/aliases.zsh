@@ -19,6 +19,7 @@ if hash mosh 2> /dev/null; then
 fi
 
 if type exa > /dev/null 2>&1; then
+  alias ls='exa'
   alias l='exa'
   alias ll='exa -l'
   alias la='exa -a'
@@ -28,6 +29,7 @@ if type exa > /dev/null 2>&1; then
   alias LA='exa -aG'
   alias LLA='exa -laG'
 else
+  alias ls='ls --color=auto'
   alias l='ls'
   alias ll='ls -l'
   alias la='ls -a'

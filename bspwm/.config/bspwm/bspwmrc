@@ -47,7 +47,7 @@ bspc rule -a Alacritty:bc state=floating
 killall -q polybar
 
 # xset r rate 300 25
-kbdrate -r 9 -d 300
+# kbdrate -r 9 -d 300
 xmodmap -e 'keycode 135 = backslash bar backslash slash' # bb backslash =(
 pgrep -x nitrogen || nitrogen --restore
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
