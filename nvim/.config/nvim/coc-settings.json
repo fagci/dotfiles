@@ -7,12 +7,9 @@
   "suggest.enablePreview": false,
   "suggest.fixInsertedWord": true,
   "suggest.floatEnable": false,
-  "suggest.localityBonus": true,
   "suggest.minTriggerInputLength": 2,
   "suggest.noselect": false,
   "suggest.snippetIndicator": " >",
-  "suggest.timeout": 2000,
-  "suggest.triggerAfterInsertEnter": true,
   "diagnostic.hintSign": "?",
   "diagnostic.errorSign": "x",
   "diagnostic.warningSign": "!",
@@ -20,8 +17,6 @@
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": " >> ",
   "diagnostic.messageDelay": 1000,
-  "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.virtualTextCurrentLineOnly": false,
   "eslint.autoFix": false,
   "eslint.autoFixOnSave": false,
   "eslint.enable": true,
@@ -116,10 +111,13 @@
       "tslint"
     ]
   },
+  "python.pythonPath": "python3",
+  "python.jediPath": "/usr/lib/python3.8/site-packages/jedi",
   "python.linting.pylintArgs": [
     "--load-plugins",
     "pylint-flask"
   ],
+  "python.autoComplete.addBrackets": true,
   "git.semanticCommit.filetypes": [
     "gitcommit",
     "markdown"
