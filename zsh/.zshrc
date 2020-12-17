@@ -5,7 +5,6 @@
 export EDITOR=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
-export TERM=xterm-256color
 # Speed up prompt redraw, useful when using vi-mode 
 export KEYTIMEOUT=1
 
