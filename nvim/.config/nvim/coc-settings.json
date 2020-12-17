@@ -122,14 +122,5 @@
     "gitcommit",
     "markdown"
   ],
-  "git.enableGlobalStatus": false,
-  "coc.source.emoji.filetypes": [
-    "gitcommit",
-    "vim",
-    "vimwiki",
-    "html",
-    "text",
-    "gohtmltmpl",
-    "htmldjango"
-  ]
+  "git.enableGlobalStatus": false
 }

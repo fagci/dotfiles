@@ -48,7 +48,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'gohtmltmpl' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'gohtmltmpl' }
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 

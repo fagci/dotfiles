@@ -1,5 +1,6 @@
 [options]
-font = Ubuntu Mono 10
+#font = Hack 10
+font = JetBrains Mono 8
 
 allow_bold = true
 audible_bell = false
@@ -8,7 +9,7 @@ urgent_on_bell = true
 clickable_url = true
 scrollback_lines = 32767
 search_wrap = true
-cursor_blink = off
+#cursor_blink = off
 #cursor_shape = ibeam
 browser = chromium
 dynamic_title = true
@@ -17,7 +18,7 @@ dynamic_title = true
 
 [colors]
 # hard contrast: background = #1d2021
-background = #282828
+background = #1a1a1a
 # soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2

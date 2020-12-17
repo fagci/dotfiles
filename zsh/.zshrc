@@ -5,12 +5,12 @@
 export EDITOR=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
+export TERM=xterm-256color
 # Speed up prompt redraw, useful when using vi-mode 
 export KEYTIMEOUT=1
-set -o emacs #prevent vim mode, coz of home key brings to it
 
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=50000
+HISTSIZE=30000
 SAVEHIST=10000
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
@@ -37,13 +37,15 @@ precmd() {
     if [ -z "${SSH_CONNECTION}" ]; then
         PROMPT="%(?..%? )%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}$ "
     else
-        PROMPT="%(?..%? )%{${fg[green]}%}%n@%m| %{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}$ "
+        PROMPT="%(?..%? )%{${fg[green]}%}%n@%m %{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}$ "
     fi
 }
 
 # Format the vcs_info_msg_0_ variable
 zstyle ':vcs_info:git:*' formats ' %b '
 
+#set -o emacs #prevent vim mode, coz of home key brings to it
+bindkey -e # same as above, most used version
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
@@ -58,10 +60,10 @@ source ~/.zinit/bin/zinit.zsh
 
 zinit ice lucid wait"0" blockf
 zinit light zsh-users/zsh-completions
-zinit ice lucid wait"0" atload"_zsh_autosuggest_start"
-zinit light zsh-users/zsh-autosuggestions
 zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
 zinit light zdharma/fast-syntax-highlighting
+zinit ice lucid wait"0" atload"_zsh_autosuggest_start"
+zinit light zsh-users/zsh-autosuggestions
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
@@ -74,5 +76,4 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
 fi
 
 # zprof
-### End of Zinit's installer chunk
 ### End of Zinit's installer chunk
