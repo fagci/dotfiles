@@ -28,11 +28,7 @@
     "vue-html": "html",
     "css": "css"
   },
-  "coc.preferences.rootPatterns": [
-    "composer.json",
-    "package.json",
-    ".git"
-  ],
+  "coc.preferences.rootPatterns": ["composer.json", "package.json", ".git"],
   "snippets.shortcut": "ﲖ ",
   "suggest.completionItemKindLabels": {
     "class": " ",
@@ -95,32 +91,13 @@
     "vim": "vint",
     "sh": "shellcheck",
     "python": "pylint",
-    "php": [
-      "tidy"
-    ],
-    "html": [
-      "tidy"
-    ],
-    "gohtmltmpl": [
-      "tidy"
-    ],
-    "javascript": [
-      "eslint"
-    ],
-    "typescript": [
-      "tslint"
-    ]
+    "php": ["tidy"],
+    "html": ["tidy"],
+    "gohtmltmpl": ["tidy"],
+    "javascript": ["eslint"],
+    "typescript": ["tslint"]
   },
-  "python.pythonPath": "python3",
-  "python.jediPath": "/usr/lib/python3.8/site-packages/jedi",
-  "python.linting.pylintArgs": [
-    "--load-plugins",
-    "pylint-flask"
-  ],
-  "python.autoComplete.addBrackets": true,
-  "git.semanticCommit.filetypes": [
-    "gitcommit",
-    "markdown"
-  ],
+  "python.linting.pylintArgs": ["--load-plugins", "pylint-flask"],
+  "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
   "git.enableGlobalStatus": false
 }
