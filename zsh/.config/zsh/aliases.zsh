@@ -8,6 +8,8 @@ alias gcam="git commit -am"
 alias gp="git push"
 alias gl="git pull"
 
+alias ssh="TERM=xterm-256color ssh"
+
 if hash nvim 2> /dev/null; then
     if [[ $(nvim --version | head -1 | grep -o '[0-9]\.[0-9]') -gt 0.3 ]]; then
         alias vim='nvim'

@@ -167,11 +167,11 @@ function! GitBranch()
   return system("git branch --show-current 2>/dev/null | tr -d '\n'")
 endfunction
 
-function! DetectGoHtmlTmpl()
-    if expand('%:e') == "html" && search("{{") != 0
-        set filetype=gohtmltmpl 
-    endif
-endfunction
+" function! DetectGoHtmlTmpl()
+"     if expand('%:e') == "html" && search("{{") != 0
+"         set filetype=gohtmltmpl 
+"     endif
+" endfunction
 
 " ======================================== 
 " Mappings
@@ -310,9 +310,9 @@ augroup ScrollToLastSeenLocationOnFileOpen
                 \ | endif
 augroup END
 
-augroup filetypedetect
-    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-augroup END
+" augroup filetypedetect
+"     au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+" augroup END
 
 " Highlight the symbol and its references when holding the cursor.
 augroup HLSymbolOnCursorHold
