@@ -310,6 +310,8 @@ augroup ScrollToLastSeenLocationOnFileOpen
                 \ | endif
 augroup END
 
+autocmd BufWritePre *.py silent call CocAction('format')
+
 " augroup filetypedetect
 "     au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
 " augroup END

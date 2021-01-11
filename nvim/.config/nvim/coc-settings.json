@@ -28,7 +28,6 @@
     "vue-html": "html",
     "css": "css"
   },
-  "coc.preferences.rootPatterns": ["composer.json", "package.json", ".git"],
   "snippets.shortcut": "ﲖ ",
   "suggest.completionItemKindLabels": {
     "class": " ",
@@ -78,7 +77,6 @@
     "html",
     "typescript",
     "javascript",
-    "python",
     "json",
     "yaml",
     "vue",
@@ -90,14 +88,25 @@
     "asterisk": "asterisklint",
     "vim": "vint",
     "sh": "shellcheck",
-    "python": "pylint",
-    "php": ["tidy"],
-    "html": ["tidy"],
-    "gohtmltmpl": ["tidy"],
-    "javascript": ["eslint"],
-    "typescript": ["tslint"]
+    "php": [
+      "tidy"
+    ],
+    "html": [
+      "tidy"
+    ],
+    "gohtmltmpl": [
+      "tidy"
+    ],
+    "javascript": [
+      "eslint"
+    ],
+    "typescript": [
+      "tslint"
+    ]
   },
-  "python.linting.pylintArgs": ["--load-plugins", "pylint-flask"],
-  "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
+  "git.semanticCommit.filetypes": [
+    "gitcommit",
+    "markdown"
+  ],
   "git.enableGlobalStatus": false
 }
