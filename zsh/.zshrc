@@ -1,8 +1,7 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
-autoload -Uz vcs_info
-autoload colors && colors
+autoload -Uz vcs_info colors compinit
 
 export EDITOR=vim
 export PATH=$PATH:~/bin
@@ -21,7 +20,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=30000
 SAVEHIST=10000
 
-setopt PROMPT_SUBST
+setopt prompt_subst
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
@@ -30,14 +29,15 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history          # share command history data
 
 zstyle ':vcs_info:git:*' formats ' %b '
+zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' format '%F{yellow}%d:%f'
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 
+colors
 precmd() { 
     vcs_info 
-
     if [ -z "${SSH_CONNECTION}" ]; then
         PROMPT="%(?..[%?] )%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}> "
     else
@@ -52,15 +52,14 @@ fi
 
 source ~/.zinit/bin/zinit.zsh
 
-zinit ice lucid wait'0' atinit'zicompinit; zicdreplay'
-zinit light zdharma/fast-syntax-highlighting
-zinit ice lucid wait'0' atload'_zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
-# zinit ice lucid wait'0'
-# zinit light zsh-users/zsh-completions
+zinit for \
+    light-mode  zsh-users/zsh-autosuggestions \
+    light-mode  zdharma/fast-syntax-highlighting \
+                zdharma/history-search-multi-word
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
+
 
 # [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh # output hl
 
@@ -68,6 +67,8 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=8600
 fi
+
+compinit
 
 # zprof
 ### End of Zinit's installer chunk
