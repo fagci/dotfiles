@@ -65,7 +65,7 @@ source ~/.config/zsh/aliases.zsh
 
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
-    export MPD_PORT=8600
+    export MPD_PORT=6600
 fi
 
 compinit
