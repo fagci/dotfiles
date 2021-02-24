@@ -95,6 +95,7 @@ set shortmess+=F
 set splitbelow splitright
 set termguicolors
 set listchars=tab:▸\ ,space:.,trail:•
+set redrawtime=5000
 
 " Editing
 set nowrap

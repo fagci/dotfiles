@@ -88,25 +88,12 @@
     "asterisk": "asterisklint",
     "vim": "vint",
     "sh": "shellcheck",
-    "php": [
-      "tidy"
-    ],
-    "html": [
-      "tidy"
-    ],
-    "gohtmltmpl": [
-      "tidy"
-    ],
-    "javascript": [
-      "eslint"
-    ],
-    "typescript": [
-      "tslint"
-    ]
+    "php": ["tidy"],
+    "html": ["tidy"],
+    "gohtmltmpl": ["tidy"],
+    "javascript": ["eslint"],
+    "typescript": ["tslint"]
   },
-  "git.semanticCommit.filetypes": [
-    "gitcommit",
-    "markdown"
-  ],
+  "git.semanticCommit.filetypes": ["gitcommit", "markdown"],
   "git.enableGlobalStatus": false
 }
