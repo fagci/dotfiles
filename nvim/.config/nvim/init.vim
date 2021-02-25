@@ -60,7 +60,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vimwiki/vimwiki'
 " Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
-Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
