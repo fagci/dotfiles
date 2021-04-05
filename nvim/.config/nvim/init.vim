@@ -323,6 +323,9 @@ augroup END
 let python_highlight_all=1
 
 let g:pear_tree_repeatable_expand=0
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 0
 
 let g:php_sql_heredoc = 1
 let g:php_sql_nowdoc = 1
