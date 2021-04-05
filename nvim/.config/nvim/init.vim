@@ -34,6 +34,7 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tmsvg/pear-tree'
 
 " Language-specific
 Plug 'mattn/emmet-vim'
@@ -48,7 +49,6 @@ Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'gohtmltmpl' }
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 
@@ -58,7 +58,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Utils
 Plug 'vimwiki/vimwiki'
-" Plug 'andymass/vim-matchup'
 Plug 'vifm/vifm.vim'
 
 call plug#end()
@@ -167,12 +166,6 @@ endfunction
 function! GitBranch()
   return system("git branch --show-current 2>/dev/null | tr -d '\n'")
 endfunction
-
-" function! DetectGoHtmlTmpl()
-"     if expand('%:e') == "html" && search("{{") != 0
-"         set filetype=gohtmltmpl 
-"     endif
-" endfunction
 
 " ======================================== 
 " Mappings
@@ -313,10 +306,6 @@ augroup END
 
 autocmd BufWritePre *.py silent call CocAction('format')
 
-" augroup filetypedetect
-"     au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
-" augroup END
-
 " Highlight the symbol and its references when holding the cursor.
 augroup HLSymbolOnCursorHold
     autocmd!
@@ -333,6 +322,8 @@ augroup END
 
 let python_highlight_all=1
 
+let g:pear_tree_repeatable_expand=0
+
 let g:php_sql_heredoc = 1
 let g:php_sql_nowdoc = 1
 let g:php_html_in_heredoc = 1
@@ -341,7 +332,7 @@ let g:php_html_in_nowdoc = 1
 let g:vue_pre_processors = []
 
 " Used on most machines
-let g:coc_global_extensions = ['coc-git', 'coc-sh', 'coc-pairs', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets']
+let g:coc_global_extensions = ['coc-sh', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets']
 
 " Also using
 "   coc-css coc-stylelint coc-emmet coc-eslint coc-html coc-json coc-phpls coc-prettier 
