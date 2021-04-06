@@ -1,7 +1,7 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
-autoload -Uz vcs_info colors compinit
+autoload -Uz vcs_info colors
 
 export EDITOR=vim
 export PATH=$PATH:~/bin
@@ -67,8 +67,6 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=6600
 fi
-
-compinit
 
 # zprof
 ### End of Zinit's installer chunk
