@@ -53,7 +53,6 @@ Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 
 " LSP, completion
-Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Utils
@@ -335,11 +334,7 @@ let g:php_html_in_nowdoc = 1
 let g:vue_pre_processors = []
 
 " Used on most machines
-let g:coc_global_extensions = ['coc-sh', 'coc-diagnostic', 'coc-marketplace', 'coc-snippets']
-
-" Also using
-"   coc-css coc-stylelint coc-emmet coc-eslint coc-html coc-json coc-phpls coc-prettier 
-"   coc-sql coc-tslint-plugin coc-tsserver coc-vetur coc-yaml 
+let g:coc_global_extensions = ['coc-sh', 'coc-diagnostic', 'coc-marketplace']
 
 let g:rg_derive_root = 1
 
