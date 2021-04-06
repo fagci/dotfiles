@@ -32,7 +32,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tmsvg/pear-tree'
 
