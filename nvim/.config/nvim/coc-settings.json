@@ -17,9 +17,7 @@
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": " >> ",
   "diagnostic.messageDelay": 1000,
-  "eslint.autoFix": false,
   "eslint.autoFixOnSave": false,
-  "eslint.enable": true,
   "emmet.includeLanguages": {
     "html": "html",
     "php": "html",
@@ -57,6 +55,7 @@
     "variable": " "
   },
   "intelephense.telemetry.enabled": false,
+  "intelephense.files.maxSize": 1000000,
   "intelephense.files.exclude": [
     "**/.git/**",
     "**/.svn/**",
@@ -84,30 +83,13 @@
   ],
   "diagnostic-languageserver.filetypes": {
     "css": "stylelint",
-    "python": "pylint",
     "yaml": "ansible-lint",
     "asterisk": "asterisklint",
     "vim": "vint",
     "sh": "shellcheck",
-    "php": [
-      "tidy"
-    ],
-    "html": [
-      "tidy"
-    ],
-    "gohtmltmpl": [
-      "tidy"
-    ],
-    "javascript": [
-      "eslint"
-    ],
-    "typescript": [
-      "tslint"
-    ]
-  },
-  "git.semanticCommit.filetypes": [
-    "gitcommit",
-    "markdown"
-  ],
-  "git.enableGlobalStatus": false
+    "html": ["tidy"],
+    "gohtmltmpl": ["tidy"],
+    "javascript": ["eslint"],
+    "typescript": ["tslint"]
+  }
 }

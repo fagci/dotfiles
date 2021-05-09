@@ -5,10 +5,10 @@ focus_follows_mouse no
 floating_modifier $mod
 
 for_window [class="^.*"] border pixel 0
-gaps inner 10 
-gaps outer 5
-smart_gaps on
-smart_borders on
+#gaps inner 10 
+#gaps outer 5
+#smart_gaps on
+#smart_borders on
 
 font pango: Terminus, FontAwesome Regular, Ubuntu Mono derivative Powerline, Icons 8
 # }}}
