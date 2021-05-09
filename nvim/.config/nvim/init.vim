@@ -52,6 +52,7 @@ Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'zah/nim.vim', {'for': 'nim'}
+Plug 'linkinpark342/xonsh-vim'
 
 " LSP, completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
