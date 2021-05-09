@@ -205,6 +205,7 @@ Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'meatballs/vim-xonsh'
 
 Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
 " Plug 'beberlei/vim-php-refactor', {'for': 'php'}

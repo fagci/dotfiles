@@ -1,12 +1,13 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
-autoload -Uz vcs_info colors
+autoload -Uz vcs_info colors compinit bashcompinit
 
 export EDITOR=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export LANG=en_US.UTF-8
+export fpath=(~/.termux/completions $fpath)
 
 DISABLE_AUTO_UPDATE="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
@@ -54,11 +55,15 @@ source ~/.zinit/bin/zinit.zsh
 
 zinit for \
     light-mode  zsh-users/zsh-autosuggestions \
+    light-mode  zsh-users/zsh-completions \
     light-mode  zdharma/fast-syntax-highlighting \
                 zdharma/history-search-multi-word
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
+
+compinit
+bashcompinit
 
 
 # [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh # output hl
@@ -66,6 +71,19 @@ source ~/.config/zsh/aliases.zsh
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=6600
+    source "${EXTERNAL_STORAGE}/termuxlauncher/.apps-launcher"
+
+    launch_completion() {
+        local curr perv apps
+        COMPREPLY=()
+        curr="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+        apps=$(launch -l | tr '\n' ' ')
+        COMPREPLY=( $(compgen -W "${apps}" -- ${curr}) ) 
+    }
+    alias a=launch
+    complete -F launch_completion launch
+    complete -F launch_completion a
 fi
 
 # zprof
