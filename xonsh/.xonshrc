@@ -1,0 +1,16 @@
+# $XONSH_SHOW_TRACEBACK = True
+if $TERMUX_VERSION:
+    launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
+    if launch.exists():
+        source-bash @(launch)
+
+def _rtn():
+    if __xonsh__.history and __xonsh__.history.rtns[-1] > 0:
+        return __xonsh__.history.rtns[-1]
+
+$PROMPT_FIELDS['rtn'] = _rtn
+$PROMPT='{RED}{rtn:{} }{CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{RESET}{YELLOW}⪫{RESET} '
+
+aliases['l'] = 'ls'
+aliases['ll'] = 'ls -l'
+aliases['la'] = 'ls -a'
