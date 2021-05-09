@@ -17,3 +17,8 @@ else:
 aliases['l'] = 'ls'
 aliases['ll'] = 'ls -l'
 aliases['la'] = 'ls -a'
+
+aliases['ga'] = 'git add'
+aliases['gl'] = 'git pull'
+aliases['gp'] = 'git push'
+aliases['gcam'] = 'git commit -am'
