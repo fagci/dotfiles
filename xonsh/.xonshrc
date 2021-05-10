@@ -10,6 +10,13 @@ if 'TERMUX_VERSION' in ${...}:
     launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
     if launch.exists():
         source-bash @(launch)
+else:
+    xontrib load fzf-widgets
+
+    $fzf_history_binding = "c-r"  # Ctrl+R
+    $fzf_ssh_binding = "c-s"      # Ctrl+S
+    $fzf_file_binding = "c-t"      # Ctrl+T
+    $fzf_dir_binding = "c-g"
 
 def _rtn():
     if __xonsh__.history and __xonsh__.history.rtns[-1] > 0:
