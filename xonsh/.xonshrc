@@ -1,5 +1,12 @@
 # $XONSH_SHOW_TRACEBACK = True
+$XONSH_HISTORY_BACKEND = 'sqlite'
+$HISTCONTROL='ignoredups'
+
 if 'TERMUX_VERSION' in ${...}:
+    aliases['pks'] = 'pkg search'
+    aliases['pki'] = 'pkg install'
+    aliases['pku'] = 'pkg update'
+    aliases['pkug'] = 'pkg upgrade'
     launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
     if launch.exists():
         source-bash @(launch)
@@ -9,6 +16,7 @@ def _rtn():
         return __xonsh__.history.rtns[-1]
 
 $PROMPT_FIELDS['rtn'] = _rtn
+
 if 'SSH_CLIENT' in ${...}:
     $PROMPT='{RED}{rtn:{} }{GREEN}{user}@{hostname} {CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{RESET}{YELLOW}⪫{RESET} '
 else:
@@ -22,3 +30,6 @@ aliases['ga'] = 'git add'
 aliases['gl'] = 'git pull'
 aliases['gp'] = 'git push'
 aliases['gcam'] = 'git commit -am'
+
+if $(which rsync):
+    aliases['cp'] = ['rsync', '--progress', '--recursive', '--archive']
