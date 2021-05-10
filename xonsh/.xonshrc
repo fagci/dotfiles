@@ -2,6 +2,8 @@
 $XONSH_HISTORY_BACKEND = 'sqlite'
 $HISTCONTROL='ignoredups'
 
+$PATH.extend([$HOME + '/.local/bin'])
+
 if 'TERMUX_VERSION' in ${...}:
     aliases['pks'] = 'pkg search'
     aliases['pki'] = 'pkg install'
@@ -22,6 +24,11 @@ def _rtn():
     if __xonsh__.history and __xonsh__.history.rtns[-1] > 0:
         return __xonsh__.history.rtns[-1]
 
+def _check_url(url):
+    import requests
+    r = requests.get(url[0])
+    print(r.status_code, int(r.elapsed.total_seconds()*1000), 'ms')
+
 $PROMPT_FIELDS['rtn'] = _rtn
 
 if 'SSH_CLIENT' in ${...}:
@@ -37,6 +44,8 @@ aliases['ga'] = 'git add'
 aliases['gl'] = 'git pull'
 aliases['gp'] = 'git push'
 aliases['gcam'] = 'git commit -am'
+
+aliases['cu'] = _check_url
 
 if $(which rsync):
     aliases['cp'] = ['rsync', '--progress', '--recursive', '--archive']
