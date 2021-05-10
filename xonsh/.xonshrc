@@ -46,6 +46,7 @@ aliases['gp'] = 'git push'
 aliases['gcam'] = 'git commit -am'
 
 aliases['cu'] = _check_url
+aliases['http-here'] = 'python3 -m http.server'
 
 if $(which rsync):
     aliases['cp'] = ['rsync', '--progress', '--recursive', '--archive']
