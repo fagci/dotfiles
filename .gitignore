@@ -1,2 +1,4 @@
-nvim/.config/nvim/plugged
-nvim/.config/nvim/autoload
+nvim/.config/nvim/
+!nvim/.config/nvim/init.vim
+!nvim/.config/nvim/after/
+!nvim/.config/nvim/ftplugin/
