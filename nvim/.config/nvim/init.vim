@@ -46,7 +46,7 @@ set undofile
 
 " UI
 set number
-set signcolumn=number
+set signcolumn=yes
 set scrolloff=5
 set sidescrolloff=5
 set splitbelow splitright
@@ -104,6 +104,7 @@ Plug 'tpope/vim-dadbod'
 
 " HL
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'StanAngeloff/php.vim', {'for': 'php'}
 
 " UI
 " Plug 'gruvbox-community/gruvbox'
@@ -241,6 +242,12 @@ augroup ScrollToLastSeenLocationOnFileOpen
                 \ | endif
 augroup END
 
+let g:php_html_in_heredoc = 0
+let g:php_html_in_nowdoc = 0
+let g:php_html_load = 0
+let g:php_sql_query = 0
+let g:php_sql_heredoc = 0
+let g:php_sql_nowdoc = 0
 
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
