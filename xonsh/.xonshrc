@@ -1,24 +1,11 @@
 # $XONSH_SHOW_TRACEBACK = True
 $XONSH_HISTORY_BACKEND = 'sqlite'
+#$SHELL_TYPE=prompt_toolkit
 $HISTCONTROL='ignoredups'
+$TERM='xterm-256color'
 
 $PATH.extend([$HOME + '/.local/bin'])
 
-if 'TERMUX_VERSION' in ${...}:
-    aliases['pks'] = 'pkg search'
-    aliases['pki'] = 'pkg install'
-    aliases['pku'] = 'pkg update'
-    aliases['pkug'] = 'pkg upgrade'
-    launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
-    if launch.exists():
-        source-bash @(launch)
-else:
-    xontrib load fzf-widgets
-
-    $fzf_history_binding = "c-r"  # Ctrl+R
-    $fzf_ssh_binding = "c-s"      # Ctrl+S
-    $fzf_file_binding = "c-t"      # Ctrl+T
-    $fzf_dir_binding = "c-g"
 
 def _rtn():
     if __xonsh__.history and __xonsh__.history.rtns[-1] > 0:
@@ -36,6 +23,7 @@ if 'SSH_CLIENT' in ${...}:
 else:
     $PROMPT='{RED}{rtn:{} }{CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{RESET}{YELLOW}⪫{RESET} '
 
+
 aliases['l'] = 'ls'
 aliases['ll'] = 'ls -l'
 aliases['la'] = 'ls -a'
@@ -47,6 +35,25 @@ aliases['gcam'] = 'git commit -am'
 
 aliases['cu'] = _check_url
 aliases['http-here'] = 'python3 -m http.server'
+
+if 'TERMUX_VERSION' in ${...}:
+    aliases['pks'] = 'pkg search'
+    aliases['pki'] = 'pkg install'
+    aliases['pku'] = 'pkg update'
+    aliases['pkug'] = 'pkg upgrade'
+    launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
+    if launch.exists():
+        source-bash @(launch)
+else:
+    xontrib load fzf-widgets
+
+    $fzf_history_binding = "c-r"  # Ctrl+R
+    $fzf_ssh_binding = "c-s"      # Ctrl+S
+    $fzf_file_binding = "c-t"      # Ctrl+T
+    $fzf_dir_binding = "c-g"
+
+if $(which nvim):
+    aliases['vim'] = 'nvim'
 
 if $(which rsync):
     aliases['cp'] = ['rsync', '--progress', '--recursive', '--archive']

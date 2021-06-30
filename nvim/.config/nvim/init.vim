@@ -1,74 +1,30 @@
-" ==================== 
+" ======================================== 
 " Author: fagci
-" Description: My neovim config for frontend web development
-" ====================
-
-let g:loaded_matchit=1
-let g:loaded_matchparen=1
-let g:loaded_netrw=1
-let g:loaded_netrwPlguin=1
-
-" ======================================== 
-" Plugins
+" CreationDate: 2021-06-28
 " ======================================== 
 
-" Vim-Plug install if not
-let s:plug_autoload_path = "~/.config/nvim/autoload/plug.vim"
-let s:plug_download_url  = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-if !filereadable(expand(s:plug_autoload_path))
-    silent exec "!curl -fLo " . fnameescape(s:plug_autoload_path) . " --create-dirs " . s:plug_download_url
-    silent exec "so " . fnameescape(s:plug_autoload_path)
-endif
+" Speedup
+let g:loaded_matchparen        = 1
+let g:loaded_matchit           = 1
+let g:loaded_logiPat           = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_gzip              = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_shada_plugin      = 1
+let g:loaded_spellfile_plugin  = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_tutor_mode_plugin = 1
+let g:loaded_remote_plugins    = 1
 
-call plug#begin("~/.config/nvim/plugged")
-
-" Plug 'tweekmonster/startuptime.vim'
-
-" Project navigation
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-
-" Editing
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tmsvg/pear-tree'
-
-" Language-specific
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-dadbod'
-Plug 'vim-scripts/dbext.vim'
-Plug 'adoy/vim-php-refactoring-toolbox', {'for': 'php'}
-
-" Syntax hl
-Plug 'nelsyeung/twig.vim', {'for': 'twig'}
-Plug 'posva/vim-vue', {'for': 'vue'}
-Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'StanAngeloff/php.vim', {'for': 'php'}
-Plug 'vim-python/python-syntax', {'for': 'python'}
-Plug 'zah/nim.vim', {'for': 'nim'}
-Plug 'linkinpark342/xonsh-vim'
-
-" LSP, completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Utils
-Plug 'vimwiki/vimwiki'
-Plug 'vifm/vifm.vim'
-
-call plug#end()
-
-filetype plugin indent on
-syntax on
-
-" ======================================== 
-" Options
-" ======================================== 
+set lazyredraw
+set updatetime=150
+set hidden confirm " this speeds up buffer switch x25 I think
+set switchbuf=useopen
+set ttimeoutlen=0  " remove delay on mode change
+set synmaxcol=300
 
 " Base
 let mapleader=','
@@ -86,22 +42,20 @@ set undofile
 
 " UI
 set number
-set signcolumn=yes
+set signcolumn=number
 set scrolloff=5
 set sidescrolloff=5
-set shortmess=I
-set shortmess+=c
-set shortmess+=F
 set splitbelow splitright
 set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set listchars=tab:▸\ ,space:.,trail:•
-set redrawtime=10000
 
 " Editing
 set nowrap
 set clipboard+=unnamedplus
 set smartindent
-set expandtab smarttab
+set expandtab
 set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
@@ -114,27 +68,43 @@ set inccommand=nosplit " live substitution
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-" set stl+=%(\ \|\ %{GitBranch()}%)
-set stl+=%(\ \|\ %{coc#status()}%)
+set stl+=%(\ [%{coc#status()}]%{get(b:,'coc_current_function','')}%)
 set stl+=%=%l:%c/%L\ %y
 
-" Speedup
-set nocursorline nocursorcolumn norelativenumber
-set lazyredraw
-set updatetime=150
-set regexpengine=1
-set hidden confirm " this speeds up buffer switch x25 I think
-set switchbuf=useopen
-set timeoutlen=1000 ttimeoutlen=0  " remove delay on mode change
-set regexpengine=0
-set noshowmatch
+set shortmess+=c
 
-
-if executable('rg')
-    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore --smart-case --glob "!.git/*"'
+" Install VIM-Plug if not
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Editing
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'honza/vim-snippets'
+
+" Utils
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'vifm/vifm.vim'
+Plug 'vim-scripts/dbext.vim'
+Plug 'tpope/vim-dadbod'
+
+" HL
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+
+" UI
+Plug 'gruvbox-community/gruvbox'
+
+call plug#end()
 
 " ======================================== 
 " Functions
@@ -150,24 +120,6 @@ command! -bang -nargs=* GRG
             \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --glob "!.git/*" -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-function! GitBranch()
-  return system("git branch --show-current 2>/dev/null | tr -d '\n'")
-endfunction
-
 " ======================================== 
 " Mappings
 " ======================================== 
@@ -175,6 +127,8 @@ endfunction
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>, :noh<CR>
+
+nnoremap ; :
 
 map <leader>l :set list!<CR>
 
@@ -215,24 +169,18 @@ nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
 " toggle colorcolumn with ,|
 nnoremap <silent> <leader><bar> :execute "set colorcolumn="
-                  \ . (&colorcolumn == "" ? "80" : "")<CR>
+            \ . (&colorcolumn == "" ? "80" : "")<CR>
 
 noremap <Leader>/ :Commentary<CR>
 
 " Vifm
 map <Leader>vv :Vifm<CR> 
-map <Leader>vs :VsplitVifm<CR> 
 
 " Vim-plug
-
 nnoremap <silent> <leader>pi :PlugInstall<CR>
 nnoremap <silent> <leader>pu :PlugUpdate<CR>
-nnoremap <silent> <leader>pr :PlugClean<CR>
 nnoremap <silent> <leader>pc :PlugClean<CR>
 nnoremap <silent> <leader>pg :PlugUpgrade<CR>
-nnoremap <silent> <leader>ps :PlugStatus<CR>
-nnoremap <silent> <leader>pd :PlugDiff<CR>
-nnoremap <silent> <leader>ph :PlugSnapshot
 
 nnoremap <tab> :GFiles --cache<cr>
 nnoremap <Leader><tab> :Files<CR>
@@ -241,61 +189,44 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
-" COC
-
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+" COC -------------------
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-
-" Jump between snippet placeholders
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-nmap <silent> <leader>[ <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>] <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>.  <Plug>(coc-fix-current)
-
-nmap <leader>es :CocCommand snippets.editSnippets<CR>
+nmap <leader>r <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
-" ======================================== 
-" Autocommands
-" ======================================== 
-
-silent !stty -ixon
-
-augroup Ixon
-    autocmd! VimLeave * silent !stty ixon
+" Highlight the symbol and its references when press '*' in normal mode
+augroup cursorHighlight
+  autocmd! CursorHold * silent call CocActionAsync('highlight')
 augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen
@@ -305,70 +236,15 @@ augroup ScrollToLastSeenLocationOnFileOpen
                 \ | endif
 augroup END
 
-autocmd BufWritePre *.py silent call CocAction('format')
 
-" Highlight the symbol and its references when holding the cursor.
-augroup HLSymbolOnCursorHold
-    autocmd!
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup END
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
+let g:coc_global_extensions = [
+            \ 'coc-pairs',
+            \ 'coc-snippets',
+            \ 'coc-highlight',
+            \ 'coc-pyright',
+            \ 'coc-json',
+            \ 'coc-diagnostic']
 
-augroup FZF
-    au! FileType fzf set noshowmode noruler nonu nornu
-augroup END
-
-" ======================================== 
-" Variables
-" ======================================== 
-
-let python_highlight_all=1
-
-let g:pear_tree_repeatable_expand=0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 0
-
-let g:php_sql_heredoc = 1
-let g:php_sql_nowdoc = 1
-let g:php_html_in_heredoc = 1
-let g:php_html_in_nowdoc = 1
-
-let g:vue_pre_processors = []
-
-" Used on most machines
-let g:coc_global_extensions = ['coc-sh', 'coc-diagnostic', 'coc-marketplace']
-
-let g:rg_derive_root = 1
-
-let g:vifm_replace_netrw=1
-
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_exclude_filetypes = ['help', 'fzf']
-
-
-" ======================================== 
-" Colors
-" ======================================== 
-
-let gruvbox_transp_bg=v:true
-color gruvbox8_hard
-
-hi! Normal guibg=NONE ctermbg=NONE
-hi! LineNr guibg=NONE ctermbg=NONE ctermfg=239 guifg=#666666
-hi! SignColumn guibg=NONE ctermbg=NONE
-hi! StatusLine         gui=NONE      guifg=#ffffff guibg=NONE
-hi! SpecialKey         ctermfg=239   guifg=#666666
-hi! IndentGuidesOdd    ctermbg=236   guibg=#282828
-hi! IndentGuidesEven   ctermbg=235   guibg=#323232
-
-hi! DiffAdd cterm=none ctermbg=none ctermfg=green gui=none guibg=none guifg=green
-hi! DiffDelete ctermbg=none ctermfg=red gui=none guibg=none guifg=darkred
-hi! DiffChangeDelete ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
-hi! DiffChange ctermbg=none ctermfg=grey gui=none guibg=none guifg=grey
-
-hi! CocWarningSign ctermfg=yellow guifg=#ffff00
-hi! CocInfoSign ctermfg=blue guifg=#0088aa
-
-
+colorscheme gruvbox

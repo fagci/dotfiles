@@ -1,7 +1,7 @@
 # vim: set filetype=zsh :
 
 # zmodload zsh/zprof
-autoload -Uz vcs_info colors compinit bashcompinit
+autoload -Uz vcs_info colors
 
 export EDITOR=vim
 export PATH=$PATH:~/bin
@@ -62,16 +62,16 @@ zinit for \
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
-compinit
-bashcompinit
-
-
 # [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh # output hl
 
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=6600
     source "${EXTERNAL_STORAGE}/termuxlauncher/.apps-launcher"
+
+    autoload -U compinit bashcompinit
+    compinit
+    bashcompinit
 
     launch_completion() {
         local curr perv apps
@@ -84,6 +84,7 @@ if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     alias a=launch
     complete -F launch_completion launch
     complete -F launch_completion a
+
 fi
 
 # zprof
