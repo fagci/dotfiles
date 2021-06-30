@@ -39,6 +39,7 @@
     "**/.history/**",
     "**/vendor/**/vendor/**"
   ],
+  "coc.preferences.enableFloatHighlight": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "php",
     "phtml",

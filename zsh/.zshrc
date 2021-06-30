@@ -67,24 +67,6 @@ source ~/.config/zsh/aliases.zsh
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
     export MPD_PORT=6600
-    source "${EXTERNAL_STORAGE}/termuxlauncher/.apps-launcher"
-
-    autoload -U compinit bashcompinit
-    compinit
-    bashcompinit
-
-    launch_completion() {
-        local curr perv apps
-        COMPREPLY=()
-        curr="${COMP_WORDS[COMP_CWORD]}"
-        prev="${COMP_WORDS[COMP_CWORD-1]}"
-        apps=$(launch -l | tr '\n' ' ')
-        COMPREPLY=( $(compgen -W "${apps}" -- ${curr}) ) 
-    }
-    alias a=launch
-    complete -F launch_completion launch
-    complete -F launch_completion a
-
 fi
 
 # zprof

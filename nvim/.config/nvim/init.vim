@@ -20,11 +20,15 @@ let g:loaded_tutor_mode_plugin = 1
 let g:loaded_remote_plugins    = 1
 
 set lazyredraw
-set updatetime=150
+set updatetime=300
 set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 set ttimeoutlen=0  " remove delay on mode change
 set synmaxcol=300
+" old regex for large files
+if line('$') > 1000
+    set re=1
+endif
 
 " Base
 let mapleader=','
@@ -68,7 +72,7 @@ set inccommand=nosplit " live substitution
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-set stl+=%(\ [%{coc#status()}]%{get(b:,'coc_current_function','')}%)
+" set stl+=%(\ [%{coc#status()}]%)
 set stl+=%=%l:%c/%L\ %y
 
 set shortmess+=c
@@ -102,7 +106,8 @@ Plug 'tpope/vim-dadbod'
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 
 " UI
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
+Plug 'lifepillar/vim-gruvbox8'
 
 call plug#end()
 
@@ -225,9 +230,9 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when press '*' in normal mode
-augroup cursorHighlight
-  autocmd! CursorHold * silent call CocActionAsync('highlight')
-augroup END
+" augroup cursorHighlight
+"   autocmd! CursorHold * silent call CocActionAsync('highlight')
+" augroup END
 
 augroup ScrollToLastSeenLocationOnFileOpen
     autocmd! BufReadPost *
@@ -240,11 +245,16 @@ augroup END
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_global_extensions = [
+            \ 'coc-marketplace',
             \ 'coc-pairs',
             \ 'coc-snippets',
-            \ 'coc-highlight',
             \ 'coc-pyright',
+            \ 'coc-sh',
+            \ 'coc-vimlsp',
             \ 'coc-json',
+            \ 'coc-html',
+            \ 'coc-css',
+            \ 'coc-emmet',
             \ 'coc-diagnostic']
 
-colorscheme gruvbox
+colorscheme gruvbox8
