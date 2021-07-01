@@ -105,6 +105,8 @@ Plug 'tpope/vim-dadbod'
 " HL
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
+Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
+Plug 'nelsyeung/twig.vim', {'for': 'twig'}
 
 " UI
 " Plug 'gruvbox-community/gruvbox'
@@ -235,16 +237,16 @@ endfunction
 "   autocmd! CursorHold * silent call CocActionAsync('highlight')
 " augroup END
 
-augroup ScrollToLastSeenLocationOnFileOpen
-    autocmd! BufReadPost *
-                \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-                \ |   exe "normal! g`\""
-                \ | endif
-augroup END
+" augroup ScrollToLastSeenLocationOnFileOpen
+"     autocmd! BufReadPost *
+"                 \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+"                 \ |   exe "normal! g`\""
+"                 \ | endif
+" augroup END
 
-let g:php_html_in_heredoc = 0
-let g:php_html_in_nowdoc = 0
-let g:php_html_load = 0
+" let g:php_html_in_heredoc = 0
+" let g:php_html_in_nowdoc = 0
+" let g:php_html_load = 0
 let g:php_sql_query = 0
 let g:php_sql_heredoc = 0
 let g:php_sql_nowdoc = 0

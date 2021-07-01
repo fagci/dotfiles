@@ -3,6 +3,8 @@
 # zmodload zsh/zprof
 autoload -Uz vcs_info colors
 
+# export TERM=screen-256color
+export INPUTRC=~/.inputrc
 export EDITOR=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
@@ -13,9 +15,14 @@ DISABLE_AUTO_UPDATE="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 bindkey -e
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
+bindkey '\e[1~'   beginning-of-line  # Linux console
+bindkey '\e[H'    beginning-of-line  # xterm
+bindkey '\eOH'    beginning-of-line  # gnome-terminal
+bindkey '\e[2~'   overwrite-mode     # Linux console, xterm, gnome-terminal
+bindkey '\e[3~'   delete-char        # Linux console, xterm, gnome-terminal
+bindkey '\e[4~'   end-of-line        # Linux console
+bindkey '\e[F'    end-of-line        # xterm
+bindkey '\eOF'    end-of-line        # gnome-termina
 
 HISTFILE=~/.zsh_history
 HISTSIZE=30000
