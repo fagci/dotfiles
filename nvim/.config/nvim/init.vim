@@ -1,6 +1,6 @@
 " ======================================== 
 " Author: fagci
-" CreationDate: 2021-06-28
+" CreationDate: 2021-07-04
 " ======================================== 
 
 " Speedup
@@ -36,7 +36,7 @@ let maplocalleader=','
 set langmenu=en_US.utf-8
 language message en_US.UTF-8
 
-" Backup, history, undo
+" Backup, history, undoo
 set noswapfile nobackup nowritebackup
 set undodir=~/.vimundo
 if (!isdirectory(expand(&undodir)))
@@ -72,7 +72,6 @@ set inccommand=nosplit " live substitution
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\  
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
-" set stl+=%(\ [%{coc#status()}]%)
 set stl+=%=%l:%c/%L\ %y
 
 set shortmess+=c
@@ -86,13 +85,17 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 " Editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
+Plug 'hrsh7th/vim-vsnip'
+" Plug 'SirVer/ultisnips'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -102,14 +105,8 @@ Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-dadbod'
 
-" HL
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'StanAngeloff/php.vim', {'for': 'php'}
-Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
-Plug 'nelsyeung/twig.vim', {'for': 'twig'}
 
 " UI
-" Plug 'gruvbox-community/gruvbox'
 Plug 'lifepillar/vim-gruvbox8'
 
 call plug#end()
@@ -197,73 +194,59 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
-" COC -------------------
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" ==============================
+" EXPERIMENTS WITH LSP BELOW
+" ==============================
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+nvim_lsp.pyright.setup{}
+nvim_lsp.intelephense.setup{
+  capabilities = capabilities,
+}
+EOF
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>r <Plug>(coc-rename)
+set completeopt=menuone,noselect
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:false
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.vsnip = v:true
+" let g:compe.source.ultisnips = v:true
+let g:compe.source.emoji = v:true
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
 
-" Highlight the symbol and its references when press '*' in normal mode
-" augroup cursorHighlight
-"   autocmd! CursorHold * silent call CocActionAsync('highlight')
-" augroup END
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
-" augroup ScrollToLastSeenLocationOnFileOpen
-"     autocmd! BufReadPost *
-"                 \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-"                 \ |   exe "normal! g`\""
-"                 \ | endif
-" augroup END
-
-" let g:php_html_in_heredoc = 0
-" let g:php_html_in_nowdoc = 0
-" let g:php_html_load = 0
-let g:php_sql_query = 0
-let g:php_sql_heredoc = 0
-let g:php_sql_nowdoc = 0
-
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-let g:coc_global_extensions = [
-            \ 'coc-marketplace',
-            \ 'coc-pairs',
-            \ 'coc-snippets',
-            \ 'coc-pyright',
-            \ 'coc-sh',
-            \ 'coc-vimlsp',
-            \ 'coc-json',
-            \ 'coc-html',
-            \ 'coc-css',
-            \ 'coc-emmet',
-            \ 'coc-diagnostic']
 
 colorscheme gruvbox8

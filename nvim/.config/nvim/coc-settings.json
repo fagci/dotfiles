@@ -25,6 +25,7 @@
   },
   "intelephense.telemetry.enabled": false,
   "intelephense.files.maxSize": 1000000,
+  "intelephense.maxMemory": 768,
   "intelephense.files.exclude": [
     "**/.git/**",
     "**/.svn/**",
