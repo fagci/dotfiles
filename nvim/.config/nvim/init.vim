@@ -46,7 +46,7 @@ set undofile
 
 " UI
 set number
-set signcolumn=yes
+set signcolumn=number
 set scrolloff=5
 set sidescrolloff=5
 set splitbelow splitright
@@ -87,7 +87,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Editing
 Plug 'tpope/vim-commentary'
@@ -100,14 +100,23 @@ Plug 'hrsh7th/vim-vsnip'
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 Plug 'vimwiki/vimwiki'
 Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-dadbod'
 
-
 " UI
 Plug 'lifepillar/vim-gruvbox8'
+
+
+
+" TEST ZONE
+
+Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 
 call plug#end()
 
@@ -194,34 +203,67 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
+nnoremap <Leader>M :GitMessenger<CR>
+
 " ==============================
 " EXPERIMENTS WITH LSP BELOW
 " ==============================
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+    require "lsp_signature".on_attach()
+end
+
+--Enable completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
-}
 
-nvim_lsp.pyright.setup{}
-nvim_lsp.intelephense.setup{
-  capabilities = capabilities,
-}
+local general_on_attach = function(client, bufnr)
+  if client.resolved_capabilities.completion then
+    require "lsp_signature".on_attach()
+  end
+end
+
+-- Setup basic lsp servers
+for _, server in pairs({"pyright", "intelephense", "html", "cssls"}) do
+  nvim_lsp[server].setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+  }
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
+
 EOF
+
+call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+call sign_define("LspDiagnosticInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+call sign_define("LspDiagnosticHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 
 set completeopt=menuone,noselect
 let g:compe = {}
 let g:compe.enabled = v:true
-let g:compe.autocomplete = v:false
+let g:compe.autocomplete = v:true
 let g:compe.debug = v:false
-let g:compe.min_length = 1
+let g:compe.min_length = 2
 let g:compe.preselect = 'enable'
 let g:compe.throttle_time = 80
 let g:compe.source_timeout = 200
@@ -239,7 +281,7 @@ let g:compe.source.calc = v:true
 let g:compe.source.nvim_lsp = v:true
 let g:compe.source.vsnip = v:true
 " let g:compe.source.ultisnips = v:true
-let g:compe.source.emoji = v:true
+" let g:compe.source.emoji = v:true
 
 
 inoremap <silent><expr> <C-Space> compe#complete()
@@ -248,5 +290,16 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
+
 
 colorscheme gruvbox8
+hi NonText guifg=bg
+highlight SignColumn guibg=GruvboxBg0
+highlight link NormalFloat GruvboxFg0
