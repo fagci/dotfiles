@@ -235,28 +235,19 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
-
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    virtual_text = {
+        prefix = "//",
+        spacing = 2,
+--        severity_limit = "Warning",
+    },
+    underline = true,
     signs = true,
-
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
     update_in_insert = false,
   }
 )
 
 EOF
 
-call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
-call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
-call sign_define("LspDiagnosticInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
-call sign_define("LspDiagnosticHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 
 set completeopt=menuone,noselect
 let g:compe = {}
@@ -302,4 +293,23 @@ nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
 colorscheme gruvbox8
 hi NonText guifg=bg
 highlight SignColumn guibg=GruvboxBg0
-highlight link NormalFloat GruvboxFg0
+" highlight link NormalFloat GruvboxFg0
+
+" Errors in Red
+hi LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
+" Warnings in Yellow
+hi LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
+" Info and Hints in White
+hi LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White
+hi LspDiagnosticsVirtualTextHint guifg=White ctermfg=White
+
+" Underline the offending code
+hi LspDiagnosticsUnderlineError guifg=NONE ctermfg=NONE cterm=underline gui=underline
+hi LspDiagnosticsUnderlineWarning guifg=NONE ctermfg=NONE cterm=underline gui=underline
+hi LspDiagnosticsUnderlineInformation guifg=NONE ctermfg=NONE cterm=underline gui=underline
+hi LspDiagnosticsUnderlineHint guifg=NONE ctermfg=NONE cterm=underline gui=underline
+
+hi LspDiagnosticsError guifg=Red ctermfg=Red cterm=underline gui=underline
+hi LspDiagnosticsWarning guifg=Yellow ctermfg=Yellow cterm=underline gui=underline
+hi LspDiagnosticsInformation guifg=Green ctermfg=Green cterm=underline gui=underline
+hi LspDiagnosticsHint guifg=Cyan ctermfg=Cyan cterm=underline gui=underline
