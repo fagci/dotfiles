@@ -64,6 +64,7 @@ set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
+set completeopt=menuone,noselect
 
 " Search
 set ignorecase incsearch hlsearch smartcase
@@ -109,8 +110,9 @@ Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
 
 " UI
-Plug 'lifepillar/vim-gruvbox8'
 Plug 'folke/lsp-colors.nvim'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " TEST ZONE
 
@@ -206,8 +208,25 @@ nnoremap <Leader>b :Buffers<CR>
 
 nnoremap <Leader>M :GitMessenger<CR>
 
+" LSP
 
-" Autoccommands
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader> rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+
+" ==============================
+" AUTOCOMMANDS
+" ==============================
 
 silent !stty -ixon
 
@@ -222,60 +241,6 @@ augroup GoToLastPosition
       \ | endif
 augroup END
 
-" ==============================
-" EXPERIMENTS WITH LSP BELOW
-" ==============================
-
-lua << EOF
-local nvim_lsp = require('lspconfig')
-local on_attach = function(client, bufnr)
-    require "lsp_signature".on_attach()
-end
-
---Enable completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local general_on_attach = function(client, bufnr)
-  if client.resolved_capabilities.completion then
-    require "lsp_signature".on_attach()
-  end
-end
-
--- Setup basic lsp servers
-for _, server in pairs({"pyright", "intelephense", "html", "cssls"}) do
-  nvim_lsp[server].setup {
-    capabilities = capabilities,
-    on_attach = on_attach
-  }
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-        prefix = "//",
-        spacing = 2,
---        severity_limit = "Warning",
-    },
-    underline = true,
-    signs = true,
-    update_in_insert = false,
-  }
-)
-
-require'lspconfig'.sqls.setup{
-    on_attach = function(client)
-        client.resolved_capabilities.execute_command = true
-
-        require'sqls'.setup{}
-    end
-}
-
-require('nvim-autopairs').setup()
-
-
-EOF
-
 let g:vimwiki_key_mappings = {
             \ 'all_maps': 1,
             \ 'global': 1,
@@ -289,50 +254,43 @@ let g:vimwiki_key_mappings = {
             \ 'mouse': 0,
             \ }
 
-set completeopt=menuone,noselect
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 2
-let g:compe.preselect = 'always'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.resolve_timeout = 800
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
+" ==============================
+" LUA
+" ==============================
 
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
-" let g:compe.source.vsnip = v:true
-let g:compe.source.ultisnips = v:true
-" let g:compe.source.emoji = v:true
+lua << EOF
+local servers = {"pyright", "intelephense", "html", "cssls", "vimls", "bashls", "yamlls", "vuels"}
 
+local nvim_lsp = require('lspconfig')
 
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+require('nvim-autopairs').setup()
 
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader> rn <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
+require('compe').setup {
+    preselect = "always";
+    min_length = 2;
+    source = {
+        path = true;
+        buffer = true;
+        calc = true;
+        nvim_lsp = true;
+        ultisnips = true;
+    };
+}
 
+require('colorizer').setup {
+  'css';
+  css = { css = true }
+}
+
+local on_attach = function(client, bufnr)
+    require('lsp_signature').on_attach()
+end
+
+for _, server in ipairs(servers) do
+  nvim_lsp[server].setup { on_attach = on_attach }
+end
+
+EOF
 
 colorscheme gruvbox8
-
 hi NonText guifg=bg
-
