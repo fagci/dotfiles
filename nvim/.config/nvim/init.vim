@@ -1,7 +1,7 @@
-" ======================================== 
+" ========================================
 " Author: fagci
 " CreationDate: 2021-07-04
-" ======================================== 
+" ========================================
 
 " Speedup
 let g:loaded_matchparen        = 1
@@ -71,7 +71,7 @@ set ignorecase incsearch hlsearch smartcase
 set inccommand=nosplit " live substitution
 
 " Statusline
-set stl=[%n]%{&paste?'\ PASTE':''}\  
+set stl=[%n]%{&paste?'\ PASTE':''}\
 set stl+=%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%)
 set stl+=%=%l:%c/%L\ %y
 
@@ -89,6 +89,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki' " to keep completions work
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-compe'
 
@@ -98,7 +99,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'SirVer/ultisnips'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -110,22 +114,21 @@ Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
 
 " UI
+Plug 'RRethy/vim-illuminate'
 Plug 'folke/lsp-colors.nvim'
 Plug 'lifepillar/vim-gruvbox8'
-Plug 'norcalli/nvim-colorizer.lua'
 
 " TEST ZONE
 
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
-Plug 'ray-x/lsp_signature.nvim'
 Plug 'nanotee/sqls.nvim'
 
 
 call plug#end()
 
-" ======================================== 
+" ========================================
 " Functions
-" ======================================== 
+" ========================================
 
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
@@ -137,9 +140,9 @@ command! -bang -nargs=* GRG
             \   'rg --column --line-number --no-heading --color=always --fixed-strings --max-filesize=10240000 --smart-case --glob "!.git/*" --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map" -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
-" ======================================== 
+" ========================================
 " Mappings
-" ======================================== 
+" ========================================
 
 nmap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
@@ -191,7 +194,7 @@ nnoremap <silent> <leader><bar> :execute "set colorcolumn="
 noremap <Leader>/ :Commentary<CR>
 
 " Vifm
-map <Leader>vv :Vifm<CR> 
+map <Leader>vv :Vifm<CR>
 
 " Vim-plug
 nnoremap <silent> <leader>pi :PlugInstall<CR>
@@ -264,6 +267,10 @@ local servers = {"pyright", "intelephense", "html", "cssls", "vimls", "bashls", 
 local nvim_lsp = require('lspconfig')
 
 require('nvim-autopairs').setup()
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true -- it will auto insert `(` after select function or method item
+})
 
 require('compe').setup {
     preselect = "always";
@@ -273,6 +280,8 @@ require('compe').setup {
         buffer = true;
         calc = true;
         nvim_lsp = true;
+        nvim_lua = true;
+        vsnip = true;
         ultisnips = true;
     };
 }
@@ -282,8 +291,25 @@ require('colorizer').setup {
   css = { css = true }
 }
 
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{}
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+
 local on_attach = function(client, bufnr)
-    require('lsp_signature').on_attach()
+    -- empty for now
+    require 'illuminate'.on_attach(client)
 end
 
 for _, server in ipairs(servers) do
@@ -293,4 +319,3 @@ end
 EOF
 
 colorscheme gruvbox8
-hi NonText guifg=bg
