@@ -98,8 +98,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
-Plug 'SirVer/ultisnips'
-Plug 'rafamadriz/friendly-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'rafamadriz/friendly-snippets'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'norcalli/nvim-colorizer.lua'
@@ -114,15 +114,16 @@ Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
 
 " UI
-Plug 'RRethy/vim-illuminate'
 Plug 'folke/lsp-colors.nvim'
-Plug 'lifepillar/vim-gruvbox8'
+
 
 " TEST ZONE
 
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
 Plug 'nanotee/sqls.nvim'
 
+Plug 'rktjmp/lush.nvim'
+Plug 'npxbr/gruvbox.nvim'
 
 call plug#end()
 
@@ -282,7 +283,6 @@ require('compe').setup {
         nvim_lsp = true;
         nvim_lua = true;
         vsnip = true;
-        ultisnips = true;
     };
 }
 
@@ -309,7 +309,6 @@ end
 
 local on_attach = function(client, bufnr)
     -- empty for now
-    require 'illuminate'.on_attach(client)
 end
 
 for _, server in ipairs(servers) do
@@ -318,4 +317,7 @@ end
 
 EOF
 
-colorscheme gruvbox8
+colorscheme gruvbox
+
+hi! Normal guibg=NONE ctermbg=NONE
+hi! SignColumn guibg=NONE ctermbg=NONE
