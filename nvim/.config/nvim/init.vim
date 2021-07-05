@@ -85,37 +85,38 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vimwiki/vimwiki' " to keep completions work
+
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'hrsh7th/nvim-compe'
 
 " Editing
+Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-" Plug 'honza/vim-snippets'
-Plug 'hrsh7th/vim-vsnip'
-" Plug 'SirVer/ultisnips'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'vimwiki/vimwiki'
 Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-dadbod'
+Plug 'editorconfig/editorconfig-vim'
 
 " UI
 Plug 'lifepillar/vim-gruvbox8'
-
-
+Plug 'folke/lsp-colors.nvim'
 
 " TEST ZONE
 
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'nanotee/sqls.nvim'
 
 
 call plug#end()
@@ -131,7 +132,7 @@ command! -bang -nargs=* RG
 
 command! -bang -nargs=* GRG
             \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --glob "!.git/*" -- '.shellescape(<q-args>), 1,
+            \   'rg --column --line-number --no-heading --color=always --fixed-strings --max-filesize=10240000 --smart-case --glob "!.git/*" --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map" -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " ======================================== 
@@ -205,6 +206,22 @@ nnoremap <Leader>b :Buffers<CR>
 
 nnoremap <Leader>M :GitMessenger<CR>
 
+
+" Autoccommands
+
+silent !stty -ixon
+
+augroup Ixon
+    autocmd! VimLeave * silent !stty ixon
+augroup END
+
+augroup GoToLastPosition
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
+augroup END
+
 " ==============================
 " EXPERIMENTS WITH LSP BELOW
 " ==============================
@@ -246,8 +263,31 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+require'lspconfig'.sqls.setup{
+    on_attach = function(client)
+        client.resolved_capabilities.execute_command = true
+
+        require'sqls'.setup{}
+    end
+}
+
+require('nvim-autopairs').setup()
+
+
 EOF
 
+let g:vimwiki_key_mappings = {
+            \ 'all_maps': 1,
+            \ 'global': 1,
+            \ 'headers': 0,
+            \ 'text_objs': 0,
+            \ 'table_format': 0,
+            \ 'table_mappings': 0,
+            \ 'lists': 0,
+            \ 'links': 1,
+            \ 'html': 0,
+            \ 'mouse': 0,
+            \ }
 
 set completeopt=menuone,noselect
 let g:compe = {}
@@ -255,7 +295,7 @@ let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
 let g:compe.debug = v:false
 let g:compe.min_length = 2
-let g:compe.preselect = 'enable'
+let g:compe.preselect = 'always'
 let g:compe.throttle_time = 80
 let g:compe.source_timeout = 200
 let g:compe.resolve_timeout = 800
@@ -270,8 +310,8 @@ let g:compe.source.path = v:true
 let g:compe.source.buffer = v:true
 let g:compe.source.calc = v:true
 let g:compe.source.nvim_lsp = v:true
-let g:compe.source.vsnip = v:true
-" let g:compe.source.ultisnips = v:true
+" let g:compe.source.vsnip = v:true
+let g:compe.source.ultisnips = v:true
 " let g:compe.source.emoji = v:true
 
 
@@ -282,34 +322,17 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader> rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
 
 
 colorscheme gruvbox8
+
 hi NonText guifg=bg
-highlight SignColumn guibg=GruvboxBg0
-" highlight link NormalFloat GruvboxFg0
 
-" Errors in Red
-hi LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
-" Warnings in Yellow
-hi LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
-" Info and Hints in White
-hi LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White
-hi LspDiagnosticsVirtualTextHint guifg=White ctermfg=White
-
-" Underline the offending code
-hi LspDiagnosticsUnderlineError guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineWarning guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineInformation guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineHint guifg=NONE ctermfg=NONE cterm=underline gui=underline
-
-hi LspDiagnosticsError guifg=Red ctermfg=Red cterm=underline gui=underline
-hi LspDiagnosticsWarning guifg=Yellow ctermfg=Yellow cterm=underline gui=underline
-hi LspDiagnosticsInformation guifg=Green ctermfg=Green cterm=underline gui=underline
-hi LspDiagnosticsHint guifg=Cyan ctermfg=Cyan cterm=underline gui=underline
