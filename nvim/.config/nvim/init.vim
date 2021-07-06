@@ -77,55 +77,63 @@ set stl+=%=%l:%c/%L\ %y
 
 set shortmess+=c
 
-" Install VIM-Plug if not
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Install packer if not installed
+let install_path = stdpath("data") . "/site/pack/packer/start/packer.nvim"
+if empty(glob(install_path)) > 0
+  execute printf("!git clone https://github.com/wbthomason/packer.nvim %s", install_path)
+  packadd packer.nvim
 endif
 
-call plug#begin('~/.vim/plugged')
+lua << EOF
 
-Plug 'vimwiki/vimwiki' " to keep completions work
+plugins = {
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'hrsh7th/nvim-compe'
+'vimwiki/vimwiki',
 
-" Editing
-Plug 'windwp/nvim-autopairs'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
-" Plug 'SirVer/ultisnips'
-" Plug 'rafamadriz/friendly-snippets'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'norcalli/nvim-colorizer.lua'
+'neovim/nvim-lspconfig',
+'kabouzeid/nvim-lspinstall',
+{'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
+'hrsh7th/nvim-compe',
 
-" Utils
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+-- Editing
+'windwp/nvim-autopairs',
+'tpope/vim-commentary',
+'tpope/vim-surround',
+'mattn/emmet-vim',
+'hrsh7th/vim-vsnip',
+'godlygeek/tabular',
+'norcalli/nvim-colorizer.lua',
 
-Plug 'vifm/vifm.vim'
-Plug 'vim-scripts/dbext.vim'
-Plug 'tpope/vim-dadbod'
-Plug 'editorconfig/editorconfig-vim'
+-- Utils
+{ 'junegunn/fzf', dir = '~/.fzf', run = './install --all' },
+'junegunn/fzf.vim',
 
-" UI
-Plug 'folke/lsp-colors.nvim'
+'vifm/vifm.vim',
+'vim-scripts/dbext.vim',
+'tpope/vim-dadbod',
+'editorconfig/editorconfig-vim',
+'kristijanhusak/vim-dadbod-completion',
 
+-- UI
+'folke/lsp-colors.nvim',
 
-" TEST ZONE
+-- TEST ZONE
 
-Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
-Plug 'nanotee/sqls.nvim'
+'rhysd/git-messenger.vim',
+'nanotee/sqls.nvim',
 
-Plug 'rktjmp/lush.nvim'
-Plug 'npxbr/gruvbox.nvim'
+'rktjmp/lush.nvim',
+'npxbr/gruvbox.nvim'
+}
 
-call plug#end()
+require('packer').startup(function(use)
+  for _, v in pairs(plugins) do
+    use(v)
+  end
+end)
+
+EOF
+
 
 " ========================================
 " Functions
@@ -215,7 +223,7 @@ nnoremap <Leader>M :GitMessenger<CR>
 " LSP
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader> rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
@@ -243,6 +251,10 @@ augroup GoToLastPosition
       \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
       \ |   exe "normal! g`\""
       \ | endif
+augroup END
+
+augroup LangTemp
+    autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
 augroup END
 
 let g:vimwiki_key_mappings = {
@@ -276,6 +288,8 @@ require("nvim-autopairs.completion.compe").setup({
 require('compe').setup {
     preselect = "always";
     min_length = 2;
+    max_menu_width = 100;
+    documentation = true;
     source = {
         path = true;
         buffer = true;
@@ -283,6 +297,7 @@ require('compe').setup {
         nvim_lsp = true;
         nvim_lua = true;
         vsnip = true;
+        vim_dadbod_completion = true;
     };
 }
 
