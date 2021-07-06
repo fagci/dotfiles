@@ -93,12 +93,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki' " to keep completions work
 
+" LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
+
+" Syntax hl
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'hrsh7th/nvim-compe'
+Plug 'chr4/nginx.vim'
 
 " Editing
+Plug 'hrsh7th/nvim-compe'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -217,6 +221,8 @@ nnoremap <Leader>b :Buffers<CR>
 
 " GIT (figitive + git-messenger)
 nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gl :Git pull<CR>
 nnoremap <Leader>M :GitMessenger<CR>
 
 " LSP
