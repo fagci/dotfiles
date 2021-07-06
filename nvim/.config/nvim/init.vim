@@ -65,10 +65,15 @@ set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 set completeopt=menuone,noselect
+set nrformats=alpha,hex,bin " <c-a> <c-x> inc dec
 
 " Search
 set ignorecase incsearch hlsearch smartcase
 set inccommand=nosplit " live substitution
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ -HS\ --line-number
+  set grepformat=%f:%l:%c:%m
+endif
 
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\
@@ -105,6 +110,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
@@ -209,6 +215,8 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
+" GIT (figitive + git-messenger)
+nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>M :GitMessenger<CR>
 
 " LSP
