@@ -83,7 +83,7 @@ set stl+=%=%l:%c/%L\ %y
 set shortmess+=c
 
 " Install VIM-Plug if not
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = stdpath('data') . '/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -109,6 +109,7 @@ Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'sbdchd/neoformat'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
