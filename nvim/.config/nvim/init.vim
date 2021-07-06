@@ -77,63 +77,58 @@ set stl+=%=%l:%c/%L\ %y
 
 set shortmess+=c
 
-" Install packer if not installed
-let install_path = stdpath("data") . "/site/pack/packer/start/packer.nvim"
-if empty(glob(install_path)) > 0
-  execute printf("!git clone https://github.com/wbthomason/packer.nvim %s", install_path)
-  packadd packer.nvim
+" Install VIM-Plug if not
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-lua << EOF
-
-plugins = {
-
-'vimwiki/vimwiki',
-
-'neovim/nvim-lspconfig',
-'kabouzeid/nvim-lspinstall',
-{'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'},
-'hrsh7th/nvim-compe',
-
--- Editing
-'windwp/nvim-autopairs',
-'tpope/vim-commentary',
-'tpope/vim-surround',
-'mattn/emmet-vim',
-'hrsh7th/vim-vsnip',
-'godlygeek/tabular',
-'norcalli/nvim-colorizer.lua',
-
--- Utils
-{ 'junegunn/fzf', dir = '~/.fzf', run = './install --all' },
-'junegunn/fzf.vim',
-
-'vifm/vifm.vim',
-'vim-scripts/dbext.vim',
-'tpope/vim-dadbod',
-'editorconfig/editorconfig-vim',
-'kristijanhusak/vim-dadbod-completion',
-
--- UI
-'folke/lsp-colors.nvim',
-
--- TEST ZONE
-
-'rhysd/git-messenger.vim',
-'nanotee/sqls.nvim',
-
-'rktjmp/lush.nvim',
-'npxbr/gruvbox.nvim'
-}
-
-require('packer').startup(function(use)
-  for _, v in pairs(plugins) do
-    use(v)
-  end
-end)
 
 EOF
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'vimwiki/vimwiki' " to keep completions work
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'hrsh7th/nvim-compe'
+
+" Editing
+Plug 'windwp/nvim-autopairs'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+" Plug 'SirVer/ultisnips'
+" Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Utils
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'vifm/vifm.vim'
+Plug 'vim-scripts/dbext.vim'
+Plug 'tpope/vim-dadbod'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'kristijanhusak/vim-dadbod-completion'
+
+" UI
+Plug 'folke/lsp-colors.nvim'
+
+
+" TEST ZONE
+
+Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
+Plug 'nanotee/sqls.nvim'
+
+Plug 'rktjmp/lush.nvim'
+Plug 'npxbr/gruvbox.nvim'
+
+call plug#end()
 
 " ========================================
 " Functions
@@ -221,16 +216,15 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>M :GitMessenger<CR>
 
 " LSP
-
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
 
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
