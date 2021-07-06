@@ -109,7 +109,6 @@ Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'norcalli/nvim-colorizer.lua'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -125,6 +124,7 @@ Plug 'kristijanhusak/vim-dadbod-completion'
 " UI
 Plug 'folke/lsp-colors.nvim'
 Plug 'morhetz/gruvbox'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
@@ -194,6 +194,7 @@ noremap <silent> <C-S-Right> :vertical resize +1<CR>
 noremap <silent> <C-S-Up> :resize +1<CR>
 noremap <silent> <C-S-Down> :resize -1<CR>
 
+" Buffers management
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
@@ -212,6 +213,7 @@ nnoremap <silent> <leader>pu :PlugUpdate<CR>
 nnoremap <silent> <leader>pc :PlugClean<CR>
 nnoremap <silent> <leader>pg :PlugUpgrade<CR>
 
+" Project navigation
 nnoremap <tab> :GFiles --cache<cr>
 nnoremap <Leader><tab> :Files<CR>
 nnoremap <Leader>f :GRG<CR>
@@ -236,6 +238,7 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
 
+" Completions
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
@@ -260,6 +263,10 @@ augroup END
 augroup LangTemp
     autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
 augroup END
+
+" ==============================
+" Variables
+" ==============================
 
 let g:vimwiki_key_mappings = {
             \ 'all_maps': 1,
@@ -305,10 +312,7 @@ require('compe').setup {
     };
 }
 
-require('colorizer').setup {
-  'css';
-  css = { css = true }
-}
+require('colorizer').setup { 'css'; css = { css = true } }
 
 local function setup_servers()
   require'lspinstall'.setup()
