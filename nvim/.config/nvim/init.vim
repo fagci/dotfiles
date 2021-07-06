@@ -84,8 +84,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-EOF
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki' " to keep completions work
