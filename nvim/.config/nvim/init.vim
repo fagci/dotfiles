@@ -113,9 +113,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'kristijanhusak/vim-dadbod-completion'
 
 " UI
-Plug 'folke/lsp-colors.nvim' " better lsp hl for now
-Plug 'rktjmp/lush.nvim'
-Plug 'npxbr/gruvbox.nvim'
+Plug 'folke/lsp-colors.nvim'
+Plug 'morhetz/gruvbox'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
@@ -126,14 +125,19 @@ call plug#end()
 " Functions
 " ========================================
 
+let rg_default = 'rg --max-filesize=512000 --column --line-number --no-heading --color=always --glob "!.git/*"'
+let rg_match_opts = ' --fixed-strings --smart-case'
+let rg_full_opts = rg_match_opts . ' --no-ignore'
+let rg_git_opts = rg_match_opts . ' --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map"'
+
 command! -bang -nargs=* RG
             \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --fixed-strings --no-ignore --smart-case --glob "!.git/*" -- '.shellescape(<q-args>), 1,
+            \   rg_default . rg_full_opts . ' -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 command! -bang -nargs=* GRG
             \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --fixed-strings --max-filesize=10240000 --smart-case --glob "!.git/*" --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map" -- '.shellescape(<q-args>), 1,
+            \   rg_default . rg_git_opts . ' -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " ========================================
