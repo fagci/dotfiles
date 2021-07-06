@@ -4,20 +4,20 @@
 " ========================================
 
 " Speedup
-let g:loaded_matchparen        = 1
-let g:loaded_matchit           = 1
-let g:loaded_logiPat           = 1
-let g:loaded_rrhelper          = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_gzip              = 1
-let g:loaded_zipPlugin         = 1
 let g:loaded_2html_plugin      = 1
-let g:loaded_shada_plugin      = 1
-let g:loaded_spellfile_plugin  = 1
+let g:loaded_gzip              = 1
+let g:loaded_logiPat           = 1
+let g:loaded_matchit           = 1
+let g:loaded_matchparen        = 1
 let g:loaded_netrw             = 1
 let g:loaded_netrwPlugin       = 1
-let g:loaded_tutor_mode_plugin = 1
 let g:loaded_remote_plugins    = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_shada_plugin      = 1
+let g:loaded_spellfile_plugin  = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_tutor_mode_plugin = 1
+let g:loaded_zipPlugin         = 1
 
 set lazyredraw
 set updatetime=300
@@ -98,8 +98,6 @@ Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
-" Plug 'SirVer/ultisnips'
-" Plug 'rafamadriz/friendly-snippets'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'norcalli/nvim-colorizer.lua'
@@ -115,16 +113,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'kristijanhusak/vim-dadbod-completion'
 
 " UI
-Plug 'folke/lsp-colors.nvim'
-
-
-" TEST ZONE
-
-Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
-Plug 'nanotee/sqls.nvim'
-
+Plug 'folke/lsp-colors.nvim' " better lsp hl for now
 Plug 'rktjmp/lush.nvim'
 Plug 'npxbr/gruvbox.nvim'
+
+" TEST ZONE
+Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
 
 call plug#end()
 
