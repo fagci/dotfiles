@@ -3,7 +3,6 @@
 # zmodload zsh/zprof
 autoload -Uz vcs_info colors
 
-# export TERM=screen-256color
 export INPUTRC=~/.inputrc
 export EDITOR=vim
 export PATH=$PATH:~/bin
@@ -68,8 +67,6 @@ zinit for \
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
-
-# [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh # output hl
 
 if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
     export MPD_HOST=localhost
