@@ -92,6 +92,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-compe'
+Plug 'nelsyeung/twig.vim'
+Plug 'kchmck/vim-coffee-script'
 
 " Editing
 Plug 'windwp/nvim-autopairs'
