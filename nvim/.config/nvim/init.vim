@@ -123,7 +123,7 @@ Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'kristijanhusak/vim-dadbod-completion'
+"Plug 'kristijanhusak/vim-dadbod-completion'
 
 " UI
 Plug 'folke/lsp-colors.nvim'
@@ -301,18 +301,18 @@ require("nvim-autopairs.completion.compe").setup({
 })
 
 require('compe').setup {
-    preselect = "always";
+--    preselect = "always";
     min_length = 2;
-    max_menu_width = 100;
-    documentation = true;
+--    max_menu_width = 100;
+    documentation = false;
     source = {
         path = true;
         buffer = true;
         calc = true;
         nvim_lsp = true;
-        nvim_lua = true;
+--        nvim_lua = true;
         vsnip = true;
-        vim_dadbod_completion = true;
+--        vim_dadbod_completion = true;
     };
 }
 

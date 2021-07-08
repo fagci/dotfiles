@@ -176,6 +176,7 @@ label = "%percentage_used%%"
 type = internal/temperature
 label = " %temperature-c%"
 interval = 5
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input
 
 [module/i3]
 type = internal/i3
