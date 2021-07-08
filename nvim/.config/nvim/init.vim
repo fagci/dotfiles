@@ -65,10 +65,15 @@ set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
 set completeopt=menuone,noselect
+set nrformats=alpha,hex,bin " <c-a> <c-x> inc dec
 
 " Search
 set ignorecase incsearch hlsearch smartcase
 set inccommand=nosplit " live substitution
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ -HS\ --line-number
+  set grepformat=%f:%l:%c:%m
+endif
 
 " Statusline
 set stl=[%n]%{&paste?'\ PASTE':''}\
@@ -78,7 +83,7 @@ set stl+=%=%l:%c/%L\ %y
 set shortmess+=c
 
 " Install VIM-Plug if not
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = stdpath('data') . '/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -88,25 +93,31 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki' " to keep completions work
 
+" LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
+
+" Syntax hl
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-compe'
 Plug 'nelsyeung/twig.vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'chr4/nginx.vim'
 
 " Editing
+Plug 'hrsh7th/nvim-compe'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'sbdchd/neoformat'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'vifm/vifm.vim'
 Plug 'vim-scripts/dbext.vim'
@@ -117,6 +128,7 @@ Plug 'kristijanhusak/vim-dadbod-completion'
 " UI
 Plug 'folke/lsp-colors.nvim'
 Plug 'morhetz/gruvbox'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
@@ -186,6 +198,7 @@ noremap <silent> <C-S-Right> :vertical resize +1<CR>
 noremap <silent> <C-S-Up> :resize +1<CR>
 noremap <silent> <C-S-Down> :resize -1<CR>
 
+" Buffers management
 nnoremap <leader>q :bp<bar>bd#<cr>
 nnoremap <leader>Q :bp!<bar>bd!#<cr>
 
@@ -204,6 +217,7 @@ nnoremap <silent> <leader>pu :PlugUpdate<CR>
 nnoremap <silent> <leader>pc :PlugClean<CR>
 nnoremap <silent> <leader>pg :PlugUpgrade<CR>
 
+" Project navigation
 nnoremap <tab> :GFiles --cache<cr>
 nnoremap <Leader><tab> :Files<CR>
 nnoremap <Leader>f :GRG<CR>
@@ -211,6 +225,10 @@ nnoremap <Leader>F :RG<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 
+" GIT (figitive + git-messenger)
+nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gl :Git pull<CR>
 nnoremap <Leader>M :GitMessenger<CR>
 
 " LSP
@@ -224,6 +242,7 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
 
+" Completions
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
@@ -248,6 +267,10 @@ augroup END
 augroup LangTemp
     autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
 augroup END
+
+" ==============================
+" Variables
+" ==============================
 
 let g:vimwiki_key_mappings = {
             \ 'all_maps': 1,
@@ -293,10 +316,7 @@ require('compe').setup {
     };
 }
 
-require('colorizer').setup {
-  'css';
-  css = { css = true }
-}
+require('colorizer').setup { 'css'; css = { css = true } }
 
 local function setup_servers()
   require'lspinstall'.setup()
