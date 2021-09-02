@@ -24,7 +24,7 @@ set updatetime=300
 set hidden confirm " this speeds up buffer switch x25 I think
 set switchbuf=useopen
 set ttimeoutlen=0  " remove delay on mode change
-set synmaxcol=300
+set synmaxcol=1000
 " old regex for large files
 if line('$') > 1000
     set re=1
