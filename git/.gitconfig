@@ -1,10 +1,10 @@
 [user]
 	email = fagci.nsk@gmail.com
 	name = Mikhail Yudin
-	username = fagcinsk
+	username = fagci
 
 [github]
-	user = fagcinsk
+	user = fagci
 
 [core]
   editor = vim

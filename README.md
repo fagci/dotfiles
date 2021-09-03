@@ -1,14 +1,14 @@
 # Dotfiles
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles?ref=badge_shield)
 
-![](https://raw.githubusercontent.com/fagcinsk/dotfiles/master/screenshot.png)
+![](https://raw.githubusercontent.com/fagci/dotfiles/master/screenshot.png)
 
 ## Install
 
 1. Clone this repo to home directory
     ```sh
-    git clone https://github.com/fagcinsk/dotfiles ~/.dotfiles
+    git clone https://github.com/fagci/dotfiles ~/.dotfiles
     ```
 1. Go into cloned repo root directory
     ```sh
@@ -43,5 +43,5 @@ Enjoy.
 
 ## License
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles?ref=badge_large)
 
