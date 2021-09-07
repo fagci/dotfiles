@@ -291,8 +291,6 @@ let g:vimwiki_key_mappings = {
 " ==============================
 
 lua << EOF
-local servers = {"html", "cssls", "vimls", "bashls", "yamlls", "vuels"}
-
 local nvim_lsp = require('lspconfig')
 
 require('nvim-autopairs').setup()
@@ -334,15 +332,6 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
-
-local on_attach = function(client, bufnr)
-    -- empty for now
-end
-
-for _, server in ipairs(servers) do
-  nvim_lsp[server].setup { on_attach = on_attach }
-end
-
 EOF
 
 colorscheme gruvbox
