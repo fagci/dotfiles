@@ -235,8 +235,8 @@ nnoremap <Leader>M :GitMessenger<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <leader>. :Neoformat<CR>
+nnoremap <leader>. <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <leader>= :Neoformat<CR>
 nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
