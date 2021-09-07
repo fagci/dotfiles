@@ -291,7 +291,7 @@ let g:vimwiki_key_mappings = {
 " ==============================
 
 lua << EOF
-local servers = {"intelephense", "html", "cssls", "vimls", "bashls", "yamlls", "vuels"}
+local servers = {"html", "cssls", "vimls", "bashls", "yamlls", "vuels"}
 
 local nvim_lsp = require('lspconfig')
 
