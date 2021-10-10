@@ -22,3 +22,5 @@
 [branch]
   autosetuprebase = always
 
+[credential]
+	helper = store
