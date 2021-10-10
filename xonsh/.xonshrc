@@ -2,9 +2,11 @@
 $XONSH_HISTORY_BACKEND = 'sqlite'
 #$SHELL_TYPE=prompt_toolkit
 $HISTCONTROL='ignoredups'
-$TERM='xterm-256color'
 
 $PATH.extend([$HOME + '/.local/bin'])
+
+# workaround https://github.com/xonsh/xonsh/issues/4409
+__import__('warnings').simplefilter('ignore', DeprecationWarning, 882)
 
 
 def _rtn():
@@ -13,7 +15,7 @@ def _rtn():
 
 def _check_url(url):
     import requests
-    r = requests.get(url[0])
+    r = requests.get(url[0], headers={'User-Agent':'Mozilla/5.0'})
     print(r.status_code, int(r.elapsed.total_seconds()*1000), 'ms')
 
 $PROMPT_FIELDS['rtn'] = _rtn
@@ -41,10 +43,8 @@ if 'TERMUX_VERSION' in ${...}:
     aliases['pki'] = 'pkg install'
     aliases['pku'] = 'pkg update'
     aliases['pkug'] = 'pkg upgrade'
-    launch = p'$PREFIX/../home/storage/shared/termuxlauncher/.apps-launcher'
-    if launch.exists():
-        source-bash @(launch)
-else:
+
+if $(which fzf):
     xontrib load fzf-widgets
 
     $fzf_history_binding = "c-r"  # Ctrl+R
