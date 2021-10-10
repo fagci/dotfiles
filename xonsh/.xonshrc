@@ -19,9 +19,9 @@ def _check_url(url):
 $PROMPT_FIELDS['rtn'] = _rtn
 
 if 'SSH_CLIENT' in ${...}:
-    $PROMPT='{RED}{rtn:{} }{GREEN}{user}@{hostname} {CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{RESET}{YELLOW}⪫{RESET} '
+    $PROMPT='{RED}{rtn:{} }{GREEN}{user}@{hostname} {CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{YELLOW}⪫{RESET} '
 else:
-    $PROMPT='{RED}{rtn:{} }{CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{RESET}{YELLOW}⪫{RESET} '
+    $PROMPT='{RED}{rtn:{} }{CYAN}{cwd}{WHITE}{BACKGROUND_BLACK}{curr_branch: {} }{YELLOW}⪫{RESET} '
 
 
 aliases['l'] = 'ls'
