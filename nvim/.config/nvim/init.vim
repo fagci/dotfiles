@@ -102,6 +102,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-compe'
 Plug 'nelsyeung/twig.vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'elixir-editors/vim-elixir'
 Plug 'chr4/nginx.vim'
 
 " Editing
@@ -117,18 +118,13 @@ Plug 'sbdchd/neoformat'
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
 
 Plug 'vifm/vifm.vim'
-Plug 'vim-scripts/dbext.vim'
-Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'kristijanhusak/vim-dadbod-completion'
 
 " UI
 Plug 'folke/lsp-colors.nvim'
 Plug 'morhetz/gruvbox'
-Plug 'norcalli/nvim-colorizer.lua'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
@@ -314,8 +310,6 @@ require('compe').setup {
 --        vim_dadbod_completion = true;
     };
 }
-
-require('colorizer').setup { 'css'; css = { css = true } }
 
 local function setup_servers()
   require'lspinstall'.setup()
