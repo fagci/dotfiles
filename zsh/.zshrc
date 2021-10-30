@@ -5,8 +5,7 @@ autoload -Uz vcs_info colors
 
 export INPUTRC=~/.inputrc
 export EDITOR=vim
-export PATH=$PATH:~/bin
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/bin:~/.local/bin
 export LANG=en_US.UTF-8
 export fpath=(~/.termux/completions $fpath)
 
