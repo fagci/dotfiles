@@ -4,7 +4,7 @@
 autoload -Uz vcs_info colors
 
 export INPUTRC=~/.inputrc
-export EDITOR=vim
+export EDITOR=nvim
 export PATH=$PATH:~/bin:~/.local/bin
 export LANG=en_US.UTF-8
 export fpath=(~/.termux/completions $fpath)
@@ -34,7 +34,7 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-zstyle ':vcs_info:git:*' formats ' %b '
+zstyle ':vcs_info:git:*' formats ' %b'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' format '%F{yellow}%d:%f'
