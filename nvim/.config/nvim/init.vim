@@ -104,15 +104,27 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'elixir-editors/vim-elixir'
 Plug 'chr4/nginx.vim'
 
-" Editing
-" Plug 'hrsh7th/nvim-compe'
-Plug 'windwp/nvim-autopairs'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
+" Completion
+Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
+
+" Editing
+Plug 'b3nj5m1n/kommentary'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'hrsh7th/vim-vsnip'
+Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
+Plug 'tpope/vim-surround'
+Plug 'windwp/nvim-autopairs'
+Plug 'ray-x/lsp_signature.nvim'
 
 " Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -126,22 +138,7 @@ Plug 'RRethy/nvim-base16'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
-
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
 Plug 'andymass/vim-matchup'
-
-Plug 'onsails/lspkind-nvim'
-Plug 'ray-x/lsp_signature.nvim'
-
-Plug 'rafamadriz/friendly-snippets'
 
 call plug#end()
 
@@ -215,8 +212,6 @@ nnoremap <leader>Q :bp!<bar>bd!#<cr>
 " toggle colorcolumn with ,|
 nnoremap <silent> <leader><bar> :execute "set colorcolumn="
             \ . (&colorcolumn == "" ? "80" : "")<CR>
-
-noremap <Leader>/ :Commentary<CR>
 
 " Vifm
 map <Leader>vv :Vifm<CR>
@@ -298,6 +293,11 @@ let g:vimwiki_key_mappings = {
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
+vim.g.kommentary_create_default_mappings = false
+vim.api.nvim_set_keymap("n", "<leader>/", "<Plug>kommentary_line_default", {})
+-- vim.api.nvim_set_keymap("n", "<leader>/", "<Plug>kommentary_motion_default", {})
+vim.api.nvim_set_keymap("x", "<leader>/", "<Plug>kommentary_visual_default", {})
+
 require('nvim-autopairs').setup()
 
 
@@ -307,10 +307,9 @@ local lspkind = require('lspkind')
 
 cmp.setup({
 snippet = {
-  -- REQUIRED - you must specify a snippet engine
-  expand = function(args)
-    vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-  end,
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
 },
 completion = { completeopt = 'menu,menuone,noinsert' },
 mapping = {
@@ -339,40 +338,24 @@ formatting = {
 },
 sources = cmp.config.sources({
   { name = 'nvim_lsp' },
-  { name = 'vsnip' }, -- For vsnip users.
+  { name = 'calc' },
+  { name = 'vsnip' },
 }, {
   { name = 'buffer' },
 })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-sources = {
-  { name = 'buffer' }
-}
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-sources = cmp.config.sources({
-  { name = 'path' }
-}, {
-  { name = 'cmdline' }
-})
-})
-
-
-
-
+cmp.setup.cmdline('/', {sources = {{ name = 'buffer' }}})
+cmp.setup.cmdline(':', {sources = cmp.config.sources({{ name = 'path' }}, {{ name = 'cmdline' }})})
 
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
     require'lspconfig'[server].setup{
-    on_attach = function(client, bufnr)
-    require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
-  end,
+        on_attach = function(client, bufnr)
+            require "lsp_signature".on_attach()
+        end,
     }
   end
 end
