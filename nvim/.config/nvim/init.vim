@@ -64,7 +64,7 @@ set formatoptions=tcqrn1
 set shiftwidth=4           " Spaces for each (auto)indent.
 set softtabstop=4          " Spaces for tabs when inserting <Tab> or <BS>.
 set tabstop=4              " Spaces that a <Tab> in file counts for.
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noinsert
 set nrformats=alpha,hex,bin " <c-a> <c-x> inc dec
 
 " Search
@@ -99,14 +99,13 @@ Plug 'kabouzeid/nvim-lspinstall'
 
 " Syntax hl
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'hrsh7th/nvim-compe'
 Plug 'nelsyeung/twig.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'elixir-editors/vim-elixir'
 Plug 'chr4/nginx.vim'
 
 " Editing
-Plug 'hrsh7th/nvim-compe'
+" Plug 'hrsh7th/nvim-compe'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -123,11 +122,26 @@ Plug 'vifm/vifm.vim'
 Plug 'editorconfig/editorconfig-vim'
 
 " UI
-Plug 'folke/lsp-colors.nvim'
-Plug 'morhetz/gruvbox'
+Plug 'RRethy/nvim-base16'
 
 " TEST ZONE
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+Plug 'andymass/vim-matchup'
+
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
+
+Plug 'rafamadriz/friendly-snippets'
 
 call plug#end()
 
@@ -239,11 +253,6 @@ nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vca <cmd>lua vim.lsp.buf.code_action()<CR>
 
-" Completions
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
 " ==============================
 " AUTOCOMMANDS
 " ==============================
@@ -290,32 +299,81 @@ lua << EOF
 local nvim_lsp = require('lspconfig')
 
 require('nvim-autopairs').setup()
-require("nvim-autopairs.completion.compe").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true -- it will auto insert `(` after select function or method item
+
+
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+local lspkind = require('lspkind')
+
+cmp.setup({
+snippet = {
+  -- REQUIRED - you must specify a snippet engine
+  expand = function(args)
+    vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+  end,
+},
+completion = { completeopt = 'menu,menuone,noinsert' },
+mapping = {
+  ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+  ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+  ['<C-e>'] = cmp.mapping({
+    i = cmp.mapping.abort(),
+    c = cmp.mapping.close(),
+  }),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+},
+experimental = { ghost_text = false, custom_menu = true },
+formatting = {
+    format = lspkind.cmp_format({with_text=false, menu = ({
+        buffer = "[B]",
+        nvim_lsp = "[L]",
+        vsnip = "[S]",
+        calc = "[C]",
+        path = "[P]",
+        neorg = "[N]",
+        cmp_tabnine = "[T]",
+    }),
+    }),
+},
+sources = cmp.config.sources({
+  { name = 'nvim_lsp' },
+  { name = 'vsnip' }, -- For vsnip users.
+}, {
+  { name = 'buffer' },
+})
 })
 
-require('compe').setup {
-    preselect = "always";
-    min_length = 2;
---    max_menu_width = 100;
-    documentation = false;
-    source = {
-        path = true;
-        buffer = true;
-        calc = true;
-        nvim_lsp = true;
---        nvim_lua = true;
-        vsnip = true;
---        vim_dadbod_completion = true;
-    };
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+sources = {
+  { name = 'buffer' }
 }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+sources = cmp.config.sources({
+  { name = 'path' }
+}, {
+  { name = 'cmdline' }
+})
+})
+
+
+
+
 
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
+    require'lspconfig'[server].setup{
+    on_attach = function(client, bufnr)
+    require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
+  end,
+    }
   end
 end
 
@@ -326,9 +384,7 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
 EOF
 
-colorscheme gruvbox
-
-hi! Normal guibg=NONE ctermbg=NONE
-hi! SignColumn guibg=NONE ctermbg=NONE
+colorscheme base16-gruvbox-dark-hard
