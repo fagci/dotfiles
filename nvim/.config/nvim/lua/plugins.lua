@@ -38,13 +38,12 @@ return packer.startup(function(use)
 		after = {'nvim-lspconfig'}
 	}
 
-	use {'hrsh7th/cmp-path', after = {'nvim-cmp'}}
 	use {'hrsh7th/cmp-nvim-lsp', after = {'nvim-cmp'}}
 	use {'hrsh7th/cmp-buffer', after = {'nvim-cmp'}}
+	use {'hrsh7th/cmp-calc', after = {'nvim-cmp'}}
+	use {'hrsh7th/cmp-path', after = {'nvim-cmp'}}
 	use {'hrsh7th/cmp-vsnip', after = {'nvim-cmp'}}
 	use {'hrsh7th/vim-vsnip', after = {'nvim-cmp'}}
-	-- use {'hrsh7th/cmp-cmdline', after = {'nvim-cmp'}}
-	use {'hrsh7th/cmp-calc', after = {'nvim-cmp'}}
 	use {
 		'windwp/nvim-autopairs',
 		config = function() require('config.nvim-autopairs') end,
@@ -67,6 +66,17 @@ return packer.startup(function(use)
 	-- Utils
 	use 'junegunn/fzf'
 	use 'junegunn/fzf.vim'
+
+	use {
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                {'nvim-lua/plenary.nvim'},
+                {"nvim-telescope/telescope-fzy-native.nvim"}
+            },
+            config = function()
+                require "config.telescope"
+            end,
+        }
 
 	use 'vifm/vifm.vim'
 	use 'editorconfig/editorconfig-vim'

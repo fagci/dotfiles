@@ -56,14 +56,19 @@ map('n', '<leader>pi', ':PackerInstall<CR>', NS)
 map('n', '<leader>pu', ':PackerUpdate<CR>', NS)
 map('n', '<leader>pc', ':PackerClean<CR>', NS)
 map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
+map('n', '<leader>ps', ':PackerSync<CR>', NS)
 
 -- Project navigation
-map('n', '<tab>', ':GFiles --cache<cr>', N)
-map('n', '<Leader><tab>', ':Files<CR>', N)
+map('n', '<tab>', ':Telescope git_files<cr>', N)
+map('n', '<Leader><tab>', ':Telescope find_files hidden=true<CR>', N)
 map('n', '<Leader>f', ':GRG<CR>', N)
-map('n', '<Leader>F', ':RG<CR>', N)
-map('n', '<Leader>h', ':History<CR>', N)
-map('n', '<Leader>b', ':Buffers<CR>', N)
+map('n', '<Leader>F', ':Telescope live_grep<CR>', N)
+map('n', '<Leader>h', ':Telescope history<CR>', N)
+map('n', '<Leader>b', ':Telescope buffers<CR>', N)
+
+map("n", "<leader>gc", ":Telescope git_commits<CR>", {})
+map("n", "<leader>o", ":Telescope oldfiles<CR>", {})
+
 
 -- GIT (figitive + git-messenger)
 map('n', '<Leader>gc', ':Commits<CR>', N)
