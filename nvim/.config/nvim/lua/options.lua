@@ -10,6 +10,7 @@ opt.synmaxcol = 1000
 opt.switchbuf = 'useopen'
 opt.updatetime = 150
 opt.timeoutlen = 1000
+opt.ttimeoutlen = 0
 
 -- Backups
 opt.backup = false
@@ -28,6 +29,10 @@ opt.splitbelow = true
 opt.termguicolors = true
 opt.listchars='tab:▸ ,space:.,trail:•'
 wo.colorcolumn = '80,120'
+wo.statusline = "[%n]%{&paste?' PASTE':''} "
+wo.statusline = wo.statusline .. "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) "
+wo.statusline = wo.statusline .. "%=%l:%c/%L %y"
+
 
 -- Editing
 wo.wrap = false

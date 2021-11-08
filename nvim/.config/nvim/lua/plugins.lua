@@ -8,10 +8,10 @@ return packer.startup(function(use)
 	use {'wbthomason/packer.nvim', opt = true}
 
 	-- Syntax hl
-	use 'nvim-treesitter/nvim-treesitter'
-	use 'nelsyeung/twig.vim'
-	use 'elixir-editors/vim-elixir'
-	use 'chr4/nginx.vim'
+	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+	use {'nelsyeung/twig.vim', ft={'twig'}}
+	use {'elixir-editors/vim-elixir', ft={'elixir'}}
+	use {'chr4/nginx.vim', ft={'nginx'}}
 
 	-- LSP
 
@@ -23,8 +23,6 @@ return packer.startup(function(use)
 			{"kabouzeid/nvim-lspinstall", event = "BufRead"}
 		}
 	}
-
-
 
 	-- Completion
 	use 'onsails/lspkind-nvim'
@@ -45,7 +43,7 @@ return packer.startup(function(use)
 	use {'hrsh7th/cmp-buffer', after = {'nvim-cmp'}}
 	use {'hrsh7th/cmp-vsnip', after = {'nvim-cmp'}}
 	use {'hrsh7th/vim-vsnip', after = {'nvim-cmp'}}
-	use {'hrsh7th/cmp-cmdline', after = {'nvim-cmp'}}
+	-- use {'hrsh7th/cmp-cmdline', after = {'nvim-cmp'}}
 	use {'hrsh7th/cmp-calc', after = {'nvim-cmp'}}
 	use {
 		'windwp/nvim-autopairs',
@@ -79,17 +77,4 @@ return packer.startup(function(use)
 
 	-- TEST ZONE
 	use 'rhysd/git-messenger.vim'
-
-
-	use { 'kyazdani42/nvim-web-devicons' }
-	use {
-		'yamatsum/nvim-nonicons',
-		requires = {'kyazdani42/nvim-web-devicons'}
-	}
-
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-		config = function() require('config.lualine') end
-	}
 end)

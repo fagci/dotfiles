@@ -89,16 +89,6 @@ _G.packer_plugins = {
     path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/cmp-calc",
     url = "https://github.com/hrsh7th/cmp-calc"
   },
-  ["cmp-cmdline"] = {
-    after_files = { "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/cmp-cmdline/after/plugin/cmp_cmdline.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
-  },
   ["cmp-nvim-lsp"] = {
     after_files = { "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua" },
     load_after = {
@@ -182,20 +172,16 @@ _G.packer_plugins = {
     path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
-  ["lualine.nvim"] = {
-    config = { "\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.lualine\frequire\0" },
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-    url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
   neoformat = {
     loaded = true,
     path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/neoformat",
     url = "https://github.com/sbdchd/neoformat"
   },
   ["nginx.vim"] = {
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/nginx.vim",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/nginx.vim",
     url = "https://github.com/chr4/nginx.vim"
   },
   ["nvim-autopairs"] = {
@@ -209,7 +195,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-cmdline", "cmp-path", "cmp-vsnip", "vim-vsnip", "cmp-buffer", "cmp-calc", "nvim-autopairs", "cmp-nvim-lsp" },
+    after = { "cmp-nvim-lsp", "cmp-vsnip", "cmp-path", "cmp-buffer", "nvim-autopairs", "cmp-calc", "vim-vsnip" },
     config = { "\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.nvim-cmp\frequire\0" },
     load_after = {
       ["nvim-lspconfig"] = true
@@ -243,20 +229,10 @@ _G.packer_plugins = {
     path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/nvim-lspinstall",
     url = "https://github.com/kabouzeid/nvim-lspinstall"
   },
-  ["nvim-nonicons"] = {
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/nvim-nonicons",
-    url = "https://github.com/yamatsum/nvim-nonicons"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = false,
@@ -270,8 +246,10 @@ _G.packer_plugins = {
     url = "https://github.com/godlygeek/tabular"
   },
   ["twig.vim"] = {
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/twig.vim",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/twig.vim",
     url = "https://github.com/nelsyeung/twig.vim"
   },
   ["vifm.vim"] = {
@@ -280,8 +258,10 @@ _G.packer_plugins = {
     url = "https://github.com/vifm/vifm.vim"
   },
   ["vim-elixir"] = {
-    loaded = true,
-    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/start/vim-elixir",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/vim-elixir",
     url = "https://github.com/elixir-editors/vim-elixir"
   },
   ["vim-matchup"] = {
@@ -313,18 +293,31 @@ time([[Defining packer_plugins]], false)
 time([[Config for kommentary]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.kommentary\frequire\0", "config", "kommentary")
 time([[Config for kommentary]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.lualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType nginx ++once lua require("packer.load")({'nginx.vim'}, { ft = "nginx" }, _G.packer_plugins)]]
+vim.cmd [[au FileType twig ++once lua require("packer.load")({'twig.vim'}, { ft = "twig" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'friendly-snippets'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-lspinstall'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/nginx.vim/ftdetect/nginx.vim]], true)
+vim.cmd [[source /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/nginx.vim/ftdetect/nginx.vim]]
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/nginx.vim/ftdetect/nginx.vim]], false)
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/twig.vim/ftdetect/twig.vim]], true)
+vim.cmd [[source /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/twig.vim/ftdetect/twig.vim]]
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/twig.vim/ftdetect/twig.vim]], false)
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
+vim.cmd [[source /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
+time([[Sourcing ftdetect script at: /data/data/com.termux/files/home/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
 

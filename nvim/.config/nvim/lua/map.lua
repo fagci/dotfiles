@@ -39,10 +39,10 @@ map('v', '<A-DOWN>', ':m \'>+1<CR>gv=gv', N)
 map('v', '<A-UP>', ':m \'<-2<CR>gv=gv', N)
 
 -- Resize windows
-map('', ':vertical resize -1<CR>', '', NS)
-map('', ':vertical resize +1<CR>', '', NS)
-map('', ':resize +1<CR>', '', NS)
-map('', ':resize -1<CR>', '', NS)
+map('', '<C-S-Left>', ':vertical resize -1<CR>', NS)
+map('', '<C-S-Right>', ':vertical resize +1<CR>', NS)
+map('', '<C-S-Up>', ':resize +1<CR>', NS)
+map('', '<C-S-Down>', ':resize -1<CR>', NS)
 
 -- Buffers management
 map('n', '<leader>q', ':bp<bar>bd#<cr>', N)
@@ -52,10 +52,10 @@ map('n', '<leader>Q', ':bp!<bar>bd!#<cr>', N)
 map('', '<Leader>vv', ':Vifm<CR>', {})
 
 -- Vim-plug
-map('n', '<leader>pi', ':PlugInstall<CR>', NS)
-map('n', '<leader>pu', ':PlugUpdate<CR>', NS)
-map('n', '<leader>pc', ':PlugClean<CR>', NS)
-map('n', '<leader>pg', ':PlugUpgrade<CR>', NS)
+map('n', '<leader>pi', ':PackerInstall<CR>', NS)
+map('n', '<leader>pu', ':PackerUpdate<CR>', NS)
+map('n', '<leader>pc', ':PackerClean<CR>', NS)
+map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
 
 -- Project navigation
 map('n', '<tab>', ':GFiles --cache<cr>', N)
