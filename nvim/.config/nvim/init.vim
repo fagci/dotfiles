@@ -140,6 +140,10 @@ Plug 'RRethy/nvim-base16'
 Plug 'rhysd/git-messenger.vim', {'on': 'GitMessenger'}
 Plug 'andymass/vim-matchup'
 
+Plug 'kosayoda/nvim-lightbulb'
+
+Plug 'sainnhe/everforest'
+
 call plug#end()
 
 " ========================================
@@ -322,6 +326,16 @@ mapping = {
     i = cmp.mapping.abort(),
     c = cmp.mapping.close(),
   }),
+   ["<PageUp>"] = function(fallback)
+    for i = 1, 10 do
+      cmp.mapping.select_prev_item()(nil)
+    end
+  end,
+  ["<PageDown>"] = function(fallback)
+    for i = 1, 10 do
+      cmp.mapping.select_next_item()(nil)
+    end
+  end,
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
 },
 experimental = { ghost_text = false, custom_menu = true },
@@ -349,6 +363,10 @@ sources = cmp.config.sources({
 cmp.setup.cmdline('/', {sources = {{ name = 'buffer' }}})
 cmp.setup.cmdline(':', {sources = cmp.config.sources({{ name = 'path' }}, {{ name = 'cmdline' }})})
 
+-- insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
@@ -369,6 +387,13 @@ require'lspinstall'.post_install_hook = function ()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
+
+-- Test ZONE
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+
+
 EOF
 
-colorscheme base16-gruvbox-dark-hard
+let g:everforest_background = 'hard'
+" colorscheme base16-gruvbox-dark-hard
+colorscheme everforest
