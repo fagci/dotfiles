@@ -273,6 +273,7 @@ augroup END
 " Variables
 " ==============================
 
+let g:matchup_matchparen_offscreen = { 'method': 'popup' }
 let g:vimwiki_key_mappings = {
             \ 'all_maps': 1,
             \ 'global': 1,
