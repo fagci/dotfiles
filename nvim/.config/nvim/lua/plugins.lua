@@ -1,10 +1,4 @@
-local cmd = vim.cmd
-cmd [[packadd packer.nvim]]
-
-local packer = require 'packer'
-
--- Add packages
-return packer.startup(function(use)
+return require('packer').startup(function(use)
 	use {'wbthomason/packer.nvim', opt = true}
 
 	-- Syntax hl
@@ -65,17 +59,6 @@ return packer.startup(function(use)
 	-- Utils
 	use 'junegunn/fzf'
 	use 'junegunn/fzf.vim'
-
-	use {
-            'nvim-telescope/telescope.nvim',
-            requires = {
-                {'nvim-lua/plenary.nvim'},
-                {"nvim-telescope/telescope-fzy-native.nvim"}
-            },
-            config = function()
-                require "config.telescope"
-            end,
-        }
 
 	use 'vifm/vifm.vim'
 	use 'editorconfig/editorconfig-vim'

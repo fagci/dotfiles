@@ -5,7 +5,7 @@ local NS = { noremap = true, silent = true }
 
 vim.g.mapleader =','
 
-map('n', '<leader>ev', ':e ~/.config/nvim/lua/init.lua<CR>', N)
+map('n', '<leader>ev', ':e ~/.config/nvim/init.lua<CR>', N)
 map('n', '<leader>sv', ':so ~/.config/nvim/init.lua<CR>', N)
 map('n', '<Leader>,', ':noh<CR>', N)
 map('n', '<', '<<', {})
@@ -57,15 +57,12 @@ map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
 map('n', '<leader>ps', ':PackerSync<CR>', NS)
 
 -- Project navigation
-map('n', '<tab>', ':Telescope git_files<cr>', N)
-map('n', '<Leader><tab>', ':Telescope find_files hidden=true<CR>', N)
+map('n', '<tab>', ':GFiles<cr>', N)
+map('n', '<Leader><tab>', ':Files<CR>', N)
 map('n', '<Leader>f', ':GRG<CR>', N)
-map('n', '<Leader>F', ':Telescope live_grep<CR>', N)
-map('n', '<Leader>h', ':Telescope history<CR>', N)
-map('n', '<Leader>b', ':Telescope buffers<CR>', N)
-
-map("n", "<leader>gc", ":Telescope git_commits<CR>", {})
-map("n", "<leader>o", ":Telescope oldfiles<CR>", {})
+map('n', '<Leader>F', ':RG<CR>', N)
+map('n', '<Leader>h', ':History<CR>', N)
+map('n', '<Leader>b', ':Buffers<CR>', N)
 
 -- LSP
 map('n', '<silent>', 'gd <cmd>lua vim.lsp.buf.definition()<CR>', N)
@@ -79,6 +76,6 @@ map('n', '<silent>', '<C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>', N)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
 map('n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
+-- Kommentary
 map("n", "<leader>/", "<Plug>kommentary_line_default", {})
--- map("n", "<leader>/", "<Plug>kommentary_motion_default", {})
 map("x", "<leader>/", "<Plug>kommentary_visual_default", {})
