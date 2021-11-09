@@ -18,3 +18,4 @@ augroup packer_user_config
   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
 ]])
+vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})')

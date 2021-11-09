@@ -6,11 +6,19 @@ local function setup_servers()
         on_attach = function(client, bufnr)
             require "lsp_signature".on_attach()
         end,
+	flags = {debounce_text_changes = 150}
     }
   end
 end
 
 setup_servers()
+
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+})
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require'lspinstall'.post_install_hook = function ()
