@@ -14,7 +14,6 @@ return packer.startup(function(use)
 	use {'chr4/nginx.vim', ft={'nginx'}}
 
 	-- LSP
-
 	use {
 		"neovim/nvim-lspconfig",
 		after = "nvim-lspinstall",

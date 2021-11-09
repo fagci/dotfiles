@@ -33,7 +33,6 @@ wo.statusline = "[%n]%{&paste?' PASTE':''} "
 wo.statusline = wo.statusline .. "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) "
 wo.statusline = wo.statusline .. "%=%l:%c/%L %y"
 
-
 -- Editing
 wo.wrap = false
 opt.clipboard = 'unnamedplus'

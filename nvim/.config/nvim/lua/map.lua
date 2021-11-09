@@ -1,10 +1,9 @@
 local map = vim.api.nvim_set_keymap
 
-vim.g.mapleader =','
-
 local N = { noremap = true }
 local NS = { noremap = true, silent = true }
 
+vim.g.mapleader =','
 
 map('n', '<leader>ev', ':e ~/.config/nvim/lua/init.lua<CR>', N)
 map('n', '<leader>sv', ':so ~/.config/nvim/init.lua<CR>', N)
@@ -13,7 +12,6 @@ map('n', '<', '<<', {})
 map('n', '>', '>>', {})
 map('v', '<', '<gv', {})
 map('v', '>', '>gv', {})
-
 
 map('', '<leader>l', ':set list!<CR>', {})
 
@@ -68,13 +66,6 @@ map('n', '<Leader>b', ':Telescope buffers<CR>', N)
 
 map("n", "<leader>gc", ":Telescope git_commits<CR>", {})
 map("n", "<leader>o", ":Telescope oldfiles<CR>", {})
-
-
--- GIT (figitive + git-messenger)
-map('n', '<Leader>gc', ':Commits<CR>', N)
-map('n', '<Leader>gp', ':Git push<CR>', N)
-map('n', '<Leader>gl', ':Git pull<CR>', N)
-map('n', '<Leader>M', ':GitMessenger<CR>', N)
 
 -- LSP
 map('n', '<silent>', 'gd <cmd>lua vim.lsp.buf.definition()<CR>', N)
