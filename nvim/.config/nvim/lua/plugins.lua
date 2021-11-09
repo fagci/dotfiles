@@ -61,8 +61,8 @@ return require('packer').startup(function(use)
 	use 'editorconfig/editorconfig-vim'
 
 	-- UI
-	-- use 'RRethy/nvim-base16'
-	use 'sainnhe/everforest'
+	use 'RRethy/nvim-base16'
+	-- use 'sainnhe/everforest'
 
 	-- TEST ZONE
 	use 'rhysd/git-messenger.vim'

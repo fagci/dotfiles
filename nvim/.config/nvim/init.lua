@@ -6,4 +6,4 @@ require 'mappings'
 require 'init_packer'
 
 require 'plugins'
-require 'colors'
+require 'styles'
