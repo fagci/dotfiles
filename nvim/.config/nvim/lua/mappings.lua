@@ -66,6 +66,7 @@ map('n', '<Leader>f', ':GRG<CR>', N)
 map('n', '<Leader>F', ':RG<CR>', N)
 map('n', '<Leader>h', ':History<CR>', N)
 map('n', '<Leader>b', ':Buffers<CR>', N)
+map('n', '<Leader>t', ':NvimTreeToggle<CR>', N)
 
 -- LSP
 map('n', '<silent>', 'gd <cmd>lua vim.lsp.buf.definition()<CR>', N)

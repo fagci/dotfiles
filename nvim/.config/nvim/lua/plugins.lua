@@ -2,7 +2,7 @@ return require('packer').startup(function(use)
 	use {'wbthomason/packer.nvim', opt = true}
 
 	-- Syntax hl
-	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', event = "BufRead"}
 	use {'nelsyeung/twig.vim', ft={'twig'}}
 	use {'elixir-editors/vim-elixir', ft={'elixir'}}
 	use {'chr4/nginx.vim', ft={'nginx'}}
@@ -62,9 +62,16 @@ return require('packer').startup(function(use)
 
 	-- UI
 	use 'RRethy/nvim-base16'
-	-- use 'sainnhe/everforest'
+	use "kyazdani42/nvim-web-devicons"
 
 	-- TEST ZONE
 	use 'rhysd/git-messenger.vim'
+
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = 'kyazdani42/nvim-web-devicons',
+		config = function() require'nvim-tree'.setup {} end
+	}
+
 	require'nvim-lastplace'.setup{}	
 end)
