@@ -19,15 +19,14 @@ return require('packer').startup(function(use)
 
 	-- Completion
 	use 'onsails/lspkind-nvim'
+	use 'ray-x/lsp_signature.nvim'
 	use {'rafamadriz/friendly-snippets', event = 'InsertEnter'}
 
 	use {
 		'hrsh7th/nvim-cmp',
 		after = 'friendly-snippets',
 		config = function() require('config.nvim-cmp') end,
-		requires = {
-			'onsails/lspkind-nvim',
-		},
+		requires = {'onsails/lspkind-nvim'},
 		after = {'nvim-lspconfig'}
 	}
 
@@ -48,18 +47,16 @@ return require('packer').startup(function(use)
 		'b3nj5m1n/kommentary', 
 		config = function() require('config.kommentary') end
 	}
-	use 'godlygeek/tabular'
-	use 'mattn/emmet-vim'
-	use 'sbdchd/neoformat'
-	use 'tpope/vim-surround'
-	use 'ray-x/lsp_signature.nvim'
+	use {'godlygeek/tabular', cmd='Tabularize'}
+	use {'sbdchd/neoformat', cmd='Neoformat'}
 	use {'andymass/vim-matchup', event = 'VimEnter'}
+	use 'mattn/emmet-vim'
+	use 'tpope/vim-surround'
 	use 'ethanholz/nvim-lastplace'
 
 	-- Utils
 	use 'junegunn/fzf'
 	use 'junegunn/fzf.vim'
-
 	use 'vifm/vifm.vim'
 	use 'editorconfig/editorconfig-vim'
 
@@ -69,4 +66,5 @@ return require('packer').startup(function(use)
 
 	-- TEST ZONE
 	use 'rhysd/git-messenger.vim'
+	require'nvim-lastplace'.setup{}	
 end)
