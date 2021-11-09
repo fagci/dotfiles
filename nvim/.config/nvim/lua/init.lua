@@ -5,4 +5,3 @@ require 'map'
 require 'init_packer'
 require 'plugins'
 require 'colors'
-
