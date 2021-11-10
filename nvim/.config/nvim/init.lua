@@ -10,11 +10,11 @@ require 'styles'
 
 -- FIXME:
 --
--- LSP signature: no border, different BG
+-- UI: LSP signature: no border, different BG
 -- UI: thin colorcolumns / hl only overflowed
 -- UI: rm EOF tildas as line numbers exists
--- cmp: DOCs background (no border)
--- LSP: diagnostics w/o border, different BG, show at single line or something
+-- UI: cmp: DOCs background (no border)
+-- UI: LSP: diagnostics w/o border, different BG, show at single line or something
 --
 -- TODO:
 --

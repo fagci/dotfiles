@@ -72,7 +72,11 @@ return require('packer').startup(function(use)
 	use 'editorconfig/editorconfig-vim'
 
 	-- UI
-	use {'crivotz/nvim-colorizer.lua', config = [[require('config.colorizer')]]}
+	use {
+		'crivotz/nvim-colorizer.lua', 
+		ft = { 'css', 'javascript', 'php', 'html' },
+		config = [[require('colorizer').setup {'css', 'javascript', 'php', 'html'}]]
+	}
 	use {
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
