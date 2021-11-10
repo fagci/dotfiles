@@ -1,2 +1,8 @@
--- vim.cmd('colorscheme base16-gruvbox-dark-soft')
-vim.cmd('colorscheme base16-onedark')
+vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[
+augroup matchup_matchparen_highlight
+  autocmd!
+  autocmd ColorScheme * hi MatchParen guibg=#444444
+augroup END
+]])

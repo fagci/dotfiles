@@ -39,7 +39,7 @@ opt.clipboard = 'unnamedplus'
 bo.autoindent = true
 bo.expandtab = true
 bo.shiftwidth = 4
-bo.smartindent = true
+-- bo.smartindent = true
 bo.softtabstop = 4
 bo.tabstop = 4
 opt.completeopt = "menuone,noinsert,noselect"
@@ -64,3 +64,5 @@ opt.formatoptions = opt.formatoptions
   + "j" -- Auto-remove comments if possible.
   - "2" -- I'm not in gradeschool anymore
 
+vim.cmd('filetype plugin indent on')
+vim.g.matchup_matchparen_offscreen = {method = 'popup'}

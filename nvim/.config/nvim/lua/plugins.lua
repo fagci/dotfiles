@@ -2,7 +2,10 @@ return require('packer').startup(function(use)
 	use {'wbthomason/packer.nvim', opt = true}
 
 	-- Syntax hl
-	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', event = "BufRead"}
+	use {
+		'nvim-treesitter/nvim-treesitter', 
+		run = ':TSUpdate', 
+	}
 	use {'nelsyeung/twig.vim', ft={'twig'}}
 	use {'elixir-editors/vim-elixir', ft={'elixir'}}
 	use {'chr4/nginx.vim', ft={'nginx'}}
@@ -11,7 +14,7 @@ return require('packer').startup(function(use)
 	use {
 		"neovim/nvim-lspconfig",
 		after = "nvim-lspinstall",
-		config = function() require("config.nvim-lspconfig") end,
+		config = [[require("config.nvim-lspconfig")]],
 		requires = {
 			{"kabouzeid/nvim-lspinstall", event = "BufRead"}
 		}
@@ -25,7 +28,7 @@ return require('packer').startup(function(use)
 	use {
 		'hrsh7th/nvim-cmp',
 		after = 'friendly-snippets',
-		config = function() require('config.nvim-cmp') end,
+		config = [[require('config.nvim-cmp')]],
 		requires = {'onsails/lspkind-nvim'},
 		after = {'nvim-lspconfig'}
 	}
@@ -38,14 +41,22 @@ return require('packer').startup(function(use)
 	use {'hrsh7th/vim-vsnip', after = {'nvim-cmp'}}
 	use {
 		'windwp/nvim-autopairs',
-		config = function() require('config.nvim-autopairs') end,
+		config = [[require('config.nvim-autopairs')]],
 		after = 'nvim-cmp'
 	}
 
 	-- Editing
+	use 'AndrewRadev/tagalong.vim'
+	use {'p00f/nvim-ts-rainbow', config = function()
+		require'nvim-treesitter.configs'.setup {
+			rainbow = {
+				enable = true
+			}
+		}
+	end}
 	use {
 		'b3nj5m1n/kommentary', 
-		config = function() require('config.kommentary') end
+		config = [[require('config.kommentary')]]
 	}
 	use {'godlygeek/tabular', cmd='Tabularize'}
 	use {'sbdchd/neoformat', cmd='Neoformat'}
@@ -61,7 +72,14 @@ return require('packer').startup(function(use)
 	use 'editorconfig/editorconfig-vim'
 
 	-- UI
-	use 'RRethy/nvim-base16'
+	use {'crivotz/nvim-colorizer.lua', config = [[require('config.colorizer')]]}
+	use {
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = [[require("todo-comments").setup()]]
+	}
+
+	use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 	use "kyazdani42/nvim-web-devicons"
 
 	-- TEST ZONE
@@ -71,34 +89,35 @@ return require('packer').startup(function(use)
 		'kyazdani42/nvim-tree.lua',
 		requires = 'kyazdani42/nvim-web-devicons',
 		cmd='NvimTreeToggle',
-		config = function() require'nvim-tree'.setup {} end
+		config = [[require'nvim-tree'.setup{}]]
 	}
 
-	use { "simrat39/symbols-outline.nvim",
-	setup = function()
-		vim.g.symbols_outline = {
-			highlight_hovered_item = true,
-			show_guides = true,
-			auto_preview = true,
-			position = "right",
-			width = 25,
-			show_numbers = false,
-			show_relative_numbers = false,
-			show_symbol_details = true,
-			keymaps = {
-				close = "q",
-				goto_location  = "<CR>",
-				focus_location = "<space>",
-				hover_symbol   = "K",
-				toggle_preview = "p",
-				rename_symbol  = "r",
-				code_actions   = "a",
-			},
-		}
-	end,
-	cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" }
-}
+	use { 
+		"simrat39/symbols-outline.nvim",
+		setup = function()
+			vim.g.symbols_outline = {
+				highlight_hovered_item = true,
+				show_guides = true,
+				auto_preview = true,
+				position = "right",
+				width = 25,
+				show_numbers = false,
+				show_relative_numbers = false,
+				show_symbol_details = true,
+				keymaps = {
+					close = "q",
+					goto_location  = "<CR>",
+					focus_location = "<space>",
+					hover_symbol   = "K",
+					toggle_preview = "p",
+					rename_symbol  = "r",
+					code_actions   = "a",
+				},
+			}
+		end,
+		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" }
+	}
 
 
-require'nvim-lastplace'.setup{}	
+	require'nvim-lastplace'.setup{}	
 end)
