@@ -10,17 +10,15 @@ require 'styles'
 
 -- FIXME:
 --
--- html auto replace close tag bad for php (maybe disable plugin)
 -- UI: LSP signature: no border, different BG
--- UI: thin colorcolumns / hl only overflowed
--- UI: rm EOF tildas as line numbers exists
--- UI: cmp: DOCs background (no border)
 -- UI: LSP: diagnostics w/o border, different BG, show at single line or something
+-- UI: cmp: DOCs background (no border)
+-- UI: rm EOF tildas as line numbers exists
+-- UI: thin colorcolumns / hl only overflowed
 --
 -- TODO:
 --
 -- cmp: better navigation pgup/pgdn
--- LSP: PHP better analysis
 -- Regexp highlight
 -- DB completion (w/connection)?
 -- better navigation method

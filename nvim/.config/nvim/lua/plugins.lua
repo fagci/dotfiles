@@ -4,7 +4,11 @@ return require('packer').startup(function(use)
 	-- Syntax hl
 	use {
 		'nvim-treesitter/nvim-treesitter', 
-		run = ':TSUpdate', 
+		requires = {
+			'nvim-treesitter/nvim-treesitter-refactor',
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		},
+		run = ':TSUpdate'
 	}
 	use {'nelsyeung/twig.vim', ft={'twig'}}
 	use {'elixir-editors/vim-elixir', ft={'elixir'}}
@@ -46,56 +50,41 @@ return require('packer').startup(function(use)
 	}
 
 	-- Editing
-	use 'AndrewRadev/tagalong.vim'
-	use {'p00f/nvim-ts-rainbow', config = function()
-		require'nvim-treesitter.configs'.setup {
-			rainbow = {
-				enable = true
-			}
-		}
-	end}
-	use {
-		'b3nj5m1n/kommentary', 
-		config = [[require('config.kommentary')]]
-	}
+	use {'b3nj5m1n/kommentary', config = [[require('config.kommentary')]]}
 	use {'godlygeek/tabular', cmd='Tabularize'}
 	use {'sbdchd/neoformat', cmd='Neoformat'}
 	use {'andymass/vim-matchup', event = 'VimEnter'}
 	use 'mattn/emmet-vim'
 	use 'tpope/vim-surround'
-	use 'ethanholz/nvim-lastplace'
 
 	-- Utils
 	use 'junegunn/fzf'
 	use 'junegunn/fzf.vim'
 	use 'vifm/vifm.vim'
 	use 'editorconfig/editorconfig-vim'
-
-	-- UI
-	use {
-		'crivotz/nvim-colorizer.lua', 
-		ft = { 'css', 'javascript', 'php', 'html' },
-		config = [[require('colorizer').setup {'css', 'javascript', 'php', 'html'}]]
-	}
 	use {
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = [[require("todo-comments").setup()]]
 	}
 
-	use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+	-- UI
 	use "kyazdani42/nvim-web-devicons"
+	use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+	use {
+		'crivotz/nvim-colorizer.lua', 
+		ft = { 'css', 'javascript', 'php', 'html' },
+		config = [[require('colorizer').setup {'css', 'javascript', 'php', 'html'}]]
+	}
 
 	-- TEST ZONE
 	use 'rhysd/git-messenger.vim'
-
 	use {
 		'kyazdani42/nvim-tree.lua',
 		requires = 'kyazdani42/nvim-web-devicons',
 		cmd='NvimTreeToggle',
 		config = [[require'nvim-tree'.setup{}]]
 	}
-
 	use { 
 		"simrat39/symbols-outline.nvim",
 		setup = function()
@@ -121,7 +110,4 @@ return require('packer').startup(function(use)
 		end,
 		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" }
 	}
-
-
-	require'nvim-lastplace'.setup{}	
 end)

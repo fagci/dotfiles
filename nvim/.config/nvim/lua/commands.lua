@@ -13,9 +13,19 @@ command! -bang -nargs=* GRG
             \ call fzf#vim#grep(
             \   rg_default . rg_git_opts . ' -- '.shellescape(<q-args>), 1,
             \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 augroup packer_user_config
   autocmd!
   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
+
+augroup GoToLastPosition
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
+augroup END
+
+au! CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
+au! TextYankPost * silent! lua vim.highlight.on_yank()
 ]])
-vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})')

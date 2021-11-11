@@ -1,6 +1,7 @@
 local opt = vim.opt
 local wo = vim.wo
 local bo = vim.bo
+local g = vim.g
 
 -- Speed
 opt.lazyredraw = true
@@ -11,6 +12,11 @@ opt.switchbuf = 'useopen'
 opt.updatetime = 150
 opt.timeoutlen = 1000
 opt.ttimeoutlen = 0
+
+g.loaded_python_provider = 0
+g.python_host_prog = '/usr/bin/python2'
+g.python3_host_prog = '/usr/bin/python'
+g.node_host_prog = '/usr/bin/neovim-node-host'
 
 -- Backups
 opt.backup = false
@@ -43,6 +49,8 @@ bo.shiftwidth = 4
 bo.softtabstop = 4
 bo.tabstop = 4
 opt.completeopt = "menuone,noinsert,noselect"
+opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
+
 
 -- Search
 opt.smartcase = true
