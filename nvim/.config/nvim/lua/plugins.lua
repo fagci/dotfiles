@@ -56,6 +56,7 @@ return require('packer').startup(function(use)
 	use {'andymass/vim-matchup', event = 'VimEnter'}
 	use 'mattn/emmet-vim'
 	use 'tpope/vim-surround'
+	use 'justinmk/vim-sneak'
 
 	-- Utils
 	use 'junegunn/fzf'

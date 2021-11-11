@@ -21,7 +21,6 @@ require 'styles'
 -- cmp: better navigation pgup/pgdn
 -- Regexp highlight
 -- DB completion (w/connection)?
--- better navigation method
 -- LSP: go to definition with ctrl+o buffer close if no changes?
 --
 -- NOTE:
