@@ -116,4 +116,40 @@ return require('packer').startup(function(use)
 	use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
 	use 'kevinhwang91/nvim-bqf'
 
+	use 'romainl/vim-cool'
+	use 'wellle/targets.vim'
+
+
+
+	use {
+		{
+			'nvim-telescope/telescope.nvim',
+			requires = {
+				'nvim-lua/popup.nvim',
+				'nvim-lua/plenary.nvim',
+				'telescope-frecency.nvim',
+				'telescope-fzf-native.nvim',
+			},
+			wants = {
+				'popup.nvim',
+				'plenary.nvim',
+				'telescope-frecency.nvim',
+				'telescope-fzf-native.nvim',
+			},
+			-- setup = [[require('config.telescope_setup')]],
+			config = [[require('config.telescope')]],
+			cmd = 'Telescope',
+			module = 'telescope',
+		},
+		{
+			'nvim-telescope/telescope-frecency.nvim',
+			after = 'telescope.nvim',
+			requires = 'tami5/sql.nvim',
+		},
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			run = 'make',
+		},
+	}
+
 end)
