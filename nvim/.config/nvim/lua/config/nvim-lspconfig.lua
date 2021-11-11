@@ -13,13 +13,6 @@ end
 
 setup_servers()
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = true,
-    -- underline = true,
-    update_in_insert = false,
-})
-
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers

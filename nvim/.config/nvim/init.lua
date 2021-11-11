@@ -11,7 +11,6 @@ require 'styles'
 -- FIXME:
 --
 -- UI: LSP signature: no border, different BG
--- UI: LSP: diagnostics w/o border, different BG, show at single line or something
 -- UI: cmp: DOCs background (no border)
 -- UI: rm EOF tildas as line numbers exists
 -- UI: thin colorcolumns / hl only overflowed
