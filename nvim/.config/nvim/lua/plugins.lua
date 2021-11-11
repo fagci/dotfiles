@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
 
 	-- Editing
 	use {'b3nj5m1n/kommentary', config = [[require('config.kommentary')]]}
+	-- use 'tomtom/tcomment_vim'
 	use {'godlygeek/tabular', cmd='Tabularize'}
 	use {'sbdchd/neoformat', cmd='Neoformat'}
 	use {'andymass/vim-matchup', event = 'VimEnter'}
@@ -111,4 +112,8 @@ return require('packer').startup(function(use)
 		end,
 		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" }
 	}
+
+	use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
+	use 'kevinhwang91/nvim-bqf'
+
 end)

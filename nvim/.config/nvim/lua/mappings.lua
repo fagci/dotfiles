@@ -83,4 +83,5 @@ map('n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
 -- Kommentary
 map("n", "<leader>/", "<Plug>kommentary_line_default", {})
+map("n", "gc", "<Plug>kommentary_motion_default", {})
 map("x", "<leader>/", "<Plug>kommentary_visual_default", {})
