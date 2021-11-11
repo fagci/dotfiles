@@ -10,6 +10,7 @@ require 'styles'
 
 -- FIXME:
 --
+-- html auto replace close tag bad for php (maybe disable plugin)
 -- UI: LSP signature: no border, different BG
 -- UI: thin colorcolumns / hl only overflowed
 -- UI: rm EOF tildas as line numbers exists
