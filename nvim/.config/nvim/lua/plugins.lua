@@ -152,4 +152,10 @@ return require('packer').startup(function(use)
 		},
 	}
 
+
+	use {
+		'mbbill/undotree',
+		cmd = 'UndotreeToggle',
+		config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
+	}
 end)
