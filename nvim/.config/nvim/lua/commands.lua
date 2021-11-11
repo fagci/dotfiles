@@ -26,6 +26,5 @@ augroup GoToLastPosition
       \ | endif
 augroup END
 
-au! CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})
 au! TextYankPost * silent! lua vim.highlight.on_yank()
 ]])
