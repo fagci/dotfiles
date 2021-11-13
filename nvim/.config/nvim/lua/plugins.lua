@@ -62,6 +62,7 @@ return require('packer').startup(function(use)
     -- Utils
     use 'vifm/vifm.vim'
     use 'romainl/vim-cool'
+    use 'tpope/vim-fugitive'
     use 'rhysd/git-messenger.vim'
     use 'editorconfig/editorconfig-vim'
     use {'junegunn/fzf.vim', requires = {'junegunn/fzf'}}
