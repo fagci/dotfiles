@@ -1,6 +1,6 @@
 # Dotfiles
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)
+![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)
 
 ![](https://raw.githubusercontent.com/fagci/dotfiles/master/screenshot.png)
 
@@ -43,5 +43,4 @@ Enjoy.
 
 ## License
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffagci%2Fdotfiles?ref=badge_large)
-
+![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)
