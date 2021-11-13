@@ -2,8 +2,6 @@
 
 ![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffagcinsk%2Fdotfiles.svg?type=shield)
 
-![](https://raw.githubusercontent.com/fagci/dotfiles/master/screenshot.png)
-
 ## Install
 
 1. Clone this repo to home directory
