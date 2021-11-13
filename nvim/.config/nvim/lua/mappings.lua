@@ -60,8 +60,8 @@ map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
 map('n', '<leader>ps', ':PackerSync<CR>', NS)
 
 -- Project navigation
-map('n', '<tab>', ':Telescope git_files<cr>', N)
-map('n', '<Leader><tab>', ':Telescope find_files<CR>', N)
+map('n', '<tab>', ':GFiles<cr>', N)
+map('n', '<Leader><tab>', ':Files<CR>', N)
 map('n', '<Leader>f', ':GRG<CR>', N)
 map('n', '<Leader>F', ':RG<CR>', N)
 map('n', '<Leader>h', ':History<CR>', N)
