@@ -7,8 +7,11 @@
 	user = fagci
 
 [core]
-  editor = vim
-  quotepath = false
+	editor = nvim
+	quotepath = false
+
+[commit]
+    template = ~/.gitmessage
 
 [pull]
 	rebase = true
@@ -20,7 +23,7 @@
 	default = current
 
 [branch]
-  autosetuprebase = always
+	autosetuprebase = always
 
 [credential]
 	helper = store
