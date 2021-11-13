@@ -62,11 +62,6 @@ cmp.setup({
 
 
 	},
-	documentation = {
-        border = "single",
-        winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    },
-	experimental = { ghost_text = false, custom_menu = true },
 	formatting = {
 		format = lspkind.cmp_format({with_text=false, menu = ({
 			buffer = "[B]",

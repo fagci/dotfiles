@@ -50,7 +50,6 @@ opt.tabstop = 4
 opt.completeopt = "menuone,noinsert,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
 
-
 -- Search
 opt.smartcase = true
 opt.ignorecase = true

@@ -27,12 +27,4 @@ augroup GoToLastPosition
 augroup END
 
 au! TextYankPost * silent! lua vim.highlight.on_yank()
-
-
 ]])
---[[
-command! -bang RG
-	\ :Telescope find_files find_command=rg,--no-ignore,--hidden,--glob,!.git/*,--fixed-strings,--smart-case,--files prompt_prefix=🔍
-command! -bang GRG
-	\ :Telescope find_files find_command=rg,--ignore,--glob,!.git/*,--fixed-strings,--smart-case,--glob,!*.min.*,--glob,!*.bundle.*,--glob,!*.map,--files prompt_prefix=🔍
-]]
