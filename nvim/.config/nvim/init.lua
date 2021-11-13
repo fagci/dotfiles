@@ -10,6 +10,7 @@ require 'styles'
 
 -- FIXME:
 --
+-- CMP: path completion working?
 -- UI: LSP signature: no border, different BG
 -- UI: cmp: DOCs background (no border)
 -- UI: rm EOF tildas as line numbers exists
