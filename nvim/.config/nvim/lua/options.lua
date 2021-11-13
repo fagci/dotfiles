@@ -1,6 +1,5 @@
 local opt = vim.opt
 local wo = vim.wo
-local bo = vim.bo
 local g = vim.g
 
 -- Speed
@@ -21,7 +20,7 @@ g.node_host_prog = '/usr/bin/neovim-node-host'
 -- Backups
 opt.backup = false
 opt.writebackup = false
-bo.swapfile = false
+opt.swapfile = false
 opt.undodir = os.getenv("HOME") .. "/.vimundo"
 opt.undofile = true
 
@@ -42,12 +41,12 @@ wo.statusline = wo.statusline .. "%=%l:%c/%L %y"
 -- Editing
 wo.wrap = false
 opt.clipboard = 'unnamedplus'
-bo.autoindent = true
-bo.expandtab = true
-bo.shiftwidth = 4
--- bo.smartindent = true
-bo.softtabstop = 4
-bo.tabstop = 4
+opt.autoindent = true
+opt.expandtab = true
+opt.shiftwidth = 4
+-- opt.smartindent = true
+opt.softtabstop = 4
+opt.tabstop = 4
 opt.completeopt = "menuone,noinsert,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
 
