@@ -1,6 +1,8 @@
 vim.o.background = "dark"
 
-if string.find(vim.fn.getenv("PREFIX"), 'termux') then
+local prefix = vim.fn.getenv("PREFIX")
+
+if prefix and string.find(tostring(prefix), 'termux') then
 	vim.g.gruvbox_italic=0
 	vim.g.gruvbox_italicize_comments=0
 	vim.g.gruvbox_italicize_strings=0
