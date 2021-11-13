@@ -54,6 +54,8 @@ return require('packer').startup(function(use)
     use 'wellle/targets.vim'
     use 'justinmk/vim-sneak'
     use 'tpope/vim-surround'
+    use 'AndrewRadev/splitjoin.vim'
+    use 'AndrewRadev/sideways.vim'
     use {'sbdchd/neoformat', cmd='Neoformat'}
     use {'godlygeek/tabular', cmd='Tabularize'}
     use {'andymass/vim-matchup', event = 'VimEnter'}
@@ -62,10 +64,9 @@ return require('packer').startup(function(use)
     -- Utils
     use 'vifm/vifm.vim'
     use 'romainl/vim-cool'
-    use 'tpope/vim-fugitive'
     use 'rhysd/git-messenger.vim'
     use 'editorconfig/editorconfig-vim'
-    use {'junegunn/fzf.vim', requires = {'junegunn/fzf'}}
+    use {'junegunn/fzf.vim', requires = {'junegunn/fzf'}, run = function() vim.fn['fzf#install']() end}
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -101,5 +102,6 @@ return require('packer').startup(function(use)
 
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'kevinhwang91/nvim-bqf'
+
 end)
 
