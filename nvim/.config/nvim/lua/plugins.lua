@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
     use 'wellle/targets.vim'
     use 'justinmk/vim-sneak'
     use 'tpope/vim-surround'
+    use 'tpope/vim-repeat'
     use 'AndrewRadev/splitjoin.vim' -- gS, gJ
     use 'AndrewRadev/sideways.vim'
     use {'sbdchd/neoformat', cmd='Neoformat'}
@@ -87,6 +88,7 @@ return require('packer').startup(function(use)
     -- UI
     use 'kyazdani42/nvim-web-devicons'
     use {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
+    use 'sainnhe/sonokai'
     use {
         'crivotz/nvim-colorizer.lua', 
         ft = { 'css', 'javascript', 'php', 'html' },

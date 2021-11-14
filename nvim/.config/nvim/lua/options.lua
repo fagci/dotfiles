@@ -33,10 +33,8 @@ opt.splitright = true
 opt.splitbelow = true
 opt.termguicolors = true
 opt.listchars='tab:▸ ,space:.,trail:•'
-wo.colorcolumn = '80,120'
-wo.statusline = "[%n]%{&paste?' PASTE':''} "
-wo.statusline = wo.statusline .. "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) "
-wo.statusline = wo.statusline .. "%=%l:%c/%L %y"
+opt.colorcolumn = '80,120'
+opt.statusline = [[[%n]%{&paste?' PASTE':''} %(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) %=%l:%c/%L %y]]
 
 -- Editing
 wo.wrap = false

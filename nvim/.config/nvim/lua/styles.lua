@@ -6,10 +6,15 @@ if string.find(tostring(prefix), 'termux') then
     vim.g.gruvbox_italic=0
     vim.g.gruvbox_italicize_comments=0
     vim.g.gruvbox_italicize_strings=0
+
+    vim.g.sonokai_disable_italic_comment=1
+    vim.g.sonokai_enable_italic = 0
+    vim.g.sonokai_style = 'andromeda'
 end
 
 vim.cmd([[
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme sonokai
 
 let &fcs='eob: '
 
