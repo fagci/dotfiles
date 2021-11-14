@@ -10,7 +10,7 @@ require 'styles'
 
 -- FIXME:
 --
--- CMP: path completion working?
+-- PHP: sometimes cursor not indents on <CR>
 --
 -- TODO:
 --
@@ -18,6 +18,3 @@ require 'styles'
 -- Regexp highlight
 -- LSP: go to definition with ctrl+o buffer close if no changes?
 --
--- NOTE:
---
--- PHP: sometimes cursor not indents on <CR>
