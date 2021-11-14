@@ -60,5 +60,13 @@ opt.inccommand = 'nosplit'
 opt.shortmess:append "c"
 
 opt.formatoptions = 'croqn'
-vim.cmd('filetype plugin indent on')
-vim.g.matchup_matchparen_offscreen = {method = 'popup'}
+vim.cmd [[
+filetype plugin indent on
+]]
+if vim.fn.executable('rg') then
+    opt.grepprg = [[rg --hidden --glob "!.git" --no-heading --smart-case --vimgrep --follow $*]]
+    opt.grepformat='%f:%l:%c:%m'
+elseif vim.fn.executable('ag') then
+    opt.grepprg = [[ag --nogroup --nocolor --vimgrep]]
+end
+g.matchup_matchparen_offscreen = {method = 'popup'}

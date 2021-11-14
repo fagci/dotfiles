@@ -72,8 +72,12 @@ map('n', '<Leader>t', ':NvimTreeToggle<CR>', N)
 map('n', '<Leader>o', ':SymbolsOutline<CR>', N)
 
 -- LSP
-map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', NS)
-map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', NS)
+-- map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', NS)
+map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
+-- map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', NS)
+map('n', 'gr', ':Trouble lsp_references<CR>', NS)
+map('n', 'ge', ':Trouble lsp_document_diagnostics<CR>', NS)
+
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', NS)
 map('n', '<leader>.', '<cmd>lua vim.lsp.buf.formatting()<CR>', N)
 map('n', '<leader>=', ':Neoformat<CR>', N)

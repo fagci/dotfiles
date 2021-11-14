@@ -54,7 +54,7 @@ return require('packer').startup(function(use)
     use 'wellle/targets.vim'
     use 'justinmk/vim-sneak'
     use 'tpope/vim-surround'
-    use 'AndrewRadev/splitjoin.vim'
+    use 'AndrewRadev/splitjoin.vim' -- gS, gJ
     use 'AndrewRadev/sideways.vim'
     use {'sbdchd/neoformat', cmd='Neoformat'}
     use {'godlygeek/tabular', cmd='Tabularize'}
@@ -71,6 +71,11 @@ return require('packer').startup(function(use)
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
+    }
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = [[require("trouble").setup()]]
     }
     use {
         'folke/todo-comments.nvim',
@@ -102,6 +107,12 @@ return require('packer').startup(function(use)
 
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'kevinhwang91/nvim-bqf'
+
+    use {
+        'mhinz/vim-grepper',
+        --[[ cmd = {'Grepper'},
+        keys = {'gs'}, ]]
+    }
 
 end)
 
