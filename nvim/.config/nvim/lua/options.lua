@@ -28,16 +28,20 @@ opt.undofile = true
 opt.number = true
 opt.scrolloff = 5
 opt.sidescrolloff = 5
-wo.signcolumn = "number"
+opt.signcolumn = "number"
 opt.splitright = true
 opt.splitbelow = true
 opt.termguicolors = true
 opt.listchars='tab:▸ ,space:.,trail:•'
 opt.colorcolumn = '80,120'
-opt.statusline = [[[%n]%{&paste?' PASTE':''} %(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) %=%l:%c/%L %y]]
+opt.statusline = table.concat {
+    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
+    "%=",
+    "%l:%c/%L %y",
+}
 
 -- Editing
-wo.wrap = false
+opt.wrap = false
 opt.clipboard = 'unnamedplus'
 opt.autoindent = true
 opt.expandtab = true
