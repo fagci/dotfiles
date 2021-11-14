@@ -1,5 +1,6 @@
 local cmp = require'cmp'
 local lspkind = require('lspkind')
+local luasnip = require("luasnip")
 
 
 local feedkey = function(key, mode)
@@ -12,10 +13,17 @@ end
 
 
 cmp.setup({
-	snippet = {
+    snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
+			require("luasnip").lsp_expand(args.body)
 		end,
+	},
+    sources = {
+		{ name = "luasnip" },
+		{ name = "nvim_lsp" },
+		{ name = "path" },
+		{ name = "calc" },
+		{ name = "buffer" },
 	},
 	completion = { completeopt = 'menu,menuone,noinsert' },
 	mapping = {
@@ -39,24 +47,23 @@ cmp.setup({
 		end,
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif vim.fn['vsnip#available']() == 1 then
-				feedkey('<Plug>(vsnip-expand-or-jump)', '')
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				-- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-				fallback()
-			end
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
 		end, { 'i', 's' }),
 
 
 		['<S-Tab>'] = cmp.mapping(function()
-			if cmp.visible() then
+            if cmp.visible() then
 				cmp.select_prev_item()
-			elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-				feedkey('<Plug>(vsnip-jump-prev)', '')
+            elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
 			end
 		end, { 'i', 's' }),
 
@@ -66,20 +73,14 @@ cmp.setup({
 		format = lspkind.cmp_format({with_text=false, menu = ({
 			buffer = "[B]",
 			nvim_lsp = "[L]",
-			vsnip = "[S]",
+			luasnip = "[S]",
 			calc = "[C]",
 			path = "[P]",
 			neorg = "[N]",
+			emoji = "[E]",
 			cmp_tabnine = "[T]",
 		}),
 	}),
 },
-sources = cmp.config.sources({
-	{ name = 'nvim_lsp' },
-	{ name = 'calc' },
-	{ name = 'vsnip' },
-}, {
-	{ name = 'buffer' },
-})
 })
 
