@@ -30,19 +30,19 @@ return require('packer').startup(function(use)
 
 
     use {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter *',
-    after='friendly-snippets',
-    config = [[require('config.nvim-cmp')]],
-    requires = {
-      { 'L3MON4D3/LuaSnip' },
-      { 'hrsh7th/cmp-buffer' , after={'nvim-cmp'}},
-      { 'hrsh7th/cmp-nvim-lsp' , after={'nvim-cmp'}},
-      { 'hrsh7th/cmp-path' , after={'nvim-cmp'}},
-      { 'saadparwaiz1/cmp_luasnip', after={'nvim-cmp'} },
-      { "hrsh7th/cmp-calc" , after={'nvim-cmp'}},
-    },
-  }
+        'hrsh7th/nvim-cmp',
+        event = 'InsertEnter *',
+        after='friendly-snippets',
+        config = [[require('config.nvim-cmp')]],
+        requires = {
+            { 'L3MON4D3/LuaSnip' },
+            { 'hrsh7th/cmp-buffer' , after='nvim-cmp'},
+            { 'hrsh7th/cmp-nvim-lsp' , after='nvim-cmp'},
+            { 'hrsh7th/cmp-path' , after='nvim-cmp'},
+            { 'saadparwaiz1/cmp_luasnip', after='nvim-cmp'},
+            { "hrsh7th/cmp-calc" , after='nvim-cmp'},
+        },
+    }
 
     use {
         'windwp/nvim-autopairs',
