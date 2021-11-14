@@ -16,5 +16,4 @@ require 'styles'
 --
 -- cmp: better navigation pgup/pgdn
 -- Regexp highlight
--- LSP: go to definition with ctrl+o buffer close if no changes?
 --
