@@ -3,9 +3,12 @@ local lspkind = require'lspkind'
 local luasnip = require'luasnip'
 
 cmp.setup({
-    completion = { completeopt = 'menu,menuone,noinsert' },
+    completion = { 
+        completeopt = 'menu,menuone,noinsert',
+        keyword_length = 3,
+    },
     sources = {
-        { name = 'nvim_lsp' },
+        { name = 'nvim_lsp', max_item_count = 20 },
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
