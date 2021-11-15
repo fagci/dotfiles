@@ -15,7 +15,6 @@ opt.ttimeoutlen = 0
 g.loaded_python_provider = 0
 g.python_host_prog = '/usr/bin/python2'
 g.python3_host_prog = '/usr/bin/python3'
-g.node_host_prog = '/usr/bin/neovim-node-host'
 
 -- Backups
 opt.backup = false

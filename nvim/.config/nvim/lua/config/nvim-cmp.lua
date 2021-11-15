@@ -8,7 +8,7 @@ cmp.setup({
         keyword_length = 3,
     },
     sources = {
-        { name = 'nvim_lsp', max_item_count = 20 },
+        { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
@@ -23,16 +23,6 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ['<PageUp>'] = function(fallback)
-            for i = 1, 10 do
-                cmp.mapping.select_prev_item()(nil)
-            end
-        end,
-        ['<PageDown>'] = function(fallback)
-            for i = 1, 10 do
-                cmp.mapping.select_next_item()(nil)
-            end
-        end,
         ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
