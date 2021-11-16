@@ -7,7 +7,6 @@ export INPUTRC=~/.inputrc
 export EDITOR=nvim
 export PATH=$PATH:~/bin:~/.local/bin
 export LANG=en_US.UTF-8
-export fpath=(~/.termux/completions $fpath)
 
 DISABLE_AUTO_UPDATE="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
