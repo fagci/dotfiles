@@ -67,16 +67,5 @@ zinit for \
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
-if [[ ! -z "${PREFIX}" && $PREFIX == *"termux"* ]]; then
-    export MPD_HOST=localhost
-    export MPD_PORT=6600
-fi
-
 # zprof
 ### End of Zinit's installer chunk
-
-PATH="/home/user/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/user/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/user/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/user/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/user/perl5"; export PERL_MM_OPT;
