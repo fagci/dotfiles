@@ -66,7 +66,7 @@ return require('packer').startup(function(use)
     -- Utils
     use 'vifm/vifm.vim'
     use 'romainl/vim-cool'
-    -- use 'gennaro-tedesco/nvim-peekup'
+    use 'gennaro-tedesco/nvim-peekup'
     use 'rhysd/git-messenger.vim'
     use 'editorconfig/editorconfig-vim'
     use {'junegunn/fzf.vim', requires = {'junegunn/fzf'}, run = function() vim.fn['fzf#install']() end}
@@ -113,7 +113,7 @@ return require('packer').startup(function(use)
     use {'Olical/vim-enmasse', cmd = 'EnMasse'}
     use 'kevinhwang91/nvim-bqf'
 
-    use {'mhinz/vim-grepper', cmd = 'Grepper'}
+    use 'mhinz/vim-grepper'
 
     require('virtual-column').init({
         column_number = 120,
