@@ -90,6 +90,7 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
     use 'sainnhe/sonokai'
+    use 'davepinto/virtual-column.nvim'
     use {
         'crivotz/nvim-colorizer.lua', 
         ft = { 'css', 'javascript', 'php', 'html' },
@@ -113,5 +114,12 @@ return require('packer').startup(function(use)
     use 'kevinhwang91/nvim-bqf'
 
     use {'mhinz/vim-grepper', cmd = 'Grepper'}
+
+    require('virtual-column').init({
+        column_number = 120,
+        overlay = false,
+        vert_char = "▏",
+        enabled = true
+    })
 end)
 
