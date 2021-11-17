@@ -11,6 +11,7 @@ require 'styles'
 -- FIXME:
 --
 -- PHP: sometimes cursor not indents on <CR>
+-- HTML: shows closing tag when already entered
 --
 -- TODO:
 --
