@@ -32,7 +32,7 @@ opt.splitright = true
 opt.splitbelow = true
 opt.termguicolors = true
 opt.listchars='tab:▸ ,space:.,trail:•'
--- opt.colorcolumn = '80,120'
+opt.colorcolumn = '120'
 opt.statusline = table.concat {
     "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
     "%=",

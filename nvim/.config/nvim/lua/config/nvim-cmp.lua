@@ -2,6 +2,32 @@ local cmp = require'cmp'
 local lspkind = require'lspkind'
 local luasnip = require'luasnip'
 
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+local f = luasnip.function_node
+
+luasnip.snippets = {
+    php = {
+        s('ph', {
+            t({'<?php '}), i(0), t({' ?>'})
+        }),
+        s('phe', {
+            t({'<?= '}), i(0), t({' ?>'})
+        }),
+        s('phpwhil', {
+            t({'<?php while( '}), i(1), t({' ): ?>', '\t'}),
+            i(0), t({ '', '' }),
+            t({'<?php endwhile; ?>'})
+        }),
+        s('phpif', {
+            t({'<?php if( '}), i(1), t({' ): ?>', '\t'}),
+            i(0), t({ '', '' }),
+            t({'<?php endif; ?>'})
+        }),
+    }
+}
+
 cmp.setup({
     completion = { 
         completeopt = 'menu,menuone,noinsert',

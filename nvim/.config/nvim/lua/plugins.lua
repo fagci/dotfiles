@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
     }
 
     -- Editing
-    use 'mattn/emmet-vim'
+    use {'mattn/emmet-vim', ft = {'html', 'css', 'htmldjango', 'twig', 'php'}}
     use 'wellle/targets.vim'
     use 'justinmk/vim-sneak'
     use 'tpope/vim-surround'
@@ -90,7 +90,6 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
     use 'sainnhe/sonokai'
-    use 'davepinto/virtual-column.nvim'
     use {
         'crivotz/nvim-colorizer.lua', 
         ft = { 'css', 'javascript', 'php', 'html' },
@@ -114,12 +113,5 @@ return require('packer').startup(function(use)
     use 'kevinhwang91/nvim-bqf'
 
     use 'mhinz/vim-grepper'
-
-    require('virtual-column').init({
-        column_number = 120,
-        overlay = false,
-        vert_char = "▏",
-        enabled = true
-    })
 end)
 
