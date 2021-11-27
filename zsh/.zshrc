@@ -2,6 +2,12 @@
 
 START="$(date "+%s%3N")"
 
+plugins=(
+    autosuggestions/zsh-autosuggestions.plugin.zsh
+    completions/zsh-completions.plugin.zsh
+    syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+)
+
 fpath=(~/.config/zsh/prompt $fpath)
 autoload -Uz prompt.zsh; prompt.zsh
 
@@ -43,9 +49,12 @@ source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
 # TODO: mv to ~/.local/share/zsh/
-source ~/.config/zsh/plugins/autosuggestions/zsh-autosuggestions.plugin.zsh
-source ~/.config/zsh/plugins/completions/zsh-completions.plugin.zsh
-source ~/.config/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+for plugin ($plugins); do
+    # ts="$(date "+%s%3N")"
+    source ~/.config/zsh/plugins/$plugin
+    # te="$(date "+%s%3N")"
+    # echo "$plugin $(($te - $ts))ms"
+done
 
 # Search history using fzf
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
