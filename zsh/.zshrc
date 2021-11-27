@@ -3,7 +3,6 @@
 START="$(date "+%s%3N")"
 
 # zmodload zsh/zprof
-autoload -Uz vcs_info colors
 
 stty -ixon
 bindkey -e
@@ -32,33 +31,28 @@ zstyle ':completion:*' format '%F{yellow}%d:%f'
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 
-colors
-precmd() { 
-    vcs_info 
-    if [ -z "${SSH_CONNECTION}" ]; then
-        PROMPT="%(?..[%?] )%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}> "
-    else
-        PROMPT="%(?..[%?] )%{${fg[green]}%}%n@%m %{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}> "
-    fi
-}
+fpath=(~/.config/zsh/prompt $fpath)
+autoload -Uz prompt.zsh; prompt.zsh
 
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
+autoload -U compinit; compinit
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+# if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+#     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+#     command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+#     command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+#         print -P "%F{33} %F{34}Installation successful.%f%b" || \
+#         print -P "%F{160} The clone has failed.%f%b"
+# fi
 
-zinit for \
-    light-mode  zsh-users/zsh-autosuggestions \
-    light-mode  zsh-users/zsh-completions \
-    light-mode  zdharma-continuum/fast-syntax-highlighting \
-                zdharma-continuum/history-search-multi-word
+# source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+# autoload -Uz _zinit
+# (( ${+_comps} )) && _comps[zinit]=_zinit
+
+# zinit for \
+#     light-mode  zsh-users/zsh-autosuggestions \
+#     light-mode  zsh-users/zsh-completions \
+#     light-mode  zdharma-continuum/fast-syntax-highlighting \
+#                 zdharma-continuum/history-search-multi-word
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
