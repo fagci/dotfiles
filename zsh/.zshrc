@@ -42,6 +42,7 @@ autoload -U compinit; compinit
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
+# TODO: mv to ~/.local/share/zsh/
 source ~/.config/zsh/plugins/autosuggestions/zsh-autosuggestions.plugin.zsh
 source ~/.config/zsh/plugins/completions/zsh-completions.plugin.zsh
 source ~/.config/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
