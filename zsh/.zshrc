@@ -1,16 +1,11 @@
 # vim: set filetype=zsh :
 
+START="$(date "+%s%3N")"
+
 # zmodload zsh/zprof
 autoload -Uz vcs_info colors
 
-export INPUTRC=~/.inputrc
-export EDITOR=nvim
-export PATH=$PATH:~/bin:~/.local/bin
-export LANG=en_US.UTF-8
-
-DISABLE_AUTO_UPDATE="true"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
+stty -ixon
 bindkey -e
 bindkey '\e[1~'   beginning-of-line  # Linux console
 bindkey '\e[H'    beginning-of-line  # xterm
@@ -21,9 +16,6 @@ bindkey '\e[4~'   end-of-line        # Linux console
 bindkey '\e[F'    end-of-line        # xterm
 bindkey '\eOF'    end-of-line        # gnome-termina
 
-HISTFILE=~/.zsh_history
-HISTSIZE=30000
-SAVEHIST=10000
 
 setopt prompt_subst
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -71,6 +63,8 @@ zinit for \
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
+LAST_COMMAND_TIME=$(($(date "+%s%3N")-$START))
+echo "Startup time: ${LAST_COMMAND_TIME}ms"
 # zprof
 
 ### End of Zinit's installer chunk

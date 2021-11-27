@@ -85,7 +85,7 @@ map('n', '<leader>=', ':Neoformat<CR>', N)
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', NS)
 map('n', '<C-k>','<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
-map('n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
+map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
 -- Kommentary
 map("n", "<leader>/", "<Plug>kommentary_line_default", {})
