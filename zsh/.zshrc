@@ -8,9 +8,6 @@ plugins=(
     syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 )
 
-fpath=(~/.config/zsh/prompt $fpath)
-autoload -Uz prompt.zsh; prompt.zsh
-
 stty -ixon
 
 # Key bindings
@@ -43,6 +40,7 @@ zstyle ':completion:*' format '%F{yellow}%d:%f'
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 
+source ~/.config/zsh/prompt.zsh
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
