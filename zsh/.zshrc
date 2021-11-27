@@ -55,12 +55,12 @@ for plugin ($plugins); do
 done
 
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+
+for dump in ~/.zcompdump(N.mh+24); do
   compinit
-  touch ~/.zcompdump
-else
-  compinit -C
-fi
+done
+
+compinit -C
 
 # Search history using fzf
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
