@@ -46,10 +46,9 @@ zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
-# TODO: mv to ~/.local/share/zsh/
 for plugin ($plugins); do
     # ts="$(date "+%s%3N")"
-    source ~/.config/zsh/plugins/$plugin
+    source ~/.local/share/zsh/plugins/$plugin
     # te="$(date "+%s%3N")"
     # echo "$plugin $(($te - $ts))ms"
 done
