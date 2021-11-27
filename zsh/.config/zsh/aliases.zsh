@@ -1,5 +1,3 @@
-# vim: set filetype=zsh :
-#
 # aliases
 
 alias gc="git commit -a"
@@ -7,6 +5,9 @@ alias ga="git add"
 alias gcam="git commit -am"
 alias gp="git push"
 alias gl="git pull"
+
+alias d='dirs -v | sed "s/^/cd/"'
+for index ({1..9}) alias "cd$index"="cd +${index}"; unset index
 
 if hash nvim 2> /dev/null; then
     if [[ $(nvim --version | head -1 | grep -o '[0-9]\.[0-9]') -gt 0.3 ]]; then

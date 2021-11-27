@@ -1,3 +1,6 @@
+setopt prompt_subst
+zstyle ':vcs_info:git:*' formats ' %b'
+
 autoload -Uz vcs_info colors
 colors
 

@@ -1,10 +1,13 @@
-# vim: set filetype=zsh :
+# zmodload zsh/zprof
 
 START="$(date "+%s%3N")"
 
-# zmodload zsh/zprof
+fpath=(~/.config/zsh/prompt $fpath)
+autoload -Uz prompt.zsh; prompt.zsh
 
 stty -ixon
+
+# Key bindings
 bindkey -e
 bindkey '\e[1~'   beginning-of-line  # Linux console
 bindkey '\e[H'    beginning-of-line  # xterm
@@ -15,8 +18,7 @@ bindkey '\e[4~'   end-of-line        # Linux console
 bindkey '\e[F'    end-of-line        # xterm
 bindkey '\eOF'    end-of-line        # gnome-termina
 
-
-setopt prompt_subst
+# History
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
@@ -24,41 +26,27 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-zstyle ':vcs_info:git:*' formats ' %b'
+# Pushd
+setopt auto_pushd           # push the current directory visited on the stack.
+setopt pushd_ignore_dups    # do not store duplicates in the stack.
+setopt pushd_silent         # do not print the directory stack after pushd or popd.
+
 zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' format '%F{yellow}%d:%f'
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 
-fpath=(~/.config/zsh/prompt $fpath)
-autoload -Uz prompt.zsh; prompt.zsh
-
 autoload -U compinit; compinit
-
-# if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-#     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-#     command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-#     command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-#         print -P "%F{33} %F{34}Installation successful.%f%b" || \
-#         print -P "%F{160} The clone has failed.%f%b"
-# fi
-
-# source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-# autoload -Uz _zinit
-# (( ${+_comps} )) && _comps[zinit]=_zinit
-
-# zinit for \
-#     light-mode  zsh-users/zsh-autosuggestions \
-#     light-mode  zsh-users/zsh-completions \
-#     light-mode  zdharma-continuum/fast-syntax-highlighting \
-#                 zdharma-continuum/history-search-multi-word
 
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
+source ~/.config/zsh/plugins/autosuggestions/zsh-autosuggestions.plugin.zsh
+source ~/.config/zsh/plugins/completions/zsh-completions.plugin.zsh
+source ~/.config/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
 LAST_COMMAND_TIME=$(($(date "+%s%3N")-$START))
 echo "Startup time: ${LAST_COMMAND_TIME}ms"
-# zprof
 
-### End of Zinit's installer chunk
+# zprof
