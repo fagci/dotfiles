@@ -43,8 +43,6 @@ zstyle ':completion:*' format '%F{yellow}%d:%f'
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 
-autoload -U compinit; compinit
-
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
@@ -55,6 +53,14 @@ for plugin ($plugins); do
     # te="$(date "+%s%3N")"
     # echo "$plugin $(($te - $ts))ms"
 done
+
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+  touch ~/.zcompdump
+else
+  compinit -C
+fi
 
 # Search history using fzf
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
