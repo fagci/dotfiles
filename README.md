@@ -6,13 +6,21 @@
 
 1. Clone this repo to home directory
     ```sh
-    git clone https://github.com/fagci/dotfiles ~/.dotfiles
+    git clone https://github.com/fagci/dotfiles ~/.dotfiles --recurse-submodules
     ```
 1. Go into cloned repo root directory
     ```sh
     cd ~/.dotfiles
     ```
 1. Use `stow */` from repo root to make config symlinks.
+
+## Update
+
+```
+git pull
+git submodule update --init --recursive
+stow */
+```
 
 ## Used packages
 
