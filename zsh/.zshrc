@@ -47,6 +47,9 @@ source ~/.config/zsh/plugins/autosuggestions/zsh-autosuggestions.plugin.zsh
 source ~/.config/zsh/plugins/completions/zsh-completions.plugin.zsh
 source ~/.config/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
+# Search history using fzf
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+
 LAST_COMMAND_TIME=$(($(date "+%s%3N")-$START))
 echo "Startup time: ${LAST_COMMAND_TIME}ms"
 
