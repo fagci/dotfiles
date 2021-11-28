@@ -30,8 +30,6 @@ stow */
 - dunst
 - git
 - i3
-- irssi
-- kitty
 - nvim
 - picom
 - polybar
