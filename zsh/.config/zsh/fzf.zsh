@@ -1,5 +1,5 @@
 function fzf-history-widget () {
-    BUFFER=$(history -n 1 | awk '!a[$0]++' | fzf --reverse -i +m)
+    BUFFER=$(history -nr 1 | awk '!a[$0]++' | fzf -i +m)
     CURSOR=$#BUFFER
     zle reset-prompt
 }
