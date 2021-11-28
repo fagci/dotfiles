@@ -9,7 +9,7 @@ source ~/.config/zsh/plugins.zsh
 source ~/.config/zsh/compinit.zsh
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
-if hash zsh 2> /dev/null; then
+if hash fzf 2> /dev/null; then
     source ~/.config/zsh/fzf.zsh
 fi
 
