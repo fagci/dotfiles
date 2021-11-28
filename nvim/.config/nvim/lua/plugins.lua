@@ -16,11 +16,9 @@ return require('packer').startup(function(use)
     -- LSP
     use {
         'neovim/nvim-lspconfig',
-        after = 'nvim-lspinstall',
+        {'williamboman/nvim-lsp-installer',
         config = [[require('config.nvim-lspconfig')]],
-        requires = {
-            {'kabouzeid/nvim-lspinstall', event = 'BufRead'}
-        }
+    }
     }
 
     -- Completion
