@@ -6,12 +6,13 @@ plugins=(
     autosuggestions/zsh-autosuggestions.plugin.zsh
     completions/zsh-completions.plugin.zsh
     syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+    vi-mode/zsh-vi-mode.plugin.zsh
 )
 
 stty -ixon
 
 # Key bindings
-bindkey -e
+# bindkey -e
 bindkey '\e[1~'   beginning-of-line  # Linux console
 bindkey '\e[H'    beginning-of-line  # xterm
 bindkey '\eOH'    beginning-of-line  # gnome-terminal
