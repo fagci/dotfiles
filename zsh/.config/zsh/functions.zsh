@@ -39,7 +39,13 @@ extip() {
 }
 
 zsh-stats() {
-  fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
+    fc -l 1 \
+        | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' \
+        | grep -v "./" \
+        | column -c3 -s " " -t \
+        | sort -nr \
+        | nl \
+        | head -n25
 }
 
 todos() {
@@ -102,16 +108,11 @@ disallows() {
 }
 
 get-sitemap-urls() {
-    mozcurl "$1" | awk -F'[<>]' '/loc/ {print $3}'
+    mozcurl "$1" \
+        | awk -F'[<>]' '/loc/ {print $3}'
 }
 
+get-url-status(){
+    mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
+}
 
-
-# check-sitemap-urls() {
-#     while IFS= read -r sitemap; do
-#         echo "[*] $sitemap"
-#         mozcurl "$sitemap" \
-#             | awk -F'[<>]' '/<loc>/{print $3}' \
-#             | xargs -L1 -P 16 { mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@";}
-#     done <<< $(get-sitemap-urls "$1")
-# }
