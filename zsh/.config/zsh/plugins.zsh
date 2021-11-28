@@ -5,6 +5,8 @@ plugins=(
     # vi-mode/zsh-vi-mode.plugin.zsh
 )
 
+ZSH_PLUGINS=~/.local/share/zsh/plugins/
+
 for plugin ($plugins); do
     # ts="$(date "+%s%3N")"
     source $ZSH_PLUGINS/$plugin

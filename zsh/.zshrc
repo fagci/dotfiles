@@ -1,7 +1,6 @@
 # zmodload zsh/zprof
 
 START_TIME="$(date "+%s%3N")"
-ZSH_PLUGINS=~/.local/share/zsh/plugins/
 
 source ~/.config/zsh/options.zsh
 source ~/.config/zsh/keybindings.zsh
