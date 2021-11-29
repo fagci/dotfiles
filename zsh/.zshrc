@@ -12,7 +12,7 @@ source ~/.config/zsh/compinit.zsh
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/aliases.zsh
 
-source ~/.config/zsh/*.local.zsh(N)
+source ~/.config/zsh/*.local.zsh(N) 2>/dev/null
 
 hash fzf 2>/dev/null && source ~/.config/zsh/fzf.zsh
 
