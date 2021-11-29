@@ -1,4 +1,4 @@
-# bindkey -e
+bindkey -e
 bindkey '\e[1~'   beginning-of-line  # Linux console
 bindkey '\e[H'    beginning-of-line  # xterm
 bindkey '\eOH'    beginning-of-line  # gnome-terminal
