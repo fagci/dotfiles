@@ -1,3 +1,5 @@
 nvim/.config/nvim/plugin/packer_compiled.lua
 *.zwc
 *.zwc.old
+*.local.zsh
+chpwd-recent-dirs

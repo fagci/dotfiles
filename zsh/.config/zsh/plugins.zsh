@@ -7,8 +7,5 @@ plugins=(
 ZSH_PLUGINS=~/.local/share/zsh/plugins/
 
 for plugin ($plugins); do
-    # ts="$(date "+%s%3N")"
     source $ZSH_PLUGINS/$plugin
-    # te="$(date "+%s%3N")"
-    # echo "$plugin $(($te - $ts))ms"
 done
