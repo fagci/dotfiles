@@ -14,6 +14,5 @@ setopt pushd_ignore_dups    # do not store duplicates in the stack.
 setopt pushd_silent         # do not print the directory stack after pushd or popd.
 
 setopt extended_glob
-setopt globdots
 
 setopt complete_in_word

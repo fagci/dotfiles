@@ -17,3 +17,5 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 
 compinit -C
+
+_comp_options+=(globdots)
