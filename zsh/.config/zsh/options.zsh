@@ -13,6 +13,7 @@ setopt auto_pushd           # push the current directory visited on the stack.
 setopt pushd_ignore_dups    # do not store duplicates in the stack.
 setopt pushd_silent         # do not print the directory stack after pushd or popd.
 
+setopt autocd
 setopt extended_glob
 
 setopt complete_in_word

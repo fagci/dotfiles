@@ -7,49 +7,40 @@ echoerr() {
     echo "$@" 1>&2
 }
 
+# FS navigation
+
 mkcd() {
     mkdir -p "$@" && cd "$@"
 }
 
-share() {
-    curl --progress-bar -F"file=@$1" https://0x0.st | tee /dev/null
+get-dirs() {
+    find -type d \( \
+        -name '.git' \
+        -o -name 'node_modules' \
+        -o -name '*.js.map' \
+        -o -name '*.min.*' \
+        -o -name '*.o' \
+        \) -prune -o -print
 }
 
-wttr() {
-    wget -qO- wttr.in/\?nqM
-}
-
-cht() {
-    local IFS=+ 
-    where="$1"
-    shift
-    curl "https://cht.sh/$where/$*"
-}
-
-geoip() {
-    curl https://ipapi.co/${1}/json/
+fif() {
+    local q="$1"
+    local dir="${2:-.}"
+    rg --max-filesize=512000 --line-number --smart-case \
+        --hidden \
+        --glob "!.git/" \
+        --glob "!*.min.*" \
+        --glob "!*.bundle.*" \
+        --glob "!*.map" \
+        "$q" "$dir"
 }
 
 fcd() {
-    cd $(find -type d -print 2> /dev/null | fzf)
+    cd "$(get-dirs 2>/dev/null | fzf)"
 }
 
-extip() {
-    curl https://ifconfig.me
-}
-
-zsh-stats() {
-    fc -l 1 \
-        | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' \
-        | grep -v "./" \
-        | column -c3 -s " " -t \
-        | sort -nr \
-        | nl \
-        | head -n25
-}
-
-todos() {
-    awk -v IGNORECASE=1 -F'TODO:?\\s*' '/TODO/{print FILENAME ": " $2}' **/*.*(D.)
+fed() {
+    "${VISUAL:-${EDITOR:-vi}}" "$(fzf)"
 }
 
 extract() {
@@ -116,3 +107,43 @@ get-url-status(){
     mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
 }
 
+# Net
+
+geoip() {
+    curl https://ipapi.co/${1}/json/
+}
+
+extip() {
+    curl https://ifconfig.me
+}
+
+# Misc
+
+zsh-stats() {
+    fc -l 1 \
+        | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' \
+        | grep -v "./" \
+        | column -c3 -s " " -t \
+        | sort -nr \
+        | nl \
+        | head -n25
+}
+
+share() {
+    curl --progress-bar -F"file=@$1" https://0x0.st | tee /dev/null
+}
+
+wttr() {
+    wget -qO- wttr.in/\?nqM
+}
+
+cht() {
+    local IFS=+ 
+    where="$1"
+    shift
+    curl "https://cht.sh/$where/$*"
+}
+
+todos() {
+    awk -v IGNORECASE=1 -F'TODO:?\\s*' '/TODO/{print FILENAME ": " $2}' **/*.*(D.)
+}

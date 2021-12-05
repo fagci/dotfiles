@@ -8,3 +8,4 @@ zle     -N   fzf-history-widget
 bindkey '^r' fzf-history-widget
 bindkey -M vicmd '^r' fzf-history-widget
 bindkey -M viins '^r' fzf-history-widget
+
