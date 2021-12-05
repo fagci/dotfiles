@@ -1,6 +1,6 @@
 # zmodload zsh/zprof
 
-START_TIME="$(date "+%s%3N")"
+# START_TIME="$(date "+%s%3N")"
 
 autoload -Uz zmv
 
@@ -16,7 +16,7 @@ source ~/.config/zsh/*.local.zsh(N) 2>/dev/null
 
 hash fzf 2>/dev/null && source ~/.config/zsh/fzf.zsh
 
-ELAPSED_TIME=$(($(date "+%s%3N")-$START_TIME))
-echo "Startup time: ${ELAPSED_TIME}ms"
+# ELAPSED_TIME=$(($(date "+%s%3N")-$START_TIME))
+# echo "Startup time: ${ELAPSED_TIME}ms"
 
 # zprof
