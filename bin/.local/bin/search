@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+q="$1"
+dir="${2:-.}"
+
+# find files
+find "$dir" -name "*$q*"
+
+#find contents using ripgrep if installed
+if command -v rg &> /dev/null
+then
+    rg --max-filesize=512000 --column --line-number \
+        --no-heading --color=always --glob "!.git/*" \
+        --smart-case \
+        --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map" \
+        "$q" "$dir"
+else
+    fgrep "$q" -r "$dir"
+fi
