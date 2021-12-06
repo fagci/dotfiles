@@ -17,3 +17,5 @@ setopt autocd
 setopt extended_glob
 
 setopt complete_in_word
+
+setopt noclobber
