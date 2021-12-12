@@ -40,6 +40,8 @@ map('v', '<A-DOWN>', ':m \'>+1<CR>gv=gv', N)
 map('v', '<A-UP>', ':m \'<-2<CR>gv=gv', N)
 map('n', '<A-LEFT>', ':SidewaysLeft<CR>', N)
 map('n', '<A-RIGHT>', ':SidewaysRight<CR>', N)
+map('n', '<C-A-LEFT>', ':SidewaysLeft<CR>', N)
+map('n', '<C-A-RIGHT>', ':SidewaysRight<CR>', N)
 
 -- Resize windows
 map('', '<C-S-Left>', ':vertical resize -1<CR>', NS)
