@@ -14,13 +14,13 @@ mkcd() {
 }
 
 get-dirs() {
-    find -type d \( \
-        -name '.git' \
-        -o -name 'node_modules' \
-        -o -name '*.js.map' \
-        -o -name '*.min.*' \
-        -o -name '*.o' \
-        \) -prune -o -print
+find -type d \( \
+    -name '.git' \
+    -o -name 'node_modules' \
+    -o -name '*.js.map' \
+    -o -name '*.min.*' \
+    -o -name '*.o' \
+    \) -prune -o -print
 }
 
 fif() {
@@ -33,7 +33,7 @@ fif() {
         --glob "!*.bundle.*" \
         --glob "!*.map" \
         "$q" "$dir"
-}
+    }
 
 fcd() {
     cd "$(get-dirs 2>/dev/null | fzf)"
@@ -75,7 +75,7 @@ wg(){
 }
 
 mozcurl() {
-    curl -s -H "$MOZ_UA_H" "$1"
+    curl -s -H "$MOZ_UA_H" "$@"
 }
 
 download_recursive() {
@@ -99,13 +99,30 @@ disallows() {
 }
 
 get-sitemap-urls() {
-    mozcurl "$1" \
-        | awk -F'[<>]' '/loc/ {print $3}'
+mozcurl "$1" \
+    | awk -F'[<>]' '/loc/ {print $3}'
 }
 
-get-url-status(){
-    mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
+url-status(){
+mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
 }
+
+function url-ttfb {
+local format='%{time_pretransfer} %{time_starttransfer}'
+mozcurl -o /dev/null -w "$format" "$@" \
+    | awk '{ printf("%5d ms\n", ($2-$1)*1000) }'
+}
+
+url-check() {
+local format='[%{http_code}]
+DNS: 0 %{time_namelookup} s
+Conn: 0 %{time_connect} s
+TTFB: %{time_pretransfer} %{time_starttransfer} s
+'
+mozcurl -o /dev/null -w "$format" "$@" \
+    | awk '/s$/{ printf("%d %s\n", $1, ($3-$2)*1000, "ms") } !/s$/'
+}
+
 
 # Net
 
@@ -120,13 +137,13 @@ extip() {
 # Misc
 
 zsh-stats() {
-    fc -l 1 \
-        | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' \
-        | grep -v "./" \
-        | column -c3 -s " " -t \
-        | sort -nr \
-        | nl \
-        | head -n25
+fc -l 1 \
+    | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' \
+    | grep -v "./" \
+    | column -c3 -s " " -t \
+    | sort -nr \
+    | nl \
+    | head -n25
 }
 
 share() {

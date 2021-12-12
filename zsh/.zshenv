@@ -4,3 +4,5 @@ export LANGUAGE=en_US.UTF-8
 export LANG=$LANGUAGE
 
 export PATH="${PATH}:${HOME}/.local/bin"
+
+source ~/.config/zsh/functions.zsh
