@@ -1,7 +1,11 @@
 local ts_configs = require 'nvim-treesitter.configs'
 ts_configs.setup {
   ensure_installed = 'maintained',
-  highlight = { enable = true, use_languagetree = true },
+  highlight = {
+      additional_vim_regex_highlighting = true,
+      enable = true,
+      use_languagetree = true
+    },
   indent = { enable = false },
   incremental_selection = {
     enable = true,
