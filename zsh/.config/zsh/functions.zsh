@@ -110,7 +110,7 @@ mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
 function url-ttfb {
 local format='%{time_pretransfer} %{time_starttransfer}'
 mozcurl -o /dev/null -w "$format" "$@" \
-    | awk '{ printf("%5d ms\n", ($2-$1)*1000) }'
+    | awk '{ printf("%d ms\n", ($2-$1)*1000) }'
 }
 
 url-check() {
