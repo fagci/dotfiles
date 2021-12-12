@@ -108,7 +108,7 @@ mozcurl -o /dev/null --write-out "%{http_code},%{url_effective}\n" "$@"
 }
 
 function url-ttfb {
-local format='%{time_pretransfer} %{time_starttransfer}'
+local format='%{time_appconnect} %{time_starttransfer}'
 mozcurl -o /dev/null -w "$format" "$@" \
     | awk '{ printf("%d ms\n", ($2-$1)*1000) }'
 }
@@ -117,10 +117,10 @@ url-check() {
 local format='[%{http_code}]
 DNS: 0 %{time_namelookup} s
 Conn: 0 %{time_connect} s
-TTFB: %{time_pretransfer} %{time_starttransfer} s
+TTFB: %{time_appconnect} %{time_starttransfer} s
 '
 mozcurl -o /dev/null -w "$format" "$@" \
-    | awk '/s$/{ printf("%d %s\n", $1, ($3-$2)*1000, "ms") } !/s$/'
+    | awk '/s$/{ printf("%5s %5d %s\n", $1, ($3-$2)*1000, "ms") } !/s$/'
 }
 
 
