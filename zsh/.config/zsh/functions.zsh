@@ -78,7 +78,7 @@ mozcurl() {
     curl -s -H "$MOZ_UA_H" "$@"
 }
 
-download_recursive() {
+download-recursive() {
     if [[ $# -lt 2 ]]; then
         echoerr "Usage: <url> <extensions_comma> [destination]"
         return 1
@@ -101,6 +101,10 @@ disallows() {
 get-sitemap-urls() {
 mozcurl "$1" \
     | awk -F'[<>]' '/loc/ {print $3}'
+}
+
+url-headers() {
+    mozcurl -so /dev/null -D - "$1"
 }
 
 url-status(){
@@ -128,6 +132,10 @@ mozcurl -o /dev/null -w "$format" "$@" \
 
 geoip() {
     curl https://ipapi.co/${1}/json/
+}
+
+ipinfo() {
+    curl http://ipinfo.io/$1
 }
 
 extip() {
@@ -164,3 +172,8 @@ cht() {
 todos() {
     awk -v IGNORECASE=1 -F'TODO:?\\s*' '/TODO/{print FILENAME ": " $2}' **/*.*(D.)
 }
+
+function = () {
+    awk "BEGIN{print $@}"
+}
+
