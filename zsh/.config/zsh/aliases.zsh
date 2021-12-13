@@ -6,7 +6,7 @@ alias gcam="git commit -am"
 alias gp="git push"
 alias gl="git pull"
 
-alias cdd='> cd $(dirs -lp | fzf +m)'
+alias cdd='cd $(dirs -lp | fzf +m)'
 
 if hash nvim 2> /dev/null; then
     alias vim='nvim'
