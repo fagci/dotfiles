@@ -4,11 +4,10 @@
 
 autoload -Uz zmv
 
-source ~/.config/zsh/options.zsh # slow prompt
+source ~/.config/zsh/options.zsh
 source ~/.config/zsh/keybindings.zsh
 source ~/.config/zsh/prompt.zsh
 source ~/.config/zsh/plugins.zsh
-source ~/.config/zsh/compinit.zsh
 source ~/.config/zsh/aliases.zsh
 
 source ~/.config/zsh/*.local.zsh(N) 2>/dev/null
