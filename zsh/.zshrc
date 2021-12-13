@@ -2,11 +2,10 @@
 
 # START_TIME="$(date "+%s%3N")"
 
-autoload -Uz zmv
-
 source ~/.config/zsh/options.zsh
 source ~/.config/zsh/keybindings.zsh
 source ~/.config/zsh/prompt.zsh
+source ~/.config/zsh/modules.zsh
 source ~/.config/zsh/plugins.zsh
 source ~/.config/zsh/aliases.zsh
 

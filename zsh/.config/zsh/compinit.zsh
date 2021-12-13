@@ -27,8 +27,6 @@ zstyle ':completion:*' expand prefix suffix
 
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
-autoload -Uz compinit
-
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done

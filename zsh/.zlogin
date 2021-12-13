@@ -1,7 +1,7 @@
 (
     # <https://github.com/zimfw/zimfw/blob/master/login_init.zsh>
     setopt LOCAL_OPTIONS EXTENDED_GLOB
-    autoload -U zrecompile
+    autoload -Uz zrecompile
     local ZSHCONFIG=~/.config/zsh/
 
     # Compile zcompdump, if modified, to increase startup speed.
