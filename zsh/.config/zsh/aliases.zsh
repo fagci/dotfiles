@@ -12,7 +12,7 @@ if hash nvim 2> /dev/null; then
     alias vim='nvim'
 fi
 
-if type exa > /dev/null 2>&1; then
+if hash exa 2> /dev/null; then
   alias ls='exa'
   alias l='exa'
   alias ll='exa -l'
