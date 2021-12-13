@@ -4,9 +4,7 @@ colors
 PROMPT_GIT_UPDATE=1
 
 function preexec {
-    if [[ "$2" == git* ]]; then
-        PROMPT_GIT_UPDATE=1
-    fi
+    [[ "$2" == git* ]] && PROMPT_GIT_UPDATE=1
 }
 
 function chpwd {
@@ -14,14 +12,13 @@ function chpwd {
 }
 
 function precmd {
-    if [[ -n "$PROMPT_GIT_UPDATE" ]] ; then
-        vcs_info
+    [[ -n "$PROMPT_GIT_UPDATE" ]] && {
         PROMPT_GIT_UPDATE=
-    fi
+        vcs_info
+    }
 }
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes false
 zstyle ':vcs_info:git:*' formats ' %b'
 setopt PROMPT_SUBST
 
