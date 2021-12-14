@@ -18,11 +18,14 @@ function precmd {
 }
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats ' %b'
+zstyle ':vcs_info:git:*' formats ' %b '
 setopt PROMPT_SUBST
 
-if [[ -n "$SSH_CONNECTION" ]]; then
-    PROMPT='%F{green}%n@%m %(?.%F{yellow}.%F{red})%~%F{reset}${vcs_info_msg_0_}> '
-else
-    PROMPT='%(?.%F{yellow}.%F{red})%~%F{reset}${vcs_info_msg_0_}> '
-fi
+PROMPT=''
+
+[[ -n "$SSH_CONNECTION" ]] && PROMPT+='%F{green}%n@%m '
+
+PROMPT+='%(?..%F{red}⊗ )'
+PROMPT+='%F{yellow}%~%F{reset}'
+PROMPT+='${vcs_info_msg_0_}'
+PROMPT+='> '
