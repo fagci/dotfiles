@@ -1,5 +1,4 @@
-autoload -Uz vcs_info colors
-colors
+autoload -Uz vcs_info
 
 PROMPT_GIT_UPDATE=1
 
@@ -22,8 +21,8 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats ' %b'
 setopt PROMPT_SUBST
 
-if [[ -n "${SSH_CONNECTION}" ]]; then
-    PROMPT='%(?..[%?] )%{${fg[green]}%}%n@%m %{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}> '
+if [[ -n "$SSH_CONNECTION" ]]; then
+    PROMPT='%F{green}%n@%m %(?.%F{yellow}.%F{red})%~%F{reset}${vcs_info_msg_0_}> '
 else
-    PROMPT='%(?..[%?] )%{${fg[yellow]}%}%~%{${reset_color}%}${vcs_info_msg_0_}> '
+    PROMPT='%(?.%F{yellow}.%F{red})%~%F{reset}${vcs_info_msg_0_}> '
 fi
