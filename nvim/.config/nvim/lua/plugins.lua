@@ -4,6 +4,7 @@ return require('packer').startup(function(use)
     -- Syntax hl
     use {'chr4/nginx.vim', ft={'nginx'}}
     use {'nelsyeung/twig.vim', ft={'twig'}}
+    use {'alaviss/nim.nvim', ft={'nim'}}
     use {
         'nvim-treesitter/nvim-treesitter', 
         run = ':TSUpdate',

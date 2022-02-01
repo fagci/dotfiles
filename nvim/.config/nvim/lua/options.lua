@@ -45,6 +45,7 @@ opt.clipboard = 'unnamedplus'
 opt.autoindent = true
 opt.expandtab = true
 opt.shiftwidth = 4
+opt.foldlevelstart = 99
 -- opt.smartindent = true
 opt.softtabstop = 4
 opt.tabstop = 4
