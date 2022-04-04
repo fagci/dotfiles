@@ -41,7 +41,7 @@ luasnip.snippets = {
 cmp.setup({
     completion = { 
         completeopt = 'menu,menuone,noinsert',
-        keyword_length = 3,
+        -- keyword_length = 3,
     },
     sources = {
         { name = 'nvim_lsp' },
@@ -53,6 +53,16 @@ cmp.setup({
     mapping = {
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ["<PageUp>"] = function(fallback)
+            for _ = 1, 8 do
+                cmp.mapping.select_prev_item()(nil)
+            end
+        end,
+        ["<PageDown>"] = function(fallback)
+            for _ = 1, 8 do
+                cmp.mapping.select_next_item()(nil)
+            end
+        end,
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable,
         ['<C-e>'] = cmp.mapping({
