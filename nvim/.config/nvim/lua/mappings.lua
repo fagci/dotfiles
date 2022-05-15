@@ -3,7 +3,7 @@ local map = vim.api.nvim_set_keymap
 local N = { noremap = true }
 local NS = { noremap = true, silent = true }
 
-vim.g.mapleader =','
+vim.g.mapleader = ','
 
 map('n', '<leader>ev', ':e ~/.config/nvim/init.lua<CR>', N)
 map('n', '<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>', N)
@@ -85,7 +85,7 @@ map('n', '<leader>.', '<cmd>lua vim.lsp.buf.format{async=true}<CR>', N)
 map('n', '<leader>=', ':Neoformat<CR>', N)
 -- map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', N)
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', NS)
-map('n', '<C-k>','<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
+map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 

@@ -1,45 +1,9 @@
-local cmp = require'cmp'
-local lspkind = require'lspkind'
-local luasnip = require'luasnip'
-
-local s = luasnip.snippet
-local t = luasnip.text_node
-local i = luasnip.insert_node
-local f = luasnip.function_node
-
-luasnip.snippets = {
-    php = {
-        s('ph', {
-            t({'<?php '}), i(0), t({' ?>'})
-        }),
-        s('phe', {
-            t({'<?= '}), i(0), t({' ?>'})
-        }),
-        s('phpwhil', {
-            t({'<?php while('}), i(1), t({'): ?>', '\t'}),
-            i(0), t({ '', '' }),
-            t({'<?php endwhile; ?>'})
-        }),
-        s('phpf', {
-            t({'<?php for('}), i(1),t({'; '}),i(2),t({'; '}),i(3), t({'): ?>', '\t'}),
-            i(0), t({ '', '' }),
-            t({'<?php endfor; ?>'})
-        }),
-        s('phpfe', {
-            t({'<?php foreach('}), i(1),t({' as '}),i(2), t({'): ?>', '\t'}),
-            i(0), t({ '', '' }),
-            t({'<?php endforeach; ?>'})
-        }),
-        s('phpif', {
-            t({'<?php if('}), i(1), t({'): ?>', '\t'}),
-            i(0), t({ '', '' }),
-            t({'<?php endif; ?>'})
-        }),
-    }
-}
+local cmp = require 'cmp'
+local lspkind = require 'lspkind'
+local luasnip = require 'luasnip'
 
 cmp.setup({
-    completion = { 
+    completion = {
         completeopt = 'menu,menuone,noinsert',
         keyword_length = 2,
     },
@@ -55,12 +19,12 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<Down>'] = cmp.mapping.select_next_item(),
         ['<Up>'] = cmp.mapping.select_prev_item(),
-        ["<PageUp>"] = function(fallback)
+        ["<PageUp>"] = function(_)
             for _ = 1, 8 do
                 cmp.mapping.select_prev_item()(nil)
             end
         end,
-        ["<PageDown>"] = function(fallback)
+        ["<PageDown>"] = function(_)
             for _ = 1, 8 do
                 cmp.mapping.select_next_item()(nil)
             end
@@ -105,7 +69,7 @@ cmp.setup({
     },
     formatting = {
         format = lspkind.cmp_format({
-            with_text=false, 
+            with_text = false,
             menu = ({
                 buffer = '[B]',
                 nvim_lsp = '[L]',
@@ -123,4 +87,3 @@ cmp.setup({
         ghost_text = true,
     },
 })
-
