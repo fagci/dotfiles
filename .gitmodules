@@ -7,3 +7,6 @@
 [submodule "zsh/.config/zsh/plugins/syntax-highlighting"]
 	path = zsh/.local/share/zsh/plugins/syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "fzf/.fzf"]
+	path = fzf/.fzf
+	url = https://github.com/junegunn/fzf.git

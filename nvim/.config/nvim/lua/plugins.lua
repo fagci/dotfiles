@@ -71,7 +71,7 @@ return require('packer').startup(function(use)
     use 'mhinz/vim-grepper'
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'editorconfig/editorconfig-vim'
-    use { 'junegunn/fzf.vim', requires = { 'junegunn/fzf' }, run = function() vim.fn['fzf#install']() end }
+    use { 'ibhagwan/fzf-lua', requires = 'kyazdani42/nvim-web-devicons', config=[[require('config.fzf-lua')]]}
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -92,8 +92,6 @@ return require('packer').startup(function(use)
 
     -- UI
     use 'kyazdani42/nvim-web-devicons'
-    --[[ use {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}}
-    use 'sainnhe/sonokai' ]]
     use {
         "catppuccin/nvim",
         as = "catppuccin",
@@ -107,12 +105,6 @@ return require('packer').startup(function(use)
 
     -- TEST ZONE
     use {
-        'kyazdani42/nvim-tree.lua',
-        cmd = 'NvimTreeToggle',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = [[require'nvim-tree'.setup{}]]
-    }
-    use {
         'simrat39/symbols-outline.nvim',
         setup = [[require'config.symbols-outline']],
         cmd = { 'SymbolsOutline', 'SymbolsOutlineOpen', 'SymbolsOutlineClose' }
@@ -120,4 +112,12 @@ return require('packer').startup(function(use)
 
     use 'kevinhwang91/nvim-bqf'
 
+    return
+    -- to remove
+    use {
+        'kyazdani42/nvim-tree.lua',
+        cmd = 'NvimTreeToggle',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = [[require'nvim-tree'.setup{}]]
+    }
 end)

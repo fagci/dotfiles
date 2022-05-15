@@ -1,5 +1,4 @@
 local opt = vim.opt
-local wo = vim.wo
 local g = vim.g
 
 -- Speed
@@ -31,7 +30,7 @@ opt.signcolumn = "number"
 opt.splitright = true
 opt.splitbelow = true
 opt.termguicolors = true
-opt.listchars='tab:▸ ,space:.,trail:•'
+opt.listchars = 'tab:▸ ,space:.,trail:•'
 opt.colorcolumn = '120'
 opt.statusline = table.concat {
     "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
@@ -67,8 +66,8 @@ filetype plugin indent on
 ]]
 if vim.fn.executable('rg') then
     opt.grepprg = [[rg --hidden --glob "!.git" --no-heading --smart-case --vimgrep --follow $*]]
-    opt.grepformat='%f:%l:%c:%m'
+    opt.grepformat = '%f:%l:%c:%m'
 elseif vim.fn.executable('ag') then
     opt.grepprg = [[ag --nogroup --nocolor --vimgrep]]
 end
-g.matchup_matchparen_offscreen = {method = 'popup'}
+g.matchup_matchparen_offscreen = { method = 'popup' }

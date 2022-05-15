@@ -64,12 +64,12 @@ map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
 map('n', '<leader>ps', ':PackerSync<CR>', NS)
 
 -- Project navigation
-map('n', '<tab>', ':GFiles<cr>', N)
-map('n', '<Leader><tab>', ':Files<CR>', N)
-map('n', '<Leader>f', ':GRG<CR>', N)
-map('n', '<Leader>F', ':RG<CR>', N)
-map('n', '<Leader>h', ':History<CR>', N)
-map('n', '<Leader>b', ':Buffers<CR>', N)
+map('n', '<tab>', ':FzfLua git_files<cr>', N)
+map('n', '<Leader><tab>', ':FzfLua files<CR>', N)
+map('n', '<Leader>f', ':FzfLua grep_project<CR>', N)
+map('n', '<Leader>F', ':FzfLua grep<CR>', N)
+map('n', '<Leader>h', ':FzfLua loclist<CR>', N)
+map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
 map('n', '<Leader>t', ':NvimTreeToggle<CR>', N)
 map('n', '<Leader>o', ':SymbolsOutline<CR>', N)
 
