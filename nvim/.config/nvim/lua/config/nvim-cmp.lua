@@ -41,7 +41,7 @@ luasnip.snippets = {
 cmp.setup({
     completion = { 
         completeopt = 'menu,menuone,noinsert',
-        -- keyword_length = 3,
+        keyword_length = 2,
     },
     sources = {
         { name = 'nvim_lsp' },

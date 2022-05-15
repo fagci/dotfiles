@@ -35,6 +35,9 @@ trans_mv() {
     local dir=${1:-$PWD}
     for NAME in "$dir"/* ; do
         TRS=$(translit <<< "${NAME// /_}")
+        TRS=${TRS//\"/}
+        TRS=${TRS//\'/}
+        TRS=${TRS//\`/}
         if [ "$NAME" != "$TRS" ]; then
             # echo "\"$NAME\" -> \"$TRS\""
             mv -v "$NAME" "$TRS"
