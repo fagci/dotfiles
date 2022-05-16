@@ -1,6 +1,5 @@
 require("catppuccin").setup({
     colorscheme = "soft_manilo",
-    transparency = false,
     styles = {
         comments = "NONE",
         functions = "NONE",
