@@ -1,11 +1,10 @@
 local ts_configs = require 'nvim-treesitter.configs'
 ts_configs.setup {
     ensure_installed = 'all',
-    --[[ highlight = {
+    highlight = {
         enable = true,
-        additional_vim_regex_highlighting = true,
-        use_languagetree = true
-    }, ]]
+        disable = { "html", "twig" }, -- fixes twig hl
+    },
     indent = { enable = false },
     incremental_selection = {
         enable = true,

@@ -6,7 +6,6 @@ require 'mappings'
 require 'init_packer'
 
 require 'plugins'
-require 'styles'
 
 -- FIXME:
 --

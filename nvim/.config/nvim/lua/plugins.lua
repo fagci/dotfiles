@@ -71,7 +71,7 @@ return require('packer').startup(function(use)
     use 'mhinz/vim-grepper'
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'editorconfig/editorconfig-vim'
-    use { 'ibhagwan/fzf-lua', requires = 'kyazdani42/nvim-web-devicons', config=[[require('config.fzf-lua')]]}
+    use { 'ibhagwan/fzf-lua', config=[[require('config.fzf-lua')]]}
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -94,6 +94,7 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use {
         "catppuccin/nvim",
+        branch = 'dev-remaster',
         as = "catppuccin",
         config = [[require('config.catppuccin')]],
     }
