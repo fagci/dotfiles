@@ -19,7 +19,7 @@ require 'fzf-lua'.setup {
         },
         preview    = {
             vertical     = 'up:45%', -- up|down:size
-            horizontal   = 'right:60%', -- right|left:size
+            horizontal   = 'right:50%', -- right|left:size
             title        = false, -- preview border title (file/buf)?
         },
     },
