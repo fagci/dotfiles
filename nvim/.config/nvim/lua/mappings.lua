@@ -93,7 +93,7 @@ map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 -- Comment
 map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", {})
 -- TODO: refactor this shit
-map("x", "<leader>/", "<ESC><cmd>lua if #require('Comment.ft').lang(vim.bo.filetype)==1 then require('Comment.api').toggle_linewise_op(vim.fn.visualmode()) else require('Comment.api').toggle_blockwise_op(vim.fn.visualmode()) end<CR>", {})
+map("x", "<leader>/", "<ESC><cmd>lua require('utils').toggle_visual_comment()<CR>", {})
 
 -- Grepper
 map('n', 'gs', '<Plug>(GrepperOperator)', {})
