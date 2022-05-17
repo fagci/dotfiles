@@ -5,6 +5,9 @@ return require('packer').startup(function(use)
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
     use { 'alaviss/nim.nvim', ft = 'nim' }
+    use { 'othree/yajs.vim', ft = 'js' }
+    use { 'othree/html5.vim', ft = {'html', 'php'} }
+
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -103,4 +106,40 @@ return require('packer').startup(function(use)
     -- TEST ZONE
     use 'lewis6991/nvim-treesitter-context'
     use 'elihunter173/dirbuf.nvim' -- fm as text
+    use 'nvim-lua/lsp-status.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config=[[
+            require('lualine').setup {
+              options = {
+                icons_enabled = false,
+                theme = 'OceanicNext',
+                component_separators = false,
+                section_separators = {},
+                disabled_filetypes = {},
+                always_divide_middle = true,
+                globalstatus = false,
+              },
+              sections = {
+                lualine_a = {'quickfix'},
+                lualine_b = {function() return require('lsp-status').status() end},
+                lualine_c = {'filename'},
+                lualine_x = {'encoding', 'filetype'},
+                lualine_y = {},
+                lualine_z = {'location'}
+              },
+              inactive_sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = {'filename'},
+                lualine_x = {'location'},
+                lualine_y = {},
+                lualine_z = {}
+              },
+              tabline = {},
+              extensions = {}
+            }
+        ]]
+    }
 end)

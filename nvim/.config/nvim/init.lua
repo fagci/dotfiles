@@ -16,6 +16,7 @@ vim.cmd([[
 syntax on
 colorscheme OceanicNext
 let &fcs='eob: '
+let g:airline_theme='oceanicnext'
 ]])
 
 -- FIXME:

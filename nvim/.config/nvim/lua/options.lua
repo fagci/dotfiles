@@ -33,10 +33,10 @@ vim.o.background = "dark"
 vim.o.termguicolors = true
 opt.listchars = 'tab:▸ ,space:.,trail:•'
 opt.colorcolumn = '120'
-opt.statusline = 
+--[[ opt.statusline = 
     "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) " ..
     "%="..
-    "%l:%c/%L %y"
+    "%l:%c/%L %y" ]]
 
 -- Editing
 opt.wrap = false
