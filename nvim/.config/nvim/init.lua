@@ -1,11 +1,11 @@
 require 'disable_builtins'
 require 'options'
 require 'commands'
-require 'mappings'
 
 require 'init_packer'
 
 require 'plugins'
+require 'mappings'
 
 vim.cmd("colorscheme onenord")
 
@@ -16,6 +16,5 @@ vim.cmd("colorscheme onenord")
 --
 -- TODO:
 --
--- cmp: better navigation pgup/pgdn
 -- Regexp highlight
 --

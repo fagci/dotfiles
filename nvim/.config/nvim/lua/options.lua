@@ -32,11 +32,10 @@ opt.splitbelow = true
 opt.termguicolors = true
 opt.listchars = 'tab:▸ ,space:.,trail:•'
 opt.colorcolumn = '120'
-opt.statusline = table.concat {
-    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
-    "%=",
-    "%l:%c/%L %y",
-}
+opt.statusline = 
+    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) " ..
+    "%="..
+    "%l:%c/%L %y"
 
 -- Editing
 opt.wrap = false
@@ -45,7 +44,6 @@ opt.autoindent = true
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.foldlevelstart = 99
--- opt.smartindent = true
 opt.softtabstop = 4
 opt.tabstop = 4
 opt.completeopt = "menuone,noinsert,noselect"
@@ -61,9 +59,9 @@ opt.inccommand = 'nosplit'
 opt.shortmess:append "c"
 
 opt.formatoptions = 'croqn'
-vim.cmd [[
-filetype plugin indent on
-]]
+
+vim.cmd("filetype plugin indent on")
+
 if vim.fn.executable('rg') then
     opt.grepprg = [[rg --hidden --glob "!.git" --no-heading --smart-case --vimgrep --follow $*]]
     opt.grepformat = '%f:%l:%c:%m'
