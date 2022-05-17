@@ -3,7 +3,8 @@ ts_configs.setup {
     ensure_installed = 'all',
     highlight = {
         enable = true,
-        disable = { "html", "twig", "lua" }, -- fixes twig hl, lua italics
+        disable = { "lua" },
+        additional_vim_regex_highlighting = true,
     },
     indent = { enable = false },
     incremental_selection = {

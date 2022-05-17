@@ -90,10 +90,10 @@ map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
--- Kommentary
-map("n", "<leader>/", "<Plug>kommentary_line_default", {})
-map("n", "gc", "<Plug>kommentary_motion_default", {})
-map("x", "<leader>/", "<Plug>kommentary_visual_default", {})
+-- Comment
+map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", {})
+-- TODO: refactor this shit
+map("x", "<leader>/", "<ESC><cmd>lua if #require('Comment.ft').lang(vim.bo.filetype)==1 then require('Comment.api').toggle_linewise_op(vim.fn.visualmode()) else require('Comment.api').toggle_blockwise_op(vim.fn.visualmode()) end<CR>", {})
 
 -- Grepper
 map('n', 'gs', '<Plug>(GrepperOperator)', {})

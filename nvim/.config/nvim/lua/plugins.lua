@@ -2,9 +2,9 @@ return require('packer').startup(function(use)
     use { 'wbthomason/packer.nvim', opt = true }
 
     -- Syntax hl
-    use { 'chr4/nginx.vim', ft = { 'nginx' } }
-    use { 'nelsyeung/twig.vim', ft = { 'twig' } }
-    use { 'alaviss/nim.nvim', ft = { 'nim' } }
+    use { 'chr4/nginx.vim', ft = 'nginx' }
+    use { 'nelsyeung/twig.vim', ft = 'twig' }
+    use { 'alaviss/nim.nvim', ft = 'nim' }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -60,7 +60,7 @@ return require('packer').startup(function(use)
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
     use { 'godlygeek/tabular', cmd = 'Tabularize' }
     use { 'andymass/vim-matchup', event = 'VimEnter' }
-    use { 'b3nj5m1n/kommentary', config = [[require('config.kommentary')]] }
+    use { 'numToStr/Comment.nvim', config = [[require('config.comment')]] }
 
     -- Utils
     use 'vifm/vifm.vim'
@@ -70,7 +70,7 @@ return require('packer').startup(function(use)
     use 'mhinz/vim-grepper'
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'editorconfig/editorconfig-vim'
-    use { 'ibhagwan/fzf-lua', config=[[require('config.fzf-lua')]]}
+    use { 'ibhagwan/fzf-lua', config = [[require('config.fzf-lua')]] }
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -89,33 +89,18 @@ return require('packer').startup(function(use)
         config = [[require('todo-comments').setup()]]
     }
 
-    -- UI
-    use 'kyazdani42/nvim-web-devicons'
+    -- colorschemes
     use 'rmehri01/onenord.nvim'
     use 'cpea2506/one_monokai.nvim'
+    use 'mhartington/oceanic-next'
+
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
-        config = [[require('colorizer').setup {'css', 'javascript', 'php', 'html'}]]
+        config = [[require('config.colorizer')]]
     }
 
     -- TEST ZONE
-    use {
-        'simrat39/symbols-outline.nvim',
-        setup = [[require'config.symbols-outline']],
-        cmd = { 'SymbolsOutline', 'SymbolsOutlineOpen', 'SymbolsOutlineClose' }
-    }
-
+    use 'lewis6991/nvim-treesitter-context'
     use 'elihunter173/dirbuf.nvim' -- fm as text
-
-    use 'kevinhwang91/nvim-bqf'
-
-    return
-    -- to remove
-    use {
-        'kyazdani42/nvim-tree.lua',
-        cmd = 'NvimTreeToggle',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = [[require'nvim-tree'.setup{}]]
-    }
 end)

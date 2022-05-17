@@ -7,7 +7,16 @@ require 'init_packer'
 require 'plugins'
 require 'mappings'
 
-vim.cmd("colorscheme onenord")
+
+vim.cmd "highlight clear"
+if vim.fn.exists "syntax_on" then
+  vim.cmd "syntax reset"
+end
+vim.cmd([[
+syntax on
+colorscheme OceanicNext
+let &fcs='eob: '
+]])
 
 -- FIXME:
 --
