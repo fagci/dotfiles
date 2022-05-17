@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
     use 'ray-x/lsp_signature.nvim'
     use 'honza/vim-snippets'
 
-
     use {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter *',
@@ -92,7 +91,8 @@ return require('packer').startup(function(use)
 
     -- UI
     use 'kyazdani42/nvim-web-devicons'
-    use "EdenEast/nightfox.nvim"
+    use 'rmehri01/onenord.nvim'
+    use 'cpea2506/one_monokai.nvim'
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
@@ -105,6 +105,8 @@ return require('packer').startup(function(use)
         setup = [[require'config.symbols-outline']],
         cmd = { 'SymbolsOutline', 'SymbolsOutlineOpen', 'SymbolsOutlineClose' }
     }
+
+    use 'elihunter173/dirbuf.nvim' -- fm as text
 
     use 'kevinhwang91/nvim-bqf'
 

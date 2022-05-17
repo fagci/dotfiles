@@ -7,7 +7,7 @@ require 'init_packer'
 
 require 'plugins'
 
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme onenord")
 
 -- FIXME:
 --
