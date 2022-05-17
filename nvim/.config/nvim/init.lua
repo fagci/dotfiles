@@ -7,6 +7,8 @@ require 'init_packer'
 
 require 'plugins'
 
+vim.cmd("colorscheme catppuccin")
+
 -- FIXME:
 --
 -- PHP: sometimes cursor not indents on <CR>

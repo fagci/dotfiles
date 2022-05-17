@@ -3,7 +3,7 @@ ts_configs.setup {
     ensure_installed = 'all',
     highlight = {
         enable = true,
-        disable = { "html", "twig" }, -- fixes twig hl
+        disable = { "html", "twig", "lua" }, -- fixes twig hl, lua italics
     },
     indent = { enable = false },
     incremental_selection = {
