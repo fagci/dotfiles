@@ -106,10 +106,8 @@ return require('packer').startup(function(use)
     -- TEST ZONE
     use 'lewis6991/nvim-treesitter-context'
     use 'elihunter173/dirbuf.nvim' -- fm as text
-    use 'nvim-lua/lsp-status.nvim'
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config=[[
             require('lualine').setup {
               options = {
@@ -123,11 +121,11 @@ return require('packer').startup(function(use)
               },
               sections = {
                 lualine_a = {'quickfix'},
-                lualine_b = {function() return require('lsp-status').status() end},
+                lualine_b = {'diagnostics'},
                 lualine_c = {'filename'},
                 lualine_x = {'encoding', 'filetype'},
-                lualine_y = {},
-                lualine_z = {'location'}
+                lualine_y = {'location'},
+                lualine_z = {}
               },
               inactive_sections = {
                 lualine_a = {},
