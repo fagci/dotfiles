@@ -92,12 +92,7 @@ return require('packer').startup(function(use)
 
     -- UI
     use 'kyazdani42/nvim-web-devicons'
-    use {
-        "catppuccin/nvim",
-        branch = 'dev-remaster',
-        as = "catppuccin",
-        config = [[require('config.catppuccin')]],
-    }
+    use "EdenEast/nightfox.nvim"
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
