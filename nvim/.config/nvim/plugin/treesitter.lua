@@ -6,7 +6,7 @@ ts_configs.setup {
         disable = { "lua" },
         additional_vim_regex_highlighting = true,
     },
-    indent = { enable = true },
+    indent = { enable = false },
     incremental_selection = {
         enable = true,
         keymaps = {

@@ -4,8 +4,6 @@ return require('packer').startup(function(use)
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
-    use { 'alaviss/nim.nvim', ft = 'nim' }
-    use { 'othree/yajs.vim', ft = 'js' }
     use { 'othree/html5.vim', ft = {'html', 'php'} }
 
     use {
