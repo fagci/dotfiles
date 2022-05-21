@@ -1,14 +1,16 @@
+require 'plugins/init_packer'
+
 return require('packer').startup(function(use)
-    use { 'wbthomason/packer.nvim', opt = true }
+    use { 'wbthomason/packer.nvim', event = "VimEnter" }
 
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
-    use { 'othree/html5.vim', ft = {'html', 'php'} }
 
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
+        config = [[require('plugins.config.treesitter')]],
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
@@ -20,7 +22,7 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         {
             'williamboman/nvim-lsp-installer',
-            config = [[require('config.nvim-lspconfig')]],
+            config = [[require('plugins.config.nvim-lspconfig')]],
         }
     }
 
@@ -33,7 +35,10 @@ return require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter *',
         after = 'vim-snippets',
-        config = [[require('config.nvim-cmp')]],
+        config = [[
+        require('plugins.config.nvim-cmp')
+        require('plugins.config.snippets')
+        ]],
         requires = {
             { 'L3MON4D3/LuaSnip' },
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
@@ -47,7 +52,7 @@ return require('packer').startup(function(use)
     use {
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
-        config = [[require('config.nvim-autopairs')]],
+        config = [[require('plugins.config.nvim-autopairs')]],
     }
 
     -- Editing
@@ -61,7 +66,7 @@ return require('packer').startup(function(use)
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
     use { 'godlygeek/tabular', cmd = 'Tabularize' }
     use { 'andymass/vim-matchup', event = 'VimEnter' }
-    use { 'numToStr/Comment.nvim', config = [[require('config.comment')]] }
+    use { 'numToStr/Comment.nvim', config = [[require('plugins.config.comment')]] }
 
     -- Utils
     use 'vifm/vifm.vim'
@@ -71,7 +76,7 @@ return require('packer').startup(function(use)
     use 'mhinz/vim-grepper'
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'gpanders/editorconfig.nvim'
-    use { 'ibhagwan/fzf-lua', config = [[require('config.fzf-lua')]] }
+    use { 'ibhagwan/fzf-lua', config = [[require('plugins.config.fzf-lua')]] }
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -99,11 +104,10 @@ return require('packer').startup(function(use)
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
-        config = [[require('config.colorizer')]]
+        config = [[require('plugins.config.colorizer')]]
     }
 
     -- TEST ZONE
-    use 'lewis6991/nvim-treesitter-context'
     use 'elihunter173/dirbuf.nvim' -- fm as text
     use {
         'nvim-lualine/lualine.nvim',

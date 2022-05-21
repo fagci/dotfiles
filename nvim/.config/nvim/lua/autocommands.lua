@@ -1,5 +1,5 @@
 local api = vim.api
-function au(event, name, fn)
+local function au(event, name, fn)
     api.nvim_create_autocmd({ event }, {
       group = api.nvim_create_augroup(name, { clear = true }),
       callback = fn,

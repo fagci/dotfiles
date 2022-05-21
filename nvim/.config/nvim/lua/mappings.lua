@@ -7,7 +7,7 @@ vim.g.mapleader = ','
 
 map('n', '<leader>ev', ':FzfLua files cwd=~/.config/nvim/<CR>', N)
 map('n', '<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>', N)
-map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins.lua<CR>', N)
+map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins/init.lua<CR>', N)
 map('n', '<leader>eo', ':e ~/.config/nvim/lua/options.lua<CR>', N)
 
 map('n', '<Leader>,', ':noh<CR>', N)
@@ -40,8 +40,6 @@ map('v', '<A-DOWN>', ':m \'>+1<CR>gv=gv', N)
 map('v', '<A-UP>', ':m \'<-2<CR>gv=gv', N)
 map('n', '<A-LEFT>', ':SidewaysLeft<CR>', N)
 map('n', '<A-RIGHT>', ':SidewaysRight<CR>', N)
-map('n', '<C-A-LEFT>', ':SidewaysLeft<CR>', N)
-map('n', '<C-A-RIGHT>', ':SidewaysRight<CR>', N)
 
 -- Resize windows
 map('', '<C-S-Left>', ':vertical resize -1<CR>', NS)
@@ -71,20 +69,16 @@ map('n', '<Leader>F', ':FzfLua grep<CR>', N)
 map('n', '<Leader>h', ':FzfLua loclist<CR>', N)
 map('n', '<Leader>j', ':FzfLua jumps<CR>', N)
 map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
-map('n', '<Leader>t', ':NvimTreeToggle<CR>', N)
 map('n', '<Leader>o', ':SymbolsOutline<CR>', N)
 
 -- LSP
--- map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', NS)
 map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
--- map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', NS)
 map('n', 'gr', ':Trouble lsp_references<CR>', NS)
 map('n', 'ge', ':Trouble lsp_document_diagnostics<CR>', NS)
 
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', NS)
 map('n', '<leader>.', '<cmd>lua vim.lsp.buf.formatting{async=true}<CR>', N)
 map('n', '<leader>=', ':Neoformat<CR>', N)
--- map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', N)
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', NS)
 map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
@@ -92,7 +86,6 @@ map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
 -- Comment
 map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", {})
--- TODO: refactor this shit
 map("x", "<leader>/", "<ESC><cmd>lua require('utils').toggle_visual_comment()<CR>", {})
 
 -- Grepper
