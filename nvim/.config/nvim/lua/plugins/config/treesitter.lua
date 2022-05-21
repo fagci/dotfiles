@@ -1,13 +1,19 @@
 local ts_configs = require 'nvim-treesitter.configs'
 ts_configs.setup {
-    ensure_installed = 'all',
+    ensure_installed = {
+        'php', 'html', 'css', 'javascript', 'jsdoc', 'yaml',
+        'go', 'python',
+        'json', 'bash',
+        'lua', 'perl'
+    },
+    sync_installed = true,
     highlight = {
         enable = true,
-        disable = { "lua" },
-        additional_vim_regex_highlighting = true,
-        use_languagetree = true,
+        -- additional_vim_regex_highlighting = {'php', 'html'},
     },
-    indent = { enable = true },
+    indent = {
+        enable = false,
+    },
     refactor = {
         smart_rename = { enable = true, keymaps = { smart_rename = ',r' } },
         highlight_definitions = { enable = true },

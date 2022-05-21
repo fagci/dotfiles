@@ -4,5 +4,6 @@ require 'autocommands'
 require 'plugins'
 require 'mappings'
 
-vim.cmd 'colorscheme srcery'
+vim.g.tokyonight_style = "night"
+vim.cmd 'colorscheme tokyonight'
 

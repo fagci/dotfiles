@@ -17,10 +17,12 @@ au('BufReadPost', 'LastPosition', function()
 end)
 
 vim.cmd([[
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-
 au! TextYankPost * silent! lua vim.highlight.on_yank()
+]])
+
+-- Enable folds (zc and zo) on functions and classes but not by default
+vim.cmd([[
+  set nofoldenable
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
 ]])

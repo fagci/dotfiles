@@ -3,10 +3,9 @@ local g = vim.g
 
 -- Speed
 opt.lazyredraw = true
-opt.confirm = true -- TODO: check default
+opt.confirm = true
 opt.synmaxcol = 1000
-opt.switchbuf = 'useopen' -- ?
-opt.updatetime = 150
+opt.updatetime = 300
 opt.ttimeoutlen = 0
 
 g.loaded_python_provider = 0
@@ -31,22 +30,17 @@ opt.termguicolors = true
 opt.listchars = 'tab:▸ ,space:.,trail:•'
 opt.fillchars = { eob = ' ' }
 opt.colorcolumn = '120'
---[[ opt.statusline = 
-    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) " ..
-    "%="..
-    "%l:%c/%L %y" ]]
 
 -- Editing
 opt.wrap = false
 opt.clipboard = 'unnamedplus'
-opt.smartindent = true
 opt.formatoptions = 'croqn'
 opt.expandtab = true
-opt.shiftwidth = 4
+opt.shiftwidth = 0
 opt.softtabstop = 4
 opt.tabstop = 4
 opt.foldlevelstart = 99
-opt.completeopt = "menuone,noinsert,noselect"
+opt.completeopt = "menu,menuone,noinsert,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
 
 -- Search

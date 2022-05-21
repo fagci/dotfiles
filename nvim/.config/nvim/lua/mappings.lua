@@ -7,7 +7,7 @@ vim.g.mapleader = ','
 
 map('n', '<leader>ev', ':FzfLua files cwd=~/.config/nvim/<CR>', N)
 map('n', '<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>', N)
-map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins/init.lua<CR>', N)
+map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins/plugins.lua<CR>', N)
 map('n', '<leader>eo', ':e ~/.config/nvim/lua/options.lua<CR>', N)
 
 map('n', '<Leader>,', ':noh<CR>', N)
@@ -72,9 +72,9 @@ map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
 map('n', '<Leader>o', ':SymbolsOutline<CR>', N)
 
 -- LSP
-map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
+--[[ map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
 map('n', 'gr', ':Trouble lsp_references<CR>', NS)
-map('n', 'ge', ':Trouble lsp_document_diagnostics<CR>', NS)
+map('n', 'ge', ':Trouble lsp_document_diagnostics<CR>', NS) ]]
 
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', NS)
 map('n', '<leader>.', '<cmd>lua vim.lsp.buf.formatting{async=true}<CR>', N)
