@@ -14,7 +14,8 @@ if vim.fn.exists "syntax_on" then
 end
 vim.cmd([[
 syntax on
-colorscheme OceanicNext
+"colorscheme OceanicNext
+colorscheme srcery
 let &fcs='eob: '
 ]])
 

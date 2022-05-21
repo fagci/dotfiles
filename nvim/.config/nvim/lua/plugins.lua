@@ -94,6 +94,7 @@ return require('packer').startup(function(use)
     use 'rmehri01/onenord.nvim'
     use 'cpea2506/one_monokai.nvim'
     use 'mhartington/oceanic-next'
+    use {'srcery-colors/srcery-vim', as = 'srcery'}
 
     use {
         'crivotz/nvim-colorizer.lua',
@@ -110,7 +111,7 @@ return require('packer').startup(function(use)
             require('lualine').setup {
               options = {
                 icons_enabled = false,
-                theme = 'OceanicNext',
+                theme = 'auto',
                 component_separators = false,
                 section_separators = {},
                 disabled_filetypes = {},
