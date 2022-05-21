@@ -70,7 +70,7 @@ return require('packer').startup(function(use)
     use 'rhysd/git-messenger.vim'
     use 'mhinz/vim-grepper'
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
-    use 'editorconfig/editorconfig-vim'
+    use 'gpanders/editorconfig.nvim'
     use { 'ibhagwan/fzf-lua', config = [[require('config.fzf-lua')]] }
     use {
         'mbbill/undotree',
