@@ -1,6 +1,6 @@
 require('Comment').setup {
     mappings = {
-        -- basic = false,
+        basic = false,
         extra = false,
         extended = false,
     },

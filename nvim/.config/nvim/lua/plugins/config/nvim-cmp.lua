@@ -2,9 +2,21 @@ local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
 
+local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
 cmp.setup({
     completion = {
-        completeopt = 'menu,menuone,noinsert',
         keyword_length = 2,
     },
     sources = {
@@ -43,7 +55,7 @@ cmp.setup({
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
             else
                 fallback()
             end
@@ -52,7 +64,7 @@ cmp.setup({
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
             else
                 fallback()
             end

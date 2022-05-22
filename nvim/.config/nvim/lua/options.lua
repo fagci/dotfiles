@@ -45,7 +45,7 @@ opt.wrap = false
 opt.clipboard = 'unnamedplus'
 opt.formatoptions = 'croqn'
 opt.foldlevelstart = 99
-opt.completeopt = "menu,menuone,noinsert,noselect"
+opt.completeopt = "menu,menuone,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
 
 -- Search

@@ -1,12 +1,11 @@
-local gps = require("nvim-gps")
 require('lualine').setup {
     options = {
         theme = 'OceanicNext',
     },
     sections = {
-        lualine_a = { 'diagnostics' },
-        lualine_b = { 'filename' },
-        lualine_c = { { gps.get_location, cond = gps.is_available }, },
+        lualine_a = {},
+        lualine_b = { 'diagnostics', 'filename' },
+        lualine_c = { 'lsp_progress' },
         lualine_x = { 'encoding', 'filetype' },
         lualine_y = { 'location' },
         lualine_z = {}

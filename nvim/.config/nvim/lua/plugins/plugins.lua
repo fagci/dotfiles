@@ -13,7 +13,6 @@ return require('packer').startup(function(use)
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            { 'SmiteshP/nvim-gps', config = [[require("nvim-gps").setup()]] },
         },
     }
 
@@ -110,6 +109,7 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         config = [[require('plugins.config.lualine')]]
     }
+    use 'arkav/lualine-lsp-progress'
     use("nathom/filetype.nvim")
 
 
