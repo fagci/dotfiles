@@ -1,10 +1,6 @@
 local opt = vim.opt
 local g = vim.g
 
--- use filetype.lua instead of filetype.vim
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1
-
 -- Speed
 opt.lazyredraw = true
 opt.confirm = true
@@ -39,6 +35,7 @@ opt.colorcolumn = '120'
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.smartindent = true
+opt.autoindent = true
 opt.expandtab = true
 opt.wrap = false
 opt.clipboard = 'unnamedplus'
