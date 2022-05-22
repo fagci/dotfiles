@@ -55,11 +55,11 @@ return require('packer').startup(function(use)
     }
 
     -- Editing
-    use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
+    use "tpope/vim-repeat"
+    use "tpope/vim-surround"
     use 'wellle/targets.vim'
-    use { 'justinmk/vim-sneak', setup = [[vim.g['sneak#label'] = 1]] }
-    use 'tpope/vim-surround'
-    use { 'tpope/vim-repeat', keys = '.' }
+    use 'ggandor/lightspeed.nvim'
+    use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
     use { 'AndrewRadev/splitjoin.vim', cmd = { 'SplitjoinJoin', 'SplitjoinSplit' }, keys = { 'gS', 'gJ' } } -- gS, gJ
     use { 'AndrewRadev/sideways.vim', cmd = { 'SidewaysLeft', 'SidewaysRight' } }
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
