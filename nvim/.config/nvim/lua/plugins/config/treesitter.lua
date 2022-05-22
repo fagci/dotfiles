@@ -12,7 +12,7 @@ ts_configs.setup {
         -- additional_vim_regex_highlighting = {'php', 'html'},
     },
     indent = {
-        enable = false,
+        enable = true,
     },
     refactor = {
         smart_rename = { enable = true, keymaps = { smart_rename = ',r' } },

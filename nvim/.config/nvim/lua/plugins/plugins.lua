@@ -4,7 +4,6 @@ return require('packer').startup(function(use)
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
-    use { 'othree/html5.vim', ft = { 'html', 'php' } }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -16,15 +15,6 @@ return require('packer').startup(function(use)
         },
     }
 
-    -- LSP
-    use {
-        'neovim/nvim-lspconfig',
-        {
-            'williamboman/nvim-lsp-installer',
-            config = [[require('plugins.config.nvim-lspconfig')]],
-        }
-    }
-
     -- Completion
     use 'onsails/lspkind-nvim'
     use 'ray-x/lsp_signature.nvim'
@@ -32,20 +22,30 @@ return require('packer').startup(function(use)
 
     use {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter *',
-        after = 'vim-snippets',
+        -- event = 'InsertEnter *',
+        -- after = 'vim-snippets',
         config = [[
         require('plugins.config.nvim-cmp')
         require('plugins.config.snippets')
         ]],
         requires = {
             { 'L3MON4D3/LuaSnip' },
-            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+            {'hrsh7th/cmp-nvim-lsp'},
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-calc' },
         },
+    }
+
+    -- LSP
+    use {
+        'neovim/nvim-lspconfig',
+        {
+            'williamboman/nvim-lsp-installer',
+            config = [[require('plugins.config.nvim-lspconfig')]],
+        }
     }
 
     use {
@@ -68,12 +68,12 @@ return require('packer').startup(function(use)
     use { 'numToStr/Comment.nvim', config = [[require('plugins.config.comment')]] }
 
     -- Utils
+    use 'gpanders/editorconfig.nvim'
     use { 'vifm/vifm.vim', cmd = 'Vifm' }
     use { 'gennaro-tedesco/nvim-peekup', keys = [[""]] } -- show registers with mapping: ""
     use { 'rhysd/git-messenger.vim', cmd = { 'GitMessenger', 'GitMessengerClose' } }
     use { 'mhinz/vim-grepper', cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } }
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
-    use 'gpanders/editorconfig.nvim'
     use { 'ibhagwan/fzf-lua', config = [[require('plugins.config.fzf-lua')]] }
     use {
         'mbbill/undotree',
@@ -93,9 +93,9 @@ return require('packer').startup(function(use)
     -- UI
     use {
         'nvim-lualine/lualine.nvim',
+        requires = { 'arkav/lualine-lsp-progress' },
         config = [[require('plugins.config.lualine')]]
     }
-    use 'arkav/lualine-lsp-progress'
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
@@ -108,7 +108,6 @@ return require('packer').startup(function(use)
 
     -- TEST ZONE
     -- [empty]
-
 
     if packer_bootstrap then
         require('packer').sync()

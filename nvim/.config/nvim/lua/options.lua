@@ -36,11 +36,10 @@ opt.fillchars = { eob = ' ' }
 opt.colorcolumn = '120'
 
 -- Editing
-opt.expandtab = true
 opt.shiftwidth = 4
-opt.softtabstop = 4
 opt.tabstop = 4
 opt.smartindent = true
+opt.expandtab = true
 opt.wrap = false
 opt.clipboard = 'unnamedplus'
 opt.formatoptions = 'croqn'
@@ -53,3 +52,7 @@ opt.smartcase = true
 opt.ignorecase = true
 
 g.matchup_matchparen_offscreen = { method = 'popup' }
+
+vim.cmd [[set whichwrap+=<,>,[,],h,l]]
+vim.cmd [[set iskeyword+=-]]
+vim.cmd [[filetype indent on]]
