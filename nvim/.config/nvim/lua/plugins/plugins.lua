@@ -57,22 +57,21 @@ return require('packer').startup(function(use)
     -- Editing
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
     use 'wellle/targets.vim'
-    use {'justinmk/vim-sneak', setup=[[vim.g['sneak#label'] = 1]]}
+    use { 'justinmk/vim-sneak', setup = [[vim.g['sneak#label'] = 1]] }
     use 'tpope/vim-surround'
-    use 'tpope/vim-repeat'
-    use 'AndrewRadev/splitjoin.vim' -- gS, gJ
-    use 'AndrewRadev/sideways.vim'
+    use { 'tpope/vim-repeat', keys = '.' }
+    use { 'AndrewRadev/splitjoin.vim', cmd = { 'SplitjoinJoin', 'SplitjoinSplit' }, keys = { 'gS', 'gJ' } } -- gS, gJ
+    use { 'AndrewRadev/sideways.vim', cmd = { 'SidewaysLeft', 'SidewaysRight' } }
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
     use { 'godlygeek/tabular', cmd = 'Tabularize' }
     use { 'andymass/vim-matchup', event = 'VimEnter' }
     use { 'numToStr/Comment.nvim', config = [[require('plugins.config.comment')]] }
 
     -- Utils
-    use 'vifm/vifm.vim'
-    use 'romainl/vim-cool'
-    use 'gennaro-tedesco/nvim-peekup'
-    use 'rhysd/git-messenger.vim'
-    use 'mhinz/vim-grepper'
+    use { 'vifm/vifm.vim', cmd = 'Vifm' }
+    use { 'gennaro-tedesco/nvim-peekup', keys = [[""]] } -- show registers with mapping: ""
+    use { 'rhysd/git-messenger.vim', cmd = { 'GitMessenger', 'GitMessengerClose' } }
+    use { 'mhinz/vim-grepper', cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } }
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use 'gpanders/editorconfig.nvim'
     use { 'ibhagwan/fzf-lua', config = [[require('plugins.config.fzf-lua')]] }
@@ -82,35 +81,33 @@ return require('packer').startup(function(use)
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
     }
     use {
-        -- "folke/trouble.nvim",
-        "bellini666/trouble.nvim",
-        commit = "4d031d09814dc83cb5b75b84b84944b93c0bcdcb",
+        "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = [[require("trouble").setup()]]
     }
     use {
         'folke/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        config = [[require('todo-comments').setup()]]
     }
 
-    -- colorschemes
-    use 'mhartington/oceanic-next'
-
+    -- UI
+    use {
+        'nvim-lualine/lualine.nvim',
+        config = [[require('plugins.config.lualine')]]
+    }
+    use 'arkav/lualine-lsp-progress'
     use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
         config = [[require('plugins.config.colorizer')]]
     }
 
+    -- colorschemes
+    use 'mhartington/oceanic-next'
+
+
     -- TEST ZONE
-    use 'elihunter173/dirbuf.nvim' -- fm as text
-    use {
-        'nvim-lualine/lualine.nvim',
-        config = [[require('plugins.config.lualine')]]
-    }
-    use 'arkav/lualine-lsp-progress'
-    use("nathom/filetype.nvim")
+    -- [empty]
 
 
     if packer_bootstrap then

@@ -9,7 +9,7 @@ g.do_filetype_lua = 1
 opt.lazyredraw = true
 opt.confirm = true
 opt.synmaxcol = 1000
-opt.updatetime = 300
+opt.updatetime = 250
 opt.ttimeoutlen = 0
 
 g.loaded_python_provider = 0
