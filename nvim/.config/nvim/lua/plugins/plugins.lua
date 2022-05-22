@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
     -- Editing
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
     use 'wellle/targets.vim'
-    use 'justinmk/vim-sneak'
+    use {'justinmk/vim-sneak', setup=[[vim.g['sneak#label'] = 1]]}
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
     use 'AndrewRadev/splitjoin.vim' -- gS, gJ
@@ -96,11 +96,7 @@ return require('packer').startup(function(use)
     }
 
     -- colorschemes
-    use 'rmehri01/onenord.nvim'
-    use 'cpea2506/one_monokai.nvim'
     use 'mhartington/oceanic-next'
-    use { 'srcery-colors/srcery-vim', as = 'srcery' }
-    use 'folke/tokyonight.nvim'
 
     use {
         'crivotz/nvim-colorizer.lua',
