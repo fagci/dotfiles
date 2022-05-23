@@ -1,4 +1,12 @@
-return require('packer').startup(function(use)
+local packer = require('packer')
+packer.init({
+    display = {
+        open_fn = function()
+            return require('packer.util').float({ border = 'rounded' })
+        end,
+    },
+})
+return packer.startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
     -- Syntax hl
@@ -30,7 +38,7 @@ return require('packer').startup(function(use)
         ]],
         requires = {
             { 'L3MON4D3/LuaSnip' },
-            {'hrsh7th/cmp-nvim-lsp'},
+            { 'hrsh7th/cmp-nvim-lsp' },
             { 'saadparwaiz1/cmp_luasnip' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-nvim-lsp' },
@@ -47,6 +55,11 @@ return require('packer').startup(function(use)
             config = [[require('plugins.config.nvim-lspconfig')]],
         }
     }
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = [[require('plugins.config.null-ls')]]
+    }
 
     use {
         'windwp/nvim-autopairs',
@@ -56,7 +69,10 @@ return require('packer').startup(function(use)
 
     -- Editing
     use "tpope/vim-repeat"
-    use "tpope/vim-surround"
+    use {
+        'ur4ltz/surround.nvim',
+        config = [[require "surround".setup {mappings_style = "surround", map_insert_mode = false}]]
+    }
     use 'wellle/targets.vim'
     use 'ggandor/lightspeed.nvim'
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
@@ -75,6 +91,7 @@ return require('packer').startup(function(use)
     use { 'mhinz/vim-grepper', cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } }
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }
     use { 'ibhagwan/fzf-lua', config = [[require('plugins.config.fzf-lua')]] }
+    use { 'monaqa/dial.nvim', config = [[require('plugins.config.dial')]] }
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -82,7 +99,7 @@ return require('packer').startup(function(use)
     }
     use {
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = 'kyazdani42/nvim-web-devicons',
         config = [[require("trouble").setup()]]
     }
     use {
@@ -108,8 +125,14 @@ return require('packer').startup(function(use)
 
     -- TEST ZONE
     -- [empty]
+    use({
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require("gitsigns").setup { numhl = true, signcolumn = false }
+        end,
+    })
 
     if packer_bootstrap then
-        require('packer').sync()
+        packer.sync()
     end
 end)
