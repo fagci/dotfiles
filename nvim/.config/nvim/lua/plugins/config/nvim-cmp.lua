@@ -2,30 +2,19 @@ local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
 
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
 cmp.setup({
     completion = {
         keyword_length = 2,
     },
-    sources = {
+    sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'treesitter' },
         { name = 'luasnip' },
+    }, {
         { name = 'buffer' },
         { name = 'path' },
         { name = 'calc' },
-    },
+    }),
     mapping = {
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -85,12 +74,11 @@ cmp.setup({
                 path = '[P]',
                 neorg = '[N]',
                 emoji = '[E]',
-                cmp_tabnine = '[T]',
+                treesitter = '[T]',
             }),
         }),
     },
     experimental = {
-        native_menu = false,
         ghost_text = true,
     },
 })
