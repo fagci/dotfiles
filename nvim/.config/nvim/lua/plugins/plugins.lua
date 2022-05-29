@@ -9,7 +9,7 @@ packer.init({
 return packer.startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
-    use { "nathom/filetype.nvim" }
+    use { "nathom/filetype.nvim", config = [[require('plugins.config.filetype-nvim')]]}
 
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
