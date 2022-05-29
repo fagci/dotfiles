@@ -8,10 +8,9 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'treesitter' },
         { name = 'luasnip' },
-    }, {
         { name = 'buffer' },
+    }, {
         { name = 'path' },
         { name = 'calc' },
     }),
@@ -64,6 +63,7 @@ cmp.setup({
         end,
     },
     formatting = {
+        fields = { "kind", "abbr", "menu" },
         format = lspkind.cmp_format({
             with_text = false,
             menu = ({

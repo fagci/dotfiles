@@ -40,7 +40,6 @@ return packer.startup(function(use)
             { 'hrsh7th/cmp-calc' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-path' },
-            { 'ray-x/cmp-treesitter' },
             { 'saadparwaiz1/cmp_luasnip' },
         },
     }
