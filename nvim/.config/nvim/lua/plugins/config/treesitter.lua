@@ -10,6 +10,7 @@ ts_configs.setup {
     highlight = {
         enable = true,
         disable = { 'html' }, -- fix for twig
+        additional_vim_regex_highlighting = { 'php' }, -- fix no hl on some envs
     },
     indent = {
         enable = true,
