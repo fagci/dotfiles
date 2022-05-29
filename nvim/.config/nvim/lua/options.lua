@@ -8,9 +8,8 @@ opt.synmaxcol = 1000
 opt.updatetime = 250
 opt.ttimeoutlen = 0
 
-g.did_load_filetypes = 1 -- filetype.nvim plugin
-
 g.loaded_python_provider = 0
+
 g.python_host_prog = '/usr/bin/python2'
 g.python3_host_prog = '/usr/bin/python3'
 
