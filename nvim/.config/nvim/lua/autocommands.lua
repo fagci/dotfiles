@@ -5,8 +5,8 @@ local function au(event, name, fn)
       callback = fn,
     })
 end
--- Last position on Document
-au('BufReadPost', 'LastPosition', function()
+
+au('BufReadPost', 'LastPositionOnDocument', function()
     local line_data = api.nvim_buf_get_mark(0, '\"')
     local line = line_data[1]
     local last_line = api.nvim_buf_line_count(0)
@@ -16,9 +16,9 @@ au('BufReadPost', 'LastPosition', function()
     end
 end)
 
-vim.cmd([[
-au! TextYankPost * silent! lua vim.highlight.on_yank()
-]])
+au("TextYankPost", "HighlightOnYank", function ()
+    vim.highlight.on_yank()
+end)
 
 -- Enable folds (zc and zo) on functions and classes but not by default
 vim.cmd([[
