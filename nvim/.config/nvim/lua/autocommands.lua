@@ -19,10 +19,3 @@ end)
 au("TextYankPost", "HighlightOnYank", function ()
     vim.highlight.on_yank()
 end)
-
--- Enable folds (zc and zo) on functions and classes but not by default
-vim.cmd([[
-  set nofoldenable
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-]])
