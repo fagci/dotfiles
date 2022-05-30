@@ -15,8 +15,11 @@ local defaults = {
 }
 
 local configs = {
+    emmet_ls = {},
     eslint = {},
     gopls = {},
+    html = {},
+    intelephense = {},
     jsonls = {},
     pyright = {},
     sqlls = {},
@@ -25,18 +28,9 @@ local configs = {
     vuels = {},
     yamlls = {},
 
-    -- Trying to support things for inline css, emmet
-    intelephense = {
-        filetypes = { 'php', 'phtml' }
-    },
-    html = {
-        filetypes = { 'html', 'phtml' }
-    },
-    emmet_ls = {
-        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'phtml' },
-    },
+    -- Trying to support things for inline css
     cssls = {
-        filetypes = { 'css', 'scss', 'less', 'phtml' }
+        filetypes = { 'css', 'scss', 'less', 'php' }
     },
 
     sumneko_lua = {
