@@ -98,3 +98,7 @@ map("v", "<C-a>", require("dial.map").inc_visual(), N)
 map("v", "<C-x>", require("dial.map").dec_visual(), N)
 map("v", "g<C-a>", require("dial.map").inc_gvisual(), N)
 map("v", "g<C-x>", require("dial.map").dec_gvisual(), N)
+
+-- My plugins
+-- runfile
+map('n', '<leader><leader>r', '<cmd>lua require("runfile").run()<CR>', N)
