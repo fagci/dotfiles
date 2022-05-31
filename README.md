@@ -18,7 +18,7 @@
 
 ```
 git pull
-git submodule update --recursive --remote
+git pull --recurse-submodules
 stow */
 ```
 
