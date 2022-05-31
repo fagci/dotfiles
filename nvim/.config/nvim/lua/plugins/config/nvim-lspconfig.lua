@@ -27,11 +27,7 @@ local configs = {
     tsserver = {},
     vuels = {},
     yamlls = {},
-
-    -- Trying to support things for inline css
-    cssls = {
-        filetypes = { 'css', 'scss', 'less', 'php' }
-    },
+    cssls = {},
 
     sumneko_lua = {
         settings = {
