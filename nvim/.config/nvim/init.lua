@@ -1,3 +1,4 @@
+require 'global'
 require 'disable-builtins'
 require 'options'
 require 'autocommands'

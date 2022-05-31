@@ -121,6 +121,9 @@ return packer.startup(function(use)
     -- colorschemes
     use 'mhartington/oceanic-next'
 
+    -- my dev plugins
+    use '~/.config/nvim/lua/plugins_dev/runfile.nvim'
+
 
     -- TEST ZONE
     use({
