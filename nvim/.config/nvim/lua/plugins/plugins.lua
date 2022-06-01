@@ -122,7 +122,7 @@ return packer.startup(function(use)
     use 'mhartington/oceanic-next'
 
     -- my dev plugins
-    use '~/.config/nvim/lua/plugins_dev/runfile.nvim'
+    use {'~/.config/nvim/lua/plugins_dev/runfile.nvim', config = [[require('plugins.config.runfile')]]}
 
 
     -- TEST ZONE
