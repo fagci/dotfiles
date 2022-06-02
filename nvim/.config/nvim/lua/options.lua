@@ -44,6 +44,8 @@ opt.formatoptions = 'croqn'
 opt.foldlevelstart = 99
 opt.completeopt = "menu,menuone,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
+opt.iskeyword:append "-"
+opt.whichwrap:append "<>[]hl"
 
 -- Search
 opt.smartcase = true
@@ -51,6 +53,3 @@ opt.ignorecase = true
 
 g.matchup_matchparen_offscreen = { method = 'popup' }
 
-vim.cmd [[set whichwrap+=<,>,[,],h,l]]
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[filetype indent on]]
