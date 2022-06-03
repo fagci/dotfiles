@@ -15,7 +15,6 @@ local defaults = {
 }
 
 local configs = {
-    emmet_ls = {},
     eslint = {},
     gopls = {},
     html = {},
