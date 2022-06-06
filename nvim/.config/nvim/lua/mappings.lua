@@ -41,6 +41,10 @@ map('v', '<A-UP>', ':m \'<-2<CR>gv=gv', N)
 map('n', '<A-LEFT>', ':SidewaysLeft<CR>', N)
 map('n', '<A-RIGHT>', ':SidewaysRight<CR>', N)
 
+-- Scroll buffer contents
+map('n', '<C-UP>', '<C-Y>', N)
+map('n', '<C-DOWN>', '<C-E>', N)
+
 -- Resize windows
 map('', '<C-S-Left>', ':vertical resize -1<CR>', NS)
 map('', '<C-S-Right>', ':vertical resize +1<CR>', NS)
