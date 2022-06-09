@@ -24,10 +24,6 @@ return packer.startup(function(use)
     }
 
     -- Completion
-    use 'onsails/lspkind-nvim'
-    use 'ray-x/lsp_signature.nvim'
-    use 'honza/vim-snippets'
-
     use {
         'hrsh7th/nvim-cmp',
         config = [[
@@ -35,6 +31,9 @@ return packer.startup(function(use)
         require('plugins.config.snippets')
         ]],
         requires = {
+            { 'onsails/lspkind-nvim' },
+            { 'ray-x/lsp_signature.nvim' },
+            { 'honza/vim-snippets' },
             { 'L3MON4D3/LuaSnip' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-calc' },
@@ -58,17 +57,16 @@ return packer.startup(function(use)
         config = [[require('plugins.config.null-ls')]]
     }
 
-    use {
-        'windwp/nvim-autopairs',
-        after = 'nvim-cmp',
-        config = [[require('plugins.config.nvim-autopairs')]],
-    }
-
     -- Editing
     use "tpope/vim-repeat"
     use {
         'ur4ltz/surround.nvim',
         config = [[require "surround".setup {mappings_style = "surround", map_insert_mode = false}]]
+    }
+    use {
+        'windwp/nvim-autopairs',
+        after = 'nvim-cmp',
+        config = [[require('plugins.config.nvim-autopairs')]],
     }
     use 'wellle/targets.vim'
     use 'ggandor/lightspeed.nvim'
@@ -122,7 +120,7 @@ return packer.startup(function(use)
     use 'mhartington/oceanic-next'
 
     -- my dev plugins
-    use {'~/.config/nvim/lua/plugins_dev/runfile.nvim', config = [[require('plugins.config.runfile')]]}
+    use { '~/.config/nvim/lua/plugins_dev/runfile.nvim', config = [[require('plugins.config.runfile')]] }
 
 
     -- TEST ZONE
