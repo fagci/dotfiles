@@ -21,6 +21,15 @@ ts_configs.setup {
         highlight_definitions = { enable = true },
     },
     textobjects = {
+        swap = {
+            enable = true,
+            swap_next = {
+                ["<A-RIGHT>"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["<A-LEFT>"] = "@parameter.inner",
+            },
+        },
         select = {
             enable = true,
             keymaps = {

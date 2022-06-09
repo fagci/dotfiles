@@ -38,8 +38,6 @@ map('i', '<A-DOWN>', '<Esc>:m .+1<CR>==gi', N)
 map('i', '<A-UP>', '<Esc>:m .-2<CR>==gi', N)
 map('v', '<A-DOWN>', ':m \'>+1<CR>gv=gv', N)
 map('v', '<A-UP>', ':m \'<-2<CR>gv=gv', N)
-map('n', '<A-LEFT>', ':SidewaysLeft<CR>', N)
-map('n', '<A-RIGHT>', ':SidewaysRight<CR>', N)
 
 -- Scroll buffer contents
 map('n', '<C-UP>', '<C-Y>', N)
