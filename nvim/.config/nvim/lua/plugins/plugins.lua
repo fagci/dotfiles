@@ -103,6 +103,7 @@ return packer.startup(function(use)
         'folke/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
     }
+    use { 'fagci/runfile.nvim', config = [[require('plugins.config.runfile')]] }
 
     -- UI
     use {
@@ -114,11 +115,6 @@ return packer.startup(function(use)
     -- colorschemes
     use { 'mhartington/oceanic-next' }
 
-    -- my dev plugins
-    use { '~/.config/nvim/lua/plugins_dev/runfile.nvim', config = [[require('plugins.config.runfile')]] }
-
-
-    -- TEST ZONE
 
     if packer_bootstrap then
         packer.sync()
