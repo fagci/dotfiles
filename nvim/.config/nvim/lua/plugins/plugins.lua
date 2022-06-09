@@ -81,7 +81,6 @@ return packer.startup(function(use)
     -- Utils
     use 'gpanders/editorconfig.nvim'
     use { 'vifm/vifm.vim', cmd = 'Vifm' }
-    use { 'gennaro-tedesco/nvim-peekup', keys = [[""]] } -- show registers with mapping: ""
     use { 'rhysd/git-messenger.vim', cmd = { 'GitMessenger', 'GitMessengerClose' } }
     use { 'mhinz/vim-grepper', cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } }
     use { 'Olical/vim-enmasse', cmd = 'EnMasse' }

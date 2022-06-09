@@ -71,6 +71,7 @@ map('n', '<Leader>F', ':lua require("utils").grep_noignore()<CR>', N)
 map('n', '<Leader>h', ':FzfLua loclist<CR>', N)
 map('n', '<Leader>j', ':FzfLua jumps<CR>', N)
 map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
+map('n', '<Leader>"', ':FzfLua registers<CR>', N)
 
 -- LSP
 map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
