@@ -107,11 +107,6 @@ return packer.startup(function(use)
 
     -- UI
     use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'arkav/lualine-lsp-progress' },
-        config = [[require('plugins.config.lualine')]]
-    }
-    use {
         'crivotz/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
         config = [[require('plugins.config.colorizer')]]

@@ -47,6 +47,12 @@ opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
 opt.iskeyword:append "-"
 opt.whichwrap:append "<>[]hl"
 
+opt.statusline = table.concat {
+    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
+    "%=",
+    "%y %l/%L",
+}
+
 -- Search
 opt.smartcase = true
 opt.ignorecase = true
