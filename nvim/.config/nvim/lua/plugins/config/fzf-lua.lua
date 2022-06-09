@@ -47,7 +47,8 @@ require 'fzf-lua'.setup {
     },
     grep = vim.tbl_extend("force", {
         rg_opts = "--column --line-number --no-heading --color=always --smart-case --fixed-strings --max-columns=512" ..
-            [[ --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map"]],
+            [[ --glob "!*.{min.js,min.css,jpg,jpeg,gif,png,zip}" ]] ..
+            [[ --glob "!{.git,node_modules,log,tmp,cache}/*" ]],
         actions = { ["ctrl-g"] = false },
     }, disable_icons),
 }

@@ -15,8 +15,8 @@ end
 M.grep_noignore = function()
     require("fzf-lua").grep_project({
         rg_opts = "-u --follow --column --line-number --no-heading --color=always --smart-case --fixed-strings --max-columns=512" ..
-            [[ --glob "!*.{min.js,swp,o,zip,map}" ]] ..
-            [[ --glob "!{.git,node_modules}/*" ]]
+            [[ --glob "!*.{min.js,min.css,jpg,jpeg,gif,png,zip}" ]] ..
+            [[ --glob "!{.git,node_modules,log,tmp,cache}/*" ]]
     })
 end
 
