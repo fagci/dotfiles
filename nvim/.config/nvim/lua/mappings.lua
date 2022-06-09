@@ -66,7 +66,7 @@ map('n', '<leader>ps', ':PackerSync<CR>', NS)
 -- Project navigation
 map('n', '<tab>', ':FzfLua git_files<cr>', N)
 map('n', '<Leader><tab>', ':FzfLua files<CR>', N)
-map('n', '<Leader>f', ':FzfLua live_grep<CR>', N)
+map('n', '<Leader>f', ':FzfLua grep_project<CR>', N)
 map('n', '<Leader>F', ':lua require("utils").grep_noignore()<CR>', N)
 map('n', '<Leader>h', ':FzfLua loclist<CR>', N)
 map('n', '<Leader>j', ':FzfLua jumps<CR>', N)
