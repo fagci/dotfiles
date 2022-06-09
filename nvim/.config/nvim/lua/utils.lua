@@ -12,4 +12,11 @@ M.toggle_visual_comment = function()
     end
 end
 
+M.grep_noignore = function()
+    require("fzf-lua").live_grep({
+        rg_opts = "-uu --follow --column --line-number --no-heading --color=always --smart-case --fixed-strings --max-columns=512" ..
+            [[ --glob "!*.min.*" --glob "!*.bundle.*" --glob "!*.map" --glob "!*.git"]]
+    })
+end
+
 return M
