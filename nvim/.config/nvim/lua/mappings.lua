@@ -17,6 +17,7 @@ map('v', '<', '<gv', {})
 map('v', '>', '>gv', {})
 
 map('', '<leader>l', ':set list!<CR>', {})
+map('', '<leader>n', ':set number!<CR>', {})
 
 map('n', '<Leader>s', ':set spell!<cr>', N)
 
