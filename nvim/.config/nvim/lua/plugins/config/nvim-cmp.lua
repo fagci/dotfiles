@@ -5,6 +5,7 @@ local luasnip = require 'luasnip'
 cmp.setup({
     completion = {
         keyword_length = 2,
+        completeopt = 'menu,menuone,noinsert',
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },

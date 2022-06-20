@@ -45,7 +45,9 @@ local configs = {
     },
 }
 
-lsp_installer.setup { automatic_installation = true }
+lsp_installer.setup {
+    automatic_installation = true,
+}
 
 for server, config in pairs(configs) do
     lspconfig[server].setup(vim.tbl_deep_extend('force', defaults, config))
