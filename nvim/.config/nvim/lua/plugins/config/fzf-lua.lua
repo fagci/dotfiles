@@ -35,7 +35,8 @@ require 'fzf-lua'.setup {
         ["gutter"] = { "bg", "Normal" },
     },
     files = vim.tbl_extend("force", disable_icons, {
-        prompt = 'Files> ', -- this gone. fzf-lua bug? TODO: remove
+        prompt  = 'Files> ', -- this gone. fzf-lua bug? TODO: remove
+        fd_opts = "--color=never --type f -IL --exclude .git",
     }),
     buffers = disable_icons,
     tags = disable_icons,
