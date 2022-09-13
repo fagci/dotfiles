@@ -27,6 +27,7 @@ local configs = {
     vuels = {},
     yamlls = {},
     cssls = {},
+    solargraph = {},
 
     sumneko_lua = {
         settings = {

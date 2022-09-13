@@ -88,7 +88,7 @@ map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
 
 -- Comment
-map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", {})
+map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", {})
 map("x", "<leader>/", "<ESC><cmd>lua require('utils').toggle_visual_comment()<CR>", {})
 
 -- Grepper

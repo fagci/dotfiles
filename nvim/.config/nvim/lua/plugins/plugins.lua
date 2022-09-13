@@ -114,6 +114,7 @@ return packer.startup(function(use)
     -- colorschemes
     use { 'mhartington/oceanic-next' }
 
+    use { 'lambdalisue/suda.vim' }
 
     if packer_bootstrap then
         packer.sync()
