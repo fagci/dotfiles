@@ -92,9 +92,7 @@ return packer.startup(function(use)
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
     }
     use {
-        -- "folke/trouble.nvim",
-        "bellini666/trouble.nvim", -- resolves error on go to definition
-        commit = "4d031d09814dc83cb5b75b84b84944b93c0bcdcb",
+        "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = [[require("trouble").setup()]]
     }
