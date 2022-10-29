@@ -20,14 +20,22 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<Down>'] = cmp.mapping.select_next_item(),
         ['<Up>'] = cmp.mapping.select_prev_item(),
-        ["<PageUp>"] = function(_)
-            for _ = 1, 8 do
-                cmp.mapping.select_prev_item()(nil)
+        ["<PageUp>"] = function(fallback)
+            if cmp.visible() then
+                for _ = 1, 8 do
+                    cmp.mapping.select_prev_item()(nil)
+                end
+            else
+                fallback()
             end
         end,
-        ["<PageDown>"] = function(_)
-            for _ = 1, 8 do
-                cmp.mapping.select_next_item()(nil)
+        ["<PageDown>"] = function(fallback)
+            if cmp.visible() then
+                for _ = 1, 8 do
+                    cmp.mapping.select_next_item()(nil)
+                end
+            else
+                fallback()
             end
         end,
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
