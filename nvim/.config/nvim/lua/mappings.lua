@@ -74,6 +74,7 @@ map('n', '<Leader>j', ':FzfLua jumps<CR>', N)
 map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
 map('n', '<Leader>"', ':FzfLua registers<CR>', N)
 map('n', '<Leader>t', ':NeoTreeShowToggle<CR>', N)
+map('n', '<Leader>o', ':AerialToggle<CR>', N)
 
 -- LSP
 map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)

@@ -13,6 +13,7 @@ return packer.startup(function(use)
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
+    use { "vim-ruby/vim-ruby", ft = { 'ruby', 'eruby' } }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -121,6 +122,30 @@ return packer.startup(function(use)
             "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
         }
+    }
+    use {
+        "petertriho/nvim-scrollbar",
+        config = [[require("scrollbar").setup()]],
+        event = "BufReadPre",
+    }
+    use {
+        "echasnovski/mini.nvim",
+        config = [[
+            require('mini.indentscope').setup({draw={animation=require('mini.indentscope').gen_animation('none')}})
+            require('mini.align').setup()
+        ]],
+        branch = "stable"
+    }
+    use {
+        "lukas-reineke/virt-column.nvim",
+        config = [[require("virt-column").setup()]],
+        event = "BufReadPre",
+    }
+    use {
+        'stevearc/aerial.nvim',
+        config = [[require('aerial').setup()]],
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        event = "BufEnter",
     }
 
     if packer_bootstrap then
