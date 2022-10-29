@@ -28,8 +28,8 @@ opt.signcolumn = "number"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.listchars = 'tab:▸ ,space:.,trail:•'
-opt.fillchars = { eob = ' ' }
+opt.listchars = { nbsp = '␣', tab = '▸ ', trail = '•', space = '.' }
+opt.fillchars = { eob = ' ', vert = ' ' }
 opt.colorcolumn = '120'
 
 -- Editing
@@ -58,4 +58,3 @@ opt.smartcase = true
 opt.ignorecase = true
 
 g.matchup_matchparen_offscreen = { method = 'popup' }
-

@@ -7,8 +7,8 @@ packer.init({
     },
 })
 return packer.startup(function(use)
-    use { 'wbthomason/packer.nvim' }
-    use { 'lewis6991/impatient.nvim' }
+    use 'wbthomason/packer.nvim'
+    use 'lewis6991/impatient.nvim'
 
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
@@ -60,7 +60,7 @@ return packer.startup(function(use)
     }
 
     -- Editing
-    use { 'tpope/vim-repeat' }
+    use 'tpope/vim-repeat'
     use {
         'ur4ltz/surround.nvim',
         config = [[require "surround".setup {mappings_style = "surround", map_insert_mode = false}]]
@@ -70,8 +70,8 @@ return packer.startup(function(use)
         after = 'nvim-cmp',
         config = [[require('plugins.config.nvim-autopairs')]],
     }
-    use { 'wellle/targets.vim' }
-    use { 'ggandor/lightspeed.nvim' }
+    use 'wellle/targets.vim'
+    use 'ggandor/lightspeed.nvim'
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
     use { 'AndrewRadev/splitjoin.vim', cmd = { 'SplitjoinJoin', 'SplitjoinSplit' }, keys = { 'gS', 'gJ' } } -- gS, gJ
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
@@ -116,10 +116,12 @@ return packer.startup(function(use)
     }
 
     -- colorschemes
-    use { 'mhartington/oceanic-next' }
+    use 'mhartington/oceanic-next'
+    use 'rebelot/kanagawa.nvim'
+    use 'mjlbach/onedark.nvim'
 
     -- test zone
-    use { 'lambdalisue/suda.vim' }
+    use 'lambdalisue/suda.vim'
     use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -135,12 +137,14 @@ return packer.startup(function(use)
         event = "BufReadPre",
     }
     use {
-        "echasnovski/mini.nvim",
+        'lukas-reineke/indent-blankline.nvim',
         config = [[
-            require('mini.align').setup()
-            require('mini.indentscope').setup({draw={animation=require('mini.indentscope').gen_animation('none')}})
-        ]],
-        branch = "stable"
+            require("indent_blankline").setup {
+                char='·',
+                context_char='·',
+                show_current_context = true,
+            }
+        ]]
     }
     use {
         'stevearc/aerial.nvim',
