@@ -81,7 +81,7 @@ map('n', 'gr', ':Trouble lsp_references<CR>', NS)
 map('n', 'ge', ':Trouble lsp_document_diagnostics<CR>', NS)
 
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', NS)
-map('n', '<leader>.', '<cmd>lua vim.lsp.buf.formatting{async=true}<CR>', N)
+map('n', '<leader>.', '<cmd>lua require("utils").lsp_format_async()<CR>', N)
 map('n', '<leader>=', ':Neoformat<CR>', N)
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', NS)
 map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
