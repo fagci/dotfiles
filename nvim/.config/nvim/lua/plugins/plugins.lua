@@ -13,7 +13,6 @@ return packer.startup(function(use)
     -- Syntax hl
     use { 'chr4/nginx.vim', ft = 'nginx' }
     use { 'nelsyeung/twig.vim', ft = 'twig' }
-    use { "vim-ruby/vim-ruby", ft = { 'ruby', 'eruby' } }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -121,7 +120,6 @@ return packer.startup(function(use)
     use 'mjlbach/onedark.nvim'
 
     -- test zone
-    use 'lambdalisue/suda.vim'
     use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -130,21 +128,6 @@ return packer.startup(function(use)
             "kyazdani42/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         }
-    }
-    use {
-        "petertriho/nvim-scrollbar",
-        config = [[require("scrollbar").setup()]],
-        event = "BufReadPre",
-    }
-    use {
-        'lukas-reineke/indent-blankline.nvim',
-        config = [[
-            require("indent_blankline").setup {
-                char='·',
-                context_char='·',
-                show_current_context = true,
-            }
-        ]]
     }
     use {
         'stevearc/aerial.nvim',

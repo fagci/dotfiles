@@ -11,3 +11,4 @@ end)
 au("HighlightOnYank", "TextYankPost", function()
     vim.highlight.on_yank()
 end)
+
