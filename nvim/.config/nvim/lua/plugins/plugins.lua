@@ -116,7 +116,16 @@ return packer.startup(function(use)
 
     -- colorschemes
     use 'mhartington/oceanic-next'
-    use 'rebelot/kanagawa.nvim'
+    use {
+        'rebelot/kanagawa.nvim',
+        config = [[
+            require('kanagawa').setup({
+                commentStyle = { italic = false },
+                keywordStyle = { italic = false },
+                variablebuiltinStyle = { italic = false },
+            })
+        ]]
+    }
     use 'mjlbach/onedark.nvim'
 
     -- test zone
