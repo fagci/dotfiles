@@ -109,17 +109,23 @@ return packer.startup(function(use)
         ft = { 'css', 'javascript', 'php', 'html' },
         config = [[require('plugins.config.colorizer')]]
     }
+    use {
+        "lukas-reineke/virt-column.nvim",
+        config = [[require("virt-column").setup()]],
+        event = "BufReadPre",
+    }
 
     -- colorschemes
     use { 'mhartington/oceanic-next' }
 
+    -- test zone
     use { 'lambdalisue/suda.vim' }
     use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         requires = {
             "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "kyazdani42/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         }
     }
@@ -131,15 +137,10 @@ return packer.startup(function(use)
     use {
         "echasnovski/mini.nvim",
         config = [[
-            require('mini.indentscope').setup({draw={animation=require('mini.indentscope').gen_animation('none')}})
             require('mini.align').setup()
+            require('mini.indentscope').setup({draw={animation=require('mini.indentscope').gen_animation('none')}})
         ]],
         branch = "stable"
-    }
-    use {
-        "lukas-reineke/virt-column.nvim",
-        config = [[require("virt-column").setup()]],
-        event = "BufReadPre",
     }
     use {
         'stevearc/aerial.nvim',
