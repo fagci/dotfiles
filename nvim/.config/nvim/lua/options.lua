@@ -43,7 +43,7 @@ opt.iskeyword:append "-"
 opt.whichwrap:append "<>[]hl"
 
 opt.statusline = table.concat {
-    "%(%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')}%) ",
+    "%r%{expand('%:p:h:t')}/%t%{(&mod?'*':'')} ",
     "%=",
     "%y %l/%L",
 }
