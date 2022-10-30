@@ -62,10 +62,8 @@ return packer.startup(function(use)
     use 'tpope/vim-repeat'
     use 'wellle/targets.vim'
     use 'ggandor/lightspeed.nvim'
-    use {
-        'ur4ltz/surround.nvim',
-        config = [[require "surround".setup {mappings_style = "surround", map_insert_mode = false}]]
-    }
+    use 'machakann/vim-sandwich'
+    use { 'junegunn/vim-easy-align' }
     use {
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
@@ -73,7 +71,6 @@ return packer.startup(function(use)
     }
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
-    use { 'godlygeek/tabular', cmd = 'Tabularize' }
     use { 'andymass/vim-matchup', event = 'VimEnter' }
     use { 'numToStr/Comment.nvim', config = [[require('plugins.config.comment')]] }
 
@@ -135,6 +132,67 @@ return packer.startup(function(use)
         config = [[require('aerial').setup()]],
         requires = { 'nvim-treesitter/nvim-treesitter' },
         event = 'BufEnter',
+    }
+    use { 'j-hui/fidget.nvim', config = [[require"fidget".setup{}]] }
+    use {
+        'kosayoda/nvim-lightbulb',
+        config = [[
+
+-- Showing defaults
+require('nvim-lightbulb').setup({
+    -- LSP client names to ignore
+    -- Example: {"sumneko_lua", "null-ls"}
+    ignore = {},
+    sign = {
+        enabled = true,
+        -- Priority of the gutter sign
+        priority = 10,
+    },
+    float = {
+        enabled = true,
+        -- Text to show in the popup float
+        text = "!",
+        -- Available keys for window options:
+        -- - height     of floating window
+        -- - width      of floating window
+        -- - wrap_at    character to wrap at for computing height
+        -- - max_width  maximal width of floating window
+        -- - max_height maximal height of floating window
+        -- - pad_left   number of columns to pad contents at left
+        -- - pad_right  number of columns to pad contents at right
+        -- - pad_top    number of lines to pad contents at top
+        -- - pad_bottom number of lines to pad contents at bottom
+        -- - offset_x   x-axis offset of the floating window
+        -- - offset_y   y-axis offset of the floating window
+        -- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
+        -- - winblend   transparency of the window (0-100)
+        win_opts = {},
+    },
+    virtual_text = {
+        enabled = true,
+        -- Text to show at virtual text
+        text = "!",
+        -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
+        hl_mode = "replace",
+    },
+    status_text = {
+        enabled = false,
+        -- Text to provide when code actions are available
+        text = "!",
+        -- Text to provide when no actions are available
+        text_unavailable = "-"
+    },
+    autocmd = {
+        enabled = true,
+        -- see :help autocmd-pattern
+        pattern = {"*"},
+        -- see :help autocmd-events
+        events = {"CursorHold", "CursorHoldI"}
+    }
+})
+
+        ]],
+        requires = 'antoinemadec/FixCursorHold.nvim',
     }
 
     if packer_bootstrap then

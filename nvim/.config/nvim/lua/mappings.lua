@@ -105,4 +105,8 @@ map("v", "<C-x>", require("dial.map").dec_visual(), N)
 map("v", "g<C-a>", require("dial.map").inc_gvisual(), N)
 map("v", "g<C-x>", require("dial.map").dec_gvisual(), N)
 
+-- EasyAlign
+map("n", "ga", "<Plug>(EasyAlign)", N)
+map("v", "ga", "<Plug>(EasyAlign)", N)
+
 map('n', '<leader>x', ':make<CR>', N)
