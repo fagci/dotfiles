@@ -60,6 +60,8 @@ return packer.startup(function(use)
 
     -- Editing
     use 'tpope/vim-repeat'
+    use 'wellle/targets.vim'
+    use 'ggandor/lightspeed.nvim'
     use {
         'ur4ltz/surround.nvim',
         config = [[require "surround".setup {mappings_style = "surround", map_insert_mode = false}]]
@@ -69,10 +71,7 @@ return packer.startup(function(use)
         after = 'nvim-cmp',
         config = [[require('plugins.config.nvim-autopairs')]],
     }
-    use 'wellle/targets.vim'
-    use 'ggandor/lightspeed.nvim'
     use { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } }
-    use { 'AndrewRadev/splitjoin.vim', cmd = { 'SplitjoinJoin', 'SplitjoinSplit' }, keys = { 'gS', 'gJ' } } -- gS, gJ
     use { 'sbdchd/neoformat', cmd = 'Neoformat' }
     use { 'godlygeek/tabular', cmd = 'Tabularize' }
     use { 'andymass/vim-matchup', event = 'VimEnter' }
@@ -92,13 +91,9 @@ return packer.startup(function(use)
         config = [[vim.g.undotree_SetFocusWhenToggle = 1]],
     }
     use {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        'folke/trouble.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
         config = [[require("trouble").setup()]]
-    }
-    use {
-        'folke/todo-comments.nvim',
-        requires = 'nvim-lua/plenary.nvim',
     }
 
     -- UI
@@ -108,13 +103,12 @@ return packer.startup(function(use)
         config = [[require('plugins.config.colorizer')]]
     }
     use {
-        "lukas-reineke/virt-column.nvim",
+        'lukas-reineke/virt-column.nvim',
         config = [[require("virt-column").setup()]],
-        event = "BufReadPre",
+        event = 'BufReadPre',
     }
 
     -- colorschemes
-    use 'mhartington/oceanic-next'
     use {
         'rebelot/kanagawa.nvim',
         config = [[
@@ -125,23 +119,22 @@ return packer.startup(function(use)
             })
         ]]
     }
-    use 'mjlbach/onedark.nvim'
 
     -- test zone
     use {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        'nvim-neo-tree/neo-tree.nvim',
+        branch = 'v2.x',
         requires = {
-            "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
+            'nvim-lua/plenary.nvim',
+            'kyazdani42/nvim-web-devicons',
+            'MunifTanjim/nui.nvim',
         }
     }
     use {
         'stevearc/aerial.nvim',
         config = [[require('aerial').setup()]],
-        requires = { "nvim-treesitter/nvim-treesitter" },
-        event = "BufEnter",
+        requires = { 'nvim-treesitter/nvim-treesitter' },
+        event = 'BufEnter',
     }
 
     if packer_bootstrap then
