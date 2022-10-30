@@ -12,3 +12,17 @@ au("HighlightOnYank", "TextYankPost", function()
     vim.highlight.on_yank()
 end)
 
+vim.cmd [[
+augroup FiletypeMakeprg
+    autocmd!
+    autocmd Filetype ruby setlocal makeprg=ruby\ %
+    autocmd Filetype php setlocal makeprg=php\ %
+    autocmd Filetype python setlocal makeprg=python\ %
+    autocmd Filetype go setlocal makeprg=go\ run\ %
+    autocmd Filetype sh setlocal makeprg=%:p
+    autocmd Filetype javascript setlocal makeprg=node\ %
+    autocmd Filetype lua setlocal makeprg=lua\ %
+    autocmd Filetype perl setlocal makeprg=perl\ %
+    autocmd Filetype java setlocal makeprg=javac\ -g:none\ %\ &&\ java\ %:r
+augroup END
+]]

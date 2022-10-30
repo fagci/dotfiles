@@ -100,7 +100,6 @@ return packer.startup(function(use)
         'folke/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
     }
-    use { 'fagci/runfile.nvim', config = [[require('plugins.config.runfile')]] }
 
     -- UI
     use {
