@@ -8,11 +8,6 @@ opt.synmaxcol = 1000
 opt.updatetime = 250
 opt.ttimeoutlen = 0
 
-g.loaded_python_provider = 0
-
-g.python_host_prog = '/usr/bin/python2'
-g.python3_host_prog = '/usr/bin/python3'
-
 -- Backups
 opt.backup = false
 opt.writebackup = false
