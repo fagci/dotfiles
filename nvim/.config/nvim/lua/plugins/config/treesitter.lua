@@ -4,7 +4,7 @@ ts_configs.setup {
         'php', 'html', 'css', 'javascript', 'jsdoc', 'yaml',
         'go', 'python',
         'json', 'bash',
-        'lua', 'perl'
+        'lua', 'perl', 'ruby'
     },
     sync_installed = true,
     highlight = {

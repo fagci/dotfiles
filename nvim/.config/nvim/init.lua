@@ -1,8 +1,4 @@
-local status_ok, impatient = pcall(require, "impatient")
-
-if status_ok then
-    impatient.enable_profile()
-end
+require 'impatient'
 
 require 'global'
 require 'disable-builtins'
@@ -11,4 +7,3 @@ require 'autocommands'
 require 'plugins'
 require 'mappings'
 
--- TODO: add support for js in phtml
