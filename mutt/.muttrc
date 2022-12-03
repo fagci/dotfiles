@@ -4,5 +4,16 @@ set visual=nvim
 set reply_to
 set reverse_name
 
+set mbox_type=Maildir
+set spoolfile="~/.mail/spool"
+set mbox="~/.mail/mbox"
+set folder="~/.mail/"
+
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+
+bind index,pager <delete> delete-message
+
 source ~/.muttrc-local
 
