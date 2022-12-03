@@ -62,7 +62,7 @@ return packer.startup(function(use)
     use 'tpope/vim-repeat'
     use 'wellle/targets.vim'
     use 'ggandor/lightspeed.nvim'
-    use 'machakann/vim-sandwich'
+    -- use 'machakann/vim-sandwich'
     use { 'junegunn/vim-easy-align' }
     use {
         'windwp/nvim-autopairs',

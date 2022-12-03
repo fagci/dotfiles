@@ -9,7 +9,7 @@ ts_configs.setup {
     sync_installed = true,
     highlight = {
         enable = true,
-        disable = { 'html' }, -- fix for twig
+        disable = { 'html', 'eruby' }, -- fix for twig
         additional_vim_regex_highlighting = { 'php' },
     },
     indent = {

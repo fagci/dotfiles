@@ -28,6 +28,7 @@ translit() {
     TRS=${TRS//Ъ/} TRS=${TRS//ь/};
     TRS=${TRS//Ь/}
     TRS=${TRS//\"/}
+    TRS=${TRS//,/_}
     TRS=${TRS//\'/}
     TRS=${TRS//\`/}
     hash iconv &> /dev/null && TRS=$(iconv -c -f UTF8 -t ASCII//TRANSLIT <<< "$TRS")
