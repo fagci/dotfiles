@@ -1,0 +1,8 @@
+text/html; lynx -force_html %r; needsterminal;
+application/msword; antiword -m koi8-r.txt %s; copiousoutput
+application/vnd.msword; antiword -m koi8-r.txt %s; copiousoutput
+application/excel; xls2csv %s; | sed 's/,/        /g'; copiousoutput
+application/msexcel; xls2csv %s; | sed 's/,/        /g'; copiousoutput
+application/ms-Excel; xls2csv %s | sed 's/,/        /g'; copiousoutput
+application/vnd.ms-excel; xls2csv %s | sed 's/,/        /g'; copiousoutput
+application/x-excel; xls2csv %s | sed 's/,/        /g'; copiousoutput

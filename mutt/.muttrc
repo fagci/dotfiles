@@ -1,0 +1,8 @@
+set realname = "Mikhail Yudin"
+set editor=nvim
+set visual=nvim
+set reply_to
+set reverse_name
+
+source ~/.muttrc-local
+
