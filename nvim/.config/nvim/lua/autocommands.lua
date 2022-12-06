@@ -26,4 +26,7 @@ augroup FiletypeMakeprg
     autocmd Filetype perl setlocal makeprg=perl\ %
     autocmd Filetype java setlocal makeprg=javac\ -g:none\ %\ &&\ java\ %:r
 augroup END
+augroup HurlFT
+    autocmd! BufRead,BufNewFile *.hurl set filetype=hurl
+augroup END
 ]]
