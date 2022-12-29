@@ -8,7 +8,7 @@ _G.au = function(group_name, event, fn, opts)
     vim.api.nvim_create_autocmd({ event }, def_opts)
 end
 
--- Inspect vatiable
+-- Inspect variable
 _G.P = function(v)
     print(vim.inspect(v))
     return v

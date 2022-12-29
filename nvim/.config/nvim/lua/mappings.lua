@@ -7,7 +7,7 @@ vim.g.mapleader = ','
 
 map('n', '<leader>ev', ':FzfLua files cwd=~/.config/nvim/<CR>', N)
 map('n', '<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>', N)
-map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins/plugins.lua<CR>', N)
+map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins.lua<CR>', N)
 map('n', '<leader>eo', ':e ~/.config/nvim/lua/options.lua<CR>', N)
 
 map('n', '<Leader>,', ':noh<CR>', N)
@@ -57,12 +57,11 @@ map('n', '<leader>Q', ':bp!<bar>bd!#<cr>', N)
 -- Vifm
 map('', '<Leader>vv', ':Vifm<CR>', {})
 
--- Vim-plug
-map('n', '<leader>pi', ':PackerInstall<CR>', NS)
-map('n', '<leader>pu', ':PackerUpdate<CR>', NS)
-map('n', '<leader>pc', ':PackerClean<CR>', NS)
-map('n', '<leader>pg', ':PackerUpgrade<CR>', NS)
-map('n', '<leader>ps', ':PackerSync<CR>', NS)
+-- lazy
+map('n', '<leader>pi', ':Lazy install<CR>', NS)
+map('n', '<leader>pu', ':Lazy update<CR>', NS)
+map('n', '<leader>pc', ':Lazy clean<CR>', NS)
+map('n', '<leader>ps', ':Lazy sync<CR>', NS)
 
 -- Project navigation
 map('n', '<tab>', ':FzfLua git_files<cr>', N)

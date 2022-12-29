@@ -1,14 +1,22 @@
 local lsp_installer = require 'nvim-lsp-installer'
-local lsp_signature = require 'lsp_signature'
+-- local lsp_signature = require 'lsp_signature'
 local lspconfig = require 'lspconfig'
 
-lsp_signature.setup {
+--[[ lsp_signature.setup {
     bind = true,
     handler_opts = { border = 'none' }
-}
+} ]]
+local navic = require("nvim-navic")
+local on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+end
+
 
 local defaults = {
-    on_attach = lsp_signature.on_attach,
+    -- on_attach = lsp_signature.on_attach,
+    on_attach = on_attach,
     capabilities = require('cmp_nvim_lsp').default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
     ),

@@ -1,4 +1,4 @@
-require('Comment').setup {
+return {
     mappings = {
         basic = false,
         extra = false,

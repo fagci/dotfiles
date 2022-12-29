@@ -4,7 +4,7 @@ local disable_icons = {
     color_icons = false,
 }
 
-require 'fzf-lua'.setup {
+return {
     winopts = {
         preview = {
             vertical   = 'up:45%', -- up|down:size
