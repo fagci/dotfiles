@@ -72,6 +72,7 @@ map('n', '<Leader>h', ':FzfLua loclist<CR>', N)
 map('n', '<Leader>j', ':FzfLua jumps<CR>', N)
 map('n', '<Leader>b', ':FzfLua buffers<CR>', N)
 map('n', '<Leader>"', ':FzfLua registers<CR>', N)
+map('n', '<Leader>R', ':FzfLua lsp_live_workspace_symbols<CR>', N)
 map('n', '<Leader>t', ':NeoTreeShowToggle<CR>', N)
 map('n', '<Leader>o', ':AerialToggle<CR>', N)
 
