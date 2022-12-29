@@ -39,7 +39,6 @@ opt.formatoptions = 'croqn'
 opt.foldlevelstart = 99
 opt.completeopt = "menu,menuone,noselect"
 opt.guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]]
-opt.iskeyword:append "-"
 opt.whichwrap:append "<>[]hl"
 
 opt.statusline = table.concat {
