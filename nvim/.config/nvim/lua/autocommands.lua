@@ -1,3 +1,13 @@
+-- Creates simple autocmd
+local au = function(group_name, event, fn, opts)
+    local def_opts = {
+        group = vim.api.nvim_create_augroup(group_name, { clear = true }),
+        callback = fn,
+    }
+    vim.tbl_deep_extend('force', def_opts, opts or {})
+    vim.api.nvim_create_autocmd({ event }, def_opts)
+end
+
 au('LastPositionOnDocument', 'BufReadPost', function()
     local line_data = vim.api.nvim_buf_get_mark(0, '"')
     local line = line_data[1]
