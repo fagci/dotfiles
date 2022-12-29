@@ -119,8 +119,6 @@ return {
         event = 'BufReadPre',
     },
 
-
-
     {
         'nvim-neo-tree/neo-tree.nvim',
         dependencies = {

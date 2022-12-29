@@ -96,14 +96,6 @@ map("x", "<leader>/", "<ESC><cmd>lua require('utils').toggle_visual_comment()<CR
 map('n', 'gs', '<Plug>(GrepperOperator)', {})
 map('x', 'gs', '<Plug>(GrepperOperator)', {})
 
--- Dial (inc/dec, switch)
-map("n", "<C-a>", require("dial.map").inc_normal(), N)
-map("n", "<C-x>", require("dial.map").dec_normal(), N)
-map("v", "<C-a>", require("dial.map").inc_visual(), N)
-map("v", "<C-x>", require("dial.map").dec_visual(), N)
-map("v", "g<C-a>", require("dial.map").inc_gvisual(), N)
-map("v", "g<C-x>", require("dial.map").dec_gvisual(), N)
-
 -- EasyAlign
 map("n", "ga", "<Plug>(EasyAlign)", N)
 map("v", "ga", "<Plug>(EasyAlign)", N)
