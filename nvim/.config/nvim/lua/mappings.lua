@@ -7,7 +7,7 @@ vim.g.mapleader = ','
 
 map('n', '<leader>ev', ':FzfLua files cwd=~/.config/nvim/<CR>', N)
 map('n', '<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>', N)
-map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins.lua<CR>', N)
+map('n', '<leader>ep', ':e ~/.config/nvim/lua/plugins/config/init.lua<CR>', N)
 map('n', '<leader>eo', ':e ~/.config/nvim/lua/options.lua<CR>', N)
 
 map('n', '<Leader>,', ':noh<CR>', N)

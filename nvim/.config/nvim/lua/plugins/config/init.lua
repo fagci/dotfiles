@@ -1,4 +1,6 @@
 return {
+    { 'chr4/nginx.vim', ft = 'nginx' },
+    { 'nelsyeung/twig.vim', ft = 'twig' },
     {
         'rebelot/kanagawa.nvim',
         priority = 1000,
@@ -7,7 +9,6 @@ return {
             vim.cmd 'colorscheme kanagawa'
         end
     },
-    { "SmiteshP/nvim-navic", config = {} },
     {
         'neovim/nvim-lspconfig',
         {
@@ -17,16 +18,6 @@ return {
                 require('plugins.config.nvim-lspconfig')
             end
         }
-    },
-    {
-        'nvim-lualine/lualine.nvim',
-        config = function()
-            require 'plugins.config.lualine'
-        end,
-        dependencies = {
-            "SmiteshP/nvim-navic",
-            'kyazdani42/nvim-web-devicons'
-        },
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -40,7 +31,8 @@ return {
     },
     {
         'ibhagwan/fzf-lua',
-        config = require('plugins.config.fzf-lua')
+        config = require('plugins.config.fzf-lua'),
+        cmd = 'FzfLua'
     },
     {
         'hrsh7th/nvim-cmp',
@@ -49,15 +41,15 @@ return {
             require('plugins.config.snippets')
         end,
         dependencies = {
-            { 'onsails/lspkind-nvim' },
-            { 'ray-x/lsp_signature.nvim' },
-            { 'honza/vim-snippets' },
-            { 'L3MON4D3/LuaSnip' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-calc' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
+            'onsails/lspkind-nvim',
+            'ray-x/lsp_signature.nvim',
+            'honza/vim-snippets',
+            'L3MON4D3/LuaSnip',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-calc',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',
+            'saadparwaiz1/cmp_luasnip',
         },
     },
     {
@@ -69,9 +61,7 @@ return {
     -- Editing
     'tpope/vim-repeat',
     'wellle/targets.vim',
-    'ggandor/lightspeed.nvim',
     'machakann/vim-sandwich',
-    'junegunn/vim-easy-align',
     {
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
@@ -81,7 +71,6 @@ return {
     },
     { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } },
     { 'sbdchd/neoformat', cmd = 'Neoformat' },
-    { 'andymass/vim-matchup', event = 'VimEnter' },
     { 'numToStr/Comment.nvim', config = require('plugins.config.comment') },
 
     -- Utils
@@ -104,9 +93,6 @@ return {
     },
 
 
-    { 'chr4/nginx.vim', ft = 'nginx' },
-    { 'nelsyeung/twig.vim', ft = 'twig' },
-
     -- UI
     {
         'crivotz/nvim-colorizer.lua',
@@ -125,13 +111,13 @@ return {
             'nvim-lua/plenary.nvim',
             'kyazdani42/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
-        }
+        },
+        cmd = { 'NeoTreeShow', 'NeoTreeShowToggle', 'NeoTreeReveal', 'NeoTreeRevealToggle' }
     },
     {
         'stevearc/aerial.nvim',
         config = {},
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        dependencies = 'nvim-treesitter/nvim-treesitter',
         event = 'BufEnter',
     },
-    { 'j-hui/fidget.nvim', config = {} }
 }
