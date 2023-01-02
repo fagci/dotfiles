@@ -55,7 +55,9 @@ return {
     {
         'jose-elias-alvarez/null-ls.nvim',
         dependencies = 'nvim-lua/plenary.nvim',
-        config = require('plugins.config.null-ls')
+        config = function()
+            require('plugins.config.null-ls')
+        end
     },
 
     -- Editing

@@ -2,7 +2,7 @@
 
 require 'disable-builtins'
 require 'options'
+require 'plugins'
 require 'utils'
 require 'autocommands'
-require 'plugins'
 require 'mappings'
