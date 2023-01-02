@@ -11,13 +11,16 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
-        {
-            'williamboman/nvim-lsp-installer',
-            dependencies = "SmiteshP/nvim-navic",
-            config = function()
-                require('plugins.config.nvim-lspconfig')
-            end
-        }
+        dependencies = {
+            'folke/neodev.nvim',
+            'j-hui/fidget.nvim',
+            'jose-elias-alvarez/null-ls.nvim',
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+        },
+        config = function()
+            require('plugins.config.nvim-lspconfig')
+        end
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -66,7 +69,7 @@ return {
     'machakann/vim-sandwich',
     {
         'windwp/nvim-autopairs',
-        after = 'nvim-cmp',
+        dependencies = 'nvim-cmp',
         config = function()
             require('plugins.config.nvim-autopairs')
         end
@@ -90,10 +93,9 @@ return {
     },
     {
         'folke/trouble.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
+        dependencies = 'kyazdani42/nvim-web-devicons',
         config = {}
     },
-
 
     -- UI
     {

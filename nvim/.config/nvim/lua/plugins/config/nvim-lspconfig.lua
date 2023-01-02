@@ -1,11 +1,5 @@
-local lsp_installer = require 'nvim-lsp-installer'
 local lsp_signature = require 'lsp_signature'
 local lspconfig = require 'lspconfig'
-
-lsp_signature.setup {
-    bind = true,
-    handler_opts = { border = 'none' }
-}
 
 local defaults = {
     on_attach = lsp_signature.on_attach,
@@ -28,26 +22,19 @@ local configs = {
     yamlls = {},
     cssls = {},
     solargraph = {},
-
-    sumneko_lua = {
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { 'vim' },
-                },
-                workspace = {
-                    library = {
-                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                        [vim.fn.stdpath('config') .. '/lua'] = true,
-                    }
-                }
-            }
-        }
-    },
+    sumneko_lua = {},
 }
 
-lsp_installer.setup {
-    automatic_installation = true,
+require("fidget").setup()
+require("neodev").setup()
+require("mason").setup()
+require("mason-lspconfig").setup({
+    automatic_installation = true
+})
+
+lsp_signature.setup {
+    bind = true,
+    handler_opts = { border = 'none' }
 }
 
 for server, config in pairs(configs) do
