@@ -6,7 +6,7 @@ return {
         priority = 1000,
         config = require('plugins.config.c-kanagawa'),
         init = function()
-            vim.cmd 'colorscheme kanagawa'
+            vim.cmd('colorscheme kanagawa')
         end
     },
     {
@@ -124,4 +124,5 @@ return {
         dependencies = 'nvim-treesitter/nvim-treesitter',
         event = 'BufEnter',
     },
+    'nanotee/sqls.nvim',
 }
