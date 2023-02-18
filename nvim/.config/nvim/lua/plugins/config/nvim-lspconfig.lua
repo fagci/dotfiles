@@ -27,7 +27,7 @@ local configs = {
     yamlls = {},
     cssls = {},
     solargraph = {},
-    sumneko_lua = {},
+    lua_ls = {},
 }
 
 require("fidget").setup()
