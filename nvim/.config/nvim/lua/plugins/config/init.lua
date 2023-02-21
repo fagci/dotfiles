@@ -99,7 +99,7 @@ return {
 
     -- UI
     {
-        'crivotz/nvim-colorizer.lua',
+        'NvChad/nvim-colorizer.lua',
         ft = { 'css', 'javascript', 'php', 'html' },
         config = require('plugins.config.colorizer')
     },
