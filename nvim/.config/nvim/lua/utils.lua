@@ -20,4 +20,56 @@ M.grep_noignore = function()
     })
 end
 
+-- Valid mapping formats:
+--
+--local mapping = {
+--  [{ 'n', 'x', 'i', 't' }] = {
+--    { lhs, rhs, opts },
+--  },
+--}
+--
+-- OR
+--
+--local mapping = {
+--  ['<C-a>'] = rhs,
+--  qw = rhs,
+--}
+M.set_maps = function(mapping, arg1, arg2)
+  local modes
+  local options
+
+  if arg1 and (arg1[1] or type(arg1) == 'string') then
+    modes = arg1
+    options = arg2
+  else
+    modes = arg2
+    options = arg1
+  end
+
+  for key, value in pairs(mapping) do
+    if type(value) == "table" then
+      local mode = key
+      local tbl = value
+
+      for _, v in pairs(tbl) do
+        local lhs = v[1]
+        local rhs = v[2]
+
+        local opts = options or {}
+        if v[3] then
+          opts = vim.tbl_deep_extend('keep', v[3], opts)
+        end
+
+        vim.keymap.set(mode, lhs, rhs, opts)
+      end
+    else
+      local mode = modes or { 'n', 'x' }
+      local lhs = key
+      local rhs = value
+
+      vim.keymap.set(mode, lhs, rhs, options)
+    end
+  end
+end
+
 return M
