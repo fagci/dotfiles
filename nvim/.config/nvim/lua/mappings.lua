@@ -75,6 +75,7 @@ map('n', '<Leader>"', ':FzfLua registers<CR>', N)
 map('n', '<Leader>R', ':FzfLua lsp_live_workspace_symbols<CR>', N)
 map('n', '<Leader>t', ':NeoTreeShowToggle<CR>', N)
 map('n', '<Leader>o', ':AerialToggle<CR>', N)
+map('n', '<Leader>u', ':UndotreeToggle<CR>', N)
 
 -- LSP
 map('n', 'gd', ':Trouble lsp_definitions<CR>', NS)
@@ -88,6 +89,20 @@ map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', NS)
 map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', NS)
 map('n', '<leader>vn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', N)
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', N)
+
+-- Refactor
+-- Remaps for the refactoring operations currently offered by the plugin
+map("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], NS)
+map("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], NS)
+map("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], NS)
+map("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], NS)
+
+-- Extract block doesn't need visual mode
+map("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], NS)
+map("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], NS)
+
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+map("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], NS)
 
 -- Comment
 map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", {})

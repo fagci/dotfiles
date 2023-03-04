@@ -104,12 +104,6 @@ return {
         config = require('plugins.config.colorizer')
     },
     {
-        'lukas-reineke/virt-column.nvim',
-        config = {},
-        event = 'BufReadPre',
-    },
-
-    {
         'nvim-neo-tree/neo-tree.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -125,4 +119,12 @@ return {
         event = 'BufEnter',
     },
     'nanotee/sqls.nvim',
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter"
+        },
+        config = {}
+    }
 }

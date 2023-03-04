@@ -17,7 +17,7 @@ ts_configs.setup {
         disable = { 'php' },
     },
     refactor = {
-        smart_rename = { enable = true, keymaps = { smart_rename = ',r' } },
+        smart_rename = { enable = true, keymaps = { smart_rename = ',rr' } },
         highlight_definitions = { enable = true },
     },
     textobjects = {
