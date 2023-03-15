@@ -33,11 +33,6 @@ return {
         },
     },
     {
-        'ibhagwan/fzf-lua',
-        config = require('plugins.config.fzf-lua'),
-        cmd = 'FzfLua'
-    },
-    {
         'hrsh7th/nvim-cmp',
         config = function()
             require('plugins.config.nvim-cmp')
@@ -61,6 +56,11 @@ return {
         config = function()
             require('plugins.config.null-ls')
         end
+    },
+    {
+        'ibhagwan/fzf-lua',
+        config = require('plugins.config.fzf-lua'),
+        cmd = 'FzfLua'
     },
 
     -- Editing
@@ -86,15 +86,16 @@ return {
     { 'Olical/vim-enmasse', cmd = 'EnMasse' },
     {
         'mbbill/undotree',
-        cmd = 'UndotreeToggle',
         config = function()
             vim.g.undotree_SetFocusWhenToggle = 1
         end,
+        cmd = 'UndotreeToggle',
     },
     {
         'folke/trouble.nvim',
         dependencies = 'kyazdani42/nvim-web-devicons',
-        config = {}
+        config = {},
+        cmd = { 'Trouble', 'TroubleToggle' }
     },
 
     -- UI
@@ -117,14 +118,6 @@ return {
         config = {},
         dependencies = 'nvim-treesitter/nvim-treesitter',
         event = 'BufEnter',
+        cmd = { 'AerialToggle' }
     },
-    'nanotee/sqls.nvim',
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter"
-        },
-        config = {}
-    }
 }
