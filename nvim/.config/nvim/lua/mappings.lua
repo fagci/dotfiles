@@ -84,7 +84,7 @@ require('utils').set_maps({
         -- Grepper
         {'gs', '<Plug>(GrepperOperator)'},
     },
-    ['v'] = {
+    [{'v', 'x'}] = {
         {'<', '<gv'},
         {'>', '>gv'},
 

@@ -2,7 +2,9 @@ local lsp_signature = require 'lsp_signature'
 local lspconfig = require 'lspconfig'
 
 local defaults = {
-    on_attach = lsp_signature.on_attach,
+    on_attach = function(client, bufnr)
+        lsp_signature.on_attach(client, bufnr)
+    end,
     capabilities = require('cmp_nvim_lsp').default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
     ),

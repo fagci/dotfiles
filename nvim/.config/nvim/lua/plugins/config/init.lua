@@ -1,14 +1,13 @@
 return {
-    { 'chr4/nginx.vim', ft = 'nginx' },
-    { 'nelsyeung/twig.vim', ft = 'twig' },
     {
         'rebelot/kanagawa.nvim',
-        priority = 1000,
         config = require('plugins.config.c-kanagawa'),
         init = function()
             vim.cmd('colorscheme kanagawa')
         end
     },
+    { 'chr4/nginx.vim', ft = 'nginx' },
+    { 'nelsyeung/twig.vim', ft = 'twig' },
     {
         'neovim/nvim-lspconfig',
         dependencies = {
