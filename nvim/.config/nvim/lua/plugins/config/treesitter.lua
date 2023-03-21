@@ -19,10 +19,6 @@ require('nvim-treesitter.configs').setup {
         smart_rename = { enable = true, keymaps = { smart_rename = ',rr' } },
         highlight_definitions = { enable = true },
     },
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-    },
     textobjects = {
         swap = {
             enable = true,

@@ -28,7 +28,6 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'JoosepAlviste/nvim-ts-context-commentstring',
         },
     },
     {
@@ -78,7 +77,6 @@ return {
     {
         'numToStr/Comment.nvim',
         config = function() require('plugins.config.comment') end,
-        dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
     },
 
     -- Utils
