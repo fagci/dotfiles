@@ -1,12 +1,11 @@
 return {
     {
-        'rebelot/kanagawa.nvim',
-        config = require('plugins.config.c-kanagawa'),
+        'sainnhe/sonokai',
         init = function()
-            vim.cmd('colorscheme kanagawa')
+            vim.cmd('colorscheme sonokai')
         end
     },
-    { 'chr4/nginx.vim', ft = 'nginx' },
+    { 'chr4/nginx.vim',     ft = 'nginx' },
     { 'nelsyeung/twig.vim', ft = 'twig' },
     {
         'neovim/nvim-lspconfig',
@@ -29,6 +28,7 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
+            'JoosepAlviste/nvim-ts-context-commentstring',
         },
     },
     {
@@ -73,16 +73,20 @@ return {
             require('plugins.config.nvim-autopairs')
         end
     },
-    { 'mattn/emmet-vim', ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } },
+    { 'mattn/emmet-vim',  ft = { 'html', 'css', 'htmldjango', 'twig', 'php' } },
     { 'sbdchd/neoformat', cmd = 'Neoformat' },
-    { 'numToStr/Comment.nvim', config = require('plugins.config.comment') },
+    {
+        'numToStr/Comment.nvim',
+        config = function() require('plugins.config.comment') end,
+        dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
+    },
 
     -- Utils
     'gpanders/editorconfig.nvim',
-    { 'vifm/vifm.vim', cmd = 'Vifm' },
+    { 'vifm/vifm.vim',           cmd = 'Vifm' },
     { 'rhysd/git-messenger.vim', cmd = { 'GitMessenger', 'GitMessengerClose' } },
-    { 'mhinz/vim-grepper', cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } },
-    { 'Olical/vim-enmasse', cmd = 'EnMasse' },
+    { 'mhinz/vim-grepper',       cmd = { 'Grepper', 'GrepperGit', 'GrepperGrep', 'GrepperRg' } },
+    { 'Olical/vim-enmasse',      cmd = 'EnMasse' },
     {
         'mbbill/undotree',
         config = function()
@@ -94,7 +98,6 @@ return {
         'folke/trouble.nvim',
         dependencies = 'kyazdani42/nvim-web-devicons',
         config = {},
-        cmd = { 'Trouble', 'TroubleToggle' }
     },
 
     -- UI

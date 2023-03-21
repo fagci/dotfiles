@@ -1,6 +1,8 @@
 local opt = vim.opt
 local g = vim.g
 
+g.mapleader = ','
+
 -- Speed
 opt.lazyredraw = true
 opt.confirm = true

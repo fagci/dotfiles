@@ -36,5 +36,6 @@
         "/home/user/.local/share/nvim/lazy/nvim-treesitter",
         "/home/user/.local/share/nvim/lazy/mason.nvim",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }

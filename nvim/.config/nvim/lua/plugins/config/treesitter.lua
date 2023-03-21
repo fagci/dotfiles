@@ -1,5 +1,4 @@
-local ts_configs = require 'nvim-treesitter.configs'
-ts_configs.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = {
         'php', 'html', 'css', 'javascript', 'jsdoc', 'yaml',
         'go', 'python',
@@ -19,6 +18,10 @@ ts_configs.setup {
     refactor = {
         smart_rename = { enable = true, keymaps = { smart_rename = ',rr' } },
         highlight_definitions = { enable = true },
+    },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
     },
     textobjects = {
         swap = {

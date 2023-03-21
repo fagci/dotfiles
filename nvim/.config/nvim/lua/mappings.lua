@@ -1,4 +1,3 @@
-vim.g.mapleader = ','
 
 require('utils').set_maps({
     [{'n', 'x'}] = {
@@ -77,9 +76,6 @@ require('utils').set_maps({
 
         -- Inline variable can also pick up the identifier currently under the cursor without visual mode
         {"<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]]},
-
-        -- Comment
-        {"<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>"},
 
         -- Grepper
         {'gs', '<Plug>(GrepperOperator)'},
