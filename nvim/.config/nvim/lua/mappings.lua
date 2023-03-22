@@ -53,7 +53,7 @@ require('utils').set_maps({
         {'<Leader>b', ':FzfLua buffers<CR>'},
         {'<Leader>"', ':FzfLua registers<CR>'},
         {'<Leader>R', ':FzfLua lsp_live_workspace_symbols<CR>'},
-        {'<Leader>t', ':NeoTreeShowToggle<CR>'},
+        {'<Leader>t', ':NeoTreeRevealToggle<CR>'},
         {'<Leader>o', ':AerialToggle<CR>'},
         {'<Leader>u', ':UndotreeToggle<CR>'},
 
