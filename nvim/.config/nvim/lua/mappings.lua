@@ -3,7 +3,7 @@ require('utils').set_maps({
     [{'n', 'x'}] = {
         {'<leader>ev', ':FzfLua files cwd=~/.config/nvim/<CR>'},
         {'<leader>em', ':e ~/.config/nvim/lua/mappings.lua<CR>'},
-        {'<leader>ep', ':e ~/.config/nvim/lua/plugins/config/init.lua<CR>'},
+        {'<leader>ep', ':e ~/.config/nvim/lua/plugins/base.lua<CR>'},
         {'<leader>eo', ':e ~/.config/nvim/lua/options.lua<CR>'},
 
         {'<leader>l', ':set list!<CR>'},

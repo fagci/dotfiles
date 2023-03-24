@@ -2,7 +2,7 @@ return {
     'max-perf',
     winopts = {
         preview = {
-            border = 'noborder',
+            border     = 'noborder',
             vertical   = 'up:45%',    -- up|down:size
             horizontal = 'right:50%', -- right|left:size
         },
