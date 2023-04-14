@@ -5,6 +5,9 @@ return {
         config = {
             compile = true,
             colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+            commentStyle = { italic = false },
+            keywordStyle = { italic = false },
+            statementStyle = { bold = false },
         },
         init = function()
             vim.cmd.colorscheme "kanagawa"
