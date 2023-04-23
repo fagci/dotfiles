@@ -10,7 +10,7 @@ require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,
         disable = { 'html', 'eruby' }, -- fix for twig
-        additional_vim_regex_highlighting = { 'php' },
+        -- additional_vim_regex_highlighting = { 'php' },
     },
     indent = {
         enable = true,

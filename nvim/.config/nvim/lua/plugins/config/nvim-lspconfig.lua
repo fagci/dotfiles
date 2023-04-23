@@ -17,12 +17,7 @@ local configs = {
     intelephense = {},
     jsonls = {},
     pyright = {},
-    sqls = {
-        on_attach = function(client, bufnr)
-            lsp_signature.on_attach(client, bufnr)
-            require('sqls').on_attach(client, bufnr)
-        end
-    },
+    sqlls = {},
     stylelint_lsp = {},
     tsserver = {},
     vuels = {},

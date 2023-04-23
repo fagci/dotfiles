@@ -1,7 +1,7 @@
 return {
     {
         'ibhagwan/fzf-lua',
-        config = require('plugins.config.fzf-lua'),
+        opts = require('plugins.config.fzf-lua'),
         cmd = 'FzfLua'
     },
     {

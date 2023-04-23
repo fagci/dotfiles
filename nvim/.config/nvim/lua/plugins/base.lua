@@ -2,7 +2,7 @@ return {
     { 'folke/lazy.nvim' },
     {
         "rebelot/kanagawa.nvim",
-        config = {
+        opts = {
             compile = true,
             colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
             commentStyle = { italic = false },

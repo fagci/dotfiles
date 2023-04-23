@@ -15,7 +15,7 @@ return {
     {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        config = { snippet_engine = "luasnip" },
+        opts = { snippet_engine = "luasnip" },
         event = "BufReadPre",
     }
 }
