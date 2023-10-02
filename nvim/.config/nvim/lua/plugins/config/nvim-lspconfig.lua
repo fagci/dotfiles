@@ -27,8 +27,6 @@ local configs = {
     lua_ls = {},
 }
 
-require("fidget").setup()
-require("neodev").setup()
 require("mason").setup()
 require("mason-lspconfig").setup({
     automatic_installation = true

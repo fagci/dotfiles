@@ -1,7 +1,7 @@
 return {
     {
         'NvChad/nvim-colorizer.lua',
-        ft = { 'css', 'javascript', 'php', 'html' },
+        ft = { 'css', 'html' },
         opts = require('plugins.config.colorizer')
     },
     {

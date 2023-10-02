@@ -8,11 +8,6 @@ return {
         end,
     },
     {
-        "dnlhc/glance.nvim",
-        event = "BufReadPre",
-        config = true,
-    },
-    {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
         opts = { snippet_engine = "luasnip" },

@@ -2,8 +2,6 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'folke/neodev.nvim',
-            'j-hui/fidget.nvim',
             'jose-elias-alvarez/null-ls.nvim',
             {
                 "williamboman/mason.nvim",

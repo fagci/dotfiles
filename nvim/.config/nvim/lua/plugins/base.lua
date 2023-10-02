@@ -4,6 +4,9 @@ return {
         "rebelot/kanagawa.nvim",
         opts = {
             compile = true,
+            transparent = true,
+            undercurl = false,
+            terminalColors = true,
             colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
             commentStyle = { italic = false },
             keywordStyle = { italic = false },
