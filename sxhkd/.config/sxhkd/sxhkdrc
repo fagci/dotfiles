@@ -24,6 +24,10 @@ super + {t,shift + space,space,f}
 super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
+# preselect the direction
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -p {west,south,north,east}
+
 # Add a new desktop on the current monitor with name set by rofi
 super + plus
     bspc monitor -a "$(rofi -dmenu -p Workspace -i -no-fixed-num-lines -width 12%)"
@@ -40,6 +44,11 @@ super + bracket{left,right}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} ^{1-9,10}
 
+# Smart way to switching between workspaces
+super + ctrl + {1-9,0}
+    workspace=$(bspc query -D -d .occupied | sed -n {1-9,10}p) && \
+    bspc desktop -f $workspace
+
 # send and follow to given desktop	
 super + ctrl + shift + {1-9}
     id=$(bspc query -N -n); bspc node -d ^{1-9}; bspc node -f ${id}
@@ -53,6 +62,10 @@ super + r : {Left,Down,Up,Right}
 super + alt + {Left,Right}
 	bspc desktop -d {prev,next}
 
+# change window layout
+super + {_,shift + }e
+	bspc node '@parent' -R {_,-}90
+
 # switch between gap presets
 super + shift + {y,u,i,o}
     bspc config window_gap {0,5,10,20}
@@ -65,13 +78,13 @@ super + shift + bracket{left,right}
 # Apps
 
 super + {Return,grave}
-    alacritty
+    alacritty --command zsh --login
 
 super + l
     ilockit
 
 super + c
-    notify-send "running chromium..." && chromium
+    notify-send "running chrome..." && google-chrome
 
 super + b
     thunar
@@ -98,6 +111,14 @@ Print
 super + Print
 	flameshot full -c
 
-XF86Audio{Mute,LowerVolume,RaiseVolume}
-    amixer set Master {toggle,5%-,5%+}
+XF86Audio{Raise,Lower}Volume  
+  pulsemixer --change-volume {+,-}10  
 
+XF86AudioMute  
+  pulsemixer --toggle-mute
+
+XF86MonBrightness{Up,Down}  
+  brightnessctl s 100{+,-}
+
+shift + XF86MonBrightness{Up,Down}  
+  brightnessctl s 500{+,-}

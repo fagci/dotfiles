@@ -11,8 +11,10 @@ local defaults = {
 }
 
 local configs = {
+    bashls = {},
     eslint = {},
     gopls = {},
+    clangd = {},
     html = {},
     intelephense = {},
     jsonls = {},

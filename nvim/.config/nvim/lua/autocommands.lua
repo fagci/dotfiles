@@ -27,7 +27,7 @@ augroup FiletypeMakeprg
     autocmd!
     autocmd Filetype ruby setlocal makeprg=ruby\ %
     autocmd Filetype php setlocal makeprg=php\ %
-    autocmd Filetype python setlocal makeprg=python\ %
+    autocmd Filetype python setlocal makeprg=python3\ %
     autocmd Filetype go setlocal makeprg=go\ run\ %
     autocmd Filetype sh setlocal makeprg=%:p
     autocmd Filetype zsh setlocal makeprg=zsh\ %
@@ -35,6 +35,7 @@ augroup FiletypeMakeprg
     autocmd Filetype lua setlocal makeprg=lua\ %
     autocmd Filetype perl setlocal makeprg=perl\ %
     autocmd Filetype java setlocal makeprg=javac\ -g:none\ %\ &&\ java\ %:r
+    autocmd Filetype cpp setlocal makeprg=g++\ %\ -o\ %.bin\ &&\ %:p.bin
 augroup END
 augroup HurlFT
     autocmd! BufRead,BufNewFile *.hurl set filetype=hurl

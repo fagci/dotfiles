@@ -1,65 +1,28 @@
-background_opacity: 0.85
-
 env:
-  # In some cases, if you're using X11 the scale factor
-  # when rendering the terminal will change between screens
-  # so to prevent that, we need to force the scale factor to 1
   WINIT_UNIX_BACKEND: x11
   WINIT_X11_SCALE_FACTOR: "1.0"
   TERM: xterm-256color
 
 window:
+  opacity: 0.96
   padding:
-    x: 4
-    y: 4
+    x: 0
+    y: 0
 
 scrolling:
   history: 3000
   multiplier: 3
 
 font:
-  size: 10
-  use_thin_strokes: true
-
-  # normal:
-  #   family: Roboto Mono
-  #   style: Regular
-  # bold:
-  #   family: Roboto Mono
-  #   style: Bold
-  # italic:
-  #   family: Roboto Mono
-  #   style: Italic
-  # bold_italic:
-  #   family: Roboto Mono
-  #   style: Bold Italic
-
-  # normal:
-  #   family: Monoid Nerd Font Mono
-  #   style: Retina
-  # bold:
-  #   family: Monoid Nerd Font Mono
-  #   style: Bold
-  # italic:
-  #   family: Monoid Nerd Font Mono
-  #   style: Italic
-
+  size: 12
   normal:
-    family: JetBrains Mono NL
+    family: JetBrains Mono
   bold:
-    family: JetBrains Mono NL
+    family: JetBrains Mono
   italic:
-    family: JetBrains Mono NL
+    family: JetBrains Mono
   italic_bold:
-    family: JetBrains Mono NL
-
-
-  # normal:
-  #   family: Hack
-  # bold:
-  #   family: Hack
-  # italic:
-  #   family: Hack
+    family: JetBrains Mono
 
 selection:
   save_to_clipboard: true
@@ -69,8 +32,6 @@ colors:
   # Default colors
   primary:
     background: "#1d2021" # high contrast
-    #background: '#282828'
-    # soft contrast: background = '#32302f'
   foreground: "#ebdbb2"
 
   # Normal colors
@@ -95,9 +56,6 @@ colors:
     magenta: "#d3869b"
     cyan: "#8ec07c"
     white: "#ebdbb2"
-
-# mouse_bindings:
-#   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
   - { key: Insert, mods: Shift, action: Paste }

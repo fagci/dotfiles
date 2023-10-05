@@ -13,16 +13,16 @@ bottom = true
 ; locale = ru_RU.UTF-8
 wm-restack = bspwm
 
-height = 20
+height = 26
 
 tray-position = right
-tray-maxsize = 20
+tray-maxsize = 26
 
 modules-left = i3 bspwm xwindow
-modules-right = net_l net_w fs_root fs_home temp mem vol battery keyboard weather date
+modules-right = net_l net_w fs_root temp mem vol battery keyboard weather date
 
-font-0 = "Iosevka term:pixelsize=10;3"
-font-1 = "FontAwesome:pixelsize=10;3"
+font-0 = "Iosevka Nerd Font:pixelsize=14;3"
+font-1 = "FontAwesome:pixelsize=14;3"
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -42,7 +42,7 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 
-label-connected = %downspeed:7%
+label-connected = ↓%downspeed:7% ↑%upspeed:7%
 label-disconnected = not connected
 label-disconnected-foreground = #66ffffff
 
@@ -119,7 +119,7 @@ time-alt = %H:%M
 
 [module/keyboard]
 type = internal/xkeyboard
-format-background = #666666
+format-background = #222222
 format-prefix = " "
 
 [module/battery]
@@ -159,7 +159,7 @@ animation-discharging-4 = 
 animation-discharging-framerate = 500
 
 [module/vol]
-type = internal/alsa
+type = internal/pulseaudio
 mapped = true
 format-volume = <label-volume>
 label-volume = " %percentage%%"
@@ -176,7 +176,7 @@ label = "%percentage_used%%"
 type = internal/temperature
 label = " %temperature-c%"
 interval = 5
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input
+thermal-zone = 2
 
 [module/i3]
 type = internal/i3

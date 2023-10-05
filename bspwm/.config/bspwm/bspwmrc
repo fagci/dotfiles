@@ -19,7 +19,7 @@ if ! echo "$mainmonitor" | grep LVDS >/dev/null 2>&1; then
 fi
 
 # Start workspaces on the main monitor.
-bspc monitor "$mainmonitor" -d 1 2 3 4 5
+bspc monitor "$mainmonitor" -d 1 2 3 4 5 6 7
 # bspc desktop -f 1
 
 bspc config border_width         1
@@ -33,6 +33,7 @@ bspc config single_monocle       true
 # TODO: make focus revert from dismissed app (flameshot)
 
 bspc rule -a Gimp state=floating follow=on
+bspc rule -a Ghidra state=floating follow=on
 # bspc rule -a Chromium desktop='^1'
 bspc rule -a TelegramDesktop desktop='^5'
 bspc rule -a Kotatogram desktop='^5'
@@ -48,13 +49,13 @@ killall -q polybar
 
 # xset r rate 300 25
 # kbdrate -r 9 -d 300
-xmodmap -e 'keycode 135 = backslash bar backslash slash' # bb backslash =(
+#xmodmap -e 'keycode 135 = backslash bar backslash slash' # bb backslash =(
 pgrep -x nitrogen || nitrogen --restore
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
 xrandr --output LVDS1 --off
 synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
 
-pgrep -x picom > /dev/null || picom -b --experimental-backends 
+#pgrep -x picom > /dev/null || picom -b --experimental-backends 
 "$HOME/.config/i3/polybar.sh" &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
