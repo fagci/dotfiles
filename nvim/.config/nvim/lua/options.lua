@@ -2,6 +2,7 @@ local opt = vim.opt
 local g = vim.g
 
 g.mapleader = ','
+g.c_syntax_for_h = true
 
 -- Speed
 opt.lazyredraw = true
