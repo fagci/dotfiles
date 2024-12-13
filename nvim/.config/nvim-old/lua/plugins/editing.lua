@@ -7,16 +7,7 @@ return {
     { 'sbdchd/neoformat', cmd = 'Neoformat' },
     {
         'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup {
-                toggler = {
-                    line = '<leader>/',
-                },
-                opleader = {
-                    block = '<leader>/',
-                },
-            }
-        end,
+        config = function() require('plugins.config.comment') end,
     },
     {
         'Wansmer/treesj',

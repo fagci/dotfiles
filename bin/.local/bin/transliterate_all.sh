@@ -14,8 +14,8 @@ shopt -s nullglob
 translit() {
     local NAME=${*:-$(cat)};
     local TRS;
-    TRS=$(sed "y/абвгдезийклмнопрстуфхцы/abvgdezijklmnoprstufxcy/" <<< "$NAME")
-    TRS=$(sed "y/АБВГДЕЗИЙКЛМНОПРСТУФХЦЫ/ABVGDEZIJKLMNOPRSTUFXCY/" <<< "$TRS")
+    TRS=$(tr "абвгдезийклмнопрстуфхцы" "abvgdezijklmnoprstufxcy" <<< "$NAME")
+    TRS=$(tr "АБВГДЕЗИЙКЛМНОПРСТУФХЦЫ" "ABVGDEZIJKLMNOPRSTUFXCY" <<< "$TRS")
     TRS=${TRS//ч/ch};
     TRS=${TRS//Ч/CH} TRS=${TRS//ш/sh};
     TRS=${TRS//Ш/SH} TRS=${TRS//ё/jo};
