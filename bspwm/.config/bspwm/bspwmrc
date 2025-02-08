@@ -45,18 +45,19 @@ bspc rule -a Alacritty:bc state=floating
 
 # other programs startup
 
-killall -q polybar
+#killall -q polybar
 
 # xset r rate 300 25
 # kbdrate -r 9 -d 300
 #xmodmap -e 'keycode 135 = backslash bar backslash slash' # bb backslash =(
 pgrep -x nitrogen || nitrogen --restore
-setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
+setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle -option caps:swapescape
 xrandr --output LVDS1 --off
 synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
 
 #pgrep -x picom > /dev/null || picom -b --experimental-backends 
-"$HOME/.config/i3/polybar.sh" &
+#"$HOME/.config/i3/polybar.sh" &&
+"$HOME/.lemonbar.sh" &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
 # pgrep -x redshift > /dev/null || redshift &

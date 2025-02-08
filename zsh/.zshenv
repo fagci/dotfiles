@@ -7,3 +7,4 @@ export GOPATH=~/go
 export PATH="${PATH}:${HOME}/.local/bin:${GOPATH}/bin:${HOME}/.cargo/bin"
 
 source ~/.config/zsh/functions.zsh
+. "$HOME/.cargo/env"

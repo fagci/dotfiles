@@ -78,7 +78,7 @@ super + shift + bracket{left,right}
 # Apps
 
 super + {Return,grave}
-    alacritty --command zsh --login
+    kitty
 
 super + l
     ilockit
