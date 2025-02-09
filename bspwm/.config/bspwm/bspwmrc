@@ -56,8 +56,8 @@ xrandr --output LVDS1 --off
 synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
 
 #pgrep -x picom > /dev/null || picom -b --experimental-backends 
-#"$HOME/.config/i3/polybar.sh" &&
-"$HOME/.lemonbar.sh" &
+"$HOME/.config/i3/polybar.sh" &&
+# "$HOME/.lemonbar.sh" &
 pgrep -x unclutter > /dev/null || unclutter &
 pgrep -x dunst > /dev/null || dunst &
 # pgrep -x redshift > /dev/null || redshift &

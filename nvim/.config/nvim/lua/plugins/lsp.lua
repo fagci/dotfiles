@@ -24,7 +24,7 @@ return {
             }
 
             local configs = {
-                bashls = {},
+                -- bashls = {},
                 eslint = {},
                 gopls = {},
                 clangd = {},
@@ -39,12 +39,12 @@ return {
                 yamlls = {},
                 cssls = {},
                 solargraph = {},
-                lua_ls = {},
+                -- lua_ls = {},
             }
 
             require("mason").setup()
             require("mason-lspconfig").setup({
-                automatic_installation = true
+                automatic_installation = false
             })
 
             lsp_signature.setup {
